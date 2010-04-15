@@ -153,8 +153,58 @@
 \section{Requerimientos}
   \label{section-req}
   \subsection{Interfaces Externas}
+    \subsubsection{Interfaces del Sistema}
+    No se registran requerimientos.
 
-  \subsection{Funciones}
+    \subsubsection{Interfaces de Usuario}
+    TBD
+
+    \subsubsection{Interfaces de Hardware}
+    No se registran requerimientos.
+
+    \subsubsection{Interfaces de Software}
+    TBD
+
+    \subsubsection{Interfaces de Comunicaciones}
+    No se registran requerimientos.
+
+  \subsection{Funciones del Sistema}
+
+  \subsubsection{Configuraci\'on inicial}
+  El objetivo de esta funci\'on es la carga en memoria de la extensi\'on que se desea utilizar para ejecutar vac-o.
+  \begin{enumerate}
+    \item \textbf{Carga de la extensi\'on:}
+    El sistema recibe la ubicaci\'on del archivo \textit{.so} y lo carga en memoria. Si la carga es exitosa, se devuelven los parametros requeridos por la extensi\'on (\textit{[(nombre, tipo, requerido, defecto)]}) para su posterior configuraci\'on. En caso de que la carga de la extensi\'on fracase, se devuelve un mensaje de error.
+    \item \textbf{Configuraci\'on de la extensi\'on:}
+    El sistema recibe la lista de parametros requeridos por la extensi\'on (\textit{[(nombre, valor)]}), se realiza la validaci\'on y en caso de exito, se asignan los valores en la extensi\'on. Finalmente, se devuelve un mensaje de exito indicando que vac-o esta listo para comenzar la ejecuci\'on. En caso de algun error de validaci\'on, se devuelve un mensaje de error.
+  \end{enumerate}
+
+  \subsubsection{Configuraci\'on de vac-o}
+  El objetivo de esta funci\'on es solicitar a la extensi\'on cargada en memoria, la informaci\'on necesaria para comenzar la ejecuci\'on del motor combinatorio.
+  \begin{enumerate}
+    \item \textbf{Secuencia inicial:}
+    El sistema solicita a la extensi\'on cargada en memoria, la secuencia de ARN que se desea optimizar. La extensi\'on debe devolver la secuencia y el sistema la almacena en memoria.
+    \item \textbf{Regiones combinatorias:}
+    El sistema solicita a la extensi\'on cargada en memoria, las regiones combinatorias de interes para la optimizaci\'on. La extensi\'on debe devolver las regiones (\textit{[(inicio, fin, tipo)]}) y el sistema inicializa cada region en memoria. 
+    \item \textbf{Estrategia de busqueda:}
+    TBD
+  \end{enumerate}
+
+  \subsubsection{Generaci\'on de secuencias}
+  \begin{enumerate}
+    \item \textbf{Generar mutaci\'on de region combinatoria:}
+    TBD
+    \item \textbf{Generar secuencia:}
+    TBD
+  \end{enumerate}
+
+  \subsubsection{Evaluaci\'on de secuencias}
+  \begin{enumerate}
+    \item \textbf{Asignar puntaje a una secuencia:}
+    TBD
+    \item \textbf{Construir \textit{ranking} de secuencias:}
+    TBD
+  \end{enumerate}
 
   \subsection{Restricciones de Rendimiento}
   No se registran requerimientos.
