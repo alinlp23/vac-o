@@ -183,27 +183,34 @@
   El objetivo de esta funci\'on es solicitar a la extensi\'on cargada en memoria, la informaci\'on necesaria para comenzar la ejecuci\'on del motor combinatorio.
   \begin{enumerate}
     \item \textbf{Secuencia inicial:}
-    El sistema solicita a la extensi\'on cargada en memoria, la secuencia de ARN que se desea optimizar. La extensi\'on debe devolver la secuencia y el sistema la almacena en memoria.
+    El sistema solicita a la extensi\'on cargada en memoria, la secuencia de ARN que se desea optimizar. La extensi\'on debe devolver la secuencia en formato FASTA y el sistema la almacena en memoria.
     \item \textbf{Regiones combinatorias:}
-    El sistema solicita a la extensi\'on cargada en memoria, las regiones combinatorias de interes para la optimizaci\'on. La extensi\'on debe devolver las regiones (\textit{[(inicio, fin, tipo)]}) y el sistema inicializa cada region en memoria. 
+    El sistema solicita a la extensi\'on cargada en memoria, las regiones combinatorias de interes para la optimizaci\'on. La extensi\'on debe devolver las regiones (\textit{[(inicio, fin, tipo)]}) y el sistema inicializa cada region en memoria. Para cada region, el parametro \textit{tipo} debe ser uno de los siguientes:
+    \begin{itemize}
+      \item Estructura secundaria (SS): Las posibles mutaciones de la region deben conservar la estructura secundaria.
+      \item Codigo genetico (GC): Las posibles mutaciones de la region deben conservar las prote\'inas.      
+    \end{itemize}
+
     \item \textbf{Estrategia de busqueda:}
     TBD
   \end{enumerate}
 
   \subsubsection{Generaci\'on de secuencias}
+  El objetivo de esta funci\'on es la construcci\'on de nuevas secuencias gen\'omicas que cumplan con las restricciones impuestas.
   \begin{enumerate}
     \item \textbf{Generar mutaci\'on de region combinatoria:}
-    TBD
+    Para cada region combinatoria el sistema debe generar una posible mutaci\'on, que cumpla con la restricci\'on impuesta por el tipo de region y las posibles intersecciones con las demas regiones.
     \item \textbf{Generar secuencia:}
-    TBD
+    A partir de las mutaciones de cada region combinatoria, se debe construir una nueva secuencia gen\'omica, reemplazando cada region por su mutaci\'on.
   \end{enumerate}
 
   \subsubsection{Evaluaci\'on de secuencias}
+  El objetivo de esta funci\'on es la evaluaci\'on y posterior construcci\'on de un \textit{ranking} de secuencias gen\'omicas.
   \begin{enumerate}
     \item \textbf{Asignar puntaje a una secuencia:}
-    TBD
+    El sistema solicita a la extensi\'on cargada en memoria, un puntaje para una secuencia dada. La extensi\'on debe evaluar la secuencia recibida comparandola con la secuencia inicial y devolver un puntaje.
     \item \textbf{Construir \textit{ranking} de secuencias:}
-    TBD
+    El sistema debe construir un \textit{ranking} de secuencias basandose en los puntajes asignados por la extensi\'on. Este listado de secuencias es adem\'as la salida final de la ejecuci\'on.
   \end{enumerate}
 
   \subsection{Restricciones de Rendimiento}
