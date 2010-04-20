@@ -8,6 +8,9 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\floatname{algorithm}{Procedimiento}
 \usepackage{url}
 \author{Santiago Videla}
 \title{Especificaci\'on de Requerimientos de Software}
@@ -80,8 +83,7 @@
     \subsubsection{Interfaces de Software}
     \begin{itemize}
       \item BioPP: Se debe utilizar la librer\'ia BioPP para realizar el \textit{folding} de secuencias gen\'omicas, predicci\'on de la estructura secundaria y c\'alculo de distancias.
-      \item Boost.Python: Se debe utilizar Boost.Python para brindar a los desarrolladores de extensiones, la posibilidad de hacerlo utilizando el lenguaje de programaci\'on Python.
-      \item QT: Se debe utilizar QT para el desarrollo de la interfaz de usuario.
+      \item Boost.Python: Se debe utilizar Boost.Python para brindar a los desarrolladores de extensiones, la posibilidad de hacerlo utilizando el lenguaje de programaci\'on Python.      
     \end{itemize}
 
     \subsubsection{Interfaces de Comunicaciones}
@@ -161,7 +163,7 @@
     El sistema recibe la ubicaci\'on del archivo \textit{.so} y lo carga en memoria. Si la carga es exitosa, se devuelven los parametros requeridos por la extensi\'on (\textit{[(nombre, tipo, validaciones, defecto)]}) para su posterior configuraci\'on. En caso de que la carga de la extensi\'on fracase, se devuelve un mensaje de error.
     
     \item \textbf{Validaci\'on de valores:}
-    La interfaz de usuario (QT) es responsable de la validaci\'on de los datos ingresados por el usuario para la configuraci\'on de la extensi\'on. Para esto, se deberan usar los diferentes \textit{criterios de validaci\'on} para cada parametro y solo cuando la validaci\'on sea exitosa, los valores son enviados al sistema. Caso contrario, se debe presentar un mensaje de error al usuario.
+    La interfaz de usuario es responsable de la validaci\'on de los datos ingresados por el usuario para la configuraci\'on de la extensi\'on. Para esto, se deberan usar los diferentes \textit{criterios de validaci\'on} para cada parametro y solo cuando la validaci\'on sea exitosa, los valores son enviados al sistema. Caso contrario, se debe presentar un mensaje de error al usuario.
     
     \item \textbf{Configuraci\'on de la extensi\'on:}
     El sistema recibe la lista de parametros requeridos por la extensi\'on (\textit{[(nombre, valor)]}) y se asignan los valores en la extensi\'on. Finalmente, se devuelve un mensaje de exito indicando que vac-o esta listo para comenzar la ejecuci\'on.
@@ -171,7 +173,7 @@
   El objetivo de esta funci\'on es solicitar a la extensi\'on cargada en memoria, la informaci\'on necesaria para comenzar la ejecuci\'on del motor combinatorio.
   \begin{enumerate}
     \item \textbf{Secuencia inicial:}
-    El sistema solicita a la extensi\'on cargada en memoria, la secuencia de ARN que se desea optimizar. La extensi\'on debe devolver la secuencia en formato FASTA y el sistema la almacena en memoria.
+    El sistema solicita a la extensi\'on cargada en memoria, la secuencia de ARN que se desea optimizar. La extensi\'on debe devolver la secuencia y el sistema la almacena en memoria. 
     
     \item \textbf{Regiones combinatorias:}
     El sistema solicita a la extensi\'on cargada en memoria, las regiones combinatorias de interes para la optimizaci\'on. La extensi\'on debe devolver las regiones (\textit{[(inicio, fin, tipo, evaluador)]}) y el sistema inicializa cada region en memoria. Para cada region, el parametro \textit{tipo} debe ser uno de los siguientes:
@@ -190,6 +192,22 @@
     \begin{center}
     $\prod_{i=1}^{n} f_{i}(s_{i}) \ge umbral$
     \end{center}
+
+    \item \textbf{Regiones de validaci\'on:}
+    El sistema solicita a la extensi\'on cargada en memoria, las regiones sobre las que se debe hacer el ``control de calidad''. La extensi\'on debe devolver las regiones (\textit{[(inicio, fin, prueba, criterio)]}) y el sistema inicializa cada region en memoria. Para cada region, el parametro \textit{prueba}, debe ser uno de los siguientes:
+      \begin{itemize}
+        \item Mutaciones sistem\'aticas (ALL): Se calculan todas las posibles mutaciones.
+	\item Mutaciones al azar (RAND): Se calculan $N$ mutaciones al azar.
+	\item Mutaciones personalizadas (CU): La extensi\'on debe proporcionar la implementaci\'on.
+      \end{itemize}    
+    El parametro \textit{criterio} debe ser uno de los siguientes:
+      \begin{itemize}
+        \item Comparaci\'on estructural (SS): Las mutaciones deben conservar la estructura secundaria.
+	\item Conteo y comparaci\'on de nucle\'otidos (NU): La cantidad de nuecle\'otidos apareados o desapareados debe ser menor o mayor que un valor determinado.
+      \end{itemize}
+    
+    Adem\'as la extensi\'on debe especificar la profundidad $M$ con la que se desea realizar el ``control de calidad'' y solo aquellas secuencias que pasen el ``control de calidad'' para todas las regiones, seran consideradas para una posterior evaluaci\'on.         
+
     \item \textbf{Librerias externas:}
     El sistema solicita a la extensi\'on, la libreria con la que se deben generar las mutaciones de cada region combinatoria.
   \end{enumerate}
@@ -201,20 +219,48 @@
     Para cada region combinatoria, el sistema debe ser capaz de generar todas las posibles mutaciones que cumplan con las restricciones impuestas por el tipo de region y considerando las posibles intersecciones con las demas regiones.
     
     \item \textbf{Generar secuencias:}
-    A partir de las mutaciones de cada region combinatoria, se deben construir nuevas secuencia gen\'omicas, reemplazando cada region por su mutaci\'on en la secuencia inicial y asegurar que la secuencia resultante consereve la estructura secundaria de la secuencia inicial. El criterio de terminaci\'on en la generaci\'on de secuencias debe ser provisto por la extensi\'on.
+    A partir de las mutaciones de cada region combinatoria, se deben construir nuevas secuencia gen\'omicas, reemplazando cada region por su mutaci\'on en la secuencia inicial y asegurar que la secuencia resultante conserve la estructura secundaria de la secuencia inicial. El criterio de terminaci\'on en la generaci\'on de secuencias debe ser provisto por la extensi\'on.
 
-    \item \textbf{Validaci\'on de secuencias:}
-    Para cada secuencia generada por el sistema, se deben aplicar pruebas de ``calidad''. El sistema solicita a la extensi\'on el tipo de prueba, que sera uno de los siguientes:
-      \begin{itemize}
-        \item Mutaciones sistem\'aticas.
-	\item Mutaciones al azar.
-      \end{itemize}
-    y el tipo de criterio, que sera uno de los siguientes:
-      \begin{itemize}
-        \item Comparaci\'on estructural por regiones.
-	\item Conteo y comparaci\'on de nucle\'otidos apareados/desapareados.
-      \end{itemize}
-    Luego, la validaci\'on consiste en aplicar el criterio de calidad a las $N$ mutaciones obtenidas. Las secuencias que no pasen las pruebas de calidad seran descartadas.
+    \item \textbf{Validar secuencias:}
+    Cada secuencia generada por el sistema debe ser sometida al ``control de calidad'' y solo aquellas que lo pasen exitosamente seran consideradas para una posterior evaluaci\'on. 
+
+    A continuaci\'on se presenta el proceso de validaci\'on en pseudo-c\'odigo. Recordar que $M$ es un valor dado por la extensi\'on al momento de configuraci\'on.
+
+    \begin{algorithmic}
+      \STATE pass = $true$
+      \STATE s = secuencia candidata generada por vac-o
+      \FORALL{$region$ \textbf{in} $regions$}
+	\STATE r = s[$region$]
+	\STATE pass = QA(r, $M$)
+	\IF{\textbf{not} pass}
+	  \STATE \textbf{break}
+	\ENDIF
+      \ENDFOR
+      \RETURN pass
+    \end{algorithmic}
+
+    \begin{algorithm}
+      \caption{QA(sequence, deep)}
+      \begin{algorithmic}
+	\STATE pass = $true$
+	\IF{deep $\ge$ 1}	
+	  \STATE mutations = generar una cola de mutaciones de ``sequence''.
+	  \WHILE{\textbf{not} isEmpty(mutations) \textbf{and} pass}
+	  \STATE m = first(mutations)
+	  \IF{m pasa el criterio de prueba}
+	    \STATE pass = QA(m, deep$-$1)
+	  \ELSE
+	    \STATE pass = $false$
+	  \ENDIF
+	  \ENDWHILE
+	\ENDIF
+	\RETURN pass
+      \end{algorithmic}      
+    \end{algorithm}
+
+    Basicamente, el procedimiento auxiliar \textbf{QA}, genera y recorre un arbol de mutaciones que tendra a lo sumo profundidad $M$ y diremos que una region pasa el ``control de calidad'' cuando sea posible generar el arbol completo. Es decir, cuando todos los nodos (mutaciones) del arbol, pasen el criterio de prueba especificado. Si alguna region no pasa el ``control de calidad'', entonces la secuencia se descarta.
+
+    
   \end{enumerate}
 
   \subsubsection{Evaluaci\'on de secuencias}
