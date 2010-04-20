@@ -8,9 +8,6 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
-\usepackage{algorithmic}
-\usepackage{algorithm}
-\floatname{algorithm}{Procedimiento}
 \usepackage{url}
 \author{Santiago Videla}
 \title{Especificaci\'on de Requerimientos de Software}
@@ -206,7 +203,7 @@
 	\item Conteo y comparaci\'on de nucle\'otidos (NU): La cantidad de nuecle\'otidos apareados o desapareados debe ser menor o mayor que un valor determinado.
       \end{itemize}
     
-    Adem\'as la extensi\'on debe especificar la profundidad $M$ con la que se desea realizar el ``control de calidad'' y solo aquellas secuencias que pasen el ``control de calidad'' para todas las regiones, seran consideradas para una posterior evaluaci\'on.         
+    Adem\'as la extensi\'on debe especificar la profundidad $M$ con la que se desea realizar el ``control de calidad''.
 
     \item \textbf{Librerias externas:}
     El sistema solicita a la extensi\'on, la libreria con la que se deben generar las mutaciones de cada region combinatoria.
@@ -219,48 +216,20 @@
     Para cada region combinatoria, el sistema debe ser capaz de generar todas las posibles mutaciones que cumplan con las restricciones impuestas por el tipo de region y considerando las posibles intersecciones con las demas regiones.
     
     \item \textbf{Generar secuencias:}
-    A partir de las mutaciones de cada region combinatoria, se deben construir nuevas secuencia gen\'omicas, reemplazando cada region por su mutaci\'on en la secuencia inicial y asegurar que la secuencia resultante conserve la estructura secundaria de la secuencia inicial. El criterio de terminaci\'on en la generaci\'on de secuencias debe ser provisto por la extensi\'on.
+    A partir de las mutaciones de cada region combinatoria, se deben construir nuevas secuencia gen\'omicas, reemplazando en la secuencia inicial, cada region por su mutaci\'on y asegurando que la secuencia resultante conserve la estructura secundaria.
+
+    Esta funcionalidad representa el coraz\'on del sistema y consiste en la construcci\'on de un arbol de subsecuencias derivadas de cada una de las regiones combinatorias, donde cada hoja del \'arbol determina una nueva secuencia gen\'omica. Luego, el sistema debe ser capaz de generar y recorrer el \'arbol basandose en la informaci\'on brindada por la extensi\'on.
+
+    El criterio de terminaci\'on en la generaci\'on de secuencias (recorrido del arbol) debe ser provisto por la extensi\'on.
 
     \item \textbf{Validar secuencias:}
-    Cada secuencia generada por el sistema debe ser sometida al ``control de calidad'' y solo aquellas que lo pasen exitosamente seran consideradas para una posterior evaluaci\'on. 
+    Cada secuencia generada por el sistema debe ser sometida al ``control de calidad'' y solo aquellas que lo pasen exitosamente seran consideradas para una posterior evaluaci\'on.    
 
-    A continuaci\'on se presenta el proceso de validaci\'on en pseudo-c\'odigo. Recordar que $M$ es un valor dado por la extensi\'on al momento de configuraci\'on.
+    El procedimiento consiste en generar y recorrer un arbol de mutaciones acumuladas por cada ``region de validaci\'on'', que tendra a lo sumo, profundidad $M$ (dado por la extensi\'on). 
 
-    \begin{algorithmic}
-      \STATE pass = $true$
-      \STATE s = secuencia candidata generada por vac-o
-      \FORALL{$region$ \textbf{in} $regions$}
-	\STATE r = s[$region$]
-	\STATE pass = QA(r, $M$)
-	\IF{\textbf{not} pass}
-	  \STATE \textbf{break}
-	\ENDIF
-      \ENDFOR
-      \RETURN pass
-    \end{algorithmic}
+    Diremos que una region pasa el ``control de calidad'' cuando sea posible generar el arbol completo. Es decir, cuando todos los nodos (mutaciones) del arbol, pasen el criterio de prueba especificado. Si alguna region no pasa el ``control de calidad'', entonces la secuencia se descarta.
 
-    \begin{algorithm}
-      \caption{QA(sequence, deep)}
-      \begin{algorithmic}
-	\STATE pass = $true$
-	\IF{deep $\ge$ 1}	
-	  \STATE mutations = generar una cola de mutaciones de ``sequence''.
-	  \WHILE{\textbf{not} isEmpty(mutations) \textbf{and} pass}
-	  \STATE m = first(mutations)
-	  \IF{m pasa el criterio de prueba}
-	    \STATE pass = QA(m, deep$-$1)
-	  \ELSE
-	    \STATE pass = $false$
-	  \ENDIF
-	  \ENDWHILE
-	\ENDIF
-	\RETURN pass
-      \end{algorithmic}      
-    \end{algorithm}
-
-    Basicamente, el procedimiento auxiliar \textbf{QA}, genera y recorre un arbol de mutaciones que tendra a lo sumo profundidad $M$ y diremos que una region pasa el ``control de calidad'' cuando sea posible generar el arbol completo. Es decir, cuando todos los nodos (mutaciones) del arbol, pasen el criterio de prueba especificado. Si alguna region no pasa el ``control de calidad'', entonces la secuencia se descarta.
-
-    
+    Tanto el procedimiento para generar las mutaciones en cada nivel del arbol, como el criterio de prueba al que se somete cada mutaci\'on, estan determinados por la ``region de validaci\'on''.
   \end{enumerate}
 
   \subsubsection{Evaluaci\'on de secuencias}
