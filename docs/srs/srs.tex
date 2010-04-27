@@ -112,7 +112,7 @@
   \subsubsection{Generaci\'on de secuencias}
   Luego de las configuraciones b\'asicas, vac-o esta en condiciones de generar nuevas secuencias gen\'omicas que cumplan las restricciones que hallan sido impuestas. Para esto, se deben calcular las posibles ``mutaciones'' de cada regi\'on combinatoria (teniendo en cuenta el tipo de regi\'on y sus posibles intersecciones) y de acuerdo a la estrategia de b\'usqueda, construir nuevas secuencias que ser\'an evaluadas posteriormente por la extensi\'on. Dado que el espacio de b\'usqueda podr\'ia ser eventualmente muy grande, el criterio de parada para la generaci\'on de secuencias tambi\'en debe ser provisto por la extensi\'on.
 
-  Notar que esta funcionalidad es el ``coraz\'on' de vac-o y es donde se encuentra la mayor complejidad del problema a resolver. 
+  Notar que esta funcionalidad es el ``coraz\'on'' de vac-o y es donde se encuentra la mayor complejidad del problema a resolver. 
 
   Supongamos $N \geqslant 1$ y $R_{1}, \cdots, R_{N}$ regiones combinatorias. Luego, tendremos: \\
   \begin{center}    
@@ -121,7 +121,7 @@
     $\cdots$ \\
     $M_{N\cdot1},..., M_{N\cdot j_{N}}$ mutaciones de $R_{N}$   
   \end{center}
-  con $j_{1}, \cdots, j_{N} \geqslant 1$. Es decir, que el n\'umero de posibles secuencias que vac-o ``deber\'ia' evaluar sera igual al producto $j_{1} \times j_{2} \times \cdots \times j_{N}$. 
+  con $j_{1}, \cdots, j_{N} \geqslant 1$. Es decir, que el n\'umero de posibles secuencias que vac-o ``deber\'ia'' evaluar sera igual al producto $j_{1} \times j_{2} \times \cdots \times j_{N}$. 
 
   Haciendo uso de diferentes estrategias de b\'usqueda, combinadas con las funciones de evaluaci\'on provistas por la extensi\'on, vac-o intentara optimizar esta generaci\'on de secuencias.
 
