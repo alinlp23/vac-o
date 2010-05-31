@@ -7,6 +7,7 @@
 \usepackage{verbatim}
 \author{Santiago Videla}
 \title{vac-o\\ Documento de Dise\~no}
+\pagestyle{headings}
 
 \begin{document}
 \maketitle
@@ -14,161 +15,124 @@
 \tableofcontents
 \newpage
 
-\section{Clases - Responsabilidades - Colaboradores}
+\section{Interfaces - Responsabilidades - Colaboradores}
   \subsection{IPluginAdmin}
-    \paragraph{Proposito:} Administrar las extensiones del sistema (archivos
-\textit{.so}).
-    \paragraph{Rol:}
-    \paragraph{Stereotipos:} Servicios
-    \paragraph{Patrones:} Singleton
-    \paragraph{Responsabilidades:}
+    \paragraph{Responsabilidad:} Administrar las extensiones del sistema
+(archivos \textit{.so}).    
       \begin{enumerate}
        \item Cargar extensi\'on.
        \item Descargar extensi\'on.
-      \end{enumerate}
-    \paragraph{Colaboradores:}  
+      \end{enumerate}    
 
   \subsection{IPlugin}
-    \paragraph{Proposito:} Brindar la informaci\'on y servicios particulares
-para una vacuna determinada.
-    \paragraph{Rol:}
-    \paragraph{Stereotipos:} Informaci\'on, Servicios
-    \paragraph{Patrones:}
-    \paragraph{Responsabilidades:}
+    \paragraph{Responsabilidad:} Brindar la informaci\'on y servicios
+particulares para una vacuna determinada.    
       \begin{enumerate}
-       \item Conocer la secuencia de ARN que se encuentra en la cepa vacunal.
-       \item Conocer las regiones combinatorias que se deben usar para buscar
+       \item Proveer la lista de par\'ametros requeridos por la extensi\'on.
+       \item Proveer la secuencia de ARN que se encuentra en la cepa vacunal.
+       \item Proveer las regiones combinatorias que se deben usar para buscar
 mejoras a la vacuna.
-       \item Conocer el umbral que se debe usar para determinar la bondad de una
-variante a una regi\'on combinatoria.
-       \item Conocer las regiones de validaci\'on que se deben usar para
+       \item Proveer el umbral que se debe usar para determinar la bondad de las
+secuencias obtenidas de las regi\'ones combinatorias.
+       \item Proveer las regiones de validaci\'on que se deben usar para
 realizar el control de calidad.
        \item Determinar si se continua buscando secuencias o no.
        \item Evaluar las secuencias candidatas.
       \end{enumerate}
     \paragraph{Colaboradores:}
       \begin{enumerate}
-       \item BioPP
+       \item \textbf{BioPP:} Calculo de distancias entre secuencias.
       \end{enumerate}
 
   \subsection{ICombinatoryRegion}
-    \paragraph{Proposito:} Calcular las secuencias que mantengan
-determinadas propiedades de una secuencia original.
-    \paragraph{Rol:}
-    \paragraph{Stereotipos:} Servicios
-    \paragraph{Patrones:} Iterator, Factory Method
-    \paragraph{Responsabilidades:}
+    \paragraph{Responsabilidad:} Calcular las secuencias que mantengan
+determinadas propiedades de una secuencia original.    
       \begin{enumerate}
-       \item Conocer la secuencia original.
-       \item Generar las secuencias que mantengan las propiedades deseadas.
+       \item Devolver la siguiente secuencia.
+       \item Evaluar la bondad de una secuencia.
       \end{enumerate}
     \paragraph{Colaboradores:}
       \begin{enumerate}
-       \item BioPP
+       \item \textbf{BioPP:} Calculo de secuencias que mantengan una propiedad
+determinada (estructura secundaria, c\'odigo gen\'etico, etc).
       \end{enumerate}
 
   \subsection{ICombinatoryEngine}
-    \paragraph{Proposito:} Generar secuencias candidatas a partir de las
-variantes generadas de cada regi\'on combinatoria.
-    \paragraph{Rol:}
-    \paragraph{Stereotipos:} Servicios
-    \paragraph{Patrones:} Singleton, Iterator
-    \paragraph{Responsabilidades:}
-      \begin{enumerate}
-       \item Conocer la secuencia completa.
+    \paragraph{Responsabilidad:} Generar secuencias candidatas a partir de las
+variantes generadas de cada regi\'on combinatoria.       
+      \begin{enumerate}       
        \item Inicializar las regiones combinatorias.
        \item Devolver la siguiente secuencia candidata.
       \end{enumerate}
     \paragraph{Colaboradores:}
       \begin{enumerate}
-       \item ICombinatoryRegion
+       \item \textbf{ICombinatoryRegion:} Consulta la siguiente secuencia de
+cada regi\'on combinatoria.
       \end{enumerate}
 
-  \subsection{ISequenceMutator}
-    \paragraph{Proposito:} Generar posibles mutaciones de una secuencia.
-    \paragraph{Rol:}
-    \paragraph{Stereotipos:} Servicios
-    \paragraph{Patrones:} Iterator, Factory Method
-    \paragraph{Responsabilidades:}
+  \subsection{IQAMutator}
+    \paragraph{Responsabilidad:} Generar mutaciones de una secuencia
+utilizando alg\'un criterio (todas las mutaciones posibles, $N$
+mutaciones aleatorias, etc).
       \begin{enumerate}
        \item Devolver la siguiente mutaci\'on.
-      \end{enumerate}
-    \paragraph{Colaboradores:}
+      \end{enumerate}    
 
-  \subsection{ISequenceValidator}
-    \paragraph{Proposito:} Decidir si una secuencia satisface determinadas
-propiedaes.
-    \paragraph{Rol:}
-    \paragraph{Stereotipos:} Servicios
-    \paragraph{Patrones:} Factory Method
-    \paragraph{Responsabilidades:}
-      \begin{enumerate}
-       \item Decidir si una secuencia satisface o no, las propiedades deseadas.
-      \end{enumerate}
+  \subsection{IQAValidator}
+    \paragraph{Responsabilidad:} Decidir si una secuencia satisface o
+mantiene determinadas propiedades.
     \paragraph{Colaboradores:}
+      \begin{enumerate}
+       \item \textbf{BioPP:} Calculo y comparaci\'on de estructura secundaria o
+conteo de nucle\'otidos
+      \end{enumerate}
 
   \subsection{IQARegion}
-    \paragraph{Proposito:} Realizar el control de calidad para una regi\'on de
-validaci\'on.
-    \paragraph{Rol:}
-    \paragraph{Stereotipos:} Servicios
-    \paragraph{Patrones:}
-    \paragraph{Responsabilidades:}
+    \paragraph{Responsabilidad:} Realizar el control de calidad para una
+regi\'on de validaci\'on.
       \begin{enumerate}
-       \item Conocer el inicio y fin de la regi\'on.
-       \item Determinar si una secuencia dada pasa o no, el control de calidad
-para la regi\'on.
+       \item Calcular y validar mutaciones acumuladas de la regi\'on hasta
+alcanzar la profundidad deseada.
       \end{enumerate}
     \paragraph{Colaboradores:}
       \begin{enumerate}
-       \item ISequenceMutator
-       \item ISequenceValidator
+       \item \textbf{IQAMutator:} Consulta la siguiente mutaci\'on.
+       \item \textbf{IQAValidator:} Consulta si una mutaci\'on determinada es
+valida o no.
       \end{enumerate}
 
   \subsection{IQAEngine}
-    \paragraph{Proposito:} Realizar el control de calidad para cada secuencia
-candidata.
-    \paragraph{Rol:}
-    \paragraph{Stereotipos:} Servicios
-    \paragraph{Patrones:} Singleton
-    \paragraph{Responsabilidades:}
-      \begin{enumerate}
-       \item Conocer las regiones de validaci\'on.
-       \item Conocer la profundidad con la que se debe realizar el control de
-calidad.
+    \paragraph{Responsabilidad:} Realizar el control de calidad para una
+secuencia candidata.
+      \begin{enumerate}       
+       \item Inicializar regiones de validaci\'on.
        \item Determinar si una secuencia candidata aprueba o no el control de
-calidad para todas las regiones de validaci\'on.
+calidad para todas sus regiones de validaci\'on.
       \end{enumerate}
     \paragraph{Colaboradores:}
       \begin{enumerate}
-       \item IQARegion
+       \item \textbf{IQARegion:} Consulta si la regi\'on de validaci\'on aprueba
+o no el control de calidad.
       \end{enumerate}
 
   \subsection{IRanker}
-    \paragraph{Proposito:} Mantener un \textit{ranking} de secuencias
-    \paragraph{Rol:}
-    \paragraph{Stereotipos:} Servicios
-    \paragraph{Patrones:} Singleton
-    \paragraph{Responsabilidades:}
-      \begin{enumerate}
-       \item Conocer el tama\~no del \textit{ranking}       
-       \item Construir \textit{ranking}
-      \end{enumerate}
+    \paragraph{Responsabilidad:} Mantener un \textit{ranking} de secuencias en
+base al puntaje asignado a cada una.       
     \paragraph{Colaboradores:}
       \begin{enumerate}
-       \item IPlugin
+       \item \textbf{IPlugin:} Consulta el puntaje para una secuencia
+determinada.
       \end{enumerate}
 
 \begin{comment}
-  \subsection{Clase}
-    \paragraph{Proposito:}
-    \paragraph{Rol:}
-    \paragraph{Stereotipos:}
-    \paragraph{Patrones:}
-    \paragraph{Responsabilidades:}
+  \subsection{Interface}
+    \paragraph{Responsabilidad:}    
       \begin{enumerate}
        \item 
       \end{enumerate}
     \paragraph{Colaboradores:}
+      \begin{enumerate}
+       \item 
+      \end{enumerate}
 \end{comment}
 \end{document}
