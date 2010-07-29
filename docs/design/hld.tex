@@ -1,29 +1,20 @@
-\documentclass[a4paper,10pt]{article}
+\section{Dise\~no de alto nivel}
+\subsection{Interfaces - Responsabilidades - Colaboradores}
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.5, angle=90]{hld.png}  
+  \caption{UML - Interfaces}
+  \label{uml:1}
+\end{figure}
 
-\usepackage[latin1]{inputenc}
-\usepackage[spanish]{babel}
-\usepackage{fontenc}
-\usepackage{graphicx}
-\usepackage{verbatim}
-\author{Santiago Videla}
-\title{vac-o\\ Documento de Dise\~no}
-\pagestyle{headings}
-
-\begin{document}
-\maketitle
-\newpage
-\tableofcontents
-\newpage
-
-\section{Interfaces - Responsabilidades - Colaboradores} 
-  \subsection{IPluginAdmin}
+  \subsubsection{IPluginAdmin}
     \paragraph{Responsabilidad:} Administrar las extensiones del sistema
 (archivos \textit{.so}).    
       \begin{enumerate}
        \item Cargar extensi\'on.       
       \end{enumerate}    
 
-  \subsection{IPlugin}
+  \subsubsection{IPlugin}
     \paragraph{Responsabilidad:} Brindar la informaci\'on y servicios
 particulares para una vacuna determinada.    
       \begin{enumerate}
@@ -42,9 +33,11 @@ realizar el control de calidad.
     \paragraph{Colaboradores:}
       \begin{enumerate}
        \item \textbf{BioPP:} Calculo de distancias entre secuencias.
+       \item \textbf{LibPlugin}: Factories de regiones combinatorias y de
+validaci\'on.
       \end{enumerate}
 
-  \subsection{ICombinatoryRegion}
+  \subsubsection{ICombinatoryRegion}
     \paragraph{Responsabilidad:} Calcular las secuencias que mantengan
 determinadas propiedades de una secuencia original.    
       \begin{enumerate}
@@ -57,7 +50,7 @@ determinadas propiedades de una secuencia original.
 determinada (estructura secundaria, c\'odigo gen\'etico, etc).
       \end{enumerate}
 
-  \subsection{ICombinatoryEngine}
+  \subsubsection{ICombinatoryEngine}
     \paragraph{Responsabilidad:} Generar secuencias candidatas a partir de las
 variantes generadas de cada regi\'on combinatoria.       
       \begin{enumerate}       
@@ -70,7 +63,7 @@ variantes generadas de cada regi\'on combinatoria.
 cada regi\'on combinatoria.
       \end{enumerate}
 
-  \subsection{IQAMutator}
+  \subsubsection{IQAMutator}
     \paragraph{Responsabilidad:} Generar mutaciones de una secuencia
 utilizando alg\'un criterio (todas las mutaciones posibles, $N$
 mutaciones aleatorias, etc).
@@ -78,7 +71,7 @@ mutaciones aleatorias, etc).
        \item Devolver la siguiente mutaci\'on.
       \end{enumerate}    
 
-  \subsection{IQAValidator}
+  \subsubsection{IQAValidator}
     \paragraph{Responsabilidad:} Decidir si una secuencia satisface o
 mantiene determinadas propiedades.
     \paragraph{Colaboradores:}
@@ -87,7 +80,7 @@ mantiene determinadas propiedades.
 conteo de nucle\'otidos
       \end{enumerate}
 
-  \subsection{IQARegion}
+  \subsubsection{IQARegion}
     \paragraph{Responsabilidad:} Realizar el control de calidad para una
 regi\'on de validaci\'on.
       \begin{enumerate}
@@ -101,7 +94,7 @@ alcanzar la profundidad deseada.
 valida o no.
       \end{enumerate}
 
-  \subsection{IQAEngine}
+  \subsubsection{IQAEngine}
     \paragraph{Responsabilidad:} Realizar el control de calidad para una
 secuencia candidata.
       \begin{enumerate}       
@@ -115,7 +108,7 @@ calidad para todas sus regiones de validaci\'on.
 o no el control de calidad.
       \end{enumerate}
 
-  \subsection{IRanker}
+  \subsubsection{IRanker}
     \paragraph{Responsabilidad:} Mantener un \textit{ranking} de secuencias en
 base al puntaje asignado a cada una.       
     \paragraph{Colaboradores:}
@@ -135,4 +128,3 @@ determinada.
        \item 
       \end{enumerate}
 \end{comment}
-\end{document}
