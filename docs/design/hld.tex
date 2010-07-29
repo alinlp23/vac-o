@@ -1,5 +1,9 @@
 \section{Dise\~no de alto nivel}
+\label{hld}
 \subsection{Interfaces - Responsabilidades - Colaboradores}
+En esta secci\'on se presentan las principales interfaces que intervienen en el
+sistema, sus respectivas responsabilidades y colaboradores. En la
+Figura~\ref{uml:1} se puede ver el diagrama UML correspondiente.
 \begin{figure}
   \centering
   \includegraphics[scale=0.5, angle=90]{hld.png}  
@@ -52,10 +56,10 @@ determinada (estructura secundaria, c\'odigo gen\'etico, etc).
 
   \subsubsection{ICombinatoryEngine}
     \paragraph{Responsabilidad:} Generar secuencias candidatas a partir de las
-variantes generadas de cada regi\'on combinatoria.       
+variantes generadas de cada regi\'on combinatoria.   
       \begin{enumerate}       
-       \item Inicializar las regiones combinatorias.
-       \item Devolver la siguiente secuencia candidata.
+       \item Recorrer el espacio de b\'usqueda generado por las variantes de
+las regiones combinatorias.
       \end{enumerate}
     \paragraph{Colaboradores:}
       \begin{enumerate}
