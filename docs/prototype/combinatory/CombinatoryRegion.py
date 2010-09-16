@@ -10,10 +10,12 @@ class CombinatoryRegion(object):
         self.wildtype = wildtype
         self.start = start
         self.end = end
-        
-    
-    def empty(self):
+
+    def reset(self):
         raise NotImplemented
+        
+    def empty(self):
+        raise NotImplemented        
     
     def current(self):
         raise NotImplemented

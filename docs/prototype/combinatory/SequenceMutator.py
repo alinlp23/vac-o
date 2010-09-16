@@ -1,9 +1,27 @@
-"""
-"""
 import itertools
 BASES = ['A','U','C','G']
 
 class SingleMutator(object):
+    """
+    Iterador ciclico sobre todas las mutaciones para una posicion.
+    
+      >>> seq = "AAA"
+      >>> s = SingleMutator(seq, 0)
+      >>> s.current()
+      'UAA'
+      >>> s.next()
+      False
+      >>> s.current()
+      'CAA'
+      >>> s.next()
+      False
+      >>> s.current()
+      'GAA'
+      >>> s.next()
+      True
+      >>> s.current()
+      'UAA'
+    """
     def __init__(self, sequence, index):
         super(SingleMutator, self).__init__()
         
@@ -31,6 +49,26 @@ class SingleMutator(object):
         return mutation
         
 class NestedMutator(SingleMutator):
+    """    
+    Iterador ciclico anidado 
+    
+      >>> seq = "AAA"
+      >>> s = NestedMutator(seq, 0, [1,2])
+      >>> s.current()
+      'UUU'
+      >>> s.next()
+      False
+      >>> s.current()
+      'UUC'
+      >>> s.next()
+      False
+      >>> s.current()
+      'UUG'
+      >>> s.next()
+      False
+      >>> s.current()
+      'UCU'
+    """
     def __init__(self, sequence, index, nested_indexes):
         super(NestedMutator, self).__init__(sequence, index)
         
@@ -52,6 +90,10 @@ class NestedMutator(SingleMutator):
         return mutation
         
 class SequenceMutator(object):
+    """
+    Iterador sobre todas las mutaciones posibles haciendo mutaciones
+    desde una mutacion, hasta 'max_mutations' simultaneas.
+    """
     def __init__(self, sequence, max_mutations):
         super(SequenceMutator, self).__init__()
         
@@ -66,9 +108,9 @@ class SequenceMutator(object):
         done = self.__mutator.next()
         if done:
             done = False
-            self.__index = self.__index + 1
+            self.__index += 1
             if self.__index == len(self.__indexes):
-                self.__mutations = self.__mutations + 1
+                self.__mutations += 1
                 if self.__mutations > self.max_mutations:
                     self.__mutations = 1
                     done = True
