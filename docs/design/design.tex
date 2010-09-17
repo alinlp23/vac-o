@@ -6,7 +6,7 @@
 \usepackage{graphicx}
 \usepackage{verbatim}
 \author{Santiago Videla}
-\title{vac-o\\ Documento de Dise\~no}
+\title{Especificaci\'on de Dise\~no de Software}
 \pagestyle{headings}
 
 \begin{document}
@@ -16,20 +16,103 @@
 \newpage
 \section{Introducci\'on}
   \subsection{Prop\'osito}
-  El prop\'osito de este documento es presentar el dise\~no de vac-o. La
-tecnica adoptada para realizar el analisis y descripci\'on del mismo se
-denomina ``Dise\~no dirigido por responsabilidades'' (Responsability-driven
-design) descripto en un \textit{paper} de Rebecca Wirfs-Brock y Brian
-Wilkerson, ``Object-Oriented Design: A Responsibility-Driven Approach''.
+  El prop\'osito de este documento es la especificaci\'on de
+dise\~no de software para la primer versi\'on del producto ``vac-o''.
+
+  La confecci\'on de este documento se enmarca dentro del desarrollo de la tesis
+de grado de la carrera Lic. en Cs. de la Computaci\'on de la FaMAF - UNC,
+\textbf{``Dise\~no de vacunas atenuadas con menor probabilidad de sufrir
+reversi\'on a la virulencia''} a cargo de Santiago Videla, con la direcci\'on
+de la Dra. Laura Alonso i Alemany (FaMAF) y la colaboraci\'on de Daniel
+Gutson (FuDePAN).
+
+  El documento esta dirigido a las personas involucradas en el desarrollo de la
+tesis como as\'i tambi\'en a los colaboradores de FuDePAN que eventualmente
+podr\'ian participar en las etapas de desarrollo y mantenimiento del software.
 
   \subsection{Descripci\'on general del documento}
+  En la secci\'on~\ref{considerations} se mencionan los objetivos, la
+metodolog\'ia adoptada y las dependencias del dise\~no.
+
+  En la secci\'on~\ref{architecture} se muestra la arquitectura del
+sistema con sus principales componentes e interacciones.
+
   En la secci\'on~\ref{hld} se presenta el dise\~no de alto nivel del sistema,
 sus interfaces y paquetes principales.
 
   En la secci\'on~\ref{lld} se presenta el dise\~no de bajo nivel del sistema,
 las clases concretas y sus relaciones para cada paquete.
 
-  \include{hld}
-  \include{lld}
+\section{Descripci\'on General}
 
+\section{Consideraciones de Dise\~no}
+  \label{considerations}
+  \subsection{Objetivos}
+  Principalmente se pretende lograr un dise\~no que cumpla con los principios
+fundamentales del dise\~no orientado a objetos, com\'unmente conocidos por el
+acr\'onimo ``SOLID'' \cite{martin00}.
+  
+  \subsection{Metodolog\'ia}
+  La metodolog\'ia utilizada para realizar el an\'alisis y descripci\'on del
+dise\~no se denomina ``Dise\~no dirigido por responsabilidades''
+\cite{wirfsbrok03}. Esta t\'ecnica se enfoca en \textit{que} acciones
+(responsabilidades) deben ser cubiertas por el sistema y que objetos ser\'an los
+responsables de llevarlas a cabo. \textit{Como} se realizara cada acci\'on,
+queda en un segunda plano.
+
+  \subsection{Dependencias}
+  Se asume para la confecci\'on de este dise\~no, el acceso a diferentes
+librer\'ias externas que ser\'an fundamentales para el correcto funcionamiento
+del
+sistema en su conjunto.
+  Respetando la metodolog\'ia adoptada, no se har\'a referencia directa a una u
+otra librer\'ia, sino a los servicios que la misma debe ser capaz de proveer al
+sistema.
+
+\section{Arquitectura del Sistema}
+  \label{architecture}
+  En la Figura~\ref{uml:architecture} se presenta un diagrama de la
+arquitectura del sistema y la interacci\'on entre sus componentes principales.
+A continuaci\'on se da una breve descripci\'on de cada uno de ellos:
+
+  \begin{itemize}
+   \item Main: Representa el componente principal en terminos de ejecuci\'on
+del sistema. Comprende principalmente, la inicializaci\'on y configuraci\'on de
+otros componentes.
+
+   \item Plugin: Representa la implementaci\'on de las caracteristicas propias
+de la vacuna que se desea optimizar. Brinda informaci\'on de configuraci\'on
+inicial como asi tambi\'en los criterios para evaluar una secuencia.
+
+   \item CombinatoryEngine: 
+
+   \item QAEngine:
+
+   \item Ranker:
+
+   \item libRNA:
+
+  \end{itemize}
+
+  \begin{figure}
+  \centering
+  \includegraphics[scale=0.5]{architecture.png}  
+  \caption{UML - Arquitectura}
+  \label{uml:architecture}
+  \end{figure}
+
+\include{hld}
+\include{lld}
+
+\begin{thebibliography}{9}  
+  \bibitem{martin00}
+  Design Principles and Design Patterns. Robert C. Martin,
+www.objectmentor.com, 2000.
+  
+  \bibitem{wirfsbrok03}
+  Rebecca Wirfs-Brock and Alan McKean. Object Design: Roles, Responsibilities
+and Collaborations, Addison-Wesley, 2003  
+
+  
+\end{thebibliography}
 \end{document}
