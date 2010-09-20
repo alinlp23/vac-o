@@ -76,21 +76,27 @@ arquitectura del sistema y la interacci\'on entre sus componentes principales.
 A continuaci\'on se da una breve descripci\'on de cada uno de ellos:
 
   \begin{itemize}
-   \item Main: Representa el componente principal en terminos de ejecuci\'on
+   \item Main: Representa el componente principal en t\'erminos de ejecuci\'on
 del sistema. Comprende principalmente, la inicializaci\'on y configuraci\'on de
 otros componentes.
 
-   \item Plugin: Representa la implementaci\'on de las caracteristicas propias
+   \item Plugin: Representa la implementaci\'on de las caracter\'isticas propias
 de la vacuna que se desea optimizar. Brinda informaci\'on de configuraci\'on
-inicial como asi tambi\'en los criterios para evaluar una secuencia.
+inicial como as\'i tambi\'en los criterios para evaluar una secuencia.
 
-   \item CombinatoryEngine: 
+   \item CombinatoryEngine: Representa el motor combinatorio del sistema
+encargado de encontrar, nuevas secuencias que sean candidatas a optimizar la
+atenuaci\'on de la vacuna.
 
-   \item QAEngine:
+   \item QAEngine: Representa el motor de control de calidad del sistema
+encargado de decidir, si una secuencia candidata pasa o no dicho control.
 
-   \item Ranker:
+   \item Ranker: Representa el componente encargado de evaluar y mantener un
+``ranking'' de secuencias.
 
-   \item libRNA:
+   \item libRNA: Representa el componente que provee al sistema funcionalidades
+para la manipulaci\'on de secuencias de ARN (``folding'' directo
+e inverso, entre otras) 
 
   \end{itemize}
 

@@ -33,12 +33,25 @@ realizar el control de calidad.
        \item Determinar si se continua buscando secuencias o no.
        \item Evaluar las secuencias candidatas.
        \item Descargar la extensi\'on.
+      \end{enumerate}         
+
+  \subsubsection{ILibRNAAdmin}
+    \paragraph{Responsabilidad:} Administrar la librer\'ia externa utilizada
+para la manipulaci\'on de secuencias ARN.
+      \begin{enumerate}
+       \item Cargar librer\'ia
+      \end{enumerate}  
+
+  \subsubsection{ILibRNA}
+    \paragraph{Responsabilidad:} Proveer al sistema funcionalidades para la
+manipulaci\'on de secuencias ARN. 
+      \begin{enumerate}
+       \item Folding directo
+       \item Folding inverso
       \end{enumerate}
     \paragraph{Colaboradores:}
       \begin{enumerate}
-       \item \textbf{BioPP:} Calculo de distancias entre secuencias.
-       \item \textbf{LibPlugin}: Factories de regiones combinatorias y de
-validaci\'on.
+       \item Vienna Package, UNAFold, otros.
       \end{enumerate}
 
   \subsubsection{ICombinatoryRegion}
@@ -50,8 +63,8 @@ determinadas propiedades de una secuencia original.
       \end{enumerate}
     \paragraph{Colaboradores:}
       \begin{enumerate}
-       \item \textbf{BioPP:} Calculo de secuencias que mantengan una propiedad
-determinada (estructura secundaria, c\'odigo gen\'etico, etc).
+       \item ILibRNA: Dise\~no de secuencias que mantengan una propiedad
+determinada (estructura secundaria).
       \end{enumerate}
 
   \subsubsection{ICombinatoryEngine}
@@ -65,24 +78,7 @@ las regiones combinatorias.
       \begin{enumerate}
        \item \textbf{ICombinatoryRegion:} Consulta la siguiente secuencia de
 cada regi\'on combinatoria.
-      \end{enumerate}
-
-  \subsubsection{IQAMutator}
-    \paragraph{Responsabilidad:} Generar mutaciones de una secuencia
-utilizando alg\'un criterio (todas las mutaciones posibles, $N$
-mutaciones aleatorias, etc).
-      \begin{enumerate}
-       \item Devolver la siguiente mutaci\'on.
-      \end{enumerate}    
-
-  \subsubsection{IQAValidator}
-    \paragraph{Responsabilidad:} Decidir si una secuencia satisface o
-mantiene determinadas propiedades.
-    \paragraph{Colaboradores:}
-      \begin{enumerate}
-       \item \textbf{BioPP:} Calculo y comparaci\'on de estructura secundaria o
-conteo de nucle\'otidos
-      \end{enumerate}
+      \end{enumerate} 
 
   \subsubsection{IQARegion}
     \paragraph{Responsabilidad:} Realizar el control de calidad para una
@@ -93,16 +89,13 @@ alcanzar la profundidad deseada.
       \end{enumerate}
     \paragraph{Colaboradores:}
       \begin{enumerate}
-       \item \textbf{IQAMutator:} Consulta la siguiente mutaci\'on.
-       \item \textbf{IQAValidator:} Consulta si una mutaci\'on determinada es
-valida o no.
+       \item ILibRNA: Predicci\'on de estructura secundaria.
       \end{enumerate}
 
   \subsubsection{IQAEngine}
     \paragraph{Responsabilidad:} Realizar el control de calidad para una
 secuencia candidata.
-      \begin{enumerate}       
-       \item Inicializar regiones de validaci\'on.
+      \begin{enumerate}             
        \item Determinar si una secuencia candidata aprueba o no el control de
 calidad para todas sus regiones de validaci\'on.
       \end{enumerate}
