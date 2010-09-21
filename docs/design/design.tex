@@ -4,6 +4,7 @@
 \usepackage[spanish]{babel}
 \usepackage{fontenc}
 \usepackage{graphicx}
+\usepackage{url}
 \usepackage{verbatim}
 \author{Santiago Videla}
 \title{Especificaci\'on de Dise\~no de Software}
@@ -43,8 +44,6 @@ sus interfaces y paquetes principales.
   En la secci\'on~\ref{lld} se presenta el dise\~no de bajo nivel del sistema,
 las clases concretas y sus relaciones para cada paquete.
 
-\section{Descripci\'on General}
-
 \section{Consideraciones de Dise\~no}
   \label{considerations}
   \subsection{Objetivos}
@@ -63,11 +62,17 @@ queda en un segunda plano.
   \subsection{Dependencias}
   Se asume para la confecci\'on de este dise\~no, el acceso a diferentes
 librer\'ias externas que ser\'an fundamentales para el correcto funcionamiento
-del
-sistema en su conjunto.
+del sistema en su conjunto.
   Respetando la metodolog\'ia adoptada, no se har\'a referencia directa a una u
 otra librer\'ia, sino a los servicios que la misma debe ser capaz de proveer al
 sistema.
+
+  \subsection{Herramientas y convenciones}
+  Se utiliza UML\cite{uml} como lenguaje de modelado y ArgoUML\cite{argoUML}
+como herramienta para la confecci\'on de diagramas. Adem\'as se adopta la
+convenci\'on de nombrar a las interfaces anteponiendo una \textit{``I''} al
+nombre de la clase concreta que la implementa. (interface:
+\textit{``IPersona''}, clase concreta: \textit{``Persona''})
 
 \section{Arquitectura del Sistema}
   \label{architecture}
@@ -76,27 +81,30 @@ arquitectura del sistema y la interacci\'on entre sus componentes principales.
 A continuaci\'on se da una breve descripci\'on de cada uno de ellos:
 
   \begin{itemize}
-   \item Main: Representa el componente principal en t\'erminos de ejecuci\'on
-del sistema. Comprende principalmente, la inicializaci\'on y configuraci\'on de
-otros componentes.
+   \item \textbf{Main:} Representa el componente principal en t\'erminos de
+ejecuci\'on del sistema. Comprende principalmente, la inicializaci\'on y
+configuraci\'on de otros componentes.
 
-   \item Plugin: Representa la implementaci\'on de las caracter\'isticas propias
-de la vacuna que se desea optimizar. Brinda informaci\'on de configuraci\'on
-inicial como as\'i tambi\'en los criterios para evaluar una secuencia.
+   \item \textbf{Plugin:} Representa la implementaci\'on de las
+caracter\'isticas propias de la vacuna que se desea optimizar. Brinda
+informaci\'on de configuraci\'on inicial como as\'i tambi\'en, los criterios
+para evaluar una secuencia.
 
-   \item CombinatoryEngine: Representa el motor combinatorio del sistema
-encargado de encontrar, nuevas secuencias que sean candidatas a optimizar la
-atenuaci\'on de la vacuna.
+   \item \textbf{CombinatoryEngine:} Representa el motor combinatorio del
+sistema encargado de encontrar, nuevas secuencias que sean candidatas a
+optimizar la atenuaci\'on de la vacuna.
 
-   \item QAEngine: Representa el motor de control de calidad del sistema
-encargado de decidir, si una secuencia candidata pasa o no dicho control.
+   \item \textbf{QAEngine:} Representa el motor de control de calidad del
+sistema encargado de decidir, si una secuencia candidata pasa o no dicho
+control.
 
-   \item Ranker: Representa el componente encargado de evaluar y mantener un
+   \item \textbf{Ranker:} Representa el componente encargado de mantener un
 ``ranking'' de secuencias.
 
-   \item libRNA: Representa el componente que provee al sistema funcionalidades
-para la manipulaci\'on de secuencias de ARN (``folding'' directo
-e inverso, entre otras) 
+   \item \textbf{libRNA:} Representa el componente que provee al sistema
+funcionalidades para la manipulaci\'on de secuencias de ARN (``folding'' directo
+e inverso) utilizando librer\'ias externas (Vienna Package, UNAFold, entre
+otras)
 
   \end{itemize}
 
@@ -112,12 +120,18 @@ e inverso, entre otras)
 
 \begin{thebibliography}{9}  
   \bibitem{martin00}
-  Design Principles and Design Patterns. Robert C. Martin,
-www.objectmentor.com, 2000.
+  Design Principles and Design Patterns. Robert C. Martin, 2000.\\
+  \url{www.objectmentor.com}
   
   \bibitem{wirfsbrok03}
   Rebecca Wirfs-Brock and Alan McKean. Object Design: Roles, Responsibilities
-and Collaborations, Addison-Wesley, 2003  
+and Collaborations, Addison-Wesley, 2003
+
+  \bibitem{uml}
+  Unified Modeling Language: \url{http://www.uml.org/}
+
+  \bibitem{argoUML}
+  ArgoUML: \url{http://argouml.tigris.org/}
 
   
 \end{thebibliography}

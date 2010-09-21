@@ -30,24 +30,22 @@ mejoras a la vacuna.
 secuencias obtenidas de las regi\'ones combinatorias.
        \item Proveer las regiones de validaci\'on que se deben usar para
 realizar el control de calidad.
+       \item Proveer el nombre de las librer\'ias externas de ARN para los 3
+posibles casos de uso (``folding'' directo, en el motor combinatorio y en el
+control de calidad, y ``folding'' inverso en el motor combinatorio).
        \item Determinar si se continua buscando secuencias o no.
        \item Evaluar las secuencias candidatas.
        \item Descargar la extensi\'on.
-      \end{enumerate}         
-
-  \subsubsection{ILibRNAAdmin}
-    \paragraph{Responsabilidad:} Administrar la librer\'ia externa utilizada
-para la manipulaci\'on de secuencias ARN.
-      \begin{enumerate}
-       \item Cargar librer\'ia
       \end{enumerate}  
 
   \subsubsection{ILibRNA}
     \paragraph{Responsabilidad:} Proveer al sistema funcionalidades para la
 manipulaci\'on de secuencias ARN. 
       \begin{enumerate}
-       \item Folding directo
-       \item Folding inverso
+       \item Folding directo.
+       \item Folding inverso.
+       \item Comparaci\'on estructural.
+       \item Calculo de distancia entre secuencias.
       \end{enumerate}
     \paragraph{Colaboradores:}
       \begin{enumerate}
@@ -63,8 +61,7 @@ determinadas propiedades de una secuencia original.
       \end{enumerate}
     \paragraph{Colaboradores:}
       \begin{enumerate}
-       \item ILibRNA: Dise\~no de secuencias que mantengan una propiedad
-determinada (estructura secundaria).
+       \item ILibRNA: ``folding'' directo e inverso.
       \end{enumerate}
 
   \subsubsection{ICombinatoryEngine}
@@ -89,7 +86,7 @@ alcanzar la profundidad deseada.
       \end{enumerate}
     \paragraph{Colaboradores:}
       \begin{enumerate}
-       \item ILibRNA: Predicci\'on de estructura secundaria.
+       \item ILibRNA: ``folding'' directo.
       \end{enumerate}
 
   \subsubsection{IQAEngine}
@@ -107,12 +104,7 @@ o no el control de calidad.
 
   \subsubsection{IRanker}
     \paragraph{Responsabilidad:} Mantener un \textit{ranking} de secuencias en
-base al puntaje asignado a cada una.       
-    \paragraph{Colaboradores:}
-      \begin{enumerate}
-       \item \textbf{IPlugin:} Consulta el puntaje para una secuencia
-determinada.
-      \end{enumerate}
+base al puntaje asignado a cada una.    
 
 \begin{comment}
   \subsection{Interface}
