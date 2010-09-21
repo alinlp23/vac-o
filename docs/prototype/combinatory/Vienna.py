@@ -58,6 +58,13 @@ def random_structure(seq_len):
             
     return structure
     
+class InverseFoldIterator(object):
+    def __init__(self, structure):
+        self.structure = structure
+        
+    def next(self):
+        return random_sequence(len(self.structure))    
+    
 def inverse_fold(structure):
     return random_sequence(len(structure))
     

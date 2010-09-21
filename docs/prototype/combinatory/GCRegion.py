@@ -6,12 +6,10 @@ from Vienna import *
 
 class GCRegion(CombinatoryRegion):
     
-    def __init__(self, vaccine, wildtype, start, end):
-        super(GCRegion, self).__init__(vaccine, wildtype, start, end)
+    def __init__(self, start, end, target_aminoacids):
+        super(GCRegion, self).__init__(start, end)
         
-        #Que deberia pasar cuando hay un Codon de 'Stop' en entre 'start' y 'end'
-        #o cuando end-start no es multiplo de 3
-        self.wildtype_aminoacids = aminoacids(self.wildtype[start:end])
+        self.wildtype_aminoacids = target_aminoacids
         
         self.__triplets = list(product(*[triplets(amino) for amino in self.wildtype_aminoacids]))
         self.reset()
@@ -23,7 +21,8 @@ class GCRegion(CombinatoryRegion):
         return self.__triplets == []
     
     def current(self):
-        return ''.join(self.__triplets[self.__index])
+        seq = self.base_sequence[:self.start]+''.join(self.__triplets[self.__index])+self.base_sequence[self.end:]
+        return seq, self.evaluate(''.join(self.__triplets[self.__index]))
         
     def next(self):
         self.__index += 1

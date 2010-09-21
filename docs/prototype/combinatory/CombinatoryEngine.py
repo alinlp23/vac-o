@@ -8,9 +8,9 @@ class _CombinatoryEngine(object):
         self.regions = []
         
     def run(self):
-        self.__product(self.regions)
+        self.__product(self.regions, self.sequence)
 
-    def __product(self, regions, product=[], score=1):
+    def __product(self, regions, seq, score=1):
         """
         Producto cartesiano de regiones con score y cutoff.
         """
@@ -18,21 +18,22 @@ class _CombinatoryEngine(object):
             #No hay mas regiones, se muestra el producto y el score
             #Aca se dispararia un evento para avisar que hay una nueva
             #secuencia candidata para ser sometida a QA y despues rankeada.
-            print product, score
+            print seq, score
         else:
             r = regions[0]
+            r.set_base_sequence(seq)
             done = False
             while(not done):
                 #Mientras la region tenga secuencias para analizar
-                s = r.current()
+                s, lscore = r.current()
                 
                 #Evaluacion local de la region multiplicado por el score acumulado
-                partial_score = r.evaluate(s)*score
+                partial_score = lscore*score
                 
                 if partial_score > self.cutoff:
                     #Se sigue calculando el producto cartesiano, con la secuencia
                     #'s' incluida y el score actualizado
-                    self.__product(regions[1:], product+[s], partial_score)
+                    self.__product(regions[1:], s, partial_score)
                     
                 done = r.next()
 

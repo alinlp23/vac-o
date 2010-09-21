@@ -3,14 +3,15 @@
 import random
 class CombinatoryRegion(object):
 
-    def __init__(self, vaccine, wildtype, start, end):
+    def __init__(self, start, end):
         super(CombinatoryRegion, self).__init__()
 
-        self.vaccine = vaccine
-        self.wildtype = wildtype
         self.start = start
         self.end = end
-
+        
+    def set_base_sequence(self, sequence):
+        self.base_sequence = sequence
+        
     def reset(self):
         raise NotImplemented
         
