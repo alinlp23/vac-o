@@ -5,7 +5,14 @@
 interfaces presentadas en la secci\'on~\ref{hld}. Para mayor claridad, se
 dividieron los diagramas UML por paquetes.
 
-  \subsubsection{Combinatory}
+  \subsubsection{Combinatory}   
+    \begin{figure}
+      \centering
+      \includegraphics[scale=0.5]{lld-combinatory.png}  
+      \caption{UML - Combinatory}
+      \label{uml:lld-combinatory}
+    \end{figure}
+
   En la Figura~\ref{uml:lld-combinatory} se puede ver el diagrama de clases
 para el paquete ``combinatory''. Este paquete representa el componente
 ``CombinatoryEngine'' en la Figura~\ref{uml:architecture} de la
@@ -49,15 +56,14 @@ excedan el porcentaje \textit{max\_similitude} de similitud, ser\'an
 descartadas.
   \end{itemize}
 
-   
+  \subsubsection{Validator}
     \begin{figure}
       \centering
-      \includegraphics[scale=0.5]{lld-combinatory.png}  
-      \caption{UML - Combinatory}
-      \label{uml:lld-combinatory}
+      \includegraphics[scale=0.5]{lld-validator.png}  
+      \caption{UML - Validator}
+      \label{uml:lld-validator}
     \end{figure}
 
-  \subsubsection{Validator}
   En la Figura~\ref{uml:lld-validator} se puede ver el diagrama de clases
 para el paquete ``validator''. Este paquete representa el componente
 ``QAEngine'' en la Figura~\ref{uml:architecture} de la
@@ -79,20 +85,44 @@ mutaciones de una secuencia:
     \end{itemize}
 y dos propiedades a verificar sobre cada mutaci\'on:
     \begin{itemize}
-     \item Conservaci\'on de una estructura secundaria dada
+     \item Comparaci\'on estructural con una estructura secundaria dada
 (\textit{SSValidator}).
      \item Conteo y comparaci\'on de nucle\'otidos apareados o desapareados
 (\textit{NUValidator}).
     \end{itemize}
 
-    \begin{figure}
+  \subsubsection{LibRNA}
+   \begin{figure}
       \centering
-      \includegraphics[scale=0.5]{lld-validator.png}  
-      \caption{UML - Validator}
-      \label{uml:lld-validator}
+      \includegraphics[scale=0.5]{lld-librna.png}  
+      \caption{UML - LibRNA}
+      \label{uml:lld-librna}
     \end{figure}
 
-  \subsubsection{LibRNA}
+  En la Figura~\ref{uml:lld-librna} se puede ver el diagrama de clases
+para el paquete ``libRNA''. Este paquete representa el componente
+``libRNA'' en la Figura~\ref{uml:architecture} de la
+secci\'on~\ref{architecture}.
+
+  La responsabilidad de este paquete es brindar al sistema servicios para la
+manipulaci\'on de secuencias de ARN. Para cumplir con esta responsabilidad, se
+ofrece al sistema el acceso a librer\'ias externas de manera transparente y
+permitiendo utilizar diferentes librer\'ias para acceder a diferentes servicios.
+
+  En la primer versi\'on del sistema, se contemplan los siguientes servicios
+como indispensables, aunque en futuras versiones se podr\'ian agregar otros:
+
+  \begin{itemize}
+   \item ``Folding'' directo (\textit{IFold})
+   \item ``Folding'' inverso (\textit{IFoldInverse})
+   \item Comparaci\'on entre estructuras (\textit{IStructureCmp})
+   \item Comparaci\'on entre secuencias (\textit{ISequenceCmp})
+  \end{itemize}
+
+  La importancia de este paquete y las interfaces que contiene radica en que le
+permite al resto del sistema, abstraerse del uso de una u otra librer\'ia, y
+contar con una API unificada para acceder a estos servicios.    
+
   \subsubsection{Ranker}
   \subsubsection{PluginAdmin}
   \subsubsection{Plugin}

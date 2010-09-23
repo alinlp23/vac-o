@@ -50,6 +50,11 @@ las clases concretas y sus relaciones para cada paquete.
   Principalmente se pretende lograr un dise\~no que cumpla con los principios
 fundamentales del dise\~no orientado a objetos, com\'unmente conocidos por el
 acr\'onimo ``SOLID'' \cite{martin00}.
+
+  En particular, se pone especial \'enfasis en respetar los principios OCP
+(Open Closed Principle) y DIP (Dependency Inversion Principle) debido a su
+importancia para obtener un sistema que sea f\'acilmente extensible y
+configurable con el fin de satisfacer las necesidades de los usuarios.
   
   \subsection{Metodolog\'ia}
   La metodolog\'ia utilizada para realizar el an\'alisis y descripci\'on del
@@ -64,15 +69,15 @@ queda en un segunda plano.
 librer\'ias externas que ser\'an fundamentales para el correcto funcionamiento
 del sistema en su conjunto.
   Respetando la metodolog\'ia adoptada, no se har\'a referencia directa a una u
-otra librer\'ia, sino a los servicios que la misma debe ser capaz de proveer al
-sistema.
+otra librer\'ia, sino a los servicios que las mismas debe ser capaces de proveer
+al sistema.
 
   \subsection{Herramientas y convenciones}
   Se utiliza UML\cite{uml} como lenguaje de modelado y ArgoUML\cite{argoUML}
 como herramienta para la confecci\'on de diagramas. Adem\'as se adopta la
 convenci\'on de nombrar a las interfaces anteponiendo una \textit{``I''} al
-nombre de la clase concreta que la implementa. (interface:
-\textit{``IPersona''}, clase concreta: \textit{``Persona''})
+nombre de la clase concreta que la implementa (interface:
+\textit{``IPersona''}, clase concreta: \textit{``Persona''}).
 
 \section{Arquitectura del Sistema}
   \label{architecture}

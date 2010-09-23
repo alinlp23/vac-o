@@ -38,18 +38,36 @@ control de calidad, y ``folding'' inverso en el motor combinatorio).
        \item Descargar la extensi\'on.
       \end{enumerate}  
 
-  \subsubsection{ILibRNA}
-    \paragraph{Responsabilidad:} Proveer al sistema funcionalidades para la
-manipulaci\'on de secuencias ARN. 
-      \begin{enumerate}
-       \item Folding directo.
-       \item Folding inverso.
-       \item Comparaci\'on estructural.
-       \item Calculo de distancia entre secuencias.
-      \end{enumerate}
+  \subsubsection{IFold}
+    \paragraph{Responsabilidad:} Proveer al sistema el ``folding'' directo de
+secuencias ARN
     \paragraph{Colaboradores:}
       \begin{enumerate}
-       \item Vienna Package, UNAFold, otros.
+       \item Vienna Package, o UNAFold, u otros.
+      \end{enumerate}
+
+  \subsubsection{IFoldInverse}
+    \paragraph{Responsabilidad:} Proveer al sistema el ``folding'' inverso de
+secuencias ARN
+    \paragraph{Colaboradores:}
+      \begin{enumerate}
+       \item Vienna Package u otros.
+      \end{enumerate}
+
+  \subsubsection{IStructureCmp}
+    \paragraph{Responsabilidad:} Proveer al sistema la comparaci\'on de
+estructuras secundarias.
+    \paragraph{Colaboradores:}
+      \begin{enumerate}
+       \item RNAForester u otros.
+      \end{enumerate}
+
+  \subsubsection{ISequenceCmp}
+    \paragraph{Responsabilidad:} Proveer al sistema la comparaci\'on de
+secuencias de ARN.
+    \paragraph{Colaboradores:}
+      \begin{enumerate}
+       \item Vienna Package u otros.
       \end{enumerate}
 
   \subsubsection{ICombinatoryRegion}
@@ -61,7 +79,7 @@ determinadas propiedades de una secuencia original.
       \end{enumerate}
     \paragraph{Colaboradores:}
       \begin{enumerate}
-       \item ILibRNA: ``folding'' directo e inverso.
+       \item IFold, IFoldInverse, IStructureCmp, ISequenceCmp
       \end{enumerate}
 
   \subsubsection{ICombinatoryEngine}
@@ -86,7 +104,7 @@ alcanzar la profundidad deseada.
       \end{enumerate}
     \paragraph{Colaboradores:}
       \begin{enumerate}
-       \item ILibRNA: ``folding'' directo.
+       \item IFold
       \end{enumerate}
 
   \subsubsection{IQAEngine}
