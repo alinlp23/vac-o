@@ -14,7 +14,7 @@ dividieron los diagramas UML por paquetes.
     \end{figure}
 
   En la Figura~\ref{uml:lld-combinatory} se puede ver el diagrama de clases
-para el paquete ``combinatory''. Este paquete representa el componente
+para el paquete \textit{combinatory}. Este paquete representa el componente
 ``CombinatoryEngine'' en la Figura~\ref{uml:architecture} de la
 secci\'on~\ref{architecture}.
 
@@ -65,7 +65,7 @@ descartadas.
     \end{figure}
 
   En la Figura~\ref{uml:lld-validator} se puede ver el diagrama de clases
-para el paquete ``validator''. Este paquete representa el componente
+para el paquete \textit{validator}. Este paquete representa el componente
 ``QAEngine'' en la Figura~\ref{uml:architecture} de la
 secci\'on~\ref{architecture}.
 
@@ -100,7 +100,7 @@ y dos propiedades a verificar sobre cada mutaci\'on:
     \end{figure}
 
   En la Figura~\ref{uml:lld-librna} se puede ver el diagrama de clases
-para el paquete ``libRNA''. Este paquete representa el componente
+para el paquete \textit{libRNA}. Este paquete representa el componente
 ``libRNA'' en la Figura~\ref{uml:architecture} de la
 secci\'on~\ref{architecture}.
 
@@ -124,5 +124,38 @@ permite al resto del sistema, abstraerse del uso de una u otra librer\'ia, y
 contar con una API unificada para acceder a estos servicios.    
 
   \subsubsection{Ranker}
+  \begin{figure}
+      \centering
+      \includegraphics[scale=0.5]{lld-ranker.png}  
+      \caption{UML - Ranker}
+      \label{uml:lld-ranker}
+    \end{figure}
+
+  En la Figura~\ref{uml:lld-ranker} se puede ver el diagrama de clases
+para el paquete \textit{ranker}. Este paquete representa el componente
+``Ranker'' en la Figura~\ref{uml:architecture} de la
+secci\'on~\ref{architecture}.
+
   \subsubsection{PluginAdmin}
+  \begin{figure}
+      \centering
+      \includegraphics[scale=0.5]{lld-pluginadmin.png}  
+      \caption{UML - PluginAdmin}
+      \label{uml:lld-pluginadmin}
+    \end{figure}
+
+  En la Figura~\ref{uml:lld-pluginadmin} se puede ver el diagrama de clases
+para el paquete \textit{pluginadmin}. Este paquete no aparece expl\'icitamente
+en la arquitectura del sistema (Figura~\ref{uml:architecture} de la
+secci\'on~\ref{architecture}), pero lo podemos identificar con la flecha que une
+el componente ``Main'' con ``Plugin''.
+
+  Fundamentalmente la responsabilidad de este paquete, es brindar al sistema la
+funcionalidad de cargar las extensiones en memoria.
+
   \subsubsection{Plugin}
+  Para el paquete \textit{plugin} no se especifica un dise\~no de bajo nivel
+debido a que la implementaci\'on de cada extensi\'on no forma parte del sistema
+``vac-o''. Simplemente, se asume que las extensiones que se implementen en el
+futuro, deber\'an garantizar que cumplen con el ``contrato'' establecido por
+las interfaces de este paquete.
