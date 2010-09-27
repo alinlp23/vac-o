@@ -1,8 +1,8 @@
 /* 
- * File:   QARegion.h
+ * File:   IQAMutator.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 27, 2010, 3:51 PM 
+ * Created on September 27, 2010, 7:20 PM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -23,21 +23,20 @@
  * 
  */
 
-#ifndef _QAREGION_H
-#define	_QAREGION_H
+#ifndef _IQAMUTATOR_H
+#define	_IQAMUTATOR_H
 
-#include "IQARegion.h"
-#include "IQAValidator.h"
-#include "IQAMutator.h"
+#include "biopp.h"
 
-class QARegion : public IQARegion {
-    int start, end;
-    IQAMutator* mutator;
-    IQAValidator* validator;
+class IQAMutator {
 public:
-    QARegion(int, int, IQAMutator&, IQAValidator&);
-    bool validate(NucSequence sequence);
+    virtual void begin() = 0;
+    virtual void current(NucSequence& sequence) = 0;
+    virtual void next() = 0;
+    virtual bool done() = 0;
+
+    virtual ~IQAMutator(){}
 };
 
-#endif	/* _QAREGION_H */
+#endif	/* _IQAMUTATOR_H */
 
