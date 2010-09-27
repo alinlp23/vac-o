@@ -55,8 +55,8 @@
 #include "IStructureCmp.h"
 #include "ISequenceCmp.h"
 
+/*plugin*/
 #include "IPlugin.h"
-
 
 
 int main(int argc, char** argv) {
