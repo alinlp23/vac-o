@@ -30,9 +30,12 @@
 
 class QAEngine : public IQAEngine {
     static QAEngine* instance;
+    int deep;
+    list<IQARegion> regions;
 protected:
     QAEngine();
 public:
+    void set_deep(int deep);
     void add_region(IQARegion& region);
     bool validate(NucSequence sequence);
 
