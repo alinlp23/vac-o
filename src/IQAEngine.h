@@ -30,6 +30,7 @@
 
 class IQAEngine {
 public:
+    virtual void set_deep(int deep) = 0;
     virtual void add_region(IQARegion& region) = 0;
     virtual bool validate(NucSequence sequence) = 0;
 
