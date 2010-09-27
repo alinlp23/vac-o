@@ -33,7 +33,7 @@ class PluginAdmin : public IPluginAdmin {
 protected:
     PluginAdmin();
 public:
-    void load(string path);
+    IPlugin* load(string path);
 
     static PluginAdmin* get_instance();
 };
