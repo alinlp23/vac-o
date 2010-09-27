@@ -28,8 +28,11 @@
 
 #include "IQARegion.h"
 
+template <class Mutator, class Validator>
 class QARegion : public IQARegion {
     int start, end;
+    Mutator mutator;
+    Validator validator;
 public:
     bool validate(NucSequence sequence);
 };
