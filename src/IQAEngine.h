@@ -34,7 +34,7 @@ class IQARegion;
 class IQAEngine
 {
 public:
-    virtual void set_deep(Depth d) = 0;
+    virtual void set_depth(Depth d) = 0;
     virtual void add_region(IQARegion* region) = 0;
     virtual bool validate(const NucSequence& sequence) const = 0;
 
