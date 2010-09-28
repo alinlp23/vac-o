@@ -36,7 +36,7 @@ class QAEngine : public IQAEngine
 protected:
     QAEngine();
 public:
-    void set_deep(Depth d);
+    void set_depth(Depth d);
     void add_region(IQARegion* region);
     bool validate(const NucSequence& sequence) const;
 
