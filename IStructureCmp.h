@@ -28,9 +28,11 @@
 
 #include "biopp.h"
 
-class IStructureCmp {
+class IStructureCmp
+{
 public:
-    virtual float compare(SecStructure struct1, SecStructure struct2) = 0;
+    virtual float compare(const SecStructure& struct1,
+                          const SecStructure& struct2) const = 0;
 
     virtual ~IStructureCmp(){}
 };

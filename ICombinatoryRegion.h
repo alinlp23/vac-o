@@ -27,16 +27,18 @@
 #define	_ICOMBINATORYREGION_H
 
 #include "biopp.h"
+#include "types.h"
 
-class ICombinatoryRegion {
+class ICombinatoryRegion
+{
 public:
     virtual void begin() = 0;
     virtual float current(NucSequence& sequence) = 0;
     virtual void next() = 0;
-    virtual bool done() = 0;
+    virtual bool done() const = 0;
 
-    virtual void set_base_sequence(NucSequence sequence) = 0;
-    virtual void add_constraint(int start, int end) = 0;
+    virtual void set_base_sequence(const NucSequence& sequence) = 0;
+    virtual void add_constraint(SeqPosition start, SeqPosition end) = 0;
 
     virtual ~ICombinatoryRegion(){}
 };

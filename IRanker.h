@@ -27,16 +27,17 @@
 #define	_IRANKER_H
 
 #include "biopp.h"
+#include "types.h"
 
-
-class IRanker {
+class IRanker
+{
 public:
-    virtual void update(NucSequence sequence, float score) = 0;
+    virtual void update(const NucSequence& sequence, Score s) = 0;
     
     virtual void begin() = 0;
     virtual float current(NucSequence& sequence) = 0;
     virtual void next() = 0;
-    virtual bool done() = 0;
+    virtual bool done() const = 0;
 
     virtual ~IRanker(){}
 };

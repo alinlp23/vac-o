@@ -26,13 +26,17 @@
 #ifndef _IQAENGINE_H
 #define	_IQAENGINE_H
 
-#include "IQARegion.h"
+#include "biopp.h"
+#include "types.h"
 
-class IQAEngine {
+class IQARegion;
+
+class IQAEngine
+{
 public:
-    virtual void set_deep(int deep) = 0;
-    virtual void add_region(IQARegion& region) = 0;
-    virtual bool validate(NucSequence sequence) = 0;
+    virtual void set_deep(Depth d) = 0;
+    virtual void add_region(IQARegion* region) = 0;
+    virtual bool validate(const NucSequence& sequence) const = 0;
 
     virtual ~IQAEngine(){}
 };

@@ -27,13 +27,14 @@
 #define	_IPLUGINADMIN_H
 
 #include <string>
-#include "IPlugin.h"
 
+class IPlugin;
 using std::string;
 
-class IPluginAdmin {
+class IPluginAdmin
+{
 public:
-    virtual IPlugin* load(string path) = 0;
+    virtual IPlugin* load(const string& path) const = 0;
 
     virtual ~IPluginAdmin(){}
 };

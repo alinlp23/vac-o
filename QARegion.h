@@ -27,16 +27,19 @@
 #define	_QAREGION_H
 
 #include "IQARegion.h"
-#include "IQAValidator.h"
-#include "IQAMutator.h"
+#include "types.h"
 
-class QARegion : public IQARegion {
-    int start, end;
+class IQAMutator;
+class IQAValidator;
+
+class QARegion : public IQARegion
+{
+    SeqPosition start, end;
     IQAMutator* mutator;
     IQAValidator* validator;
 public:
-    QARegion(int, int, IQAMutator&, IQAValidator&);
-    bool validate(NucSequence sequence);
+    QARegion(SeqPosition, SeqPosition, IQAMutator*, IQAValidator*);
+    bool validate(const NucSequence& sequence) const;
 };
 
 #endif	/* _QAREGION_H */

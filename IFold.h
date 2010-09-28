@@ -28,9 +28,11 @@
 
 #include "biopp.h"
 
-class IFold{
+class IFold
+{
 public:
-    virtual float fold(NucSequence sequence, SecStructure& structure) = 0;
+    virtual float fold(const NucSequence& sequence,
+                       SecStructure& structure) const = 0;
 
     virtual ~IFold(){}
 };

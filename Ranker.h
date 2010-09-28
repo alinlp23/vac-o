@@ -26,28 +26,31 @@
 #ifndef _RANKER_H
 #define	_RANKER_H
 
-#include <list>
+#include <set>
 #include "IRanker.h"
 
-using std::list;
+using std::set;
 
-class Ranker : public IRanker {
+class Ranker : public IRanker
+{
     static Ranker* instance;
     struct RSec{
-        float score;
+        Score score;
         NucSequence sequence;
+        bool operator() (const RSec& ls, const RSec& hs) const
+            {return ls.score<hs.score;}
     };
-    list<RSec> ranking;
-    list<RSec>::iterator it;
+    set<RSec, RSec> ranking;
+    set<RSec, RSec>::iterator it;
 protected:
     Ranker();
 public:
-    void update(NucSequence sequence, float score);
+    void update(const NucSequence& sequence, Score s);
     
     void begin();
     float current(NucSequence& sequence);
     void next();
-    bool done();
+    bool done() const;
 
     static Ranker* get_instance();
 };

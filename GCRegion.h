@@ -28,15 +28,16 @@
 
 #include "CombinatoryRegion.h"
 
-class GCRegion : public CombinatoryRegion {
+class GCRegion : public CombinatoryRegion
+{
     AminoSequence target_aminoacids;
 public:
-    GCRegion(AminoSequence aminoacids);
+    GCRegion(const AminoSequence& aminoacids);
 
     void begin();
     float current(NucSequence& sequence);
     void next();
-    bool done();
+    bool done() const;
 };
 
 #endif	/* _GCREGION_H */

@@ -32,15 +32,16 @@
 
 using std::list;
 
-class IPlugin {
+class IPlugin
+{
 public:
-    virtual list<IParameter> get_parameters() = 0;
-    virtual NucSequence get_sequence() = 0;
-    virtual list<ICombinatoryRegion> get_combinatory_regions() = 0;
-    virtual list<IQARegion> get_qa_regions() = 0;
-    virtual float get_cutoff() = 0;
-    virtual bool done() = 0;
-    virtual float evaluate_sequence(NucSequence sequence) = 0;
+    virtual list<IParameter> get_parameters() const = 0;
+    virtual NucSequence* get_sequence() const = 0;
+    virtual list<ICombinatoryRegion>* get_combinatory_regions() const = 0;
+    virtual list<IQARegion>* get_qa_regions() const = 0;
+    virtual CutOff get_cutoff() const = 0;
+    virtual bool done() const = 0;
+    virtual Score evaluate_sequence(const NucSequence& sequence) = 0;
     virtual void unload() = 0;
 
     virtual ~IPlugin(){}

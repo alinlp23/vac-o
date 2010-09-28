@@ -36,6 +36,8 @@
 #include "IQARegion.h"
 #include "QAEngine.h"
 #include "QARegion.h"
+#include "IQAValidator.h"
+#include "IQAMutator.h"
 
 /*mutator*/
 #include "ISequenceMutator.h"
