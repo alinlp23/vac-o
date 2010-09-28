@@ -28,16 +28,17 @@
 
 #include "IQAEngine.h"
 
-class QAEngine : public IQAEngine {
+class QAEngine : public IQAEngine
+{
     static QAEngine* instance;
-    int deep;
+    Depth depth;
     list<IQARegion> regions;
 protected:
     QAEngine();
 public:
-    void set_deep(int deep);
-    void add_region(IQARegion& region);
-    bool validate(NucSequence sequence);
+    void set_deep(Depth d);
+    void add_region(IQARegion* region);
+    bool validate(const NucSequence& sequence) const;
 
     static QAEngine* get_instance();
 };

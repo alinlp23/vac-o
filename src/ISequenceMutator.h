@@ -28,12 +28,13 @@
 
 #include "biopp.h"
 
-class ISequenceMutator {
+class ISequenceMutator
+{
 public:
     virtual void begin();
     virtual void current(NucSequence& sequence);
     virtual void next();
-    virtual bool done();
+    virtual bool done() const;
 
     virtual ~ISequenceMutator(){}
 };

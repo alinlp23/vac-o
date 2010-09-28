@@ -28,12 +28,13 @@
 
 #include "biopp.h"
 
-class IFoldInverse {
+class IFoldInverse
+{
 public:
     virtual void begin() = 0;
     virtual void current(NucSequence& sequence) = 0;
     virtual void next() = 0;
-    virtual bool done() = 0;
+    virtual bool done() const = 0;
     
     virtual ~IFoldInverse(){}
 };

@@ -28,12 +28,13 @@
 
 #include "IPluginAdmin.h"
 
-class PluginAdmin : public IPluginAdmin {
+class PluginAdmin : public IPluginAdmin
+{
     static PluginAdmin* instance;
 protected:
     PluginAdmin();
 public:
-    IPlugin* load(string path);
+    IPlugin* load(const string& path) const;
 
     static PluginAdmin* get_instance();
 };

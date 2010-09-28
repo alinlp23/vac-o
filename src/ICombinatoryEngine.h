@@ -26,14 +26,18 @@
 #ifndef _ICOMBINATORYENGINE_H
 #define	_ICOMBINATORYENGINE_H
 
-#include "ICombinatoryRegion.h"
+#include "biopp.h"
+#include "types.h"
 
-class ICombinatoryEngine {
+class ICombinatoryRegion;
+
+class ICombinatoryEngine
+{
 public:
     virtual void run() = 0;
-    virtual void add_region(ICombinatoryRegion& region) = 0;
-    virtual void set_sequence(NucSequence sequence) = 0;
-    virtual void set_cutoff(float cutoff) = 0;
+    virtual void add_region(ICombinatoryRegion* region) = 0;
+    virtual void set_sequence(const NucSequence& sequence) = 0;
+    virtual void set_cutoff(CutOff c) = 0;
 
     virtual ~ICombinatoryEngine(){}
 };

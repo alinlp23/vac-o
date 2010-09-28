@@ -29,9 +29,10 @@
 #include "biopp.h"
 
 
-class IQAValidator {
+class IQAValidator
+{
 public:
-    virtual bool validate(NucSequence sequence) = 0;
+    virtual bool validate(const NucSequence& sequence) const = 0;
 
     virtual ~IQAValidator(){}
 };

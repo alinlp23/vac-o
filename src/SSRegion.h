@@ -27,17 +27,20 @@
 #define	_SSREGION_H
 
 #include "CombinatoryRegion.h"
-#include "IFold.h"
-#include "IFoldInverse.h"
-#include "IStructureCmp.h"
-#include "ISequenceCmp.h"
-#include "ISequenceMutator.h"
 
-class SSRegion : public CombinatoryRegion {    
-    int max_mutations;
-    float max_similitude;
-    SecStructure wt_structure, vaccine_structure;
-    int wt_seq_cache, min_distance;
+class IFold;
+class IFoldInverse;
+class IStructureCmp;
+class ISequenceCmp;
+class ISequenceMutator;
+
+class SSRegion : public CombinatoryRegion
+{    
+    NMutations max_mutations;
+    CacheSize wt_seq_cache;
+    Similitude max_similitude;
+    Distance min_distance;
+    SecStructure wt_structure, vaccine_structure;    
     ISequenceMutator* mutator;
     
     /*libRNA backends*/
@@ -46,13 +49,14 @@ class SSRegion : public CombinatoryRegion {
     IStructureCmp* struct_cmp_backend;
     ISequenceCmp* seq_cmp_backend;
 public:
-    SSRegion(SecStructure, SecStructure, int, float, int, int,
-            IFold&, IFoldInverse&, IStructureCmp&, ISequenceCmp&);
+    SSRegion(const SecStructure&, const SecStructure&, NMutations,
+            CacheSize, Similitude, Distance, IFold*, IFoldInverse*,
+            IStructureCmp*, ISequenceCmp*);
     
     void begin();
     float current(NucSequence& sequence);
     void next();
-    bool done();
+    bool done() const;
 };
 
 #endif	/* _SSREGION_H */

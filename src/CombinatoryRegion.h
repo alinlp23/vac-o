@@ -27,20 +27,22 @@
 #define	_COMBINATORYREGION_H
 
 #include <list>
+#include "biopp.h"
 #include "ICombinatoryRegion.h"
 
 using std::list;
 
-class CombinatoryRegion : public ICombinatoryRegion {
+class CombinatoryRegion : public ICombinatoryRegion
+{
     struct Constraint{
-        int start, end;
+        SeqPosition start, end;
     };
     list<Constraint> constraints;
-    int start, end;
+    SeqPosition start, end;
     NucSequence base_sequence;
 public:
-    void set_base_sequence(NucSequence sequence);
-    void add_constraint(int start, int end);
+    void set_base_sequence(const NucSequence& sequence);
+    void add_constraint(SeqPosition start, SeqPosition end);
 };
 
 

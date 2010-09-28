@@ -26,10 +26,11 @@
 #ifndef _IPARAMETER_H
 #define	_IPARAMETER_H
 
-class IParameter {
+class IParameter
+{
 public:
-    virtual void set_value(string value) = 0;
-    virtual string get_name() = 0;
+    virtual void set_value(const string& value) = 0;
+    virtual string* get_name() const = 0;
 
     virtual ~IParameter(){}
 };

@@ -27,17 +27,19 @@
 #define	_SEQUENCEMUTATOR_H
 
 #include "ISequenceMutator.h"
+#include "types.h"
 
-class SequenceMutator : public ISequenceMutator {
+class SequenceMutator : public ISequenceMutator
+{
     NucSequence sequence;
-    int max_mutations;
+    NMutations max_mutations;
 public:
-    SequenceMutator(NucSequence, int);
+    SequenceMutator(NucSequence, NMutations);
 
     void begin();
     void current(NucSequence& sequence);
     void next();
-    bool done();
+    bool done() const;
 };
 
 #endif	/* _SEQUENCEMUTATOR_H */

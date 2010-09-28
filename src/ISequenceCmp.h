@@ -28,9 +28,11 @@
 
 #include "biopp.h"
 
-class ISequenceCmp {
+class ISequenceCmp
+{
 public:
-    virtual float compare(NucSequence seq1, NucSequence seq2) = 0;
+    virtual float compare(const NucSequence& seq1,
+                          const NucSequence& seq2) const = 0;
     
     virtual ~ISequenceCmp(){}
 };

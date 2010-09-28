@@ -1,8 +1,8 @@
 /* 
- * File:   IQARegion.h
+ * File:   types.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 27, 2010, 3:46 PM 
+ * Created on September 28, 2010, 2:50 PM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -23,18 +23,33 @@
  * 
  */
 
-#ifndef _IQAREGION_H
-#define	_IQAREGION_H
+#ifndef _TYPES_H
+#define	_TYPES_H
 
-#include "biopp.h"
+/*CombinatoryEngine cutoff*/
+typedef float CutOff;
 
-class IQARegion
-{
-public:
-    virtual bool validate(const NucSequence& sequence) const = 0;
+/*Index position in a sequence*/
+typedef unsigned int SeqPosition;
 
-    virtual ~IQARegion(){}
-};
+/*Distance between sequences*/
+typedef unsigned int Distance;
 
-#endif	/* _IQAREGION_H */
+/*Similitude between sequences or structures*/
+typedef float Similitude;
+
+/*SSRegion cache*/
+typedef unsigned int CacheSize;
+
+/*Number of mutations*/
+typedef unsigned int NMutations;
+
+/*QAEngine depth validation*/
+typedef unsigned int Depth;
+
+/*Sequence's score*/
+typedef float Score;
+
+
+#endif	/* _TYPES_H */
 

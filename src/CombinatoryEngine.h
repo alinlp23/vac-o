@@ -31,18 +31,19 @@
 
 using std::list;
 
-class CombinatoryEngine : public ICombinatoryEngine {
+class CombinatoryEngine : public ICombinatoryEngine
+{
     static CombinatoryEngine* instance;
     NucSequence sequence;
-    float cutoff;
+    CutOff cutoff;
     list<ICombinatoryRegion> regions;
 protected:
     CombinatoryEngine();
 public:
     void run();
-    void add_region(ICombinatoryRegion& region);
-    void set_sequence(NucSequence sequence);
-    void set_cutoff(float cutoff);
+    void add_region(ICombinatoryRegion* region);
+    void set_sequence(const NucSequence& sequence);
+    void set_cutoff(CutOff c);
 
     static CombinatoryEngine* get_instance();
 };
