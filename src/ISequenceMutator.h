@@ -28,12 +28,29 @@
 
 #include "biopp.h"
 
+/**
+ * Interface for sequence mutator.
+ */
 class ISequenceMutator
 {
 public:
+    /**
+     * Sets the iterator at the beginning.
+     */
     virtual void begin();
+    /**
+     * Gets the current mutation.
+     * @param sequence the NucSequence to write to.
+     */
     virtual void current(NucSequence& sequence);
+    /**
+     * Move the iterator forwards.
+     */
     virtual void next();
+    /**
+     * Check if there are more mutations.
+     * @return If the iterator it's done or not.
+     */
     virtual bool done() const;
 
     virtual ~ISequenceMutator(){}

@@ -28,9 +28,17 @@
 
 #include "biopp.h"
 
+/**
+ * Interface for quality assurance regions.
+ */
 class IQARegion
 {
 public:
+    /**
+     * Validate a given ARN sequence.
+     * @param sequence the ARN sequence to validate.
+     * @return If the sequence pass the QA or not.
+     */
     virtual bool validate(const NucSequence& sequence) const = 0;
 
     virtual ~IQARegion(){}

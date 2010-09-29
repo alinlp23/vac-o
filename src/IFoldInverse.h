@@ -28,12 +28,39 @@
 
 #include "biopp.h"
 
+/**
+ * Interface for sequence's inverse folding services.
+ */
 class IFoldInverse
 {
 public:
+    /**
+     * Sets the target secondary structure
+     * @param structure the target structure
+     */
+    virtual void set_structure(const SecStructure& structure) = 0;
+    /**
+     * Sets the initial sequence to start the search
+     * @param start the ARN sequence to start looking.
+     */
+    virtual void set_start(const NucSequence& start) = 0;
+    /**
+     * Sets the iterator at the beginning.
+     */
     virtual void begin() = 0;
+    /**
+     * Gets the current sequence
+     * @param sequence the ARN sequence to write to.
+     */
     virtual void current(NucSequence& sequence) = 0;
+    /**
+     * Move the iterator forwards
+     */
     virtual void next() = 0;
+    /**
+     * Check if there are more sequences.
+     * @return If the iterator it's done or not.
+     */
     virtual bool done() const = 0;
     
     virtual ~IFoldInverse(){}

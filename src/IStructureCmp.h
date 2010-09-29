@@ -27,12 +27,22 @@
 #define	_ISTRUCTURECMP_H
 
 #include "biopp.h"
+#include "types.h"
 
+/**
+ * Interface for structure's comparing services.
+ */
 class IStructureCmp
 {
 public:
-    virtual float compare(const SecStructure& struct1,
-                          const SecStructure& struct2) const = 0;
+    /**
+     * Compare two structures.
+     * @param struct1 a secondary structure.
+     * @param struct2 another secondary structure.
+     * @return The similitude between structures.
+     */
+    virtual Similitude compare(const SecStructure& struct1,
+                               const SecStructure& struct2) const = 0;
 
     virtual ~IStructureCmp(){}
 };
