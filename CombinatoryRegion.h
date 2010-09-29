@@ -35,14 +35,14 @@ using std::list;
 class CombinatoryRegion : public ICombinatoryRegion
 {
     struct Constraint{
-        SeqPosition start, end;
+        SeqIndex start, end;
     };
     list<Constraint> constraints;
-    SeqPosition start, end;
+    SeqIndex start, end;
     NucSequence base_sequence;
 public:
     void set_base_sequence(const NucSequence& sequence);
-    void add_constraint(SeqPosition start, SeqPosition end);
+    void add_constraint(SeqIndex start, SeqIndex end);
 };
 
 

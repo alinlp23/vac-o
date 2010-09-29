@@ -34,7 +34,7 @@ class PluginAdmin : public IPluginAdmin
 protected:
     PluginAdmin();
 public:
-    IPlugin* load(const string& path) const;
+    IPlugin* load(const Path& file) const;
 
     static PluginAdmin* get_instance();
 };

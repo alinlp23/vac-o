@@ -32,16 +32,51 @@
 
 using std::list;
 
+/**
+ * Interface for user's defined plugins
+ */
 class IPlugin
 {
 public:
-    virtual list<IParameter> get_parameters() const = 0;
-    virtual NucSequence* get_sequence() const = 0;
-    virtual list<ICombinatoryRegion>* get_combinatory_regions() const = 0;
-    virtual list<IQARegion>* get_qa_regions() const = 0;
+    /**
+     * Gets the required parameters by the plugin.
+     * @param params list of IParameter to write to.
+     */
+    virtual void get_parameters(list<IParameter>& params) const = 0;
+    /**
+     * Gets the initial ARN sequence.
+     * @param seq NucSecuence to write to.
+     */
+    virtual void get_sequence(NucSequence& seq) const = 0;
+    /**
+     * Gets the combinatory regions to be used by the combinatory engine.
+     * @param cregions list of ICombinatoryRegion to write to.
+     */
+    virtual void get_combinatory_regions(list<ICombinatoryRegion>& cregions) const = 0;
+    /**
+     * Gets the QA regions to be used by the QA engine.
+     * @param qaregions list of IQARegion to write to.
+     */
+    virtual void get_qa_regions(list<IQARegion>& qaregions) const = 0;
+    /**
+     * Gets the threshold cutoff used by the combinatory engine.
+     * @return A floating point between 0 and 1.
+     */
     virtual CutOff get_cutoff() const = 0;
+    /**
+     * Decides when to stop computing.
+     * @return Stop or not.
+     */
     virtual bool done() const = 0;
+    /**
+     * Evaluate a given ARN sequence.
+     * @param sequence the ARN sequence to evaluate.
+     * @return The score assigned.
+     */
     virtual Score evaluate_sequence(const NucSequence& sequence) = 0;
+    /**
+     * Unload the plugin.
+     */
     virtual void unload() = 0;
 
     virtual ~IPlugin(){}

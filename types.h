@@ -26,30 +26,58 @@
 #ifndef _TYPES_H
 #define	_TYPES_H
 
-/*CombinatoryEngine cutoff*/
+#include <string>
+using std::string;
+
+/**
+ * ICombinatoryEngine threshold cutoff
+ */
 typedef float CutOff;
 
-/*Index position in a sequence*/
-typedef unsigned int SeqPosition;
+/**
+ * Index position in a sequence
+ */
+typedef unsigned int SeqIndex;
 
-/*Distance between sequences*/
+/**
+ * Distance between sequences
+ */
 typedef unsigned int Distance;
 
-/*Similitude between sequences or structures*/
+/**
+ * Similitude between sequences or structures
+ */
 typedef float Similitude;
 
-/*SSRegion cache*/
+/**
+ * SSRegion cache
+ */
 typedef unsigned int CacheSize;
 
-/*Number of mutations*/
+/**
+ * Number of mutations
+ */
 typedef unsigned int NMutations;
 
-/*QAEngine depth validation*/
+/**
+ * IQAEngine depth validation
+ */
 typedef unsigned int Depth;
 
-/*Sequence's score*/
+/**
+ * Sequence's score
+ */
 typedef float Score;
 
+/**
+ * Filename path
+ */
+typedef string Path;
+
+/**
+ * Free eneregy in secodary structure
+ */
+typedef float Fe;
 
 #endif	/* _TYPES_H */
 

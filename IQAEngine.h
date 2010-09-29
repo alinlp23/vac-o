@@ -31,11 +31,27 @@
 
 class IQARegion;
 
+/**
+ * Interface for the quality assurance engine
+ */
 class IQAEngine
 {
 public:
+    /**
+     * Sets the depth for the QA.
+     * @param d the desired depth.
+     */
     virtual void set_depth(Depth d) = 0;
+    /**
+     * Add a QA region to the engine.
+     * @param region pointer to a IQARegion.
+     */
     virtual void add_region(IQARegion* region) = 0;
+    /**
+     * Validate a given ARN sequence
+     * @param sequence the ARN sequence to validate.
+     * @return If the sequence pass the QA or not.
+     */
     virtual bool validate(const NucSequence& sequence) const = 0;
 
     virtual ~IQAEngine(){}

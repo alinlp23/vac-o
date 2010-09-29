@@ -31,12 +31,30 @@
 
 class ICombinatoryRegion;
 
+/**
+ * Interface for the combinatory engine.
+ */
 class ICombinatoryEngine
 {
 public:
+    /**
+     * Run the engine.
+     */
     virtual void run() = 0;
+    /**
+     * Add a new combinatory region to the engine.
+     * @param region pointer to a combinatory region     
+     */
     virtual void add_region(ICombinatoryRegion* region) = 0;
+    /**
+     * Sets the initial ARN sequence.
+     * @param sequence reference to a NucSequence
+     */
     virtual void set_sequence(const NucSequence& sequence) = 0;
+    /**
+     * Sets the threshold cutoff.
+     * @param c floating point between 0 and 1
+     */
     virtual void set_cutoff(CutOff c) = 0;
 
     virtual ~ICombinatoryEngine(){}

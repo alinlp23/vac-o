@@ -26,15 +26,22 @@
 #ifndef _IPLUGINADMIN_H
 #define	_IPLUGINADMIN_H
 
-#include <string>
+#include "types.h"
 
 class IPlugin;
-using std::string;
 
+/**
+ * Interface for the plugin administrator.
+ */
 class IPluginAdmin
 {
 public:
-    virtual IPlugin* load(const string& path) const = 0;
+    /**
+     * Load a give plugin.
+     * @param file the path in the filesystem to a ".so" file.
+     * @return Pointer to the loaded plugin.
+     */
+    virtual IPlugin* load(const Path& file) const = 0;
 
     virtual ~IPluginAdmin(){}
 };

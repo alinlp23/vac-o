@@ -28,10 +28,17 @@
 
 #include "biopp.h"
 
-
+/**
+ * Interface for validators used for QA.
+ */
 class IQAValidator
 {
 public:
+    /**
+     * Validate a given ARN sequence.
+     * @param sequence the ARN sequence.
+     * @return If the sequence it's valid or not.
+     */
     virtual bool validate(const NucSequence& sequence) const = 0;
 
     virtual ~IQAValidator(){}

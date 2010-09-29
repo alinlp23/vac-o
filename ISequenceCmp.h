@@ -27,12 +27,22 @@
 #define	_ISEQUENCECMP_H
 
 #include "biopp.h"
+#include "types.h"
 
+/**
+ * Interface for sequence's comparing services.
+ */
 class ISequenceCmp
 {
 public:
-    virtual float compare(const NucSequence& seq1,
-                          const NucSequence& seq2) const = 0;
+    /**
+     * Compare two sequences.
+     * @param seq1 a ARN sequence
+     * @param seq2 another ARN sequence
+     * @return The similitude between sequences.
+     */
+    virtual Similitude compare(const NucSequence& seq1,
+                               const NucSequence& seq2) const = 0;
     
     virtual ~ISequenceCmp(){}
 };

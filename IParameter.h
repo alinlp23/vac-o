@@ -26,11 +26,22 @@
 #ifndef _IPARAMETER_H
 #define	_IPARAMETER_H
 
+/**
+ * Interface for plugin's parameters
+ */
 class IParameter
 {
 public:
+    /**
+     * Sets the parameter's values.
+     * @param value the value in string format.
+     */
     virtual void set_value(const string& value) = 0;
-    virtual string* get_name() const = 0;
+    /**
+     * Gets the name of the parameter.
+     * @param name string to write to.
+     */
+    virtual void get_name(string& name) const = 0;
 
     virtual ~IParameter(){}
 };

@@ -34,11 +34,11 @@ class IQAValidator;
 
 class QARegion : public IQARegion
 {
-    SeqPosition start, end;
+    SeqIndex start, end;
     IQAMutator* mutator;
     IQAValidator* validator;
 public:
-    QARegion(SeqPosition, SeqPosition, IQAMutator*, IQAValidator*);
+    QARegion(SeqIndex, SeqIndex, IQAMutator*, IQAValidator*);
     bool validate(const NucSequence& sequence) const;
 };
 

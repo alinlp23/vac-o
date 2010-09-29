@@ -27,12 +27,22 @@
 #define	_IFOLD_H
 
 #include "biopp.h"
+#include "types.h"
 
+/**
+ * Interface for sequence's folding services.
+ */
 class IFold
 {
 public:
-    virtual float fold(const NucSequence& sequence,
-                       SecStructure& structure) const = 0;
+    /**
+     * Fold an ARN sequence
+     * @param sequence the ARN sequence to fold.
+     * @param structure the structure where to write the folding.
+     * @return The free energy in the structure.
+     */
+    virtual Fe fold(const NucSequence& sequence,
+                    SecStructure& structure) const = 0;
 
     virtual ~IFold(){}
 };

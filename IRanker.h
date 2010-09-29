@@ -29,14 +29,36 @@
 #include "biopp.h"
 #include "types.h"
 
+/**
+ * Interface for the sequences ranker.
+ */
 class IRanker
 {
 public:
+    /**
+     * Update the ranking with a new sequence and score.
+     * @param sequence the new ARN sequence.
+     * @param s the score assigned to the new sequence.
+     */
     virtual void update(const NucSequence& sequence, Score s) = 0;
-    
+    /**
+     * Sets the iterator at the beginning.
+     */
     virtual void begin() = 0;
-    virtual float current(NucSequence& sequence) = 0;
+    /**
+     * Gets the current sequence and score.
+     * @param sequence the NucSequence to write to.
+     * @return The score assigned to the current sequence.
+     */
+    virtual Score current(NucSequence& sequence) = 0;
+    /**
+     * Move the iterator forwards.
+     */
     virtual void next() = 0;
+    /**
+     * Check if there are more sequences.
+     * @return If the iterator it's done or not.
+     */
     virtual bool done() const = 0;
 
     virtual ~IRanker(){}

@@ -28,12 +28,29 @@
 
 #include "biopp.h"
 
+/**
+ * Interface for sequences mutators used for QA.
+ */
 class IQAMutator
 {
 public:
+    /**
+     * Sets the iterator at the beginning.
+     */
     virtual void begin() = 0;
+    /**
+     * Gets the current mutation.
+     * @param sequence the NucSequence to write to.
+     */
     virtual void current(NucSequence& sequence) = 0;
+    /**
+     * Move the iterator forwards.
+     */
     virtual void next() = 0;
+    /**
+     * Check if there are more mutations.
+     * @return If the iterator it's done or not.
+     */
     virtual bool done() const = 0;
 
     virtual ~IQAMutator(){}
