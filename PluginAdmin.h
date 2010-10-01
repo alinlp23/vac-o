@@ -26,17 +26,13 @@
 #ifndef _PLUGINADMIN_H
 #define	_PLUGINADMIN_H
 
-#include "IPluginAdmin.h"
+#include "types.h"
+class IPlugin;
 
-class PluginAdmin : public IPluginAdmin
-{
-    static PluginAdmin* instance;
-protected:
-    PluginAdmin();
+class PluginAdmin
+{    
 public:
     IPlugin* load(const Path& file) const;
-
-    static PluginAdmin* get_instance();
 };
 
 

@@ -36,10 +36,10 @@ class SequenceMutator : public ISequenceMutator
 public:
     SequenceMutator(NucSequence, NMutations);
 
-    void begin();
-    void current(NucSequence& sequence);
-    void next();
-    bool done() const;
+    virtual void begin();
+    virtual void current(NucSequence& sequence);
+    virtual void next();
+    virtual bool done() const;
 };
 
 #endif	/* _SEQUENCEMUTATOR_H */

@@ -23,18 +23,20 @@
  *
  */
 
+/*observer&subjec*/
+#include "IObserver.h"
+#include "ISubject.h"
+
 /*combinatory*/
-#include "ICombinatoryEngine.h"
-#include "ICombinatoryRegion.h"
 #include "CombinatoryEngine.h"
+#include "ICombinatoryRegion.h"
 #include "CombinatoryRegion.h"
 #include "SSRegion.h"
 #include "GCRegion.h"
 
 /*validator*/
-#include "IQAEngine.h"
-#include "IQARegion.h"
 #include "QAEngine.h"
+#include "IQARegion.h"
 #include "QARegion.h"
 #include "IQAValidator.h"
 #include "IQAMutator.h"
@@ -44,11 +46,9 @@
 #include "SequenceMutator.h"
 
 /*ranker*/
-#include "IRanker.h"
-#include "Ranker.h"
+#include "SequenceRanker.h"
 
 /*pluginadmin*/
-#include "IPluginAdmin.h"
 #include "PluginAdmin.h"
 
 /*libRNA*/
@@ -62,5 +62,26 @@
 
 
 int main(int argc, char** argv) {
+    /*
+     * Pseudo main program...
+     *
+     * PluginAdmin plg_admin;
+     * IPlugin* plg = plg_admin.load(plg_path);
+     *     
+     * CombinatoryEngine comb_engine(plg);
+     * QAEngine qa_engine(plg);
+     * SequenceEvaluator evaluator(plg);
+     * SequenceRanker ranker(plg);
+     *
+     * evaluator.attach(&ranker);
+     * qa_engine.attach(&evaluator);
+     * comb_engine.attach(&qa_engine);
+     *
+     * comb_engine.run();
+     *
+     * print_ranking(ranker)
+     * plg->unload();
+     *
+     */
     return 0;
 }

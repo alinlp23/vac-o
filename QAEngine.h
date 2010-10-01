@@ -26,21 +26,36 @@
 #ifndef _QAENGINE_H
 #define	_QAENGINE_H
 
-#include "IQAEngine.h"
+#include "biopp.h"
+#include "types.h"
 
-class QAEngine : public IQAEngine
-{
-    static QAEngine* instance;
+#include "ISubject.h"
+#include "IObserver.h"
+#include "IQARegion.h"
+#include "IPlugin.h"
+
+class QAEngine : public IObserver<NucSequence>, public ISubject<NucSequence>
+{    
     Depth depth;
-    list<IQARegion> regions;
-protected:
-    QAEngine();
-public:
-    void set_depth(Depth d);
-    void add_region(IQARegion* region);
+    QARegionsCt regions;
+    /**
+     * Implements the IObserver<NucSequence> interface.
+     * If the sequence pass the QA, will notify the observers.
+     * @param the sequence to be validated.
+     */
+    virtual void update(const NucSequence*);
+    /**
+     * Validate a given sequence
+     * @param sequence the NucSequence to validate.
+     * @return If the sequnce pass or not the QA.
+     */
     bool validate(const NucSequence& sequence) const;
-
-    static QAEngine* get_instance();
+public:
+    /**
+     * Constructor will ask the plugin for needed data.
+     * @param pointer to IPlugin
+     */
+    QAEngine(const IPlugin*);
 };
 
 #endif	/* _QAENGINE_H */

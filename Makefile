@@ -1,5 +1,5 @@
 CPP=g++
-CPPFLAGS= -Wall -pedantic -ansi
+CPPFLAGS= -Wall -pedantic -ansi -Weffc++
 
 all:
 	$(CPP) -c $(CPPFLAGS) main.cpp

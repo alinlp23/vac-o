@@ -1,8 +1,8 @@
 /* 
- * File:   IQAEngine.h
+ * File:   ISubject.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 27, 2010, 3:48 PM 
+ * Created on September 30, 2010, 4:43 PM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -23,40 +23,30 @@
  * 
  */
 
-#ifndef _IQAENGINE_H
-#define	_IQAENGINE_H
+#ifndef _ISUBJECT_H
+#define	_ISUBJECT_H
 
-#include "biopp.h"
-#include "types.h"
+#include <list>
+#include <mili/mili.h>
+#include "IObserver.h"
 
-class IQARegion;
+using std::list;
 
-/**
- * Interface for the quality assurance engine
- */
-class IQAEngine
+template<class Subject>
+class ISubject
 {
-public:
-    /**
-     * Sets the depth for the QA.
-     * @param d the desired depth.
-     */
-    virtual void set_depth(Depth d) = 0;
-    /**
-     * Add a QA region to the engine.
-     * @param region pointer to a IQARegion.
-     */
-    virtual void add_region(IQARegion* region) = 0;
-    /**
-     * Validate a given ARN sequence
-     * @param sequence the ARN sequence to validate.
-     * @return If the sequence pass the QA or not.
-     */
-    virtual bool validate(const NucSequence& sequence) const = 0;
+    typedef IObserver<Subject> Observer;
+    typedef list<Observer*> ObserverCt;
+    typedef CAutonomousIterator<ObserverCt> ObserverIterator;
 
-    virtual ~IQAEngine(){}
+    ObserverCt observers;
+public:
+    virtual ~ISubject(){}
+
+    inline void attach(Observer*);
+    inline void detach(Observer*) throw(ElementNotFound);
+    inline void notify(const Subject*);
 };
 
-
-#endif	/* _IQAENGINE_H */
+#endif	/* _ISUBJECT_H */
 
