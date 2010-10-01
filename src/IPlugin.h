@@ -40,9 +40,9 @@ class IPlugin
 public:
     /**
      * Gets the required parameters by the plugin.
-     * @param params list of IParameter to write to.
+     * @param params container of IParameter to write to.
      */
-    virtual void get_parameters(list<IParameter>& params) const = 0;
+    virtual void get_parameters(ParamsCt& params) const = 0;
     /**
      * Gets the initial ARN sequence.
      * @param seq NucSecuence to write to.
@@ -50,14 +50,14 @@ public:
     virtual void get_sequence(NucSequence& seq) const = 0;
     /**
      * Gets the combinatory regions to be used by the combinatory engine.
-     * @param cregions list of ICombinatoryRegion to write to.
+     * @param cregions container of ICombinatoryRegion to write to.
      */
-    virtual void get_combinatory_regions(list<ICombinatoryRegion>& cregions) const = 0;
+    virtual void get_combinatory_regions(CombinatoryRegionsCt& cregions) const = 0;
     /**
      * Gets the QA regions to be used by the QA engine.
      * @param qaregions list of IQARegion to write to.
      */
-    virtual void get_qa_regions(list<IQARegion>& qaregions) const = 0;
+    virtual void get_qa_regions(QARegionsCt& qaregions) const = 0;
     /**
      * Gets the threshold cutoff used by the combinatory engine.
      * @return A floating point between 0 and 1.

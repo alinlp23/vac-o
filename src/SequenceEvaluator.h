@@ -1,8 +1,8 @@
 /* 
- * File:   Ranker.h
+ * File:   SequenceEvaluator.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 27, 2010, 4:12 PM 
+ * Created on September 30, 2010, 9:22 PM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -23,37 +23,30 @@
  * 
  */
 
-#ifndef _RANKER_H
-#define	_RANKER_H
+#ifndef _SEQUENCEEVALUATOR_H
+#define	_SEQUENCEEVALUATOR_H
 
-#include <set>
-#include "IRanker.h"
+#include "biopp.h"
+#include "IObserver.h"
+#include "ISubject.h"
+#include "SequenceOptimization.h"
+#include "IPlugin.h"
 
-using std::set;
 
-class Ranker : public IRanker
+class SequenceEvaluator : public IObserver<NucSequence>, public ISubject<SequenceOptimization>
 {
-    static Ranker* instance;
-    struct RSec{
-        Score score;
-        NucSequence sequence;
-        bool operator() (const RSec& ls, const RSec& hs) const
-            {return ls.score<hs.score;}
-    };
-    set<RSec, RSec> ranking;
-    set<RSec, RSec>::iterator it;
-protected:
-    Ranker();
+    const IPlugin* const plg;
+    /**
+     * Implements the IObserver<NucSequence> interface.
+     * Evaluate the sequence and notify the observers.
+     * @param the sequence to be evaluated.
+     */
+    virtual void update(const NucSequence*);
 public:
-    void update(const NucSequence& sequence, Score s);
-    
-    void begin();
-    float current(NucSequence& sequence);
-    void next();
-    bool done() const;
-
-    static Ranker* get_instance();
+    SequenceEvaluator(const IPlugin*);
+    SequenceEvaluator(const SequenceEvaluator&);
+    SequenceEvaluator& operator=(const SequenceEvaluator&);
 };
 
-#endif	/* _RANKER_H */
+#endif	/* _SEQUENCEEVALUATOR_H */
 

@@ -28,6 +28,8 @@
 
 #include "biopp.h"
 #include "types.h"
+#include <list>
+using std::list;
 
 /**
  * Interface for combinatories regions.
@@ -68,6 +70,11 @@ public:
 
     virtual ~ICombinatoryRegion(){}
 };
+
+/**
+ * Container of ICombinatoryRegion
+ */
+typedef list<ICombinatoryRegion> CombinatoryRegionsCt;
 
 #endif	/* _ICOMBINATORYREGION_H */
 

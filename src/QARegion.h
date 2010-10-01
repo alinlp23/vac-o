@@ -39,7 +39,9 @@ class QARegion : public IQARegion
     IQAValidator* validator;
 public:
     QARegion(SeqIndex, SeqIndex, IQAMutator*, IQAValidator*);
-    bool validate(const NucSequence& sequence) const;
+    QARegion(const QARegion&);
+    QARegion& operator=(const QARegion&);
+    virtual bool validate(const NucSequence& sequence) const;
 };
 
 #endif	/* _QAREGION_H */

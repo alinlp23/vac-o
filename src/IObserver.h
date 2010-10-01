@@ -1,8 +1,8 @@
 /* 
- * File:   GCRegion.h
+ * File:   IObserver.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 26, 2010, 5:31 PM 
+ * Created on September 30, 2010, 4:41 PM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -23,22 +23,23 @@
  * 
  */
 
-#ifndef _GCREGION_H
-#define	_GCREGION_H
+#ifndef _IOBSERVER_H
+#define	_IOBSERVER_H
 
-#include "CombinatoryRegion.h"
-
-class GCRegion : public CombinatoryRegion
+/**
+ * Interface for observers
+ */
+template<class Subject>
+class IObserver
 {
-    AminoSequence target_aminoacids;
 public:
-    GCRegion(const AminoSequence& aminoacids);
-
-    virtual void begin();
-    virtual float current(NucSequence& sequence);
-    virtual void next();
-    virtual bool done() const;
+    /**
+     * Do something with the subject observed.
+     * @param s the subject
+     */
+    virtual void update(const Subject* s) = 0;
+    virtual ~IObserver(){}
 };
 
-#endif	/* _GCREGION_H */
+#endif	/* _IOBSERVER_H */
 

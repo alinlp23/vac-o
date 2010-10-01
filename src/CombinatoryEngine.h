@@ -26,26 +26,35 @@
 #ifndef _COMBINATORYENGINE_H
 #define	_COMBINATORYENGINE_H
 
-#include <list>
-#include "ICombinatoryEngine.h"
+#include "biopp.h"
+#include "types.h"
 
-using std::list;
+#include "ISubject.h"
+#include "ICombinatoryRegion.h"
+#include "IPlugin.h"
 
-class CombinatoryEngine : public ICombinatoryEngine
-{
-    static CombinatoryEngine* instance;
+
+class CombinatoryEngine : public ISubject<NucSequence>
+{    
     NucSequence sequence;
     CutOff cutoff;
-    list<ICombinatoryRegion> regions;
-protected:
-    CombinatoryEngine();
+    CombinatoryRegionsCt regions;
+    const IPlugin* const plg;
 public:
-    void run();
-    void add_region(ICombinatoryRegion* region);
-    void set_sequence(const NucSequence& sequence);
-    void set_cutoff(CutOff c);
+    /**
+     * Constructor will ask the plugin for needed data.
+     * @param pointer to IPlugin
+     */
+    CombinatoryEngine(const IPlugin*);
 
-    static CombinatoryEngine* get_instance();
+    CombinatoryEngine(const CombinatoryEngine&);
+    CombinatoryEngine& operator=(const CombinatoryEngine&);
+
+    /**
+     * Run the engine until plg->done().
+     * Will notify the observers for each sequence found.
+     */
+    void run();
 };
 
 #endif	/* _COMBINATORYENGINE_H */

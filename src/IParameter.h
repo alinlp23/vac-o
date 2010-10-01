@@ -46,5 +46,10 @@ public:
     virtual ~IParameter(){}
 };
 
+/**
+ * Container of IParameter
+ */
+typedef list<IParameter> ParamsCt;
+
 #endif	/* _IPARAMETER_H */
 

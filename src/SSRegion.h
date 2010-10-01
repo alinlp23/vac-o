@@ -52,11 +52,13 @@ public:
     SSRegion(const SecStructure&, const SecStructure&, NMutations,
             CacheSize, Similitude, Distance, IFold*, IFoldInverse*,
             IStructureCmp*, ISequenceCmp*);
-    
-    void begin();
-    float current(NucSequence& sequence);
-    void next();
-    bool done() const;
+
+    SSRegion(const SSRegion&);
+    SSRegion& operator=(const SSRegion&);
+    virtual void begin();
+    virtual float current(NucSequence& sequence);
+    virtual void next();
+    virtual bool done() const;
 };
 
 #endif	/* _SSREGION_H */

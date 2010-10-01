@@ -27,6 +27,8 @@
 #define	_IQAREGION_H
 
 #include "biopp.h"
+#include <list>
+using std::list;
 
 /**
  * Interface for quality assurance regions.
@@ -43,6 +45,11 @@ public:
 
     virtual ~IQARegion(){}
 };
+
+/**
+ * Container of IQARegion
+ */
+typedef list<IQARegion> QARegionsCt;
 
 #endif	/* _IQAREGION_H */
 

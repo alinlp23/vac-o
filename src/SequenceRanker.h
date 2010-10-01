@@ -1,8 +1,8 @@
 /* 
- * File:   IPluginAdmin.h
+ * File:   Ranker.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 27, 2010, 4:38 PM 
+ * Created on September 27, 2010, 4:12 PM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -23,28 +23,27 @@
  * 
  */
 
-#ifndef _IPLUGINADMIN_H
-#define	_IPLUGINADMIN_H
+#ifndef _RANKER_H
+#define	_RANKER_H
 
-#include "types.h"
+#include <mili/mili.h>
 
-class IPlugin;
+#include "IObserver.h"
+#include "SequenceOptimization.h"
+#include "IPlugin.h"
 
-/**
- * Interface for the plugin administrator.
- */
-class IPluginAdmin
+class SequenceRanker : public IObserver<SequenceOptimization>,
+    public Ranker<const SequenceOptimization*, AddAfterEqual, SequenceOptimization,
+                  DisposalDeletePolicy<const SequenceOptimization*> >
 {
-public:
     /**
-     * Load a give plugin.
-     * @param file the path in the filesystem to a ".so" file.
-     * @return Pointer to the loaded plugin.
+     * Implements the IObserver<SequenceOptimization> interface.
+     * @param the sequence optimization to be ranked.
      */
-    virtual IPlugin* load(const Path& file) const = 0;
-
-    virtual ~IPluginAdmin(){}
+    virtual void update(const SequenceOptimization*);
+public:
+    SequenceRanker(const IPlugin*);
 };
 
-#endif	/* _IPLUGINADMIN_H */
+#endif	/* _RANKER_H */
 
