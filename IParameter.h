@@ -26,20 +26,25 @@
 #ifndef _IPARAMETER_H
 #define	_IPARAMETER_H
 
+#include <list>
+#include <string>
+using std::list;
+using std::string;
 /**
  * Interface for plugin's parameters
  */
 class IParameter
 {
-public:
+public:    
     /**
      * Sets the parameter's values.
      * @param value the value in string format.
+     * @return If it was possible to set the value or not.
      */
-    virtual void set_value(const string& value) = 0;
+    virtual bool set_value(const string& value) = 0;
     /**
      * Gets the name of the parameter.
-     * @param name string to write to.
+     * @return The parameter's name.
      */
     virtual void get_name(string& name) const = 0;
 
@@ -49,7 +54,7 @@ public:
 /**
  * Container of IParameter
  */
-typedef list<IParameter> ParamsCt;
+typedef list<IParameter*> ParamsCt;
 
 #endif	/* _IPARAMETER_H */
 

@@ -30,19 +30,20 @@
 
 #include "IObserver.h"
 #include "SequenceOptimization.h"
-#include "IPlugin.h"
+
+class IPlugin;
 
 class SequenceRanker : public IObserver<SequenceOptimization>,
-    public Ranker<const SequenceOptimization*, AddAfterEqual, SequenceOptimization,
+    public Ranker<const SequenceOptimization*, AddAfterEqual, SequenceOptimizationCmp,
                   DisposalDeletePolicy<const SequenceOptimization*> >
 {
     /**
      * Implements the IObserver<SequenceOptimization> interface.
-     * @param the sequence optimization to be ranked.
+     * @param opt the sequence optimization to be ranked.
      */
     virtual void update(const SequenceOptimization*);
 public:
-    SequenceRanker(const IPlugin*);
+    SequenceRanker(RankingSize);    
 };
 
 #endif	/* _RANKER_H */

@@ -28,6 +28,7 @@
 
 #include "biopp.h"
 #include "types.h"
+#include "exceptions.h"
 
 /**
  * Interface for sequence's comparing services.
@@ -39,10 +40,10 @@ public:
      * Compare two sequences.
      * @param seq1 a ARN sequence
      * @param seq2 another ARN sequence
-     * @return The similitude between sequences.
+     * @return The distance between sequences.
      */
-    virtual Similitude compare(const NucSequence& seq1,
-                               const NucSequence& seq2) const = 0;
+    virtual Distance compare(const NucSequence&,
+                             const NucSequence&) const throw(RNABackendException) = 0;
     
     virtual ~ISequenceCmp(){}
 };

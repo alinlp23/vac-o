@@ -79,5 +79,10 @@ typedef string Path;
  */
 typedef float Fe;
 
+/**
+ * Ranking size
+ */
+typedef unsigned int RankingSize;
+
 #endif	/* _TYPES_H */
 

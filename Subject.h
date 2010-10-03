@@ -1,8 +1,8 @@
 /* 
- * File:   biopp.h
+ * File:   Subject.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 26, 2010, 6:08 PM 
+ * Created on October 1, 2010, 11:07 AM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -23,20 +23,30 @@
  * 
  */
 
-#ifndef _BIOPP_H
-#define	_BIOPP_H
+#ifndef _SUBJECT_H
+#define	_SUBJECT_H
 
-#include <string>
-#include <list>
-using std::string;
-using std::list;
-/*
- * Mock-up of BioPP until we use the real package
- */
-typedef string AminoSequence;
-typedef string NucSequence;
-typedef string SecStructure;
-typedef list<NucSequence*> NucSequencesCt;
+template<class Subject>
+void ISubject<Subject>::attach(Observer* o){
+    insert_into(observers, o);
+}
 
-#endif	/* _BIOPP_H */
+template<class Subject>
+void ISubject<Subject>::detach(Observer* o) throw(ElementNotFound)
+{
+    if(!remove_first_from(observers, o)){
+        throw ElementNotFound();
+    }
+}
+
+template<class Subject>
+void ISubject<Subject>::notify(const Subject* s){
+    ObserversIterator it(observers);
+    while(!it.end()){
+        (*it)->update(s);
+        ++it;
+    }
+}
+
+#endif	/* _SUBJECT_H */
 

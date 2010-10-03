@@ -1,8 +1,8 @@
 /* 
- * File:   biopp.h
+ * File:   RNAFoldInverse.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 26, 2010, 6:08 PM 
+ * Created on October 2, 2010, 1:28 PM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -23,20 +23,21 @@
  * 
  */
 
-#ifndef _BIOPP_H
-#define	_BIOPP_H
+#ifndef _RNAFOLDINVERSE_H
+#define	_RNAFOLDINVERSE_H
 
-#include <string>
-#include <list>
-using std::string;
-using std::list;
-/*
- * Mock-up of BioPP until we use the real package
- */
-typedef string AminoSequence;
-typedef string NucSequence;
-typedef string SecStructure;
-typedef list<NucSequence*> NucSequencesCt;
+#include "IFoldInverse.h"
 
-#endif	/* _BIOPP_H */
+class RNAFoldInverse : public IFoldInverse
+{
+    NucSequence start;
+    const SecStructure structure;
+public:
+    RNAFoldInverse(const NucSequence&, const SecStructure&);
+    
+    virtual void fold_inverse(NucSequence&) throw(RNABackendException);
+};
+
+
+#endif	/* _RNAFOLDINVERSE_H */
 

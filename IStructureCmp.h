@@ -28,6 +28,7 @@
 
 #include "biopp.h"
 #include "types.h"
+#include "exceptions.h"
 
 /**
  * Interface for structure's comparing services.
@@ -42,7 +43,7 @@ public:
      * @return The similitude between structures.
      */
     virtual Similitude compare(const SecStructure& struct1,
-                               const SecStructure& struct2) const = 0;
+                               const SecStructure& struct2) const throw(RNABackendException) = 0;
 
     virtual ~IStructureCmp(){}
 };

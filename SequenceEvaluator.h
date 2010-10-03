@@ -30,20 +30,24 @@
 #include "IObserver.h"
 #include "ISubject.h"
 #include "SequenceOptimization.h"
-#include "IPlugin.h"
 
+class IPlugin;
 
 class SequenceEvaluator : public IObserver<NucSequence>, public ISubject<SequenceOptimization>
 {
-    const IPlugin* const plg;
+    IPlugin* const plg;
     /**
      * Implements the IObserver<NucSequence> interface.
      * Evaluate the sequence and notify the observers.
-     * @param the sequence to be evaluated.
+     * @param seq the sequence to be evaluated.
      */
     virtual void update(const NucSequence*);
 public:
-    SequenceEvaluator(const IPlugin*);
+    /**
+     * Constructor
+     * @param plg the loaded plugin
+     */
+    SequenceEvaluator(IPlugin* const);
     SequenceEvaluator(const SequenceEvaluator&);
     SequenceEvaluator& operator=(const SequenceEvaluator&);
 };

@@ -49,7 +49,7 @@ public:
 /**
  * Container of IQARegion
  */
-typedef list<IQARegion> QARegionsCt;
+typedef list<IQARegion*> QARegionsCt;
 
 #endif	/* _IQAREGION_H */
 

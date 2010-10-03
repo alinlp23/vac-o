@@ -45,6 +45,9 @@
 #include "ISequenceMutator.h"
 #include "SequenceMutator.h"
 
+/*evaluator*/
+#include "SequenceEvaluator.h"
+
 /*ranker*/
 #include "SequenceRanker.h"
 
@@ -56,12 +59,85 @@
 #include "IFoldInverse.h"
 #include "IStructureCmp.h"
 #include "ISequenceCmp.h"
-
+#include "RNAFold.h"
+#include "RNAFoldInverse.h"
+#include "RNAForester.h"
+#include "Hamming.h"
 /*plugin*/
 #include "IPlugin.h"
+#include "Parameter.h"
 
+#include <iostream>
+using std::cout;
+using std::cin;
+using std::endl;
+
+void ask_for_parameters(ParamsCt& params){
+    if(!params.empty())
+    {
+        CAutonomousIterator<ParamsCt> it(params);
+        
+        string aux;
+        string param_name;
+        bool valid;
+        while (!it.end())
+        {            
+            (*it)->get_name(param_name);
+            cout << "Enter value for "+param_name+": " << endl;
+            cin >> aux;
+            valid = (*it)->set_value(aux);
+            if (valid)
+                ++it;
+            else
+                cout << "Invalid value, try again." << endl;
+        }
+    }
+}
+
+void print_ranking(SequenceRanker& ranking)
+{
+    CAutonomousIterator<SequenceRanker> it(ranking);
+
+    NucSequence seq;
+    Score score;
+    while (!it.end())
+    {
+        (*it)->get_sequence(seq);
+        score = (*it)->get_score();
+        cout << "Sequence: " << seq << " Score: " << score <<endl;
+        ++it;
+    }
+}
 
 int main(int argc, char** argv) {
+    PluginAdmin plg_admin;
+    IPlugin* plg = plg_admin.load("/path/to/plugin.so");
+
+    ParamsCt params;
+    plg->get_parameters(params);
+    ask_for_parameters(params);
+
+    CombinatoryRegionsCt comb_regions;
+    NucSequence seq;
+    plg->get_sequence(seq);
+    plg->get_combinatory_regions(comb_regions);
+    CombinatoryEngine comb_engine(seq, comb_regions, plg->get_comb_cutoff(), plg);
+
+    QARegionsCt qa_regions;
+    plg->get_qa_regions(qa_regions);
+    QAEngine qa_engine(plg->get_qa_depth(), qa_regions);
+
+    SequenceEvaluator evaluator(plg);
+    SequenceRanker ranker(plg->get_ranking_size());
+
+    evaluator.attach(&ranker);
+    qa_engine.attach(&evaluator);
+    comb_engine.attach(&qa_engine);
+
+    comb_engine.run();
+    print_ranking(ranker);
+
+    plg->unload(); 
     /*
      * Pseudo main program...
      *

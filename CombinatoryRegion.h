@@ -38,13 +38,15 @@ class CombinatoryRegion : public ICombinatoryRegion
         SeqIndex start;
         SeqIndex end;
     };
-    typedef list<Constraint> ConstraintCt;
-
-    ConstraintCt constraints;
+    typedef list<Constraint*> ConstraintsCt;
+    
     SeqIndex start;
     SeqIndex end;
+    ConstraintsCt constraints;
     NucSequence base_sequence;
 public:
+    CombinatoryRegion(SeqIndex, SeqIndex);
+
     virtual void set_base_sequence(const NucSequence& sequence);
     virtual void add_constraint(SeqIndex start, SeqIndex end);
 };

@@ -36,17 +36,24 @@ template<class Subject>
 class ISubject
 {
     typedef IObserver<Subject> Observer;
-    typedef list<Observer*> ObserverCt;
-    typedef CAutonomousIterator<ObserverCt> ObserverIterator;
+    typedef list<Observer*> ObserversCt;
+    typedef CAutonomousIterator<ObserversCt> ObserversIterator;
 
-    ObserverCt observers;
+    ObserversCt observers;
 public:
+    ISubject():observers(NULL)
+    {}
     virtual ~ISubject(){}
 
     inline void attach(Observer*);
     inline void detach(Observer*) throw(ElementNotFound);
     inline void notify(const Subject*);
 };
+
+/**
+ * Implementation
+ */
+#include "Subject.h"
 
 #endif	/* _ISUBJECT_H */
 

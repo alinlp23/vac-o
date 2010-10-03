@@ -42,7 +42,7 @@ public:
      * Gets the current mutation.
      * @param sequence the NucSequence to write to.
      */
-    virtual void current(NucSequence& sequence) = 0;
+    virtual void current(NucSequence&) = 0;
     /**
      * Move the iterator forwards.
      */
