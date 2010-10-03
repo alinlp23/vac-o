@@ -28,6 +28,7 @@
 
 #include "biopp.h"
 #include "types.h"
+#include "exceptions.h"
 
 /**
  * Interface for sequence's folding services.
@@ -41,8 +42,7 @@ public:
      * @param structure the structure where to write the folding.
      * @return The free energy in the structure.
      */
-    virtual Fe fold(const NucSequence& sequence,
-                    SecStructure& structure) const = 0;
+    virtual Fe fold(const NucSequence&, SecStructure&) const throw(RNABackendException) = 0;
 
     virtual ~IFold(){}
 };

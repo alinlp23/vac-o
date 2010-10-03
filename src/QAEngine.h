@@ -32,7 +32,8 @@
 #include "ISubject.h"
 #include "IObserver.h"
 #include "IQARegion.h"
-#include "IPlugin.h"
+
+class IPlugin;
 
 class QAEngine : public IObserver<NucSequence>, public ISubject<NucSequence>
 {    
@@ -41,7 +42,7 @@ class QAEngine : public IObserver<NucSequence>, public ISubject<NucSequence>
     /**
      * Implements the IObserver<NucSequence> interface.
      * If the sequence pass the QA, will notify the observers.
-     * @param the sequence to be validated.
+     * @param candidate the sequence to be validated.
      */
     virtual void update(const NucSequence*);
     /**
@@ -49,13 +50,14 @@ class QAEngine : public IObserver<NucSequence>, public ISubject<NucSequence>
      * @param sequence the NucSequence to validate.
      * @return If the sequnce pass or not the QA.
      */
-    bool validate(const NucSequence& sequence) const;
+    bool validate(const NucSequence&) const;
 public:
     /**
      * Constructor will ask the plugin for needed data.
-     * @param pointer to IPlugin
+     * @param depth the depth for the QA tree
+     * @param regions the QA regions
      */
-    QAEngine(const IPlugin*);
+    QAEngine(Depth, const QARegionsCt&);
 };
 
 #endif	/* _QAENGINE_H */

@@ -1,8 +1,8 @@
 /* 
- * File:   biopp.h
+ * File:   RNAForester.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 26, 2010, 6:08 PM 
+ * Created on October 1, 2010, 7:00 PM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -23,20 +23,20 @@
  * 
  */
 
-#ifndef _BIOPP_H
-#define	_BIOPP_H
+#ifndef _RNAFORESTER_H
+#define	_RNAFORESTER_H
 
-#include <string>
-#include <list>
-using std::string;
-using std::list;
-/*
- * Mock-up of BioPP until we use the real package
+#include "IStructureCmp.h"
+
+/**
+ * Implementation using system call to RNAforester
  */
-typedef string AminoSequence;
-typedef string NucSequence;
-typedef string SecStructure;
-typedef list<NucSequence*> NucSequencesCt;
+class RNAForester : public IStructureCmp
+{
+public:
+    virtual Similitude compare(const SecStructure&,
+                               const SecStructure&) const throw(RNABackendException);
+};
 
-#endif	/* _BIOPP_H */
+#endif	/* _RNAFORESTER_H */
 

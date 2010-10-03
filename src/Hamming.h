@@ -1,8 +1,8 @@
 /* 
- * File:   biopp.h
+ * File:   Hamming.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 26, 2010, 6:08 PM 
+ * Created on October 1, 2010, 8:12 PM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -23,20 +23,21 @@
  * 
  */
 
-#ifndef _BIOPP_H
-#define	_BIOPP_H
+#ifndef _HAMMING_H
+#define	_HAMMING_H
 
-#include <string>
-#include <list>
-using std::string;
-using std::list;
-/*
- * Mock-up of BioPP until we use the real package
+#include "ISequenceCmp.h"
+
+/**
+ * Very simple hamming distance implementation
  */
-typedef string AminoSequence;
-typedef string NucSequence;
-typedef string SecStructure;
-typedef list<NucSequence*> NucSequencesCt;
+class Hamming : public ISequenceCmp
+{
+public:
+    virtual Distance compare(const NucSequence&,
+                             const NucSequence&) const throw(RNABackendException);
+};
 
-#endif	/* _BIOPP_H */
+
+#endif	/* _HAMMING_H */
 

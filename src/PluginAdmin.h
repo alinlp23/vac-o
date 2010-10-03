@@ -27,12 +27,13 @@
 #define	_PLUGINADMIN_H
 
 #include "types.h"
+#include "exceptions.h"
 class IPlugin;
 
 class PluginAdmin
 {    
 public:
-    IPlugin* load(const Path& file) const;
+    IPlugin* load(const Path& file) const throw(PluginException);
 };
 
 

@@ -26,6 +26,7 @@
 #ifndef _IPLUGIN_H
 #define	_IPLUGIN_H
 #include <list>
+#include "types.h"
 #include "ICombinatoryRegion.h"
 #include "IQARegion.h"
 #include "IParameter.h"
@@ -62,7 +63,12 @@ public:
      * Gets the threshold cutoff used by the combinatory engine.
      * @return A floating point between 0 and 1.
      */
-    virtual CutOff get_cutoff() const = 0;
+    virtual CutOff get_comb_cutoff() const = 0;
+    /**
+     * Gets the depth for the quality assurance engine.
+     * @return The depth
+     */
+    virtual Depth get_qa_depth() const = 0;
     /**
      * Decides when to stop computing.
      * @return Stop or not.
@@ -74,6 +80,11 @@ public:
      * @return The score assigned.
      */
     virtual Score evaluate_sequence(const NucSequence& sequence) = 0;
+    /**
+     * Gets the ranking max size.
+     * @return The size
+     */
+    virtual RankingSize get_ranking_size() const = 0;
     /**
      * Unload the plugin.
      */

@@ -1,8 +1,8 @@
 /* 
- * File:   biopp.h
+ * File:   exceptions.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 26, 2010, 6:08 PM 
+ * Created on September 30, 2010, 11:48 PM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -23,20 +23,40 @@
  * 
  */
 
-#ifndef _BIOPP_H
-#define	_BIOPP_H
+#ifndef _EXCEPTIONS_H
+#define	_EXCEPTIONS_H
 
 #include <string>
-#include <list>
+#include <exception>
+using std::exception;
 using std::string;
-using std::list;
-/*
- * Mock-up of BioPP until we use the real package
- */
-typedef string AminoSequence;
-typedef string NucSequence;
-typedef string SecStructure;
-typedef list<NucSequence*> NucSequencesCt;
 
-#endif	/* _BIOPP_H */
+class Exception : public exception
+{
+    const string message;
+public:
+    explicit Exception(const string& msg): message(msg)
+    {}
+    virtual const char* what() const throw(){
+        return message.c_str();
+    }
+
+    ~Exception() throw() {};
+};
+
+class RNABackendException : public Exception
+{
+public:
+    RNABackendException(const string& msg) : Exception("libRNA says: \n\t"+msg)
+    {}
+};
+
+class PluginException : public Exception
+{
+public:
+    PluginException(const string& msg);
+};
+
+
+#endif	/* _EXCEPTIONS_H */
 

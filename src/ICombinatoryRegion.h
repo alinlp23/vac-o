@@ -26,6 +26,7 @@
 #ifndef _ICOMBINATORYREGION_H
 #define	_ICOMBINATORYREGION_H
 
+#include <mili/mili.h>
 #include "biopp.h"
 #include "types.h"
 #include <list>
@@ -36,6 +37,7 @@ using std::list;
  */
 class ICombinatoryRegion
 {
+    virtual Score evaluate(const NucSequence&) const = 0;
 public:
     /**
      * Sets the iterator at the beginning.
@@ -46,7 +48,7 @@ public:
      * @param sequence the NucSequence reference to write to.
      * @return The score of the sequence
      */
-    virtual Score current(NucSequence& sequence) = 0;
+    virtual Score current(NucSequence&) = 0;
     /**
      * Move the iterator forwards
      */
@@ -74,7 +76,7 @@ public:
 /**
  * Container of ICombinatoryRegion
  */
-typedef list<ICombinatoryRegion> CombinatoryRegionsCt;
+typedef list<ICombinatoryRegion*> CombinatoryRegionsCt;
 
 #endif	/* _ICOMBINATORYREGION_H */
 

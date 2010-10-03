@@ -31,21 +31,25 @@
 
 #include "ISubject.h"
 #include "ICombinatoryRegion.h"
-#include "IPlugin.h"
 
+class IPlugin;
 
 class CombinatoryEngine : public ISubject<NucSequence>
 {    
-    NucSequence sequence;
-    CutOff cutoff;
+    const NucSequence sequence;
+    const CutOff cutoff;
     CombinatoryRegionsCt regions;
     const IPlugin* const plg;
 public:
     /**
-     * Constructor will ask the plugin for needed data.
-     * @param pointer to IPlugin
+     * Constructor
+     * @param seq the initial nucleotide sequence
+     * @param rs the combinatory regions
+     * @param c the threshold cutoff
+     * @param plg the loaded plugin
      */
-    CombinatoryEngine(const IPlugin*);
+    CombinatoryEngine(const NucSequence&, const CombinatoryRegionsCt&,
+                      CutOff, const IPlugin* const);
 
     CombinatoryEngine(const CombinatoryEngine&);
     CombinatoryEngine& operator=(const CombinatoryEngine&);

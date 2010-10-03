@@ -31,34 +31,39 @@
 
 class SequenceOptimization
 {
-    NucSequence sequence;
-    Score score;
+    const NucSequence sequence;
+    const Score score;
 public:
     /**
      * Constructor
-     * @param the optimized sequence.
-     * @param the sequence's score.
+     * @param seq the optimized sequence.
+     * @param score the sequence's score.
      */
-    SequenceOptimization(NucSequence&, Score);
+    SequenceOptimization(const NucSequence&, Score);
     /**
      * Gets the sequence
-     * @param NucSequence to write to.
+     * @param seq NucSequence to write to.
      */
-    inline void get_sequence(NucSequence&) const;
+    void get_sequence(NucSequence&) const;
     /**
      * Gets the global score of the optimization.
      * @return The score.
      */
-    inline Score get_score() const;
+    Score get_score() const;    
+};
+
+struct SequenceOptimizationCmp
+{
     /**
      * Compare two sequence optimizations
-     * @param a sequence optimization
-     * @param another sequence optimization
-     * @return If the first it's less than the second.
+     * @param opt1 a sequence optimization
+     * @param opt2 another sequence optimization
+     * @return If the first it's greater than the second.
      */
-    inline bool operator() (const SequenceOptimization*,
-                            const SequenceOptimization*) const;    
+    bool operator() (const SequenceOptimization*,
+                     const SequenceOptimization*) const;
 };
+
 
 #endif	/* _ISEQUENCEOPTIMIZATION_H */
 

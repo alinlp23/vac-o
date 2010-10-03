@@ -1,8 +1,8 @@
 /* 
- * File:   biopp.h
+ * File:   RNAFold.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 26, 2010, 6:08 PM 
+ * Created on October 1, 2010, 1:35 PM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -23,20 +23,19 @@
  * 
  */
 
-#ifndef _BIOPP_H
-#define	_BIOPP_H
+#ifndef _RNAFOLD_H
+#define	_RNAFOLD_H
 
-#include <string>
-#include <list>
-using std::string;
-using std::list;
-/*
- * Mock-up of BioPP until we use the real package
+#include "IFold.h"
+
+/**
+ * Implementation using the Vienna Package
  */
-typedef string AminoSequence;
-typedef string NucSequence;
-typedef string SecStructure;
-typedef list<NucSequence*> NucSequencesCt;
+class RNAFold : public IFold
+{
+public:    
+    virtual Fe fold(const NucSequence&, SecStructure&) const throw(RNABackendException);
+};
 
-#endif	/* _BIOPP_H */
+#endif	/* _RNAFOLD_H */
 

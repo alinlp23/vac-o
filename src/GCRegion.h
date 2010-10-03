@@ -31,6 +31,7 @@
 class GCRegion : public CombinatoryRegion
 {
     AminoSequence target_aminoacids;
+    virtual Score evaluate(const NucSequence&) const;
 public:
     GCRegion(const AminoSequence& aminoacids);
 

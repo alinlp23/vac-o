@@ -39,7 +39,7 @@ public:
      * @param sequence the ARN sequence.
      * @return If the sequence it's valid or not.
      */
-    virtual bool validate(const NucSequence& sequence) const = 0;
+    virtual bool validate(const NucSequence&) const = 0;
 
     virtual ~IQAValidator(){}
 };
