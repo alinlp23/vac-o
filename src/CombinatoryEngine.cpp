@@ -1,12 +1,13 @@
 #include "CombinatoryEngine.h"
 #include "IPlugin.h"
+#include "IStrategy.h"
 #include <iostream>
 using std::cout;
 using std::endl;
 
 CombinatoryEngine::CombinatoryEngine(const NucSequence& seq, const CombinatoryRegionsCt& rs,
-                                     CutOff c, const IPlugin* const plg) :
-sequence(seq), cutoff(c), regions(rs), plg(plg)
+                                     CutOff c, IPlugin* const plg) :
+sequence(seq), cutoff(c), regions(rs), plg(plg), neighborhood(), strategy()
 {}
 
 void CombinatoryEngine::run()
@@ -21,9 +22,17 @@ void CombinatoryEngine::run()
      */
     cout << "Running Combinatory engine..." << endl;
     NucSequence s1 = "AAUAGA";
-    notify(&s1);
+    notify(new SequenceOptimization(s1, 6));
     NucSequence s2 = "AAUAGU";
-    notify(&s2);
+    notify(new SequenceOptimization(s2, 9));
     NucSequence s3 = "GGUAGU";
-    notify(&s3);
+    notify(new SequenceOptimization(s3, 5));
+}
+
+bool CombinatoryEngine::update(const Solution* s)
+{
+    NucSequence seq;
+    //s->get_sequence(seq);
+    float score = plg->evaluate_sequence(seq);
+    return strategy->update_neighbors(s,score);
 }

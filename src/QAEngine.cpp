@@ -6,10 +6,10 @@ QAEngine::QAEngine(Depth depth, const QARegionsCt& regions):
 depth(depth), regions(regions)
 {}
 
-void QAEngine::update(const NucSequence* candidate)
+void QAEngine::update(const SequenceOptimization* candidate)
 {
-    cout << "QA validation for: " << *candidate << endl;
-    if(validate(*candidate))
+    cout << "QA validation for: " << candidate->first << endl;
+    if(validate(candidate->first))
         notify(candidate);
 }
 

@@ -31,15 +31,30 @@
 
 #include "ISubject.h"
 #include "ICombinatoryRegion.h"
+#include "SequenceOptimization.h"
+#include "Solution.h"
 
 class IPlugin;
+class INeighborhood;
+class IStrategy;
 
-class CombinatoryEngine : public ISubject<NucSequence>
+class CombinatoryEngine : public ISingleObserver<Solution>, public ISubject<SequenceOptimization>
 {    
     const NucSequence sequence;
     const CutOff cutoff;
     CombinatoryRegionsCt regions;
-    const IPlugin* const plg;
+    IPlugin* const plg;
+    INeighborhood* neighborhood;
+    IStrategy* strategy;
+
+    /**
+     * Implements the ISingleObserver interface.
+     * Evaluate the solution using the plugin and
+     * update the neighborhood of the strategy
+     * @param s a new candidate solution
+     * @return the same as the strategy update_neighbors function.
+     */
+    virtual bool update(const Solution*);
 public:
     /**
      * Constructor
@@ -49,13 +64,13 @@ public:
      * @param plg the loaded plugin
      */
     CombinatoryEngine(const NucSequence&, const CombinatoryRegionsCt&,
-                      CutOff, const IPlugin* const);
+                      CutOff, IPlugin* const);
 
     CombinatoryEngine(const CombinatoryEngine&);
     CombinatoryEngine& operator=(const CombinatoryEngine&);
 
     /**
-     * Run the engine until plg->done().
+     * Run the engine until plg->done() || strategy->done().
      * Will notify the observers for each sequence found.
      */
     void run();

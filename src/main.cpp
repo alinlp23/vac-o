@@ -45,9 +45,6 @@
 #include "ISequenceMutator.h"
 #include "SequenceMutator.h"
 
-/*evaluator*/
-#include "SequenceEvaluator.h"
-
 /*ranker*/
 #include "SequenceRanker.h"
 
@@ -66,6 +63,11 @@
 /*plugin*/
 #include "IPlugin.h"
 #include "Parameter.h"
+
+/*local search*/
+#include "Solution.h"
+#include "INeighborhood.h"
+#include "IStrategy.h"
 
 #include <iostream>
 using std::cout;
@@ -102,8 +104,8 @@ void print_ranking(SequenceRanker& ranking)
     Score score;
     while (!it.end())
     {
-        (*it)->get_sequence(seq);
-        score = (*it)->get_score();
+        seq = (*it)->first;
+        score = (*it)->second;
         cout << "Sequence: " << seq << " Score: " << score <<endl;
         ++it;
     }
@@ -126,17 +128,15 @@ int main(int argc, char** argv) {
     QARegionsCt qa_regions;
     plg->get_qa_regions(qa_regions);
     QAEngine qa_engine(plg->get_qa_depth(), qa_regions);
-
-    SequenceEvaluator evaluator(plg);
+    
     SequenceRanker ranker(plg->get_ranking_size());
 
-    evaluator.attach(&ranker);
-    qa_engine.attach(&evaluator);
+    qa_engine.attach(&ranker);
     comb_engine.attach(&qa_engine);
 
     comb_engine.run();
     print_ranking(ranker);
-
+    
     plg->unload(); 
     /*
      * Pseudo main program...

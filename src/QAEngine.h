@@ -32,10 +32,11 @@
 #include "ISubject.h"
 #include "IObserver.h"
 #include "IQARegion.h"
+#include "SequenceOptimization.h"
 
 class IPlugin;
 
-class QAEngine : public IObserver<NucSequence>, public ISubject<NucSequence>
+class QAEngine : public IObserver<SequenceOptimization>, public ISubject<SequenceOptimization>
 {    
     Depth depth;
     QARegionsCt regions;
@@ -44,7 +45,7 @@ class QAEngine : public IObserver<NucSequence>, public ISubject<NucSequence>
      * If the sequence pass the QA, will notify the observers.
      * @param candidate the sequence to be validated.
      */
-    virtual void update(const NucSequence*);
+    virtual void update(const SequenceOptimization*);
     /**
      * Validate a given sequence
      * @param sequence the NucSequence to validate.

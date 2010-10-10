@@ -28,29 +28,10 @@
 
 #include "biopp.h"
 #include "types.h"
+#include <utility>
+using std::pair;
 
-class SequenceOptimization
-{
-    const NucSequence sequence;
-    const Score score;
-public:
-    /**
-     * Constructor
-     * @param seq the optimized sequence.
-     * @param score the sequence's score.
-     */
-    SequenceOptimization(const NucSequence&, Score);
-    /**
-     * Gets the sequence
-     * @param seq NucSequence to write to.
-     */
-    void get_sequence(NucSequence&) const;
-    /**
-     * Gets the global score of the optimization.
-     * @return The score.
-     */
-    Score get_score() const;    
-};
+typedef pair<NucSequence, Score> SequenceOptimization;
 
 struct SequenceOptimizationCmp
 {

@@ -48,5 +48,25 @@ void ISubject<Subject>::notify(const Subject* s){
     }
 }
 
+template<class Subject>
+void ISingleSubject<Subject>::set(Observer* o){
+    observer = o;
+}
+
+template<class Subject>
+void ISingleSubject<Subject>::unset()
+{
+    observer = NULL;
+}
+
+template<class Subject>
+bool ISingleSubject<Subject>::notify(const Subject* s){
+    bool status(false);
+    if(observer)
+        status = observer->update(s);
+
+    return status;
+}
+
 #endif	/* _SUBJECT_H */
 

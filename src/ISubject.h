@@ -51,6 +51,21 @@ public:
 };
 
 /**
+ * Interface for single subjects
+ */
+template<class Subject>
+class ISingleSubject {
+    typedef ISingleObserver<Subject> Observer;
+    Observer* observer;
+public:
+    virtual ~ISingleSubject(){}
+
+    virtual void set(Observer*);
+    virtual void unset();
+    virtual bool notify(const Subject*);
+};
+
+/**
  * Implementation
  */
 #include "Subject.h"

@@ -12,7 +12,7 @@ Ranker<const SequenceOptimization*, AddAfterEqual, SequenceOptimizationCmp,
 void SequenceRanker::update(const SequenceOptimization* opt)
 {
     NucSequence seq;
-    opt->get_sequence(seq);
+    seq = opt->first;
     cout << "Ranking optimization: " << seq << endl;
     insert(opt);
 }
