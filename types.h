@@ -84,5 +84,10 @@ typedef float Fe;
  */
 typedef unsigned int RankingSize;
 
+/**
+ * Iterations
+ */
+typedef unsigned int Iteration;
+
 #endif	/* _TYPES_H */
 

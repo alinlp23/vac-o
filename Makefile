@@ -8,9 +8,8 @@ VIENNA_LIBRARY=-L/usr/local/lib -lRNA
 
 PROG=vac-o
 CPP_SRC=main.cpp DevPlugin.cpp PluginAdmin.cpp CombinatoryEngine.cpp QAEngine.cpp \
-SequenceEvaluator.cpp SequenceOptimization.cpp SequenceRanker.cpp \
-CombinatoryRegion.cpp SSRegion.cpp RNAFold.cpp RNAFoldInverse.cpp RNAForester.cpp \
-Hamming.cpp
+SequenceOptimization.cpp SequenceRanker.cpp CombinatoryRegion.cpp SSRegion.cpp \
+RNAFold.cpp RNAFoldInverse.cpp RNAForester.cpp Hamming.cpp
 
 CC_SRC=viennaRNA.c
 

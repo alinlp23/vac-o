@@ -15,7 +15,7 @@ float viennaRNA_fold(char* seq, char* structure)
 float viennaRNA_inverse_fold(char* start, char* structure)
 {
     float d;
-    initialize_fold(strlen(start));
+    initialize_fold(strlen(start));    
     d = inverse_fold(start, structure);
     free_arrays();
     return d;

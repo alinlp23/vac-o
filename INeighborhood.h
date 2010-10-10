@@ -1,8 +1,8 @@
 /* 
- * File:   SequenceEvaluator.h
+ * File:   INeighborhood.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 30, 2010, 9:22 PM 
+ * Created on October 9, 2010, 8:03 PM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -23,34 +23,34 @@
  * 
  */
 
-#ifndef _SEQUENCEEVALUATOR_H
-#define	_SEQUENCEEVALUATOR_H
+#ifndef _INEIGHBORHOOD_H
+#define	_INEIGHBORHOOD_H
 
-#include "biopp.h"
-#include "IObserver.h"
 #include "ISubject.h"
-#include "SequenceOptimization.h"
+#include "Solution.h"
+#include "ICombinatoryRegion.h"
 
-class IPlugin;
-
-class SequenceEvaluator : public IObserver<NucSequence>, public ISubject<SequenceOptimization>
+/**
+ * Interface for neighborhoods implementations.
+ */
+class INeighborhood : public ISingleSubject<Solution>
 {
-    IPlugin* const plg;
-    /**
-     * Implements the IObserver<NucSequence> interface.
-     * Evaluate the sequence and notify the observers.
-     * @param seq the sequence to be evaluated.
-     */
-    virtual void update(const NucSequence*);
+protected:
+    CombinatoryRegionsCt regions;
 public:
     /**
      * Constructor
-     * @param plg the loaded plugin
+     * @param regions
      */
-    SequenceEvaluator(IPlugin* const);
-    SequenceEvaluator(const SequenceEvaluator&);
-    SequenceEvaluator& operator=(const SequenceEvaluator&);
+    INeighborhood(const CombinatoryRegionsCt&);
+
+    /**
+     * Explore the neighborhood of a given solution and notify the observer
+     * for each solution found.
+     * @param s a solution pointer
+     */
+    virtual void explore(const Solution*) = 0;    
 };
 
-#endif	/* _SEQUENCEEVALUATOR_H */
+#endif	/* _INEIGHBORHOOD_H */
 

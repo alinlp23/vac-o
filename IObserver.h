@@ -41,5 +41,21 @@ public:
     virtual ~IObserver(){}
 };
 
+/**
+ * Interface for single observers
+ */
+template<class Subject>
+class ISingleObserver {
+public:
+    virtual ~ISingleObserver(){}
+    /**
+     * Do something with the subject observerd
+     * @param s the subject
+     * @return true or false that could be used by the SingleSubject
+     * to stop notifying
+     */
+    virtual bool update(const Subject* s) = 0;
+};
+
 #endif	/* _IOBSERVER_H */
 
