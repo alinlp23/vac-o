@@ -5,23 +5,23 @@
 interfaces presentadas en la secci\'on~\ref{hld}. Para mayor claridad, se
 dividieron los diagramas UML por paquetes.
 
-  \subsubsection{Combinatory}   
+  \subsubsection{Regions}   
     \begin{figure}
       \centering
-      \includegraphics[scale=0.5]{lld-combinatory.png}  
-      \caption{UML - Combinatory}
-      \label{uml:lld-combinatory}
+      \includegraphics[scale=0.5]{lld-regions.png}  
+      \caption{UML - Regions}
+      \label{uml:lld-regions}
     \end{figure}
 
-  En la Figura~\ref{uml:lld-combinatory} se puede ver el diagrama de clases
-para el paquete \textit{combinatory}. Este paquete representa el componente
+  En la Figura~\ref{uml:lld-regions} se puede ver el diagrama de clases
+para el paquete \textit{regions}. Este paquete forma parte del componente
 ``CombinatoryEngine'' en la Figura~\ref{uml:architecture} de la
 secci\'on~\ref{architecture}.
 
-  La principal responsabilidad de este paquete es brindar al sistema, un motor
-combinatorio de secuencias de ARN basado en restricciones. Para la primer
-versi\'on de ``vac-o'' y seg\'un lo establece la especificaci\'on de
-requerimientos, se contemplan dos tipos de restricciones.
+  La principal responsabilidad de este paquete es brindar al sistema, la
+implementaci\'on de diferentes regiones (restricciones) combinatorias sobre
+secuencias de ARN. Para la primer versi\'on de ``vac-o'' y seg\'un lo establece
+la especificaci\'on de requerimientos, se contemplan dos tipos de restricciones.
   \begin{itemize}
    \item Conservaci\'on de la estructura secundaria (\textit{SSRegion}).
    \item Conservaci\'on del c\'odigo gen\'etico (\textit{GCRegion}).
@@ -31,13 +31,12 @@ requerimientos, se contemplan dos tipos de restricciones.
 para la restricci\'on de conservar la estructura secundaria, vale la pena
 profundizar en que implica garantizar esta responsabilidad.
 
-  La clase \textit{SSRegion} es un \textit{iterator}, y los elementos sobre los
-que debe iterar son aquellas secuencias de ARN que conservan una estructura
-secundaria dada (\textit{vaccine\_structure}). Ya que la cantidad de secuencias
-que conservan una misma estructura secundaria podr\'ia ser eventualmente muy
-grande, se ofrecen dos restricciones complementarias para reducir el numero de
-secuencias que son tenidas en cuenta. A continuaci\'on resumimos brevemente cada
-una de estas restricciones:
+  La clase \textit{SSRegion} genera aquellas secuencias de ARN que conservan
+una estructura secundaria dada (\textit{vaccine\_structure}). Ya que la cantidad
+de secuencias que conservan una misma estructura secundaria podr\'ia ser
+eventualmente muy grande, se ofrecen dos restricciones complementarias para
+reducir el numero de secuencias que son tenidas en cuenta. A continuaci\'on
+resumimos brevemente cada una de estas restricciones:
 
   \begin{itemize}
    \item \textbf{Distancia m\'inima} a las secuencias que conservan una

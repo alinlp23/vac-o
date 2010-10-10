@@ -3,13 +3,13 @@
 \subsection{Interfaces - Responsabilidades - Colaboradores}
 En esta secci\'on se presentan las principales interfaces que intervienen en el
 sistema, sus respectivas responsabilidades y colaboradores. En la
-Figura~\ref{uml:hld} se puede ver el diagrama UML correspondiente.
-\begin{figure}
+Figura~\ref{uml:hld} se puede ver el diagrama de clases correspondiente.
+\begin{figure}  
   \centering
   \includegraphics[scale=0.5, angle=90]{hld.png}  
   \caption{UML - Interfaces}
   \label{uml:hld}
-\end{figure}
+\end{figure} 
 
   \subsubsection{IPluginAdmin}
     \paragraph{Responsabilidad:} Administrar las extensiones del sistema
@@ -29,14 +29,13 @@ mejoras a la vacuna.
        \item Proveer el umbral que se debe usar para determinar la bondad de las
 secuencias obtenidas de las regi\'ones combinatorias.
        \item Proveer las regiones de validaci\'on que se deben usar para
-realizar el control de calidad.
-       \item Proveer el nombre de las librer\'ias externas de ARN para los 3
-posibles casos de uso (``folding'' directo, en el motor combinatorio y en el
-control de calidad, y ``folding'' inverso en el motor combinatorio).
+realizar el control de calidad.       
+       \item Proveer el vecindario para la b\'usqueda local.
+       \item Proveer la estrategia de b\'usqueda local.
        \item Determinar si se continua buscando secuencias o no.
        \item Evaluar las secuencias candidatas.
        \item Descargar la extensi\'on.
-      \end{enumerate}  
+      \end{enumerate}
 
   \subsubsection{IFold}
     \paragraph{Responsabilidad:} Proveer al sistema el ``folding'' directo de
@@ -74,12 +73,39 @@ secuencias de ARN.
     \paragraph{Responsabilidad:} Calcular las secuencias que mantengan
 determinadas propiedades de una secuencia original.    
       \begin{enumerate}
-       \item Devolver la siguiente secuencia.
-       \item Evaluar la bondad de una secuencia.
+       \item Devolver la siguiente secuencia, el cambio realizado y la
+evaluaci\'on local del cambio.       
       \end{enumerate}
     \paragraph{Colaboradores:}
       \begin{enumerate}
        \item IFold, IFoldInverse, IStructureCmp, ISequenceCmp
+      \end{enumerate}
+
+  \subsubsection{ISolution}
+    \paragraph{Responsabilidad:} Representar una soluci\'on candidata en el
+espacio de busqueda.
+      \begin{enumerate}
+       \item Proveer la secuencia completa de la soluci\'on.
+       \item Actualizar una componente (regi\'on) de la soluci\'on y la
+secuencia completa resultante.
+       \item Calcular la evaluaci\'on local de la soluci\'on como producto de
+la evaluaci\'on de sus componentes (regiones).
+      \end{enumerate}         
+
+  \subsubsection{INeigborhood}
+    \paragraph{Responsabilidad:} Explorar el vecindario de una soluci\'on.      
+    \paragraph{Colaboradores:}
+      \begin{enumerate}
+       \item \textbf{ICombinatoryRegion:} Consulta la siguiente secuencia de
+cada regi\'on combinatoria.
+      \end{enumerate}
+
+  \subsubsection{IStrategy}
+    \paragraph{Responsabilidad:} Establecer la pol\'itica para pasar de una
+soluci\'on a la siguiente.
+      \begin{enumerate}       
+       \item Seleccionar una soluci\'on entre los vecinos de la soluci\'on
+actual.
       \end{enumerate}
 
   \subsubsection{ICombinatoryEngine}
@@ -91,8 +117,8 @@ las regiones combinatorias.
       \end{enumerate}
     \paragraph{Colaboradores:}
       \begin{enumerate}
-       \item \textbf{ICombinatoryRegion:} Consulta la siguiente secuencia de
-cada regi\'on combinatoria.
+       \item \textbf{INeighborhood:} Explora el vecindario para cada soluci\'on.
+       \item \textbf{IStrategy:} Selecciona una soluci\'on entre los vecinos.
       \end{enumerate} 
 
   \subsubsection{IQARegion}
@@ -122,7 +148,19 @@ o no el control de calidad.
 
   \subsubsection{IRanker}
     \paragraph{Responsabilidad:} Mantener un \textit{ranking} de secuencias en
-base al puntaje asignado a cada una.    
+base a evaluaci\'on global de cada una de ellas.    
+
+\paragraph{}
+Finalmente, en la Figura~\ref{uml:sequence} se presenta el diagrama de
+secuencia correspondiente a la comunicaci\'on entre las principales entidades en
+el sistema.
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.5]{sequence.png}  
+  \caption{UML - Pasaje de mensajes}
+  \label{uml:sequence}
+\end{figure}
 
 \begin{comment}
   \subsection{Interface}
