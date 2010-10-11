@@ -23,7 +23,8 @@ Figura~\ref{uml:hld} se puede ver el diagrama de clases correspondiente.
 particulares para una vacuna determinada.    
       \begin{enumerate}
        \item Proveer la lista de par\'ametros requeridos por la extensi\'on.
-       \item Proveer la secuencia de ARN que se encuentra en la cepa vacunal.
+       \item Proveer la soluci\'on inicial conteniendo la secuencia de ARN que
+se encuentra en la cepa vacunal.
        \item Proveer las regiones combinatorias que se deben usar para buscar
 mejoras a la vacuna.
        \item Proveer el umbral que se debe usar para determinar la bondad de las
@@ -33,7 +34,7 @@ realizar el control de calidad.
        \item Proveer el vecindario para la b\'usqueda local.
        \item Proveer la estrategia de b\'usqueda local.
        \item Determinar si se continua buscando secuencias o no.
-       \item Evaluar las secuencias candidatas.
+       \item Evaluar las soluciones candidatas.
        \item Descargar la extensi\'on.
       \end{enumerate}
 
@@ -92,7 +93,7 @@ secuencia completa resultante.
 la evaluaci\'on de sus componentes (regiones).
       \end{enumerate}         
 
-  \subsubsection{INeigborhood}
+  \subsubsection{INeighborhood}
     \paragraph{Responsabilidad:} Explorar el vecindario de una soluci\'on.      
     \paragraph{Colaboradores:}
       \begin{enumerate}
