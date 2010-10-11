@@ -32,7 +32,7 @@
 #include "ISubject.h"
 #include "ICombinatoryRegion.h"
 #include "SequenceOptimization.h"
-#include "Solution.h"
+#include "ISolution.h"
 
 class IPlugin;
 class INeighborhood;
