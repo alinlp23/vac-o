@@ -27,7 +27,7 @@
 #define	_COMBINATORYREGION_H
 
 #include <list>
-#include "biopp.h"
+#include <biopp/biopp.h>
 #include "ICombinatoryRegion.h"
 
 using std::list;

@@ -27,7 +27,7 @@
 #define	_RNAFOLDINVERSE_H
 
 #include "IFoldInverse.h"
-
+#include "types.h"
 class RNAFoldInverse : public IFoldInverse
 {
     NucSequence start;

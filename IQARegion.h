@@ -26,7 +26,7 @@
 #ifndef _IQAREGION_H
 #define	_IQAREGION_H
 
-#include "biopp.h"
+#include <biopp/biopp.h>
 #include <list>
 using std::list;
 

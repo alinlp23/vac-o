@@ -33,7 +33,7 @@
 /**
  * Interface for neighborhoods implementations.
  */
-class INeighborhood : public ISingleSubject<Solution>
+class INeighborhood : public ISingleSubject<ISolution>
 {
 protected:
     CombinatoryRegionsCt regions;
@@ -49,7 +49,7 @@ public:
      * for each solution found.
      * @param s a solution pointer
      */
-    virtual void explore(const Solution*) = 0;    
+    virtual void explore(const ISolution* const) = 0;
 };
 
 #endif	/* _INEIGHBORHOOD_H */

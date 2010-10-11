@@ -26,7 +26,8 @@
 #ifndef _ISEQUENCECMP_H
 #define	_ISEQUENCECMP_H
 
-#include "biopp.h"
+#include <biopp/biopp.h>
+
 #include "types.h"
 #include "exceptions.h"
 

@@ -26,7 +26,7 @@
 #ifndef _ISEQUENCEMUTATOR_H
 #define	_ISEQUENCEMUTATOR_H
 
-#include "biopp.h"
+#include <biopp/biopp.h>
 
 /**
  * Interface for sequence mutator.

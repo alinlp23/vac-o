@@ -106,7 +106,11 @@ void print_ranking(SequenceRanker& ranking)
     {
         seq = (*it)->first;
         score = (*it)->second;
-        cout << "Sequence: " << seq << " Score: " << score <<endl;
+        for (size_t i = 0; i < seq.length(); ++i)
+        {
+            cout << to_str(seq[i]);
+        }
+        cout << " Score: " << score << endl;
         ++it;
     }
 }

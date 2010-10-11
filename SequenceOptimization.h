@@ -26,7 +26,8 @@
 #ifndef _ISEQUENCEOPTIMIZATION_H
 #define	_ISEQUENCEOPTIMIZATION_H
 
-#include "biopp.h"
+#include <biopp/biopp.h>
+
 #include "types.h"
 #include <utility>
 using std::pair;

@@ -3,7 +3,8 @@
 /**
  * Static memebers
  */
-NucSequence DevPlugin::sequence = "CGCAGGGAUCGCAGGUACCCCGCAGGCGCAGAUACCCUA";
+string seq = "CGCAGGGAUCGCAGGUACCCCGCAGGCGCAGAUACCCUA";
+NucSequence DevPlugin::sequence = seq;
 SecStructure DevPlugin::vacc_struct = "...(((((((....(..((.....))..).))).)))).";
 SecStructure DevPlugin::wt_struct = "....((((((.......((.....))....))).)))..";
 

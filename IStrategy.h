@@ -27,7 +27,7 @@
 #define	_ISTRATEGY_H
 
 #include "types.h"
-class Solution;
+class ISolution;
 
 /**
  * Interface for local search strategies.
@@ -55,7 +55,7 @@ public:
      * @param current a pointer to the current solution.
      * @param score the score of current
      */
-    virtual void open_iteration(const Solution*, Score) = 0;
+    virtual void open_iteration(const ISolution*, Score) = 0;
     /**
      * Close the current iteration.
      */
@@ -68,14 +68,14 @@ public:
      * a strict improvement, false otherwise.
      * @return a pointer to the selected solution
      */
-    virtual const Solution* select_neighbor(Score&, bool&) = 0;
+    virtual const ISolution* select_neighbor(Score&, bool&) = 0;
     /**
      * Update the neighborhood for the current iteration
      * @param n a new candidate solution neighbor
      * @param score the neighbor's score
      * @return true to keep exploring the neighborhood, false otherwise.
      */
-    virtual bool update_neighbors(const Solution*, Score) = 0;
+    virtual bool update_neighbors(const ISolution*, Score) = 0;
     /**
      * Decides when to stop the local search
      * @return true to stop the search

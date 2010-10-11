@@ -27,7 +27,7 @@
 #define	_ICOMBINATORYREGION_H
 
 #include <mili/mili.h>
-#include "biopp.h"
+#include <biopp/biopp.h>
 #include "types.h"
 #include <list>
 using std::list;

@@ -26,7 +26,7 @@
 #ifndef _COMBINATORYENGINE_H
 #define	_COMBINATORYENGINE_H
 
-#include "biopp.h"
+#include <biopp/biopp.h>
 #include "types.h"
 
 #include "ISubject.h"
@@ -38,7 +38,7 @@ class IPlugin;
 class INeighborhood;
 class IStrategy;
 
-class CombinatoryEngine : public ISingleObserver<Solution>, public ISubject<SequenceOptimization>
+class CombinatoryEngine : public ISingleObserver<ISolution>, public ISubject<SequenceOptimization>
 {    
     const NucSequence sequence;
     const CutOff cutoff;
@@ -54,7 +54,7 @@ class CombinatoryEngine : public ISingleObserver<Solution>, public ISubject<Sequ
      * @param s a new candidate solution
      * @return the same as the strategy update_neighbors function.
      */
-    virtual bool update(const Solution*);
+    virtual bool update(const ISolution*);
 public:
     /**
      * Constructor

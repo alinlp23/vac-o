@@ -26,7 +26,7 @@
 #ifndef _IQAVALIDATOR_H
 #define	_IQAVALIDATOR_H
 
-#include "biopp.h"
+#include <biopp/biopp.h>
 
 /**
  * Interface for validators used for QA.

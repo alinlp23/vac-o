@@ -21,15 +21,18 @@ void CombinatoryEngine::run()
      *
      */
     cout << "Running Combinatory engine..." << endl;
-    NucSequence s1 = "AAUAGA";
+    string seq1 = "AAUAGA";
+    NucSequence s1 = seq1;
     notify(new SequenceOptimization(s1, 6));
-    NucSequence s2 = "AAUAGU";
+    string seq2 = "AAUAGU";
+    NucSequence s2 = seq2;
     notify(new SequenceOptimization(s2, 9));
-    NucSequence s3 = "GGUAGU";
+    string seq3 = "GGUAGU";
+    NucSequence s3 = seq3;
     notify(new SequenceOptimization(s3, 5));
 }
 
-bool CombinatoryEngine::update(const Solution* s)
+bool CombinatoryEngine::update(const ISolution* s)
 {
     NucSequence seq;
     //s->get_sequence(seq);
