@@ -26,7 +26,7 @@
 #ifndef _IFOLD_H
 #define	_IFOLD_H
 
-#include "biopp.h"
+#include <biopp/biopp.h>
 #include "types.h"
 #include "exceptions.h"
 

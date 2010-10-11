@@ -8,7 +8,12 @@ depth(depth), regions(regions)
 
 void QAEngine::update(const SequenceOptimization* candidate)
 {
-    cout << "QA validation for: " << candidate->first << endl;
+    cout << "QA validation for: ";
+    for (size_t i = 0; i < (candidate->first).length(); ++i)
+    {
+        cout << to_str((candidate->first)[i]);
+    }
+    cout << endl;
     if(validate(candidate->first))
         notify(candidate);
 }

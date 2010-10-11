@@ -13,6 +13,11 @@ void SequenceRanker::update(const SequenceOptimization* opt)
 {
     NucSequence seq;
     seq = opt->first;
-    cout << "Ranking optimization: " << seq << endl;
+    cout << "Ranking optimization: ";
+    for (size_t i = 0; i < seq.length(); ++i)
+    {
+        cout << to_str(seq[i]);
+    }
+    cout << endl;
     insert(opt);
 }

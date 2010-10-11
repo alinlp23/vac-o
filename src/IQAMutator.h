@@ -26,7 +26,7 @@
 #ifndef _IQAMUTATOR_H
 #define	_IQAMUTATOR_H
 
-#include "biopp.h"
+#include <biopp/biopp.h>
 
 /**
  * Interface for sequences mutators used for QA.

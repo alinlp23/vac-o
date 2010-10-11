@@ -27,7 +27,7 @@
 #define	_SOLUTION_H
 
 #include <map>
-#include "biopp.h"
+#include <biopp/biopp.h>
 #include "types.h"
 #include "ICombinatoryRegion.h"
 
@@ -40,17 +40,23 @@ typedef pair<NucSequence, Score> LocalOptimization;
  * Each solution, has the complete sequence and a map between
  * regions and optimizations.
  */
-class Solution
-{
-    NucSequence sequence;    
-    map<ICombinatoryRegion*, LocalOptimization> components;
+class ISolution
+{    
 public:
     /**
      * Constructor
-     * @param seq the initial sequence
+     * @param seq the ARNl sequence
      * @param comps a map of it's components
      */
-    Solution(NucSequence&, map<ICombinatoryRegion*, LocalOptimization>);
+    ISolution(const NucSequence&, const map<const ICombinatoryRegion*, LocalOptimization>&);
+    
+    /**
+     * Constructor
+     * @param seq the ARN sequence
+     * @param comps a container of solution components. 
+     * Useful to build the initial solution.
+     */
+    ISolution(const NucSequence&, const NucSequencesCt&);
 
     /**
      * Update this solution in a given component.
@@ -58,20 +64,28 @@ public:
      * @param seq the new complete sequence
      * @param op the local optimization for the region being updated.
      */
-    void update_solution(ICombinatoryRegion*, NucSequence&, LocalOptimization&);
+    virtual void update_solution(const ICombinatoryRegion* const, const NucSequence&, const LocalOptimization&) = 0;
 
     /**
      * Gets the complete sequence of this solution
      * @param seq the sequence
      */
-    void get_sequence(NucSequence& seq) const;
+    virtual void get_sequence(NucSequence&) const = 0;
 
     /**
      * Compute the local score for this solution excluding a given region.
      * @param exclude the region to be excluded from the score.
      * @return the partial local score without the region excluded.
      */
-    Score compute_local_score(const ICombinatoryRegion* exclude) const;    
+    virtual Score compute_local_score(const ICombinatoryRegion* const) const = 0;
+
+    /**
+     * Clone this solution
+     * @return The new solution.
+     */
+    virtual ISolution* clone() const = 0;
+
+    virtual ~ISolution(){}
 };
 
 

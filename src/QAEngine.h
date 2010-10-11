@@ -26,7 +26,7 @@
 #ifndef _QAENGINE_H
 #define	_QAENGINE_H
 
-#include "biopp.h"
+#include <biopp/biopp.h>
 #include "types.h"
 
 #include "ISubject.h"

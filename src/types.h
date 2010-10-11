@@ -27,7 +27,13 @@
 #define	_TYPES_H
 
 #include <string>
+#include <list>
+#include <biopp/biopp.h>
 using std::string;
+using std::list;
+
+typedef string SecStructure;
+typedef list<NucSequence*> NucSequencesCt;
 
 /**
  * ICombinatoryEngine threshold cutoff

@@ -26,7 +26,7 @@
 #ifndef _IFOLDINVERSE_H
 #define	_IFOLDINVERSE_H
 
-#include "biopp.h"
+#include <biopp/biopp.h>
 #include "exceptions.h"
 
 /**

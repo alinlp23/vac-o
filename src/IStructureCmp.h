@@ -26,7 +26,7 @@
 #ifndef _ISTRUCTURECMP_H
 #define	_ISTRUCTURECMP_H
 
-#include "biopp.h"
+#include <biopp/biopp.h>
 #include "types.h"
 #include "exceptions.h"
 
