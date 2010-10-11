@@ -65,7 +65,7 @@
 #include "Parameter.h"
 
 /*local search*/
-#include "Solution.h"
+#include "ISolution.h"
 #include "INeighborhood.h"
 #include "IStrategy.h"
 

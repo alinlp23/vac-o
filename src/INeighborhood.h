@@ -27,7 +27,7 @@
 #define	_INEIGHBORHOOD_H
 
 #include "ISubject.h"
-#include "Solution.h"
+#include "ISolution.h"
 #include "ICombinatoryRegion.h"
 
 /**
