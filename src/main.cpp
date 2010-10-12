@@ -122,12 +122,8 @@ int main(int argc, char** argv) {
     ParamsCt params;
     plg->get_parameters(params);
     ask_for_parameters(params);
-
-    CombinatoryRegionsCt comb_regions;
-    NucSequence seq;
-    plg->get_sequence(seq);
-    plg->get_combinatory_regions(comb_regions);
-    CombinatoryEngine comb_engine(seq, comb_regions, plg->get_comb_cutoff(), plg);
+    
+    CombinatoryEngine comb_engine(plg);
 
     QARegionsCt qa_regions;
     plg->get_qa_regions(qa_regions);
@@ -138,7 +134,8 @@ int main(int argc, char** argv) {
     qa_engine.attach(&ranker);
     comb_engine.attach(&qa_engine);
 
-    comb_engine.run();
+    //run forest, run!!!
+    comb_engine.run_forest();
     print_ranking(ranker);
     
     plg->unload(); 

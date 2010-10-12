@@ -38,26 +38,14 @@ using std::list;
 class ICombinatoryRegion
 {
     virtual Score evaluate(const NucSequence&) const = 0;
-public:
+public:    
     /**
-     * Sets the iterator at the beginning.
-     */
-    virtual void begin() = 0;
-    /**
-     * Gets the current sequence.
+     * Gets a new sequence from this region.
      * @param sequence the NucSequence reference to write to.
-     * @return The score of the sequence
+     * @param delta the local change
+     * @return The local score of the sequence change
      */
-    virtual Score current(NucSequence&) = 0;
-    /**
-     * Move the iterator forwards
-     */
-    virtual void next() = 0;
-    /**
-     * Check if there are more sequences.
-     * @return If the iterator it's done or not.
-     */
-    virtual bool done() const = 0;
+    virtual Score generate(NucSequence&, NucSequence&) = 0;
     /**
      * Sets the base sequence of the region.
      * @param sequence the ARN sequence

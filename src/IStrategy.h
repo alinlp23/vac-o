@@ -27,60 +27,47 @@
 #define	_ISTRATEGY_H
 
 #include "types.h"
-class ISolution;
+#include "ISubject.h"
+#include "ISolution.h"
+
+/**
+ * Interface for solution scorer
+ */
+struct ISolutionScorer
+{
+    /**
+     * Evaluate a given solution.
+     * @param sol the solution to be evaluated.
+     * @return the score assigned.
+     */
+    virtual Score evaluate(const ISolution*) = 0;
+    virtual ~ISolutionScorer(){}
+};
+
+struct ISolutionObserver
+{
+    virtual void update(const ISolution*, Score) = 0;
+    virtual ~ISolutionObserver(){}
+};
 
 /**
  * Interface for local search strategies.
  */
-class IStrategy
+class IStrategy : public ISingleSubject<ISolution>
 {
-protected:
-    Iteration current_iteration;
-    Iteration best_iteration;
-    Iteration max_idle_iterations;
-    Iteration max_iterations;   
-    
-    virtual bool idle_iterations_expired() = 0;
-    virtual bool max_iterations_expired() = 0;
 public:
     /**
-     * Base strategy constructor
-     * @param max_idle maximum of idle iteration (iterations from the last improvement)
-     * @param max_iter maximun of iterations
+     * Run the local search for an initial solution.
+     * @param solution the initial solution
+     * @param observer an observer to noitify new improvements.
      */
-    IStrategy(Iteration, Iteration);
+    virtual void run(const ISolution*, ISolutionObserver*) = 0;
 
     /**
-     * Open a new iteration in the search proccess
-     * @param current a pointer to the current solution.
-     * @param score the score of current
+     * Sets the solution scorer to be used during the search.
+     * @param
      */
-    virtual void open_iteration(const ISolution*, Score) = 0;
-    /**
-     * Close the current iteration.
-     */
-    virtual void close_iteration() = 0;
-    /**
-     * Select a solution from the neighborhood explored in the current iteration.
-     * Each concrete strategy would make the difference here.
-     * @param score sets this parameter to the selected solution's score
-     * @param improvement sets this parameter to true if the selected solution it's
-     * a strict improvement, false otherwise.
-     * @return a pointer to the selected solution
-     */
-    virtual const ISolution* select_neighbor(Score&, bool&) = 0;
-    /**
-     * Update the neighborhood for the current iteration
-     * @param n a new candidate solution neighbor
-     * @param score the neighbor's score
-     * @return true to keep exploring the neighborhood, false otherwise.
-     */
-    virtual bool update_neighbors(const ISolution*, Score) = 0;
-    /**
-     * Decides when to stop the local search
-     * @return true to stop the search
-     */
-    virtual bool done() const = 0;
+    virtual void set_scorer(const ISolutionScorer*) = 0;
 
     virtual ~IStrategy(){}
 };

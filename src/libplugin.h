@@ -66,21 +66,20 @@ class DevPlugin : public IPlugin
     void init_comb_regions();
     NucSequencesCt wt_cache;
     ICombinatoryRegion* ssregion;
+    
+    virtual void get_parameters(ParamsCt& params) const;
+    virtual const ISolution* get_initial_solution() const;
+    virtual INeighborhood* get_neighborhood() const;
+    virtual IStrategy* get_strategy() const;
+    virtual void get_qa_regions(QARegionsCt& qaregions) const;
+    virtual Depth get_qa_depth() const;
+    virtual Score evaluate_solution(const ISolution*);
+    virtual RankingSize get_ranking_size() const;
+    virtual void unload();
 public:    
     DevPlugin();
     DevPlugin(const DevPlugin&);
-    const DevPlugin& operator=(const DevPlugin&);
-    
-    virtual void get_parameters(ParamsCt& params) const;
-    virtual void get_sequence(NucSequence& seq) const;
-    virtual void get_combinatory_regions(CombinatoryRegionsCt& cregions) const;
-    virtual void get_qa_regions(QARegionsCt& qaregions) const;
-    virtual CutOff get_comb_cutoff() const;
-    virtual Depth get_qa_depth() const;
-    virtual bool done() const;
-    virtual Score evaluate_sequence(const NucSequence& sequence);
-    virtual RankingSize get_ranking_size() const;
-    virtual void unload();
+    const DevPlugin& operator=(const DevPlugin&);    
 };
 
 #endif	/* _LIBPLUGIN_H */

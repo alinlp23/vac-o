@@ -33,7 +33,6 @@
  */
 class RNAFold : public IFold
 {
-public:    
     virtual Fe fold(const NucSequence&, SecStructure&) const throw(RNABackendException);
 };
 

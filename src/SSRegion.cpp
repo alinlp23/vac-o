@@ -17,18 +17,6 @@ Score SSRegion::evaluate(const NucSequence& sequence) const
     return 1;
 }
 
-void SSRegion::begin()
-{}
-
-Score SSRegion::current(NucSequence& sequence)
-{
-    return evaluate(sequence);
-}
-
-void SSRegion::next()
-{}
-
-bool SSRegion::done() const
-{
-    return false;
+Score SSRegion::generate(NucSequence& sequence, NucSequence& delta){
+    return evaluate(delta);
 }

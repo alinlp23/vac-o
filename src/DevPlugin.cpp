@@ -28,35 +28,30 @@ void DevPlugin::get_parameters(ParamsCt& params) const
 
 }
 
-void DevPlugin::get_sequence(NucSequence& seq) const
+const ISolution* DevPlugin::get_initial_solution() const
 {
-    seq = sequence;
+    return NULL;
 }
 
-void DevPlugin::get_combinatory_regions(CombinatoryRegionsCt& cregions) const
-{            
-    insert_into(cregions, ssregion);
+INeighborhood* DevPlugin::get_neighborhood() const
+{
+    return NULL;
+}
+
+IStrategy* DevPlugin::get_strategy() const
+{
+    return NULL;
 }
 
 void DevPlugin::get_qa_regions(QARegionsCt& qaregions) const
 {}
-
-CutOff DevPlugin::get_comb_cutoff() const
-{
-    return cutoff;
-}
 
 Depth DevPlugin::get_qa_depth() const
 {
     return 5;
 }
 
-bool DevPlugin::done() const
-{
-    return counter==10;
-}
-
-Score DevPlugin::evaluate_sequence(const NucSequence& sequence)
+Score DevPlugin::evaluate_solution(const ISolution* solution)
 {
     ++counter;    
     return counter;

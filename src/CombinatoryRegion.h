@@ -44,11 +44,11 @@ class CombinatoryRegion : public ICombinatoryRegion
     SeqIndex end;
     ConstraintsCt constraints;
     NucSequence base_sequence;
-public:
-    CombinatoryRegion(SeqIndex, SeqIndex);
 
     virtual void set_base_sequence(const NucSequence& sequence);
     virtual void add_constraint(SeqIndex start, SeqIndex end);
+protected:
+    CombinatoryRegion(SeqIndex, SeqIndex);
 };
 
 
