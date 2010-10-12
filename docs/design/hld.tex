@@ -103,23 +103,27 @@ cada regi\'on combinatoria.
 
   \subsubsection{IStrategy}
     \paragraph{Responsabilidad:} Establecer la pol\'itica para pasar de una
-soluci\'on a la siguiente.
+soluci\'on a la siguiente y notificar cada soluci\'on que mejora a las
+anteriores.
       \begin{enumerate}       
        \item Seleccionar una soluci\'on entre los vecinos de la soluci\'on
 actual.
       \end{enumerate}
+   \paragraph{Colaboradores}
+    \begin{enumerate}
+     \item \textbf{INeighborhood:} Explora el vecindario para cada soluci\'on. 
+    \end{enumerate}
 
   \subsubsection{ICombinatoryEngine}
     \paragraph{Responsabilidad:} Generar secuencias candidatas a partir de las
-variantes generadas de cada regi\'on combinatoria.   
+soluciones encontradas por la b\'usqueda local.
       \begin{enumerate}       
-       \item Recorrer el espacio de b\'usqueda generado por las variantes de
-las regiones combinatorias.
+       \item Iniciar la b\'usqueda local.
+       \item Notificar nuevas secuencias candidatas.
       \end{enumerate}
     \paragraph{Colaboradores:}
-      \begin{enumerate}
-       \item \textbf{INeighborhood:} Explora el vecindario para cada soluci\'on.
-       \item \textbf{IStrategy:} Selecciona una soluci\'on entre los vecinos.
+      \begin{enumerate}       
+       \item \textbf{IStrategy:} Ejecuta la b\'usqueda local.
       \end{enumerate} 
 
   \subsubsection{IQARegion}
