@@ -32,13 +32,9 @@ class GCRegion : public CombinatoryRegion
 {
     AminoSequence target_aminoacids;
     virtual Score evaluate(const NucSequence&) const;
+    virtual Score generate(NucSequence&, NucSequence&);
 public:
     GCRegion(const AminoSequence& aminoacids);
-
-    virtual void begin();
-    virtual float current(NucSequence& sequence);
-    virtual void next();
-    virtual bool done() const;
 };
 
 #endif	/* _GCREGION_H */

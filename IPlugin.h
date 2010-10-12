@@ -28,6 +28,9 @@
 #include <list>
 #include "types.h"
 #include "ICombinatoryRegion.h"
+#include "INeighborhood.h"
+#include "IStrategy.h"
+#include "ISolution.h"
 #include "IQARegion.h"
 #include "IParameter.h"
 
@@ -45,41 +48,36 @@ public:
      */
     virtual void get_parameters(ParamsCt& params) const = 0;
     /**
-     * Gets the initial ARN sequence.
-     * @param seq NucSecuence to write to.
+     * Gets the initial solution containing the initial ARN sequence.
+     * @return a pointer to ISolution
      */
-    virtual void get_sequence(NucSequence& seq) const = 0;
+    virtual const ISolution* get_initial_solution() const = 0;   
     /**
-     * Gets the combinatory regions to be used by the combinatory engine.
-     * @param cregions container of ICombinatoryRegion to write to.
+     * Gets the neighborhood implementation.
+     * @return a pointer to the neighborhood
      */
-    virtual void get_combinatory_regions(CombinatoryRegionsCt& cregions) const = 0;
+    virtual INeighborhood* get_neighborhood() const = 0;
+    /**
+     * Gets the local search strategy.
+     * @return a pointer to the strategy
+     */
+    virtual IStrategy* get_strategy() const = 0;
     /**
      * Gets the QA regions to be used by the QA engine.
      * @param qaregions list of IQARegion to write to.
      */
-    virtual void get_qa_regions(QARegionsCt& qaregions) const = 0;
-    /**
-     * Gets the threshold cutoff used by the combinatory engine.
-     * @return A floating point between 0 and 1.
-     */
-    virtual CutOff get_comb_cutoff() const = 0;
+    virtual void get_qa_regions(QARegionsCt& qaregions) const = 0;    
     /**
      * Gets the depth for the quality assurance engine.
      * @return The depth
      */
-    virtual Depth get_qa_depth() const = 0;
+    virtual Depth get_qa_depth() const = 0;    
     /**
-     * Decides when to stop computing.
-     * @return Stop or not.
-     */
-    virtual bool done() const = 0;
-    /**
-     * Evaluate a given ARN sequence.
-     * @param sequence the ARN sequence to evaluate.
+     * Evaluate a given solution.
+     * @param solution the solution to evaluate
      * @return The score assigned.
      */
-    virtual Score evaluate_sequence(const NucSequence& sequence) = 0;
+    virtual Score evaluate_solution(const ISolution*) = 0;
     /**
      * Gets the ranking max size.
      * @return The size

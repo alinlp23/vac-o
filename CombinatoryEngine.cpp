@@ -5,37 +5,24 @@
 using std::cout;
 using std::endl;
 
-CombinatoryEngine::CombinatoryEngine(const NucSequence& seq, const CombinatoryRegionsCt& rs,
-                                     CutOff c, IPlugin* const plg) :
-sequence(seq), cutoff(c), regions(rs), plg(plg), neighborhood(), strategy()
-{}
-
-void CombinatoryEngine::run()
-{    
-    /*
-     * while(!plg->done())
-     * {
-     *     get a new sequence s
-     *     notify(s);
-     * }
-     *
-     */
-    cout << "Running Combinatory engine..." << endl;
-    string seq1 = "AAUAGA";
-    NucSequence s1 = seq1;
-    notify(new SequenceOptimization(s1, 6));
-    string seq2 = "AAUAGU";
-    NucSequence s2 = seq2;
-    notify(new SequenceOptimization(s2, 9));
-    string seq3 = "GGUAGU";
-    NucSequence s3 = seq3;
-    notify(new SequenceOptimization(s3, 5));
+CombinatoryEngine::CombinatoryEngine(IPlugin* const plg) :
+plg(plg), strategy(plg->get_strategy())
+{
+    ISolutionScorer* ssadapter = new PluginScoreAdapter(plg);
+    //strategy->set_scorer(ssadapter);
+    //strategy->set(this);
 }
 
-bool CombinatoryEngine::update(const ISolution* s)
+void CombinatoryEngine::run_forest()
+{   
+    cout << "Running Combinatory engine..." << endl;
+    //strategy->run(plg->get_initial_solution());
+}
+
+void CombinatoryEngine::update(const ISolution* solution, Score score)
 {
-    NucSequence seq;
-    //s->get_sequence(seq);
-    float score = plg->evaluate_sequence(seq);
-    return strategy->update_neighbors(s,score);
+    string seq1 = "AAUAGA";
+    NucSequence s1 = seq1;//s->get_sequence(s1)
+    Score s = 6; //score
+    notify(new SequenceOptimization(s1, s));    
 }

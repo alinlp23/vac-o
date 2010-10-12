@@ -33,7 +33,6 @@
  */
 class RNAForester : public IStructureCmp
 {
-public:
     virtual Similitude compare(const SecStructure&,
                                const SecStructure&) const throw(RNABackendException);
 };

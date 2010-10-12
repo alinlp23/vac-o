@@ -30,41 +30,45 @@
 #include "types.h"
 
 #include "ISubject.h"
-#include "ICombinatoryRegion.h"
 #include "SequenceOptimization.h"
 #include "ISolution.h"
+#include "IPlugin.h"
 
 class IPlugin;
-class INeighborhood;
 class IStrategy;
 
-class CombinatoryEngine : public ISingleObserver<ISolution>, public ISubject<SequenceOptimization>
-{    
-    const NucSequence sequence;
-    const CutOff cutoff;
-    CombinatoryRegionsCt regions;
-    IPlugin* const plg;
-    INeighborhood* neighborhood;
+class CombinatoryEngine : public ISolutionObserver, public ISubject<SequenceOptimization>
+{        
+    IPlugin* const plg;    
     IStrategy* strategy;
+
+    class PluginScoreAdapter: public ISolutionScorer
+    {
+        IPlugin* plg;    
+        virtual Score evaluate(const ISolution* sol)
+        {
+            return plg->evaluate_solution(sol);
+        }
+    public:
+        PluginScoreAdapter(IPlugin* p) : plg(p){}
+        PluginScoreAdapter(const PluginScoreAdapter&);
+        PluginScoreAdapter& operator=(const PluginScoreAdapter&);
+    };
 
     /**
      * Implements the ISingleObserver interface.
      * Evaluate the solution using the plugin and
      * update the neighborhood of the strategy
-     * @param s a new candidate solution
-     * @return the same as the strategy update_neighbors function.
+     * @param solution a new candidate solution
+     * @param score the score assigned     
      */
-    virtual bool update(const ISolution*);
+    virtual void update(const ISolution*, Score);
 public:
     /**
-     * Constructor
-     * @param seq the initial nucleotide sequence
-     * @param rs the combinatory regions
-     * @param c the threshold cutoff
+     * Constructor     
      * @param plg the loaded plugin
      */
-    CombinatoryEngine(const NucSequence&, const CombinatoryRegionsCt&,
-                      CutOff, IPlugin* const);
+    CombinatoryEngine(IPlugin* const);
 
     CombinatoryEngine(const CombinatoryEngine&);
     CombinatoryEngine& operator=(const CombinatoryEngine&);
@@ -73,7 +77,7 @@ public:
      * Run the engine until plg->done() || strategy->done().
      * Will notify the observers for each sequence found.
      */
-    void run();
+    void run_forest();
 };
 
 #endif	/* _COMBINATORYENGINE_H */

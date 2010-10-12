@@ -38,11 +38,11 @@ class QARegion : public IQARegion
     SeqIndex end;
     IQAMutator* const mutator;
     const IQAValidator* const validator;
+    virtual bool validate(const NucSequence&) const;
 public:
     QARegion(SeqIndex, SeqIndex, IQAMutator* const, const IQAValidator* const);
     QARegion(const QARegion&);
-    QARegion& operator=(const QARegion&);
-    virtual bool validate(const NucSequence&) const;
+    QARegion& operator=(const QARegion&);    
 };
 
 #endif	/* _QAREGION_H */

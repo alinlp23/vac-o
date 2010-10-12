@@ -27,13 +27,16 @@
 #define	_SOLUTION_H
 
 #include <map>
+#include <utility>
 #include <biopp/biopp.h>
 #include "types.h"
 #include "ICombinatoryRegion.h"
 
 using std::map;
+using std::pair;
 
 typedef pair<NucSequence, Score> LocalOptimization;
+typedef unsigned int RegionIdx;
 
 /**
  * Solutions represents the search space in any local search strategy.
@@ -42,21 +45,14 @@ typedef pair<NucSequence, Score> LocalOptimization;
  */
 class ISolution
 {    
-public:
-    /**
-     * Constructor
-     * @param seq the ARNl sequence
-     * @param comps a map of it's components
-     */
-    ISolution(const NucSequence&, const map<const ICombinatoryRegion*, LocalOptimization>&);
-    
+public:        
     /**
      * Constructor
      * @param seq the ARN sequence
      * @param comps a container of solution components. 
      * Useful to build the initial solution.
      */
-    ISolution(const NucSequence&, const NucSequencesCt&);
+    ISolution(const NucSequence&, const CombinatoryRegionsCt&);
 
     /**
      * Update this solution in a given component.
@@ -64,7 +60,7 @@ public:
      * @param seq the new complete sequence
      * @param op the local optimization for the region being updated.
      */
-    virtual void update_solution(const ICombinatoryRegion* const, const NucSequence&, const LocalOptimization&) = 0;
+    virtual void update_solution(RegionIdx, const NucSequence&, const LocalOptimization&) = 0;
 
     /**
      * Gets the complete sequence of this solution
@@ -77,7 +73,7 @@ public:
      * @param exclude the region to be excluded from the score.
      * @return the partial local score without the region excluded.
      */
-    virtual Score compute_local_score(const ICombinatoryRegion* const) const = 0;
+    virtual Score compute_local_score(RegionIdx) const = 0;
 
     /**
      * Clone this solution

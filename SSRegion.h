@@ -52,6 +52,7 @@ class SSRegion : public CombinatoryRegion
     const ISequenceCmp* const seq_cmp_backend;
 
     virtual Score evaluate(const NucSequence&) const;
+    virtual Score generate(NucSequence&, NucSequence&);
 public:
     SSRegion(SeqIndex, SeqIndex, const SecStructure&, const SecStructure&,
             NMutations, Similitude, Distance, const NucSequencesCt&,
@@ -60,10 +61,6 @@ public:
     
     SSRegion(const SSRegion&);
     SSRegion& operator=(const SSRegion&);    
-    virtual void begin();
-    virtual Score current(NucSequence&);
-    virtual void next();
-    virtual bool done() const;
 };
 
 #endif	/* _SSREGION_H */

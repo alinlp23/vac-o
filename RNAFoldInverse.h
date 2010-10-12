@@ -32,10 +32,9 @@ class RNAFoldInverse : public IFoldInverse
 {
     NucSequence start;
     const SecStructure structure;
+    virtual void fold_inverse(NucSequence&) throw(RNABackendException);
 public:
     RNAFoldInverse(const NucSequence&, const SecStructure&);
-    
-    virtual void fold_inverse(NucSequence&) throw(RNABackendException);
 };
 
 
