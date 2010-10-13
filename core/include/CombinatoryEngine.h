@@ -41,7 +41,8 @@ class CombinatoryEngine : public ISolutionObserver, public ISubject<SequenceOpti
 {        
     IPlugin* const plg;    
     IStrategy* strategy;
-
+    ISolutionScorer* ssadapter;
+    
     class PluginScoreAdapter: public ISolutionScorer
     {
         IPlugin* plg;    
@@ -78,6 +79,8 @@ public:
      * Will notify the observers for each sequence found.
      */
     void run_forest();
+    
+    ~CombinatoryEngine();
 };
 
 #endif	/* _COMBINATORYENGINE_H */

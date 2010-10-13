@@ -54,7 +54,8 @@ public:
 class PluginException : public Exception
 {
 public:
-    PluginException(const string& msg);
+    PluginException(const string& msg) :  Exception("PluginAdmin says: \n\t"+msg)
+    {}
 };
 
 
