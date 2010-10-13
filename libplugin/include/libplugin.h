@@ -40,47 +40,6 @@
 #include "RNAFoldInverse.h"
 #include "RNAForester.h"
 #include "Hamming.h"
-/**
- * Plugin for development
- */
-class DevPlugin : public IPlugin
-{
-    static NucSequence sequence;
-    static SecStructure wt_struct;
-    static SecStructure vacc_struct;
-    
-    unsigned int counter;
-    Distance min_distance;
-    CutOff cutoff;
-
-    void init_params();
-    Parameter<Distance>* min_distance_param;
-    Parameter<CutOff>* cutoff_param;
-    
-    void init_backends();
-    IFold* fold_backend;
-    IFoldInverse* inverse_backend;
-    IStructureCmp* struct_cmp_backend;
-    ISequenceCmp* seq_cmp_backend;
-
-    void init_comb_regions();
-    NucSequencesCt wt_cache;
-    ICombinatoryRegion* ssregion;
-    
-    virtual void get_parameters(ParamsCt& params) const;
-    virtual const ISolution* get_initial_solution() const;
-    virtual INeighborhood* get_neighborhood() const;
-    virtual IStrategy* get_strategy() const;
-    virtual void get_qa_regions(QARegionsCt& qaregions) const;
-    virtual Depth get_qa_depth() const;
-    virtual Score evaluate_solution(const ISolution*);
-    virtual RankingSize get_ranking_size() const;
-    virtual void unload();
-public:    
-    DevPlugin();
-    DevPlugin(const DevPlugin&);
-    const DevPlugin& operator=(const DevPlugin&);    
-};
 
 #endif	/* _LIBPLUGIN_H */
 
