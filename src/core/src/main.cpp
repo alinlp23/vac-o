@@ -23,27 +23,12 @@
  *
  */
 
-/*observer&subjec*/
-#include "IObserver.h"
-#include "ISubject.h"
-
 /*combinatory*/
 #include "CombinatoryEngine.h"
-#include "ICombinatoryRegion.h"
-#include "CombinatoryRegion.h"
-#include "SSRegion.h"
-#include "GCRegion.h"
 
 /*validator*/
 #include "QAEngine.h"
 #include "IQARegion.h"
-#include "QARegion.h"
-#include "IQAValidator.h"
-#include "IQAMutator.h"
-
-/*mutator*/
-#include "ISequenceMutator.h"
-#include "SequenceMutator.h"
 
 /*ranker*/
 #include "SequenceRanker.h"
@@ -51,23 +36,9 @@
 /*pluginadmin*/
 #include "PluginAdmin.h"
 
-/*libRNA*/
-#include "IFold.h"
-#include "IFoldInverse.h"
-#include "IStructureCmp.h"
-#include "ISequenceCmp.h"
-#include "RNAFold.h"
-#include "RNAFoldInverse.h"
-#include "RNAForester.h"
-#include "Hamming.h"
 /*plugin*/
 #include "IPlugin.h"
 #include "Parameter.h"
-
-/*local search*/
-#include "ISolution.h"
-#include "INeighborhood.h"
-#include "IStrategy.h"
 
 #include <iostream>
 using std::cout;
@@ -117,7 +88,7 @@ void print_ranking(SequenceRanker& ranking)
 
 int main(int argc, char** argv) {
     PluginAdmin plg_admin;
-    IPlugin* plg = plg_admin.load("/path/to/plugin.so");
+    IPlugin* plg = plg_admin.load("libplugin/libplugin.so");
 
     ParamsCt params;
     plg->get_parameters(params);
@@ -138,27 +109,6 @@ int main(int argc, char** argv) {
     comb_engine.run_forest();
     print_ranking(ranker);
     
-    plg->unload(); 
-    /*
-     * Pseudo main program...
-     *
-     * PluginAdmin plg_admin;
-     * IPlugin* plg = plg_admin.load(plg_path);
-     *     
-     * CombinatoryEngine comb_engine(plg);
-     * QAEngine qa_engine(plg);
-     * SequenceEvaluator evaluator(plg);
-     * SequenceRanker ranker(plg);
-     *
-     * evaluator.attach(&ranker);
-     * qa_engine.attach(&evaluator);
-     * comb_engine.attach(&qa_engine);
-     *
-     * comb_engine.run();
-     *
-     * print_ranking(ranker)
-     * plg->unload();
-     *
-     */
+    plg_admin.unload(plg); 
     return 0;
 }

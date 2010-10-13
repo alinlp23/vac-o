@@ -100,3 +100,8 @@ void DevPlugin::init_comb_regions()
                             fold_backend, inverse_backend, struct_cmp_backend,
                             seq_cmp_backend);
 }
+
+extern "C" IPlugin* create_plugin()
+{
+    return new DevPlugin();
+}

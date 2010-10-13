@@ -8,7 +8,7 @@ using std::endl;
 CombinatoryEngine::CombinatoryEngine(IPlugin* const plg) :
 plg(plg), strategy(plg->get_strategy())
 {
-    ISolutionScorer* ssadapter = new PluginScoreAdapter(plg);
+    ssadapter = new PluginScoreAdapter(plg);
     //strategy->set_scorer(ssadapter);
     //strategy->set(this);
 }
@@ -25,4 +25,9 @@ void CombinatoryEngine::update(const ISolution* solution, Score score)
     NucSequence s1 = seq1;//s->get_sequence(s1)
     Score s = 6; //score
     notify(new SequenceOptimization(s1, s));    
+}
+
+CombinatoryEngine::~CombinatoryEngine()
+{
+    delete ssadapter;
 }

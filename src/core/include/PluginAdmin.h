@@ -28,12 +28,14 @@
 
 #include "types.h"
 #include "exceptions.h"
-class IPlugin;
+#include "IPlugin.h"
 
 class PluginAdmin
-{    
+{
+    void* handle;       
 public:
-    IPlugin* load(const Path& file) const throw(PluginException);
+    IPlugin* load(const Path& file) throw(PluginException);
+    void unload(IPlugin*);
 };
 
 
