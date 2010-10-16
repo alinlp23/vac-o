@@ -93,6 +93,7 @@ int main(int argc, char** argv) {
     ParamsCt params;
     plg->get_parameters(params);
     ask_for_parameters(params);
+    plg->configure();
     
     CombinatoryEngine comb_engine(plg);
 

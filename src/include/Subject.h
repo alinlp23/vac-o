@@ -40,7 +40,7 @@ void ISubject<Subject>::detach(Observer* o) throw(ElementNotFound)
 }
 
 template<class Subject>
-void ISubject<Subject>::notify(const Subject* s){
+void ISubject<Subject>::notify(const Subject* s) const{
     ObserversIterator it(observers);
     while(!it.end()){
         (*it)->update(s);
@@ -60,7 +60,7 @@ void ISingleSubject<Subject>::unset()
 }
 
 template<class Subject>
-bool ISingleSubject<Subject>::notify(const Subject* s){
+bool ISingleSubject<Subject>::notify(const Subject* s) const{
     bool status(false);
     if(observer)
         status = observer->update(s);

@@ -1,8 +1,8 @@
 /* 
- * File:   CombinatoryRegion.h
+ * File:   Solution.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 26, 2010, 5:09 PM 
+ * Created on October 13, 2010, 9:00 PM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -23,34 +23,33 @@
  * 
  */
 
-#ifndef _COMBINATORYREGION_H
-#define	_COMBINATORYREGION_H
+#ifndef _SOLUTION_H
+#define	_SOLUTION_H
 
-#include <list>
-#include <biopp/biopp.h>
-#include "ICombinatoryRegion.h"
+#include "ISolution.h"
 
-using std::list;
-
-class CombinatoryRegion : public ICombinatoryRegion
+class Solution : public ISolution
 {
-    struct Constraint{
-        SeqIndex start;
-        SeqIndex end;
-    };
-    typedef list<Constraint*> ConstraintsCt;        
+    NucSequence sequence;
+    LocalOptimizationCt components;
+    
+    virtual void update_solution(RegionIdx, const NucSequence&, const LocalOptimization&);
+    virtual void get_sequence(NucSequence&) const;
+    virtual Score compute_local_score(RegionIdx) const;
+    virtual ISolution* clone() const;
+public:
+    /**
+     * Constructor
+     * @param seq the ARN sequence
+     * @param comps a container of solution components.
+     * Useful to build the initial solution.
+     */
+    Solution(const NucSequence&, const CombinatoryRegionsCt&);
 
-    virtual void set_base_sequence(const NucSequence& sequence);
-    virtual void add_constraint(SeqIndex start, SeqIndex end);
-    virtual void get_bounds(SeqIndex&, SeqIndex&);
-protected:
-    CombinatoryRegion(SeqIndex, SeqIndex);
-    ConstraintsCt constraints;
-    NucSequence base_sequence;
-    SeqIndex start;
-    SeqIndex end;
+    Solution(const NucSequence&, const LocalOptimizationCt&);
+    
 };
 
 
-#endif	/* _COMBINATORYREGION_H */
+#endif	/* _SOLUTION_H */
 

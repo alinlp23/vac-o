@@ -23,20 +23,12 @@
  * 
  */
 
-#ifndef _SOLUTION_H
-#define	_SOLUTION_H
+#ifndef _ISOLUTION_H
+#define	_ISOLUTION_H
 
-#include <map>
-#include <utility>
 #include <biopp/biopp.h>
 #include "types.h"
 #include "ICombinatoryRegion.h"
-
-using std::map;
-using std::pair;
-
-typedef pair<NucSequence, Score> LocalOptimization;
-typedef unsigned int RegionIdx;
 
 /**
  * Solutions represents the search space in any local search strategy.
@@ -45,15 +37,7 @@ typedef unsigned int RegionIdx;
  */
 class ISolution
 {    
-public:        
-    /**
-     * Constructor
-     * @param seq the ARN sequence
-     * @param comps a container of solution components. 
-     * Useful to build the initial solution.
-     */
-    ISolution(const NucSequence&, const CombinatoryRegionsCt&);
-
+public:
     /**
      * Update this solution in a given component.
      * @param r the region to be updated
@@ -86,5 +70,5 @@ public:
 
 
 
-#endif	/* _SOLUTION_H */
+#endif	/* _ISOLUTION_H */
 

@@ -1,5 +1,8 @@
 #include "libplugin.h"
-
+#include <iostream>
+using std::cout;
+using std::cin;
+using std::endl;
 /**
  * Plugin for development
  */
@@ -9,9 +12,9 @@ class DevPlugin : public IPlugin
     static SecStructure wt_struct;
     static SecStructure vacc_struct;
 
-    unsigned int counter;
     Distance min_distance;
     CutOff cutoff;
+    Attempts attempts;
 
     void init_params();
     Parameter<Distance>* min_distance_param;
@@ -26,8 +29,14 @@ class DevPlugin : public IPlugin
     void init_comb_regions();
     NucSequencesCt wt_cache;
     ICombinatoryRegion* ssregion;
+    CombinatoryRegionsCt regions;
+
+    void init_local_search();
+    INeighborhood* neighborhood;
+    IStrategy* strategy;
 
     virtual void get_parameters(ParamsCt& params) const;
+    virtual void configure();
     virtual const ISolution* get_initial_solution() const;
     virtual INeighborhood* get_neighborhood() const;
     virtual IStrategy* get_strategy() const;
@@ -54,13 +63,18 @@ SecStructure DevPlugin::wt_struct = "....((((((.......((.....))....))).)))..";
  * Constructor
  */
 DevPlugin::DevPlugin() :
-counter(0), min_distance(0), cutoff(1), min_distance_param(), cutoff_param(),
+min_distance(0), cutoff(1), attempts(2), min_distance_param(), cutoff_param(),
 fold_backend(), inverse_backend(), struct_cmp_backend(), seq_cmp_backend(),
-wt_cache(), ssregion()
+regions(), wt_cache(), ssregion()
 {    
-    init_params();
+    init_params();   
+}
+
+void DevPlugin::configure()
+{
     init_backends();
     init_comb_regions();
+    init_local_search();
 }
 
 void DevPlugin::get_parameters(ParamsCt& params) const
@@ -71,18 +85,18 @@ void DevPlugin::get_parameters(ParamsCt& params) const
 }
 
 const ISolution* DevPlugin::get_initial_solution() const
-{
-    return NULL;
+{    
+    return new Solution(sequence, regions);
 }
 
 INeighborhood* DevPlugin::get_neighborhood() const
 {
-    return NULL;
+    return neighborhood;
 }
 
 IStrategy* DevPlugin::get_strategy() const
 {
-    return NULL;
+    return strategy;
 }
 
 void DevPlugin::get_qa_regions(QARegionsCt& qaregions) const
@@ -95,8 +109,10 @@ Depth DevPlugin::get_qa_depth() const
 
 Score DevPlugin::evaluate_solution(const ISolution* solution)
 {
-    ++counter;    
-    return counter;
+    Score s;
+    cout << "Solution score:" << endl;
+    cin >> s;
+    return s;
 }
 
 RankingSize DevPlugin::get_ranking_size() const
@@ -113,6 +129,8 @@ void DevPlugin::unload()
     delete struct_cmp_backend;
     delete seq_cmp_backend;
     delete ssregion;
+    delete neighborhood;
+    delete strategy;
     delete this;
 }
 
@@ -141,6 +159,15 @@ void DevPlugin::init_comb_regions()
     ssregion = new SSRegion(0, 10, wt_struct, vacc_struct, 1, 0.9f, 10, wt_cache, 
                             fold_backend, inverse_backend, struct_cmp_backend,
                             seq_cmp_backend);
+    
+    insert_into(regions, ssregion);
+}
+
+void DevPlugin::init_local_search()
+{
+    neighborhood = new Neighborhood(regions, cutoff, attempts);
+    strategy = new FirstImprovement(neighborhood, 3, 1);
+    neighborhood->set(strategy);
 }
 
 extern "C" IPlugin* create_plugin()

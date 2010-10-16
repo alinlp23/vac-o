@@ -40,20 +40,20 @@ struct ISolutionScorer
      * @param sol the solution to be evaluated.
      * @return the score assigned.
      */
-    virtual Score evaluate(const ISolution*) = 0;
+    virtual Score evaluate(const ISolution*) const = 0;
     virtual ~ISolutionScorer(){}
 };
 
 struct ISolutionObserver
 {
-    virtual void update(const ISolution*, Score) = 0;
+    virtual void update(const ISolution* const, Score) = 0;
     virtual ~ISolutionObserver(){}
 };
 
 /**
  * Interface for local search strategies.
  */
-class IStrategy : public ISingleSubject<ISolution>
+class IStrategy : public ISingleObserver<ISolution>
 {
 public:
     /**

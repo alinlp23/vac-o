@@ -1,8 +1,8 @@
 /* 
- * File:   CombinatoryRegion.h
+ * File:   Neighborhood.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 26, 2010, 5:09 PM 
+ * Created on October 14, 2010, 5:18 PM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -23,34 +23,20 @@
  * 
  */
 
-#ifndef _COMBINATORYREGION_H
-#define	_COMBINATORYREGION_H
+#ifndef _NEIGHBORHOOD_H
+#define	_NEIGHBORHOOD_H
 
-#include <list>
-#include <biopp/biopp.h>
-#include "ICombinatoryRegion.h"
+#include "INeighborhood.h"
 
-using std::list;
-
-class CombinatoryRegion : public ICombinatoryRegion
+class Neighborhood : public INeighborhood
 {
-    struct Constraint{
-        SeqIndex start;
-        SeqIndex end;
-    };
-    typedef list<Constraint*> ConstraintsCt;        
-
-    virtual void set_base_sequence(const NucSequence& sequence);
-    virtual void add_constraint(SeqIndex start, SeqIndex end);
-    virtual void get_bounds(SeqIndex&, SeqIndex&);
-protected:
-    CombinatoryRegion(SeqIndex, SeqIndex);
-    ConstraintsCt constraints;
-    NucSequence base_sequence;
-    SeqIndex start;
-    SeqIndex end;
+    CombinatoryRegionsCt regions;
+    CutOff cutoff;
+    Attempts attempts;
+    virtual void explore(const ISolution* const) const;
+public:
+    Neighborhood(const CombinatoryRegionsCt&, CutOff, Attempts);
 };
 
-
-#endif	/* _COMBINATORYREGION_H */
+#endif	/* _NEIGHBORHOOD_H */
 

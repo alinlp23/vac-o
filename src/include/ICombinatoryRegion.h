@@ -29,8 +29,8 @@
 #include <mili/mili.h>
 #include <biopp/biopp.h>
 #include "types.h"
-#include <list>
-using std::list;
+#include <vector>
+using std::vector;
 
 /**
  * Interface for combinatories regions.
@@ -58,13 +58,15 @@ public:
      */
     virtual void add_constraint(SeqIndex start, SeqIndex end) = 0;
 
+    virtual void get_bounds(SeqIndex&, SeqIndex&) = 0;
+
     virtual ~ICombinatoryRegion(){}
 };
 
 /**
  * Container of ICombinatoryRegion
  */
-typedef list<ICombinatoryRegion*> CombinatoryRegionsCt;
+typedef vector<ICombinatoryRegion*> CombinatoryRegionsCt;
 
 #endif	/* _ICOMBINATORYREGION_H */
 

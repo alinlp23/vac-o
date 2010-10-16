@@ -34,7 +34,7 @@ class GCRegion : public CombinatoryRegion
     virtual Score evaluate(const NucSequence&) const;
     virtual Score generate(NucSequence&, NucSequence&);
 public:
-    GCRegion(const AminoSequence& aminoacids);
+    GCRegion(SeqIndex, SeqIndex, const AminoSequence& aminoacids);
 };
 
 #endif	/* _GCREGION_H */

@@ -34,7 +34,6 @@
 #include "ISolution.h"
 #include "IPlugin.h"
 
-class IPlugin;
 class IStrategy;
 
 class CombinatoryEngine : public ISolutionObserver, public ISubject<SequenceOptimization>
@@ -46,7 +45,7 @@ class CombinatoryEngine : public ISolutionObserver, public ISubject<SequenceOpti
     class PluginScoreAdapter: public ISolutionScorer
     {
         IPlugin* plg;    
-        virtual Score evaluate(const ISolution* sol)
+        virtual Score evaluate(const ISolution* sol) const
         {
             return plg->evaluate_solution(sol);
         }

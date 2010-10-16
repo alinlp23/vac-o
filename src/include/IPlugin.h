@@ -47,6 +47,7 @@ public:
      * @param params container of IParameter to write to.
      */
     virtual void get_parameters(ParamsCt& params) const = 0;
+    virtual void configure() = 0;
     /**
      * Gets the initial solution containing the initial ARN sequence.
      * @return a pointer to ISolution

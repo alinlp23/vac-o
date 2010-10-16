@@ -28,9 +28,14 @@
 
 #include <string>
 #include <list>
+#include <utility>
+
 #include <biopp/biopp.h>
+
 using std::string;
 using std::list;
+using std::pair;
+using std::vector;
 
 typedef string SecStructure;
 typedef list<NucSequence*> NucSequencesCt;
@@ -91,9 +96,29 @@ typedef float Fe;
 typedef unsigned int RankingSize;
 
 /**
- * Iterations
+ * Local search Iterations
  */
 typedef unsigned int Iteration;
+
+/**
+ * Local optimization used for local search
+ */
+typedef pair<NucSequence, Score> LocalOptimization;
+
+/**
+ * Container of local optimizations
+ */
+typedef vector<LocalOptimization> LocalOptimizationCt;
+
+/**
+ * Index of a solution region.
+ */
+typedef unsigned int RegionIdx;
+
+/**
+ * Number of attemps to generate a neighbord from a region generation.
+ */
+typedef unsigned int Attempts;
 
 #endif	/* _TYPES_H */
 
