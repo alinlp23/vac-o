@@ -17,3 +17,9 @@ void CombinatoryRegion::add_constraint(SeqIndex start, SeqIndex end)
     c->end = end;
     insert_into(constraints, c);
 }
+
+void CombinatoryRegion::get_bounds(SeqIndex& s, SeqIndex& e)
+{
+    s = start;
+    e = end;
+}

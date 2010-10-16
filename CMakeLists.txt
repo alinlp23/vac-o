@@ -4,6 +4,8 @@ project (vac-o)
 #common headers
 include_directories(include)
 
+set(CMAKE_BUILD_TYPE Debug)
+
 #RNAbakends library
 add_subdirectory (RNAbackends)
 

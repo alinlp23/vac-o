@@ -41,5 +41,11 @@
 #include "RNAForester.h"
 #include "Hamming.h"
 
+/*LocalSearch*/
+#include "Solution.h"
+#include "Strategy.h"
+#include "Neighborhood.h"
+#include "FirstImprovement.h"
+
 #endif	/* _LIBPLUGIN_H */
 

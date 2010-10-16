@@ -47,7 +47,7 @@ public:
 
     inline void attach(Observer*);
     inline void detach(Observer*) throw(ElementNotFound);
-    inline void notify(const Subject*);
+    inline void notify(const Subject*) const;
 };
 
 /**
@@ -62,7 +62,7 @@ public:
 
     virtual void set(Observer*);
     virtual void unset();
-    virtual bool notify(const Subject*);
+    virtual bool notify(const Subject*) const;
 };
 
 /**

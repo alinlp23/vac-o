@@ -35,21 +35,16 @@
  */
 class INeighborhood : public ISingleSubject<ISolution>
 {
-protected:
-    CombinatoryRegionsCt regions;
-public:
-    /**
-     * Constructor
-     * @param regions
-     */
-    INeighborhood(const CombinatoryRegionsCt&);
 
+public:    
     /**
      * Explore the neighborhood of a given solution and notify the observer
      * for each solution found.
      * @param s a solution pointer
      */
-    virtual void explore(const ISolution* const) = 0;
+    virtual void explore(const ISolution* const) const = 0;
+
+    ~INeighborhood(){}
 };
 
 #endif	/* _INEIGHBORHOOD_H */
