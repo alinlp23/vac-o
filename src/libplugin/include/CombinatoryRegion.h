@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   CombinatoryRegion.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 26, 2010, 5:09 PM 
+ * Created on September 26, 2010, 5:09 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,7 +20,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _COMBINATORYREGION_H
@@ -34,11 +34,12 @@ using std::list;
 
 class CombinatoryRegion : public ICombinatoryRegion
 {
-    struct Constraint{
+    struct Constraint
+    {
         SeqIndex start;
         SeqIndex end;
     };
-    typedef list<Constraint*> ConstraintsCt;        
+    typedef list<Constraint*> ConstraintsCt;
 
     virtual void set_base_sequence(const NucSequence& sequence);
     virtual void add_constraint(SeqIndex start, SeqIndex end);

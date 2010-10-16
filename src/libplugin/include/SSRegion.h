@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   SSRegion.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 26, 2010, 5:16 PM 
+ * Created on September 26, 2010, 5:16 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,7 +20,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _SSREGION_H
@@ -35,16 +35,16 @@ class ISequenceCmp;
 class ISequenceMutator;
 
 class SSRegion : public CombinatoryRegion
-{    
+{
     SecStructure wt_structure;
     SecStructure vaccine_structure;
-    NMutations max_mutations;    
+    NMutations max_mutations;
     Similitude max_similitude;
     Distance min_distance;
     const NucSequencesCt wildtype_cache;
 
     ISequenceMutator* mutator;
-    
+
     /*libRNA backends*/
     const IFold* const fold_backend;
     IFoldInverse* const inverse_backend;
@@ -55,12 +55,12 @@ class SSRegion : public CombinatoryRegion
     virtual Score generate(NucSequence&, NucSequence&);
 public:
     SSRegion(SeqIndex, SeqIndex, const SecStructure&, const SecStructure&,
-            NMutations, Similitude, Distance, const NucSequencesCt&,
-            const IFold* const, IFoldInverse* const, const IStructureCmp* const,
-            const ISequenceCmp* const);
-    
+             NMutations, Similitude, Distance, const NucSequencesCt&,
+             const IFold* const, IFoldInverse* const, const IStructureCmp* const,
+             const ISequenceCmp* const);
+
     SSRegion(const SSRegion&);
-    SSRegion& operator=(const SSRegion&);    
+    SSRegion& operator=(const SSRegion&);
 };
 
 #endif	/* _SSREGION_H */

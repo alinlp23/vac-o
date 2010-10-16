@@ -45,16 +45,17 @@ using std::cout;
 using std::cin;
 using std::endl;
 
-void ask_for_parameters(ParamsCt& params){
-    if(!params.empty())
+void ask_for_parameters(ParamsCt& params)
+{
+    if (!params.empty())
     {
         CAutonomousIterator<ParamsCt> it(params);
-        
+
         string aux;
         string param_name;
         bool valid;
         while (!it.end())
-        {            
+        {
             (*it)->get_name(param_name);
             cout << "Enter value for "+param_name+": " << endl;
             cin >> aux;
@@ -86,7 +87,8 @@ void print_ranking(SequenceRanker& ranking)
     }
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
     PluginAdmin plg_admin;
     IPlugin* plg = plg_admin.load("libplugin/libplugin.so");
 
@@ -94,13 +96,13 @@ int main(int argc, char** argv) {
     plg->get_parameters(params);
     ask_for_parameters(params);
     plg->configure();
-    
+
     CombinatoryEngine comb_engine(plg);
 
     QARegionsCt qa_regions;
     plg->get_qa_regions(qa_regions);
     QAEngine qa_engine(plg->get_qa_depth(), qa_regions);
-    
+
     SequenceRanker ranker(plg->get_ranking_size());
 
     qa_engine.attach(&ranker);
@@ -109,7 +111,7 @@ int main(int argc, char** argv) {
     //run forest, run!!!
     comb_engine.run_forest();
     print_ranking(ranker);
-    
-    plg_admin.unload(plg); 
+
+    plg_admin.unload(plg);
     return 0;
 }

@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   PluginAdmin.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 27, 2010, 4:40 PM 
+ * Created on September 27, 2010, 4:40 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,7 +20,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _PLUGINADMIN_H
@@ -32,7 +32,7 @@
 
 class PluginAdmin
 {
-    void* handle;       
+    void* handle;
 public:
     IPlugin* load(const Path& file) throw(PluginException);
     void unload(IPlugin*);

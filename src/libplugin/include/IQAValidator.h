@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   IQAValidator.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 27, 2010, 7:37 PM 
+ * Created on September 27, 2010, 7:37 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,7 +20,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _IQAVALIDATOR_H
@@ -41,7 +41,7 @@ public:
      */
     virtual bool validate(const NucSequence&) const = 0;
 
-    virtual ~IQAValidator(){}
+    virtual ~IQAValidator() {}
 };
 
 #endif	/* _IQAVALIDATOR_H */

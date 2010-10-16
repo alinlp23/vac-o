@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   IStrategy.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on October 9, 2010, 9:07 PM 
+ * Created on October 9, 2010, 9:07 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,7 +20,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _ISTRATEGY_H
@@ -41,13 +41,13 @@ struct ISolutionScorer
      * @return the score assigned.
      */
     virtual Score evaluate(const ISolution*) const = 0;
-    virtual ~ISolutionScorer(){}
+    virtual ~ISolutionScorer() {}
 };
 
 struct ISolutionObserver
 {
     virtual void update(const ISolution* const, Score) = 0;
-    virtual ~ISolutionObserver(){}
+    virtual ~ISolutionObserver() {}
 };
 
 /**
@@ -69,7 +69,7 @@ public:
      */
     virtual void set_scorer(const ISolutionScorer*) = 0;
 
-    virtual ~IStrategy(){}
+    virtual ~IStrategy() {}
 };
 
 

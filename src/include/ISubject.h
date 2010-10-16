@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   ISubject.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 30, 2010, 4:43 PM 
+ * Created on September 30, 2010, 4:43 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,7 +20,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _ISUBJECT_H
@@ -43,7 +43,7 @@ class ISubject
 public:
     ISubject():observers(NULL)
     {}
-    virtual ~ISubject(){}
+    virtual ~ISubject() {}
 
     inline void attach(Observer*);
     inline void detach(Observer*) throw(ElementNotFound);
@@ -54,11 +54,12 @@ public:
  * Interface for single subjects
  */
 template<class Subject>
-class ISingleSubject {
+class ISingleSubject
+{
     typedef ISingleObserver<Subject> Observer;
     Observer* observer;
 public:
-    virtual ~ISingleSubject(){}
+    virtual ~ISingleSubject() {}
 
     virtual void set(Observer*);
     virtual void unset();

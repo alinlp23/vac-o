@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   Ranker.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 27, 2010, 4:12 PM 
+ * Created on September 27, 2010, 4:12 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,7 +20,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _RANKER_H
@@ -34,8 +34,8 @@
 class IPlugin;
 
 class SequenceRanker : public IObserver<SequenceOptimization>,
-    public Ranker<const SequenceOptimization*, AddAfterEqual, SequenceOptimizationCmp,
-                  DisposalDeletePolicy<const SequenceOptimization*> >
+        public Ranker<const SequenceOptimization*, AddAfterEqual, SequenceOptimizationCmp,
+        DisposalDeletePolicy<const SequenceOptimization*> >
 {
     /**
      * Implements the IObserver<SequenceOptimization> interface.
@@ -43,7 +43,7 @@ class SequenceRanker : public IObserver<SequenceOptimization>,
      */
     virtual void update(const SequenceOptimization*);
 public:
-    SequenceRanker(RankingSize);    
+    SequenceRanker(RankingSize);
 };
 
 #endif	/* _RANKER_H */

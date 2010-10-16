@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   INeighborhood.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on October 9, 2010, 8:03 PM 
+ * Created on October 9, 2010, 8:03 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,7 +20,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _INEIGHBORHOOD_H
@@ -36,7 +36,7 @@
 class INeighborhood : public ISingleSubject<ISolution>
 {
 
-public:    
+public:
     /**
      * Explore the neighborhood of a given solution and notify the observer
      * for each solution found.
@@ -44,7 +44,7 @@ public:
      */
     virtual void explore(const ISolution* const) const = 0;
 
-    ~INeighborhood(){}
+    ~INeighborhood() {}
 };
 
 #endif	/* _INEIGHBORHOOD_H */

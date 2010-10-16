@@ -5,11 +5,11 @@ Solution::Solution(const NucSequence& seq, const CombinatoryRegionsCt& regions):
     CAutonomousIterator<CombinatoryRegionsCt> it(regions);
     SeqIndex start;
     SeqIndex end;
-    while(!it.end())
+    while (!it.end())
     {
         (*it)->get_bounds(start, end);
         string c;
-        for(size_t idx=start;idx<end; ++idx)
+        for (size_t idx=start; idx<end; ++idx)
         {
             c.append(to_str(seq[idx]));
         }
@@ -21,7 +21,7 @@ Solution::Solution(const NucSequence& seq, const CombinatoryRegionsCt& regions):
 }
 
 Solution::Solution(const NucSequence& seq, const LocalOptimizationCt& comp) :
-sequence(seq), components(comp)
+        sequence(seq), components(comp)
 {}
 
 void Solution::update_solution(RegionIdx r, const NucSequence& seq, const LocalOptimization& op)
@@ -38,11 +38,11 @@ void Solution::get_sequence(NucSequence& seq) const
 Score Solution::compute_local_score(RegionIdx exclude) const
 {
     Score score = 1;
-    for(RegionIdx i = 0; i<components.size(); ++i)
+    for (RegionIdx i = 0; i<components.size(); ++i)
     {
-        if(i != exclude)
+        if (i != exclude)
             score *= components[i].second;
-        
+
         ++i;
     }
     return score;

@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   Solution.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on October 9, 2010, 7:48 PM 
+ * Created on October 9, 2010, 7:48 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,7 +20,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _ISOLUTION_H
@@ -36,7 +36,7 @@
  * regions and optimizations.
  */
 class ISolution
-{    
+{
 public:
     /**
      * Update this solution in a given component.
@@ -65,7 +65,7 @@ public:
      */
     virtual ISolution* clone() const = 0;
 
-    virtual ~ISolution(){}
+    virtual ~ISolution() {}
 };
 
 

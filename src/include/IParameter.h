@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   IParameter.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 27, 2010, 4:53 PM 
+ * Created on September 27, 2010, 4:53 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,7 +20,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _IPARAMETER_H
@@ -35,7 +35,7 @@ using std::string;
  */
 class IParameter
 {
-public:    
+public:
     /**
      * Sets the parameter's values.
      * @param value the value in string format.
@@ -48,7 +48,7 @@ public:
      */
     virtual void get_name(string& name) const = 0;
 
-    virtual ~IParameter(){}
+    virtual ~IParameter() {}
 };
 
 /**

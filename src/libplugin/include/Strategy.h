@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   Strategy.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on October 13, 2010, 10:23 PM 
+ * Created on October 13, 2010, 10:23 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,7 +20,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _STRATEGY_H
@@ -33,7 +33,7 @@
  * Base class implementation for local search strategies.
  */
 class Strategy : public IStrategy
-{    
+{
     virtual void set_scorer(const ISolutionScorer*);
 protected:
     const INeighborhood* neighborhood;
