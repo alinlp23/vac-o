@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   IStructureCmp.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 26, 2010, 5:25 PM 
+ * Created on September 26, 2010, 5:25 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,7 +20,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _ISTRUCTURECMP_H
@@ -45,7 +45,7 @@ public:
     virtual Similitude compare(const SecStructure& struct1,
                                const SecStructure& struct2) const throw(RNABackendException) = 0;
 
-    virtual ~IStructureCmp(){}
+    virtual ~IStructureCmp() {}
 };
 
 #endif	/* _ISTRUCTURECMP_H */

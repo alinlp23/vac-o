@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   CombinatoryEngine.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 26, 2010, 5:08 PM 
+ * Created on September 26, 2010, 5:08 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,7 +20,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _COMBINATORYENGINE_H
@@ -37,20 +37,20 @@
 class IStrategy;
 
 class CombinatoryEngine : public ISolutionObserver, public ISubject<SequenceOptimization>
-{        
-    IPlugin* const plg;    
+{
+    IPlugin* const plg;
     IStrategy* strategy;
     ISolutionScorer* ssadapter;
-    
+
     class PluginScoreAdapter: public ISolutionScorer
     {
-        IPlugin* plg;    
+        IPlugin* plg;
         virtual Score evaluate(const ISolution* sol) const
         {
             return plg->evaluate_solution(sol);
         }
     public:
-        PluginScoreAdapter(IPlugin* p) : plg(p){}
+        PluginScoreAdapter(IPlugin* p) : plg(p) {}
         PluginScoreAdapter(const PluginScoreAdapter&);
         PluginScoreAdapter& operator=(const PluginScoreAdapter&);
     };
@@ -60,12 +60,12 @@ class CombinatoryEngine : public ISolutionObserver, public ISubject<SequenceOpti
      * Evaluate the solution using the plugin and
      * update the neighborhood of the strategy
      * @param solution a new candidate solution
-     * @param score the score assigned     
+     * @param score the score assigned
      */
     virtual void update(const ISolution*, Score);
 public:
     /**
-     * Constructor     
+     * Constructor
      * @param plg the loaded plugin
      */
     CombinatoryEngine(IPlugin* const);
@@ -78,7 +78,7 @@ public:
      * Will notify the observers for each sequence found.
      */
     void run_forest();
-    
+
     ~CombinatoryEngine();
 };
 

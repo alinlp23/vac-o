@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   Subject.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on October 1, 2010, 11:07 AM 
+ * Created on October 1, 2010, 11:07 AM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,36 +20,41 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _SUBJECT_H
 #define	_SUBJECT_H
 
 template<class Subject>
-void ISubject<Subject>::attach(Observer* o){
+void ISubject<Subject>::attach(Observer* o)
+{
     insert_into(observers, o);
 }
 
 template<class Subject>
 void ISubject<Subject>::detach(Observer* o) throw(ElementNotFound)
 {
-    if(!remove_first_from(observers, o)){
+    if (!remove_first_from(observers, o))
+    {
         throw ElementNotFound();
     }
 }
 
 template<class Subject>
-void ISubject<Subject>::notify(const Subject* s) const{
+void ISubject<Subject>::notify(const Subject* s) const
+{
     ObserversIterator it(observers);
-    while(!it.end()){
+    while (!it.end())
+    {
         (*it)->update(s);
         ++it;
     }
 }
 
 template<class Subject>
-void ISingleSubject<Subject>::set(Observer* o){
+void ISingleSubject<Subject>::set(Observer* o)
+{
     observer = o;
 }
 
@@ -60,9 +65,10 @@ void ISingleSubject<Subject>::unset()
 }
 
 template<class Subject>
-bool ISingleSubject<Subject>::notify(const Subject* s) const{
+bool ISingleSubject<Subject>::notify(const Subject* s) const
+{
     bool status(false);
-    if(observer)
+    if (observer)
         status = observer->update(s);
 
     return status;

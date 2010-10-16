@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   types.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 28, 2010, 2:50 PM 
+ * Created on September 28, 2010, 2:50 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,7 +20,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _TYPES_H

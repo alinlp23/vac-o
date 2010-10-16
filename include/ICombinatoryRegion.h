@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   ICombinatoryRegion.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 26, 2010, 5:08 PM 
+ * Created on September 26, 2010, 5:08 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,7 +20,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _ICOMBINATORYREGION_H
@@ -38,7 +38,7 @@ using std::vector;
 class ICombinatoryRegion
 {
     virtual Score evaluate(const NucSequence&) const = 0;
-public:    
+public:
     /**
      * Gets a new sequence from this region.
      * @param sequence the NucSequence reference to write to.
@@ -60,7 +60,7 @@ public:
 
     virtual void get_bounds(SeqIndex&, SeqIndex&) = 0;
 
-    virtual ~ICombinatoryRegion(){}
+    virtual ~ICombinatoryRegion() {}
 };
 
 /**

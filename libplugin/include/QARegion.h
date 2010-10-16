@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   QARegion.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 27, 2010, 3:51 PM 
+ * Created on September 27, 2010, 3:51 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,7 +20,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _QAREGION_H
@@ -42,7 +42,7 @@ class QARegion : public IQARegion
 public:
     QARegion(SeqIndex, SeqIndex, IQAMutator* const, const IQAValidator* const);
     QARegion(const QARegion&);
-    QARegion& operator=(const QARegion&);    
+    QARegion& operator=(const QARegion&);
 };
 
 #endif	/* _QAREGION_H */

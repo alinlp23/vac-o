@@ -63,11 +63,11 @@ SecStructure DevPlugin::wt_struct = "....((((((.......((.....))....))).)))..";
  * Constructor
  */
 DevPlugin::DevPlugin() :
-min_distance(0), cutoff(1), attempts(2), min_distance_param(), cutoff_param(),
-fold_backend(), inverse_backend(), struct_cmp_backend(), seq_cmp_backend(),
-regions(), wt_cache(), ssregion()
-{    
-    init_params();   
+        min_distance(0), cutoff(1), attempts(2), min_distance_param(), cutoff_param(),
+        fold_backend(), inverse_backend(), struct_cmp_backend(), seq_cmp_backend(),
+        regions(), wt_cache(), ssregion()
+{
+    init_params();
 }
 
 void DevPlugin::configure()
@@ -85,7 +85,7 @@ void DevPlugin::get_parameters(ParamsCt& params) const
 }
 
 const ISolution* DevPlugin::get_initial_solution() const
-{    
+{
     return new Solution(sequence, regions);
 }
 
@@ -144,8 +144,8 @@ void DevPlugin::init_params()
 }
 
 void DevPlugin::init_backends()
-{    
-    fold_backend = new RNAFold;    
+{
+    fold_backend = new RNAFold;
     inverse_backend = new RNAFoldInverse(sequence, vacc_struct);
     struct_cmp_backend = new RNAForester;
     seq_cmp_backend = new Hamming;
@@ -156,10 +156,10 @@ void DevPlugin::init_comb_regions()
     /**
      * Fill wt_cache with sequence that fold to wt_struct
      */
-    ssregion = new SSRegion(0, 10, wt_struct, vacc_struct, 1, 0.9f, 10, wt_cache, 
+    ssregion = new SSRegion(0, 10, wt_struct, vacc_struct, 1, 0.9f, 10, wt_cache,
                             fold_backend, inverse_backend, struct_cmp_backend,
                             seq_cmp_backend);
-    
+
     insert_into(regions, ssregion);
 }
 

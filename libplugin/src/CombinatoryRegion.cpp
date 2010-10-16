@@ -2,7 +2,7 @@
 #include "CombinatoryRegion.h"
 
 CombinatoryRegion::CombinatoryRegion(SeqIndex start, SeqIndex end) :
-start(start), end(end), constraints(), base_sequence()
+        start(start), end(end), constraints(), base_sequence()
 {}
 
 void CombinatoryRegion::set_base_sequence(const NucSequence& sequence)

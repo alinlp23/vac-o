@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   IObserver.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 30, 2010, 4:41 PM 
+ * Created on September 30, 2010, 4:41 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,7 +20,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _IOBSERVER_H
@@ -38,16 +38,17 @@ public:
      * @param s the subject
      */
     virtual void update(const Subject* s) = 0;
-    virtual ~IObserver(){}
+    virtual ~IObserver() {}
 };
 
 /**
  * Interface for single observers
  */
 template<class Subject>
-class ISingleObserver {
+class ISingleObserver
+{
 public:
-    virtual ~ISingleObserver(){}
+    virtual ~ISingleObserver() {}
     /**
      * Do something with the subject observerd
      * @param s the subject

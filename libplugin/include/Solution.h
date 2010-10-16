@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   Solution.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on October 13, 2010, 9:00 PM 
+ * Created on October 13, 2010, 9:00 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,7 +20,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _SOLUTION_H
@@ -32,7 +32,7 @@ class Solution : public ISolution
 {
     NucSequence sequence;
     LocalOptimizationCt components;
-    
+
     virtual void update_solution(RegionIdx, const NucSequence&, const LocalOptimization&);
     virtual void get_sequence(NucSequence&) const;
     virtual Score compute_local_score(RegionIdx) const;
@@ -47,7 +47,7 @@ public:
     Solution(const NucSequence&, const CombinatoryRegionsCt&);
 
     Solution(const NucSequence&, const LocalOptimizationCt&);
-    
+
 };
 
 

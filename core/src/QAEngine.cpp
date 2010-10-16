@@ -3,7 +3,7 @@
 using std::cout;
 using std::endl;
 QAEngine::QAEngine(Depth depth, const QARegionsCt& regions):
-depth(depth), regions(regions)
+        depth(depth), regions(regions)
 {}
 
 void QAEngine::update(const SequenceOptimization* candidate)
@@ -14,7 +14,7 @@ void QAEngine::update(const SequenceOptimization* candidate)
         cout << to_str((candidate->first)[i]);
     }
     cout << endl;
-    if(validate(candidate->first))
+    if (validate(candidate->first))
         notify(candidate);
 }
 

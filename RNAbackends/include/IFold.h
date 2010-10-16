@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   IFold.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 26, 2010, 5:25 PM 
+ * Created on September 26, 2010, 5:25 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,7 +20,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _IFOLD_H
@@ -44,7 +44,7 @@ public:
      */
     virtual Fe fold(const NucSequence&, SecStructure&) const throw(RNABackendException) = 0;
 
-    virtual ~IFold(){}
+    virtual ~IFold() {}
 };
 
 #endif	/* _IFOLD_H */

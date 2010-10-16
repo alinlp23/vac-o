@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   Parameter.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on October 1, 2010, 8:51 PM 
+ * Created on October 1, 2010, 8:51 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,7 +20,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _PARAMETER_H
@@ -38,7 +38,7 @@ public:
     Parameter(const string&, Type&);
     Parameter(const Parameter&);
     Parameter& operator=(const Parameter&);
-    
+
     virtual bool set_value(const string&);
     virtual void get_name(string& name) const;
 };
@@ -49,7 +49,7 @@ public:
  */
 template<class Type>
 Parameter<Type>::Parameter(const string& name, Type& value) :
-name(name), value(value)
+        name(name), value(value)
 {}
 
 template<class Type>
@@ -60,8 +60,8 @@ void Parameter<Type>::get_name(string& name) const
 
 template<class Type>
 bool Parameter<Type>::set_value(const string& value)
-{    
-    return from_string(value, this->value);    
+{
+    return from_string(value, this->value);
 }
 
 #endif	/* _PARAMETER_H */

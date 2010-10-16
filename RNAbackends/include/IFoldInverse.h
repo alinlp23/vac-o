@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   IFoldInverse.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 26, 2010, 5:25 PM 
+ * Created on September 26, 2010, 5:25 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,7 +20,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _IFOLDINVERSE_H
@@ -40,8 +40,8 @@ public:
      * @param sequence the NucSequence to write to.
      */
     virtual void fold_inverse(NucSequence&) throw(RNABackendException) = 0;
-    
-    virtual ~IFoldInverse(){}
+
+    virtual ~IFoldInverse() {}
 };
 
 #endif	/* _IFOLDINVERSE_H */

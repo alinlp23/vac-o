@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   IPlugin.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 27, 2010, 4:44 PM 
+ * Created on September 27, 2010, 4:44 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,7 +20,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _IPLUGIN_H
@@ -52,7 +52,7 @@ public:
      * Gets the initial solution containing the initial ARN sequence.
      * @return a pointer to ISolution
      */
-    virtual const ISolution* get_initial_solution() const = 0;   
+    virtual const ISolution* get_initial_solution() const = 0;
     /**
      * Gets the neighborhood implementation.
      * @return a pointer to the neighborhood
@@ -67,12 +67,12 @@ public:
      * Gets the QA regions to be used by the QA engine.
      * @param qaregions list of IQARegion to write to.
      */
-    virtual void get_qa_regions(QARegionsCt& qaregions) const = 0;    
+    virtual void get_qa_regions(QARegionsCt& qaregions) const = 0;
     /**
      * Gets the depth for the quality assurance engine.
      * @return The depth
      */
-    virtual Depth get_qa_depth() const = 0;    
+    virtual Depth get_qa_depth() const = 0;
     /**
      * Evaluate a given solution.
      * @param solution the solution to evaluate
@@ -89,7 +89,7 @@ public:
      */
     virtual void unload() = 0;
 
-    virtual ~IPlugin(){}
+    virtual ~IPlugin() {}
 };
 
 #endif	/* _IPLUGIN_H */
