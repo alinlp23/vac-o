@@ -57,6 +57,8 @@ protected:
     virtual bool select_neighbor() = 0;
 public:
     Strategy(const INeighborhood*, Iteration, Iteration);
+    Strategy(const Strategy&);
+    Strategy& operator=(const Strategy&);
 };
 
 

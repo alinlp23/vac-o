@@ -44,7 +44,7 @@ public:
      */
     virtual void explore(const ISolution* const) const = 0;
 
-    ~INeighborhood() {}
+    virtual ~INeighborhood(){}
 };
 
 #endif	/* _INEIGHBORHOOD_H */

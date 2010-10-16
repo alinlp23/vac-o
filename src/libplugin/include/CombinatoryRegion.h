@@ -46,10 +46,10 @@ class CombinatoryRegion : public ICombinatoryRegion
     virtual void get_bounds(SeqIndex&, SeqIndex&);
 protected:
     CombinatoryRegion(SeqIndex, SeqIndex);
-    ConstraintsCt constraints;
-    NucSequence base_sequence;
     SeqIndex start;
     SeqIndex end;
+    ConstraintsCt constraints;
+    NucSequence base_sequence;    
 };
 
 

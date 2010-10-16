@@ -59,7 +59,12 @@ class ISingleSubject
     typedef ISingleObserver<Subject> Observer;
     Observer* observer;
 public:
-    virtual ~ISingleSubject() {}
+    ISingleSubject():observer(NULL)
+    {}
+
+    ISingleSubject(const ISingleSubject&);
+    ISingleSubject& operator=(const ISingleSubject&);
+    virtual ~ISingleSubject(){}
 
     virtual void set(Observer*);
     virtual void unset();

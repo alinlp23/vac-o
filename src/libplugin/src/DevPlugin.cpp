@@ -65,7 +65,7 @@ SecStructure DevPlugin::wt_struct = "....((((((.......((.....))....))).)))..";
 DevPlugin::DevPlugin() :
         min_distance(0), cutoff(1), attempts(2), min_distance_param(), cutoff_param(),
         fold_backend(), inverse_backend(), struct_cmp_backend(), seq_cmp_backend(),
-        regions(), wt_cache(), ssregion()
+        wt_cache(), ssregion(), regions(), neighborhood(), strategy()
 {
     init_params();
 }

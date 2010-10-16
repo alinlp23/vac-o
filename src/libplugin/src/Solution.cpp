@@ -1,6 +1,6 @@
 #include "Solution.h"
 
-Solution::Solution(const NucSequence& seq, const CombinatoryRegionsCt& regions):sequence(seq)
+Solution::Solution(const NucSequence& seq, const CombinatoryRegionsCt& regions):sequence(seq), components()
 {
     CAutonomousIterator<CombinatoryRegionsCt> it(regions);
     SeqIndex start;
