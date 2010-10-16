@@ -6,7 +6,7 @@ using std::cout;
 using std::endl;
 
 CombinatoryEngine::CombinatoryEngine(IPlugin* const plg) :
-        plg(plg), strategy(plg->get_strategy())
+        plg(plg), strategy(plg->get_strategy()), ssadapter()
 {
     ssadapter = new PluginScoreAdapter(plg);
     strategy->set_scorer(ssadapter);
