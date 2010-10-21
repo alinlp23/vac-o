@@ -32,7 +32,6 @@ class IFold;
 class IFoldInverse;
 class IStructureCmp;
 class ISequenceCmp;
-class ISequenceMutator;
 
 class SSRegion : public CombinatoryRegion
 {
@@ -42,8 +41,6 @@ class SSRegion : public CombinatoryRegion
     Similitude max_similitude;
     Distance min_distance;
     const NucSequencesCt wildtype_cache;
-
-    ISequenceMutator* mutator;
 
     /*libRNA backends*/
     const IFold* const fold_backend;

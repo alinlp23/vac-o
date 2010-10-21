@@ -1,7 +1,4 @@
 #include "SequenceMutator.h"
-#include <iostream>
-using std::cout;
-using std::endl;
 
 SequenceMutator::SequenceMutator(const NucSequence& seq, NMutations max) :
         sequence(seq), mutated(seq), mutations(max), range(), combinator(), positions()
@@ -58,8 +55,7 @@ bool SequenceMutator::next(NucSequence& seq)
 }
 
 bool SequenceMutator::next_mutation(NucSequence& seq)
-{
-    //bool more;
+{    
     seq = mutated;
 
     SeqIndex pos = positions[positions.size()-1];
