@@ -29,6 +29,9 @@
 #include <vector>
 using std::vector;
 
+/**
+ * Iterator over the combinations for a given container.
+ */
 template <class C>
 class Combinator
 {
@@ -36,8 +39,22 @@ public:
     typedef typename C::value_type CType;
     typedef vector<CType> Combination;
 
+    /**
+     * Gets the next combination
+     * @param comb Combination to write to.
+     * @return If there are more combinations.
+     */
     bool next(Combination& comb);
+    /**
+     * Update the size of combinations and restart the iterator
+     * @param n the new size
+     */
     void update(size_t n);
+    /**
+     * Constructor
+     * @param e the container of elements to generate combinations
+     * @param n the size of the combinations.
+     */
     Combinator(const C& e, size_t n);
 private:
     typedef typename C::const_iterator ConstIterator;
@@ -50,7 +67,13 @@ private:
     ConstIterator start;
     ConstIterator kit;
 
+    /**
+     * Sets the elements being combined.
+     */
     void move();
+    /**
+     * Sets the iterator at the begining.
+     */
     void begin();
 };
 

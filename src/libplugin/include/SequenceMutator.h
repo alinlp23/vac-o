@@ -32,6 +32,10 @@
 
 using std::vector;
 
+/**
+ * Iterator over sequence mutations.
+ * From N simultaneos mutations to single mutations.
+ */
 class SequenceMutator
 {
     NucSequence sequence;
@@ -42,11 +46,35 @@ class SequenceMutator
     Combinator<list<SeqIndex> >* combinator;
     Combinator<list<SeqIndex> >::Combination positions;
 
+    /**
+     * Set the iterator at the begining for the current
+     * positions being mutated.
+     */
     void reset();
+    /**
+     * Update the combinator iterator for the current
+     * number of simultaneos mutations
+     */
     void update_combinator();
+    /**
+     * Gets the next mutations for the current number
+     * of mutations and positions.
+     * @param seq the sequence to write to the mutation.
+     * @return If there are more mutations pending.
+     */
     bool next_mutation(NucSequence&);
 public:
-    SequenceMutator(const NucSequence&, NMutations);   
+    /**
+     * Constructor
+     * @param sequence the initial sequence.
+     * @param max_mutations the maxium number of simultaneos mutations
+     */
+    SequenceMutator(const NucSequence&, NMutations);
+    /**
+     * Gets the next mutation.
+     * @param seq the sequence to write to the mutation.
+     * @return If there are more mutations pending.
+     */
     bool next(NucSequence&);
     
     ~SequenceMutator();
