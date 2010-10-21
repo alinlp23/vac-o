@@ -26,20 +26,32 @@
 #ifndef _SEQUENCEMUTATOR_H
 #define	_SEQUENCEMUTATOR_H
 
-#include "ISequenceMutator.h"
+#include "vector"
 #include "types.h"
+#include "Combinator.h"
 
-class SequenceMutator : public ISequenceMutator
+using std::vector;
+
+class SequenceMutator
 {
     NucSequence sequence;
-    NMutations max_mutations;
-public:
-    SequenceMutator(NucSequence, NMutations);
+    NucSequence mutated;
+    
+    NMutations mutations;
+    list<SeqIndex> range;
+    Combinator<list<SeqIndex> >* combinator;
+    Combinator<list<SeqIndex> >::Combination positions;
 
-    virtual void begin();
-    virtual void current(NucSequence& sequence);
-    virtual void next();
-    virtual bool done() const;
+    void reset();
+    void update_combinator();
+    bool next_mutation(NucSequence&);
+public:
+    SequenceMutator(const NucSequence&, NMutations);   
+    bool next(NucSequence&);
+    
+    ~SequenceMutator();
+    SequenceMutator(const SequenceMutator&);
+    SequenceMutator& operator=(const SequenceMutator&);
 };
 
 #endif	/* _SEQUENCEMUTATOR_H */
