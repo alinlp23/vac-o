@@ -11,18 +11,18 @@ using std::ifstream;
 Similitude RNAForester::compare(const SecStructure& struct1,
                                 const SecStructure& struct2) const throw(RNABackendException)
 {
-    ofstream out(".forester.in");
+    ofstream out("forester.in");
     out << struct1 << "\n"
     << struct2 << "\n";
 
     out.close();
 
-    string cmd = "RNAforester -r --score -f .forester.in > .forester.out";
+    string cmd = "RNAforester -r --score -f forester.in > forester.out";
     int status = system(cmd.c_str());
     if (status)
         throw RNABackendException("An error ocurred trying to execute: "+cmd);
 
-    ifstream in(".forester.out");
+    ifstream in("forester.out");
     Similitude s;
     string aux;
     /*ignore first line (global optimal score)*/

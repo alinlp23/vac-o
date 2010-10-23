@@ -41,6 +41,8 @@ public:
      */
     virtual void fold_inverse(NucSequence&) throw(RNABackendException) = 0;
 
+    virtual void set_start(const NucSequence&) = 0;
+
     virtual ~IFoldInverse() {}
 };
 

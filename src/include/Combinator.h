@@ -27,7 +27,11 @@
 #define	_COMBINATOR_H
 
 #include <vector>
+#include <list>
+#include "types.h"
+
 using std::vector;
+using std::list;
 
 /**
  * Iterator over the combinations for a given container.
@@ -38,7 +42,10 @@ class Combinator
 public:
     typedef typename C::value_type CType;
     typedef vector<CType> Combination;
-
+    /**
+     * Sets the iterator at the begining.
+     */
+    void begin();
     /**
      * Gets the next combination
      * @param comb Combination to write to.
@@ -70,13 +77,14 @@ private:
     /**
      * Sets the elements being combined.
      */
-    void move();
-    /**
-     * Sets the iterator at the begining.
-     */
-    void begin();
+    void move();    
 };
 
+/**
+ * Common usage
+ */
+typedef Combinator<list<SeqIndex> > SeqIndexesCombinator;
+typedef Combinator<list<SeqIndex> >::Combination SeqIndexesCombination;
 /**
  * Implementation
  */
@@ -135,7 +143,12 @@ bool Combinator<C>::next(Combination& comb)
             combination[k-1] = *kit;
     }
     else
+    {
         more = false;
+        //Make it cyclic
+        begin();
+        comb = combination;
+    }
 
     return more;
 }

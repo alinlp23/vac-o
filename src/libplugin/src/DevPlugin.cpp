@@ -67,7 +67,7 @@ DevPlugin::DevPlugin() :
         fold_backend(), inverse_backend(), struct_cmp_backend(), seq_cmp_backend(),
         wt_cache(), ssregion(), regions(), neighborhood(), strategy()
 {
-    init_params();
+    init_params();    
 }
 
 void DevPlugin::configure()
@@ -146,7 +146,7 @@ void DevPlugin::init_params()
 void DevPlugin::init_backends()
 {
     fold_backend = new RNAFold;
-    inverse_backend = new RNAFoldInverse(sequence, vacc_struct);
+    inverse_backend = new RNAFoldInverse(vacc_struct, 0, 10, 100);
     struct_cmp_backend = new RNAForester;
     seq_cmp_backend = new Hamming;
 }
