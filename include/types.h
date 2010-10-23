@@ -116,7 +116,7 @@ typedef vector<LocalOptimization> LocalOptimizationCt;
 typedef unsigned int RegionIdx;
 
 /**
- * Number of attemps to generate a neighbord from a region generation.
+ * Number of attemps to do something.
  */
 typedef unsigned int Attempts;
 

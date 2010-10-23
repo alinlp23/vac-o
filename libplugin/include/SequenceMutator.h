@@ -42,9 +42,9 @@ class SequenceMutator
     NucSequence mutated;
     
     NMutations mutations;
-    list<SeqIndex> range;
-    Combinator<list<SeqIndex> >* combinator;
-    Combinator<list<SeqIndex> >::Combination positions;
+    
+    SeqIndexesCombinator* combinator;
+    SeqIndexesCombination positions;
 
     /**
      * Set the iterator at the begining for the current
