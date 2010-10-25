@@ -21,7 +21,7 @@ void CombinatoryEngine::run_forest()
 void CombinatoryEngine::update(const ISolution* const solution, Score score)
 {
     NucSequence sequence;
-    solution->get_sequence(sequence);
+    solution->get_sequence(sequence);    
     notify(new SequenceOptimization(sequence, score));
 }
 
