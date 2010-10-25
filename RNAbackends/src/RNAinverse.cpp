@@ -11,6 +11,7 @@ using std::ifstream;
 using std::stringstream;
 
 #include "RNAinverse.h"
+#include "IStartProvider.h"
 
 RNAinverse::RNAinverse(const SecStructure& structure, Similitude sd, Distance hd, Attempts ca) :
         RNAStartInverse(structure, sd, hd, ca), cmd()
@@ -19,6 +20,13 @@ RNAinverse::RNAinverse(const SecStructure& structure, Similitude sd, Distance hd
     int repeat = max_structure_distance == 0 ? -1 : 1;
     ss << "RNAinverse -R " << repeat << " -a ATGC < inverse.in > inverse.out";
     cmd = ss.str();
+}
+
+void RNAinverse::query_start(IStartProvider* provider) throw(RNABackendException)
+{
+    provider->get_partial_start(this);
+    if (start.size() != structure.size())
+        throw RNABackendException("Partial start and target structure must have the same length");
 }
 
 void RNAinverse::execute(string& seq, Distance& hd, Similitude& sd) throw(RNABackendException)

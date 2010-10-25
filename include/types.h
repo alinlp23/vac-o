@@ -28,6 +28,7 @@
 
 #include <string>
 #include <list>
+#include <set>
 #include <utility>
 
 #include <biopp/biopp.h>
@@ -36,6 +37,7 @@ using std::string;
 using std::list;
 using std::pair;
 using std::vector;
+using std::set;
 
 typedef string SecStructure;
 typedef list<NucSequence*> NucSequencesCt;
@@ -119,6 +121,8 @@ typedef unsigned int RegionIdx;
  * Number of attemps to do something.
  */
 typedef unsigned int Attempts;
+
+typedef set<string> StringSequencesCt;
 
 #endif	/* _TYPES_H */
 

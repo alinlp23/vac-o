@@ -28,6 +28,7 @@
 
 #include <vector>
 #include <list>
+#include <mili/mili.h>
 #include "types.h"
 
 using std::vector;
@@ -63,6 +64,12 @@ public:
      * @param n the size of the combinations.
      */
     Combinator(const C& e, size_t n);
+    /**
+     * Constructor
+     * @param range the container of elements will be generated from 0 to range-1
+     * @param n the size of the combinations.
+     */
+    Combinator(size_t range, size_t n);
 private:
     typedef typename C::const_iterator ConstIterator;
     C elements;
@@ -92,6 +99,18 @@ typedef Combinator<list<SeqIndex> >::Combination SeqIndexesCombination;
 template<class C>
 Combinator<C>::Combinator(const C& e, size_t n) : elements(e), combination(n), k(n), end(), start(), kit()
 {
+    begin();
+}
+
+template<class C>
+Combinator<C>::Combinator(size_t range, size_t n) : elements(range), combination(n), k(n), end(), start(), kit()
+{
+    C range_ct;
+    for(size_t i=0; i<range; ++i)
+    {
+        insert_into(range_ct, i);
+    }
+    elements = range_ct;
     begin();
 }
 

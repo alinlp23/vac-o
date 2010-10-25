@@ -1,8 +1,8 @@
-/*
- * File:   RNAFoldInverse.h
+/* 
+ * File:   IStartProvider.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on October 2, 2010, 1:28 PM
+ * Created on October 25, 2010, 5:40 PM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,23 +20,34 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- *
+ * 
  */
 
-#ifndef _RNAINVERSE_H
-#define	_RNAINVERSE_H
+#ifndef _ISTARTPROVIDER_H
+#define	_ISTARTPROVIDER_H
 
-#include "RNAStartInverse.h"
-#include "types.h"
+class IFoldInverse;
 
-class RNAinverse : public RNAStartInverse
-{    
-    string cmd;
-    virtual void execute(string&, Distance&, Similitude&) throw(RNABackendException);
-    virtual void query_start(IStartProvider*) throw(RNABackendException);
+/**
+ * Interface for start sequences providers.
+ */
+class IStartProvider
+{
 public:
-    RNAinverse(const SecStructure&, Similitude, Distance, Attempts);
+    /**
+     * Gets a partial sequence from a bigger one.
+     * @param backend sets the start sequence in this backend
+     */
+    virtual void get_partial_start(IFoldInverse* const) = 0;
+    /**
+     * Gets a complete sequence.
+     * @param backend sets the start sequence in this backend
+     */
+    virtual void get_complete_start(IFoldInverse* const) = 0;
+
+    virtual ~IStartProvider(){}
 };
 
-#endif	/* _RNAINVERSE_H */
+
+#endif	/* _ISTARTPROVIDER_H */
 

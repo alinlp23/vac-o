@@ -90,7 +90,7 @@ void print_ranking(SequenceRanker& ranking)
 int main(int argc, char** argv)
 {
     PluginAdmin plg_admin;
-    IPlugin* plg = plg_admin.load("libplugin/libplugin.so");
+    IPlugin* plg = plg_admin.load("/home/sancho/facultad/tesis/repos/vac-o/trunk/src/libplugin/libplugin.so");
 
     ParamsCt params;
     plg->get_parameters(params);

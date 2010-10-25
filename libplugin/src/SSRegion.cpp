@@ -44,11 +44,21 @@ Score SSRegion::generate(NucSequence& sequence, NucSequence& delta)
 void SSRegion::set_base_sequence(const NucSequence& sequence)
 {
     base_sequence = sequence;
-    string tmp;    
+    inverse_backend->query_start(this);
+}
+
+void SSRegion::get_partial_start(IFoldInverse* const backend)
+{
+    string tmp;
     for (size_t idx = start; idx<end; ++idx)
-    {        
+    {
         tmp += to_str(base_sequence[idx]);
-    }    
-    NucSequence is = tmp;
-    inverse_backend->set_start(is);
+    }
+    NucSequence partial = tmp;
+    backend->set_start(partial);
+}
+
+void SSRegion::get_complete_start(IFoldInverse* const backend)
+{
+    backend->set_start(base_sequence);
 }
