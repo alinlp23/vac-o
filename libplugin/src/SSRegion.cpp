@@ -1,4 +1,5 @@
 #include "SSRegion.h"
+#include "IFoldInverse.h"
 
 SSRegion::SSRegion(SeqIndex s, SeqIndex e, const SecStructure& wt,
                    const SecStructure& vaccine, NMutations nm, Similitude simi,
@@ -19,21 +20,35 @@ using std::endl;
 Score SSRegion::evaluate(const NucSequence& sequence) const
 {
     Score s;
-    cout << "Local score:" << endl;
+    cout << "Local score for:" << endl;
+    for (size_t i=0; i<sequence.length(); ++i)
+    {
+        cout << to_str(sequence[i]);
+    }
+    cout << endl;
     cin >> s;
     return s;
 }
 
 Score SSRegion::generate(NucSequence& sequence, NucSequence& delta)
 {
-    string d;
-    cout << "Generate: " << endl;
-    cin >> d;
-    delta = d;
+    inverse_backend->fold_inverse(delta);
     sequence = base_sequence;
-    for (size_t idx=start; idx<end; ++idx)
+    for (size_t idx=0; idx<delta.length(); ++idx)
     {
-        sequence[idx] = delta[idx];
+        sequence[start+idx] = delta[idx];
     }
     return evaluate(delta);
+}
+
+void SSRegion::set_base_sequence(const NucSequence& sequence)
+{
+    base_sequence = sequence;
+    string tmp;    
+    for (size_t idx = start; idx<end; ++idx)
+    {        
+        tmp += to_str(base_sequence[idx]);
+    }    
+    NucSequence is = tmp;
+    inverse_backend->set_start(is);
 }

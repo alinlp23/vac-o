@@ -50,6 +50,7 @@ class SSRegion : public CombinatoryRegion
 
     virtual Score evaluate(const NucSequence&) const;
     virtual Score generate(NucSequence&, NucSequence&);
+    virtual void set_base_sequence(const NucSequence& sequence);
 public:
     SSRegion(SeqIndex, SeqIndex, const SecStructure&, const SecStructure&,
              NMutations, Similitude, Distance, const NucSequencesCt&,

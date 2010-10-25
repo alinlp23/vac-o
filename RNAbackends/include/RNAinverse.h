@@ -23,19 +23,19 @@
  *
  */
 
-#ifndef _RNAFOLDINVERSE_H
-#define	_RNAFOLDINVERSE_H
+#ifndef _RNAINVERSE_H
+#define	_RNAINVERSE_H
 
 #include "RNAStartInverse.h"
 #include "types.h"
 
-class RNAFoldInverse : public RNAStartInverse
+class RNAinverse : public RNAStartInverse
 {    
     string cmd;
     virtual void execute(string&, Distance&, Similitude&) throw(RNABackendException);
 public:
-    RNAFoldInverse(const SecStructure&, Similitude, Distance, Attempts);
+    RNAinverse(const SecStructure&, Similitude, Distance, Attempts);
 };
 
-#endif	/* _RNAFOLDINVERSE_H */
+#endif	/* _RNAINVERSE_H */
 
