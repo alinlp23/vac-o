@@ -2,17 +2,10 @@
 #include "RNAStartInverse.h"
 
 RNAStartInverse::RNAStartInverse(const SecStructure& structure, Similitude sd, Distance hd, Attempts ca) :
-        rstart(), found(), combination_attempts(ca) ,combinator(), positions(),
-        start(), structure(structure), max_structure_distance(sd), max_sequence_distance(hd)
+        rstart(), found(), combination_attempts(ca), combinator(new SeqIndexesCombinator(structure.size(), hd)),
+        positions(), start(), structure(structure), max_structure_distance(sd), max_sequence_distance(hd)
         
-{
-    list<SeqIndex> range;
-    for(SeqIndex i=0; i<structure.size(); ++i)
-    {
-        range.push_back(i);
-    }
-    combinator = new SeqIndexesCombinator(range, hd);
-}
+{}
 
 RNAStartInverse::~RNAStartInverse()
 {
@@ -86,7 +79,7 @@ void RNAStartInverse::change_start()
     while(!it.end())
     {
         //This let to search for possible changes in each position.
-        start[*it] = 'N';
+        start[*it] = wildcard;
         ++it;
     }
 }

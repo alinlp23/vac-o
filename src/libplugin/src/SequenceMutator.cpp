@@ -1,14 +1,9 @@
 #include "SequenceMutator.h"
 
 SequenceMutator::SequenceMutator(const NucSequence& seq, NMutations max) :
-        sequence(seq), mutated(seq), mutations(max), combinator(), positions()
-{
-    list<SeqIndex> range;
-    for(SeqIndex i=0; i<sequence.length(); ++i)
-    {
-        range.push_back(i);
-    }
-    combinator = new SeqIndexesCombinator(range, mutations);
+        sequence(seq), mutated(seq), mutations(max), 
+        combinator(new SeqIndexesCombinator(seq.length(), max)), positions()
+{    
     combinator->next(positions);
     reset();
 }

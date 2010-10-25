@@ -29,6 +29,7 @@
 #include <biopp/biopp.h>
 #include "exceptions.h"
 
+class IStartProvider;
 /**
  * Interface for sequence's inverse folding services.
  */
@@ -41,7 +42,18 @@ public:
      */
     virtual void fold_inverse(NucSequence&) throw(RNABackendException) = 0;
 
+    /**
+     * Sets the start sequence for the backend.
+     * @param seq the NucSequence.
+     */
     virtual void set_start(const NucSequence&) = 0;
+
+    /**
+     * Start the chain of calls to set the start sequence using
+     * the given IStartProvider.
+     * @param provider a start sequences provider.
+     */
+    virtual void query_start(IStartProvider*) throw(RNABackendException) = 0;
 
     virtual ~IFoldInverse() {}
 };

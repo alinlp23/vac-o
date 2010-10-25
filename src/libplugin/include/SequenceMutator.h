@@ -43,7 +43,7 @@ class SequenceMutator
     
     NMutations mutations;
     
-    SeqIndexesCombinator* combinator;
+    SeqIndexesCombinator* const combinator;
     SeqIndexesCombination positions;
 
     /**

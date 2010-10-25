@@ -27,13 +27,14 @@
 #define	_SSREGION_H
 
 #include "CombinatoryRegion.h"
+#include "IStartProvider.h"
 
 class IFold;
 class IFoldInverse;
 class IStructureCmp;
 class ISequenceCmp;
 
-class SSRegion : public CombinatoryRegion
+class SSRegion : public CombinatoryRegion, public IStartProvider
 {
     SecStructure wt_structure;
     SecStructure vaccine_structure;
@@ -51,6 +52,10 @@ class SSRegion : public CombinatoryRegion
     virtual Score evaluate(const NucSequence&) const;
     virtual Score generate(NucSequence&, NucSequence&);
     virtual void set_base_sequence(const NucSequence& sequence);
+
+    // Implements IStartProvider
+    virtual void get_partial_start(IFoldInverse* const);
+    virtual void get_complete_start(IFoldInverse* const);
 public:
     SSRegion(SeqIndex, SeqIndex, const SecStructure&, const SecStructure&,
              NMutations, Similitude, Distance, const NucSequencesCt&,
