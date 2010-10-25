@@ -37,7 +37,7 @@
 
 /*libRNA providers*/
 #include "RNAFold.h"
-#include "RNAFoldInverse.h"
+#include "RNAinverse.h"
 #include "RNAForester.h"
 #include "Hamming.h"
 

@@ -11,6 +11,7 @@ class DevPlugin : public IPlugin
     static NucSequence sequence;
     static SecStructure wt_struct;
     static SecStructure vacc_struct;
+    static SecStructure ires;
 
     Distance min_distance;
     CutOff cutoff;
@@ -57,6 +58,7 @@ public:
 string seq = "CGCAGGGAUCGCAGGUACCCCGCAGGCGCAGAUACCCUA";
 NucSequence DevPlugin::sequence = seq;
 SecStructure DevPlugin::vacc_struct = "...(((((((....(..((.....))..).))).)))).";
+SecStructure DevPlugin::ires = "(..((.....))..)";
 SecStructure DevPlugin::wt_struct = "....((((((.......((.....))....))).)))..";
 
 /**
@@ -146,7 +148,7 @@ void DevPlugin::init_params()
 void DevPlugin::init_backends()
 {
     fold_backend = new RNAFold;
-    inverse_backend = new RNAFoldInverse(vacc_struct, 0, 10, 100);
+    inverse_backend = new RNAinverse(ires, 0, 10, 100);
     struct_cmp_backend = new RNAForester;
     seq_cmp_backend = new Hamming;
 }
@@ -156,7 +158,7 @@ void DevPlugin::init_comb_regions()
     /**
      * Fill wt_cache with sequence that fold to wt_struct
      */
-    ssregion = new SSRegion(0, 10, wt_struct, vacc_struct, 1, 0.9f, 10, wt_cache,
+    ssregion = new SSRegion(14, 29, wt_struct, vacc_struct, 1, 0.9f, 10, wt_cache,
                             fold_backend, inverse_backend, struct_cmp_backend,
                             seq_cmp_backend);
 

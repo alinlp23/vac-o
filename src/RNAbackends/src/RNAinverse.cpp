@@ -10,9 +10,9 @@ using std::ofstream;
 using std::ifstream;
 using std::stringstream;
 
-#include "RNAFoldInverse.h"
+#include "RNAinverse.h"
 
-RNAFoldInverse::RNAFoldInverse(const SecStructure& structure, Similitude sd, Distance hd, Attempts ca) :
+RNAinverse::RNAinverse(const SecStructure& structure, Similitude sd, Distance hd, Attempts ca) :
         RNAStartInverse(structure, sd, hd, ca), cmd()
 {
     stringstream ss;
@@ -21,7 +21,7 @@ RNAFoldInverse::RNAFoldInverse(const SecStructure& structure, Similitude sd, Dis
     cmd = ss.str();
 }
 
-void RNAFoldInverse::execute(string& seq, Distance& hd, Similitude& sd) throw(RNABackendException)
+void RNAinverse::execute(string& seq, Distance& hd, Similitude& sd) throw(RNABackendException)
 {
     ofstream out("inverse.in");
     out << structure << "\n";
