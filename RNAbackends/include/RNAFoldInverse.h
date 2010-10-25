@@ -26,44 +26,15 @@
 #ifndef _RNAFOLDINVERSE_H
 #define	_RNAFOLDINVERSE_H
 
-#include "IFoldInverse.h"
+#include "RNAStartInverse.h"
 #include "types.h"
-#include "Combinator.h"
 
-class RNAFoldInverse : public IFoldInverse
-{
-    string start;
-    string rstart;
-    const SecStructure structure;
-    Similitude max_structure_distance;
-    Distance max_sequence_distance;
+class RNAFoldInverse : public RNAStartInverse
+{    
     string cmd;
-    list<string> found;
-    Attempts combination_attempts;
-    SeqIndexesCombinator* combinator;
-    SeqIndexesCombination positions;
-
-    virtual void fold_inverse(NucSequence&) throw(RNABackendException);
-    virtual void set_start(const NucSequence&);
-    
-    void change_start();
-    void execute(string&, Distance&, Similitude&);
-
-    struct SeqCmp
-    {
-        string f;
-        bool operator()(const string& s)
-        {
-            return f==s;
-        }
-        SeqCmp(const string& s):f(s){}
-    };
+    virtual void execute(string&, Distance&, Similitude&) throw(RNABackendException);
 public:
     RNAFoldInverse(const SecStructure&, Similitude, Distance, Attempts);
-    RNAFoldInverse(const RNAFoldInverse&);
-    RNAFoldInverse& operator=(const RNAFoldInverse&);
-
-    ~RNAFoldInverse();
 };
 
 #endif	/* _RNAFOLDINVERSE_H */
