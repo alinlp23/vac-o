@@ -79,7 +79,7 @@ void RNAStartInverse::change_start()
     while(!it.end())
     {
         //This let to search for possible changes in each position.
-        start[*it] = wildcard;
+        start[*it] = WILDCARD;
         ++it;
     }
 }

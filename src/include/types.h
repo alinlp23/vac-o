@@ -33,14 +33,8 @@
 
 #include <biopp/biopp.h>
 
-using std::string;
-using std::list;
-using std::pair;
-using std::vector;
-using std::set;
-
-typedef string SecStructure;
-typedef list<NucSequence*> NucSequencesCt;
+typedef std::string SecStructure;
+typedef std::list<NucSequence> NucSequencesCt;
 
 /**
  * ICombinatoryEngine threshold cutoff
@@ -105,12 +99,12 @@ typedef unsigned int Iteration;
 /**
  * Local optimization used for local search
  */
-typedef pair<NucSequence, Score> LocalOptimization;
+typedef std::pair<NucSequence, Score> LocalOptimization;
 
 /**
  * Container of local optimizations
  */
-typedef vector<LocalOptimization> LocalOptimizationCt;
+typedef std::vector<LocalOptimization> LocalOptimizationCt;
 
 /**
  * Index of a solution region.
@@ -122,7 +116,7 @@ typedef unsigned int RegionIdx;
  */
 typedef unsigned int Attempts;
 
-typedef set<string> StringSequencesCt;
+typedef std::set<std::string> StringSequencesCt;
 
 #endif	/* _TYPES_H */
 

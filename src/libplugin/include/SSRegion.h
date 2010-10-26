@@ -53,6 +53,10 @@ class SSRegion : public CombinatoryRegion, public IStartProvider
     virtual Score generate(NucSequence&, NucSequence&);
     virtual void set_base_sequence(const NucSequence& sequence);
 
+    //Filters
+    bool cache_compare(const NucSequence&);
+    bool structure_compare(const NucSequence&);
+
     // Implements IStartProvider
     virtual void get_partial_start(IFoldInverse* const);
     virtual void get_complete_start(IFoldInverse* const);

@@ -41,7 +41,7 @@
  */
 class RNAStartInverse : public IFoldInverse
 {
-    static const char wildcard = 'N';
+    static const char WILDCARD = 'N';
     string rstart;
     StringSequencesCt found;
     Attempts combination_attempts;
