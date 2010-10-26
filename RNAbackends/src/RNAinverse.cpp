@@ -60,12 +60,12 @@ void RNAinverse::execute(string& seq, Distance& hd, Similitude& sd) throw(RNABac
     {
         //all to lower because we will need to compare this sequence with the
         //sequences in found set.
-        seq[i] = tolower(aux[i]);
+        seq[i] = tolower(seq[i]);
     }
 
     //hamming distance from the start used
-    int from = aux.find_first_not_of(" ", start.size());
-    int to = aux.find_first_of(" ", from);
+    size_t from = aux.find_first_not_of(" ", start.size());
+    size_t to = aux.find_first_of(" ", from);
     from_string<Distance>(aux.substr(from, to-from), hd);
 
     //structure distance from the sequence found to the target structure.

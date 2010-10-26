@@ -164,7 +164,7 @@ void DevPlugin::init_params()
 void DevPlugin::init_backends()
 {
     fold_backend = new RNAFold;
-    inverse_backend = new RNAinverse(ires, 0, 10, 100);
+    inverse_backend = new INFORNA(ires, 0, 10, 100);
     struct_cmp_backend = new RNAForester;
     seq_cmp_backend = new Hamming;    
 }
@@ -175,10 +175,10 @@ void DevPlugin::init_comb_regions()
      * Fill wt_cache with sequences that fold to wt_struct
      */
     IStartProvider* devprovider = new DevStartProvider(wt_sequence);
-    IFoldInverse* wt_inverse = new RNAinverse(wt_struct, 0, 10, 100);
+    IFoldInverse* wt_inverse = new INFORNA(wt_struct, 0, 25, 10);
     wt_inverse->query_start(devprovider);
     NucSequence tmp;
-    for (size_t i=0; i<20; ++i)
+    for (size_t i=0; i<5; ++i)
     {
         wt_inverse->fold_inverse(tmp);
         insert_into(wt_cache, tmp);        

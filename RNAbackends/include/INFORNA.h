@@ -1,8 +1,8 @@
-/*
- * File:   libplugin.h
+/* 
+ * File:   INFORNA.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on October 1, 2010, 12:55 AM
+ * Created on October 25, 2010, 1:36 PM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,33 +20,22 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- *
+ * 
  */
 
-#ifndef _LIBPLUGIN_H
-#define	_LIBPLUGIN_H
-#include <mili/mili.h>
-#include "IPlugin.h"
+#ifndef _INFORNA_H
+#define	_INFORNA_H
 
-/*Parameters*/
-#include "Parameter.h"
+#include "RNAStartInverse.h"
+#include "types.h"
 
-/*Combinatory regions*/
-#include "SSRegion.h"
-#include "GCRegion.h"
+class INFORNA : public RNAStartInverse
+{    
+    virtual void execute(string&, Distance&, Similitude&) throw(RNABackendException);
+    virtual void query_start(IStartProvider*) throw(RNABackendException);
+public:
+    INFORNA(const SecStructure&, Similitude, Distance, Attempts);
+};
 
-/*libRNA providers*/
-#include "RNAFold.h"
-#include "RNAinverse.h"
-#include "INFORNA.h"
-#include "RNAForester.h"
-#include "Hamming.h"
-
-/*LocalSearch*/
-#include "Solution.h"
-#include "Strategy.h"
-#include "Neighborhood.h"
-#include "FirstImprovement.h"
-
-#endif	/* _LIBPLUGIN_H */
+#endif	/* _INFORNA_H */
 
