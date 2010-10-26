@@ -21,11 +21,11 @@ public:
  */
 class DevPlugin : public IPlugin
 {
-    static NucSequence vacc_sequence;
-    static NucSequence wt_sequence;
-    static SecStructure wt_struct;
-    static SecStructure vacc_struct;
-    static SecStructure ires;
+    NucSequence vacc_sequence;
+    NucSequence wt_sequence;
+    SecStructure wt_struct;
+    SecStructure vacc_struct;
+    SecStructure ires;
 
     Distance min_distance;
     CutOff cutoff;
@@ -67,24 +67,18 @@ public:
 };
 
 /**
- * Static memebers
- */
-string seq = "CGCAGGGAUCGCAGGUACCCCGCAGGCGCAGAUACCCUA";
-string wt_seq = "CCGCCGCACUUAUCCCUGACGAAUUCUACCAGUCGCGAU";
-NucSequence DevPlugin::vacc_sequence = seq;
-NucSequence DevPlugin::wt_sequence = wt_seq;                        
-SecStructure DevPlugin::vacc_struct = "...(((((((....(..((.....))..).))).)))).";
-SecStructure DevPlugin::ires = "(..((.....))..)";
-SecStructure DevPlugin::wt_struct = "....((((((.......((.....))....))).)))..";
-
-/**
  * Constructor
  */
 DevPlugin::DevPlugin() :
+        vacc_sequence("CGCAGGGAUCGCAGGUACCCCGCAGGCGCAGAUACCCUA"),
+        wt_sequence("CCGCCGCACUUAUCCCUGACGAAUUCUACCAGUCGCGAU"),        
+        wt_struct("....((((((.......((.....))....))).))).."),
+        vacc_struct("...(((((((....(..((.....))..).))).))))."),
+        ires("(..((.....))..)"),
         min_distance(0), cutoff(1), attempts(2), min_distance_param(), cutoff_param(),
         fold_backend(), inverse_backend(), struct_cmp_backend(), seq_cmp_backend(),
         wt_cache(), ssregion(), regions(), neighborhood(), strategy()
-{
+{    
     init_params();    
 }
 
