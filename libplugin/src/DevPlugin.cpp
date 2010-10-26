@@ -3,12 +3,26 @@
 using std::cout;
 using std::cin;
 using std::endl;
+#include "IStartProvider.h"
+
+class DevStartProvider : public IStartProvider
+{
+    NucSequence base;
+    virtual void get_complete_start(IFoldInverse* const){}
+    virtual void get_partial_start(IFoldInverse* const backend)
+    {
+        backend->set_start(base);
+    }
+public:
+    DevStartProvider(NucSequence& s) : base(s) {}
+};
 /**
  * Plugin for development
  */
 class DevPlugin : public IPlugin
 {
-    static NucSequence sequence;
+    static NucSequence vacc_sequence;
+    static NucSequence wt_sequence;
     static SecStructure wt_struct;
     static SecStructure vacc_struct;
     static SecStructure ires;
@@ -56,7 +70,9 @@ public:
  * Static memebers
  */
 string seq = "CGCAGGGAUCGCAGGUACCCCGCAGGCGCAGAUACCCUA";
-NucSequence DevPlugin::sequence = seq;
+string wt_seq = "CCGCCGCACUUAUCCCUGACGAAUUCUACCAGUCGCGAU";
+NucSequence DevPlugin::vacc_sequence = seq;
+NucSequence DevPlugin::wt_sequence = wt_seq;                        
 SecStructure DevPlugin::vacc_struct = "...(((((((....(..((.....))..).))).)))).";
 SecStructure DevPlugin::ires = "(..((.....))..)";
 SecStructure DevPlugin::wt_struct = "....((((((.......((.....))....))).)))..";
@@ -88,7 +104,7 @@ void DevPlugin::get_parameters(ParamsCt& params) const
 
 const ISolution* DevPlugin::get_initial_solution() const
 {
-    return new Solution(sequence, regions);
+    return new Solution(vacc_sequence, regions);
 }
 
 INeighborhood* DevPlugin::get_neighborhood() const
@@ -150,19 +166,32 @@ void DevPlugin::init_backends()
     fold_backend = new RNAFold;
     inverse_backend = new RNAinverse(ires, 0, 10, 100);
     struct_cmp_backend = new RNAForester;
-    seq_cmp_backend = new Hamming;
+    seq_cmp_backend = new Hamming;    
 }
 
 void DevPlugin::init_comb_regions()
 {
     /**
-     * Fill wt_cache with sequence that fold to wt_struct
+     * Fill wt_cache with sequences that fold to wt_struct
      */
+    IStartProvider* devprovider = new DevStartProvider(wt_sequence);
+    IFoldInverse* wt_inverse = new RNAinverse(wt_struct, 0, 10, 100);
+    wt_inverse->query_start(devprovider);
+    NucSequence tmp;
+    for (size_t i=0; i<20; ++i)
+    {
+        wt_inverse->fold_inverse(tmp);
+        insert_into(wt_cache, tmp);        
+    }
+
     ssregion = new SSRegion(14, 29, wt_struct, vacc_struct, 1, 0.9f, 10, wt_cache,
                             fold_backend, inverse_backend, struct_cmp_backend,
                             seq_cmp_backend);
 
     insert_into(regions, ssregion);
+    
+    delete devprovider;
+    delete wt_inverse;
 }
 
 void DevPlugin::init_local_search()

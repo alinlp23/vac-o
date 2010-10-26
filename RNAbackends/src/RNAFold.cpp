@@ -1,23 +1,49 @@
 #include <cstdlib>
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <mili/mili.h>
+
+using std::string;
+using std::ofstream;
+using std::ifstream;
 
 #include "RNAFold.h"
 
-extern "C" float viennaRNA_fold(char*, char*);
-
 Fe RNAFold::fold(const NucSequence& sequence, SecStructure& structure) const throw(RNABackendException)
 {
-    size_t seq_size = sequence.length();
+    string cmd = "RNAfold -noPS < fold.in > fold.out";
+    string sseq;
+    ofstream out("fold.in");
 
-    char* c_seq = (char*)calloc(seq_size+1, sizeof(char));
-    char* c_struct = (char*)calloc(seq_size+1, sizeof(char));
+    for (size_t i=0; i<sequence.length(); ++i)
+    {
+        sseq += to_str(sequence[i])[0];
+    }
 
-    //sequence.copy(c_seq, seq_size);
-    Fe energy = viennaRNA_fold(c_seq, c_struct);
+    out << sseq << "\n";
+    out.close();
 
-    structure = c_struct;
+    int status = system(cmd.c_str());
+    if (status)
+        throw RNABackendException("An error ocurred trying to execute: "+cmd);
 
-    free(c_seq);
-    free(c_struct);
+    ifstream in("fold.out");
+    /* fold.out look like this:
+     * CGCAGGGAUCGCAGGUACCCCGCAGGCGCAGAUACCCUA
+     * ...(((((((....(..((.....))..).))).)))). (-10.80)
+    */
+    string aux;
+    //ignore first line (the sequence folded)
+    getline(in, aux);
+
+    getline(in, aux);
+    structure = aux.substr(0, sequence.length());
+
+    Fe energy;
+    int from = aux.find_first_not_of(" ", sequence.length()) + 1;
+    int to = aux.find_first_of(" ", from) - 1;
+    from_string<Fe>(aux.substr(from, to-from), energy);
 
     return energy;
 }
