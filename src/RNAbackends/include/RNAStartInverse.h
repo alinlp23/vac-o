@@ -26,10 +26,12 @@
 #ifndef _RNASTARTINVERSE_H
 #define	_RNASTARTINVERSE_H
 
+#include <string>
 #include "IFoldInverse.h"
 #include "types.h"
 #include "Combinator.h"
 
+using std::string;
 /**
  * Base class implementation for RNA inverse folding
  * backends that accept a start sequence.
@@ -44,7 +46,7 @@ class RNAStartInverse : public IFoldInverse
     static const char WILDCARD = 'N';
     string rstart;
     StringSequencesCt found;
-    Attempts combination_attempts;
+    const Attempts combination_attempts;
     SeqIndexesCombinator* const combinator;
     SeqIndexesCombination positions;
 
