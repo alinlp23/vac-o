@@ -75,12 +75,12 @@ void INFORNA::execute(string& seq, Distance& hd, Similitude& sd) throw(RNABacken
     }
 
     //hamming distance from the start used
-    from = aux.find_first_not_of(" ", start.size());
+    from = aux.find_first_not_of(" ", to+start.size());
     to = aux.find_first_of(" ", from);
     from_string<Distance>(aux.substr(from, to-from), hd);
 
     //structure distance from the sequence found to the target structure.
-    from = aux.find_first_of("d= ", to);    
+    from = aux.find_first_of("d=", to) + 3;
     if (from != to)
     {
         to = aux.find_first_of(" ", from);
