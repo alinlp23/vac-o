@@ -3,6 +3,7 @@ add_library(RNAbackends src/Hamming.cpp
                         src/RNAFold.cpp
                         src/RNAStartInverse.cpp
                         src/RNAinverse.cpp
+                        src/INFORNA.cpp
                         src/RNAForester.cpp
                         src/viennaRNA.c)
 						
