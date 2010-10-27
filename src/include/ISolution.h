@@ -28,7 +28,6 @@
 
 #include <biopp/biopp.h>
 #include "types.h"
-#include "ICombinatoryRegion.h"
 
 /**
  * Solutions represents the search space in any local search strategy.

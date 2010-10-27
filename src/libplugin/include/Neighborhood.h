@@ -27,6 +27,7 @@
 #define	_NEIGHBORHOOD_H
 
 #include "INeighborhood.h"
+#include "ICombinatoryRegion.h"
 
 class Neighborhood : public INeighborhood
 {

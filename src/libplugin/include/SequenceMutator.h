@@ -29,6 +29,7 @@
 #include "vector"
 #include "types.h"
 #include "Combinator.h"
+#include "rna_backends_types.h"
 
 using std::vector;
 

@@ -33,8 +33,8 @@
  */
 class RNAForester : public IStructureCmp
 {
-    static const Path IN;
-    static const Path OUT;
+    static const FilePath IN;
+    static const FilePath OUT;
     static const Command CMD;
     static const FileLineNo LINE_NO;
     virtual Similitude compare(const SecStructure&,

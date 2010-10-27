@@ -33,8 +33,8 @@
  */
 class RNAFold : public IFold
 {
-    static const Path IN;
-    static const Path OUT;
+    static const FilePath IN;
+    static const FilePath OUT;
     static const Command CMD;
     static const FileLineNo LINE_NO;
     size_t read_free_energy(FileLine&, size_t, Fe&) const throw(RNABackendException);

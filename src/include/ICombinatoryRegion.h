@@ -29,6 +29,7 @@
 #include <mili/mili.h>
 #include <biopp/biopp.h>
 #include "types.h"
+#include "rna_backends_types.h"
 #include <vector>
 using std::vector;
 

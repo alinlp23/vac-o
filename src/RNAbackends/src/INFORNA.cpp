@@ -8,10 +8,10 @@
 using std::string;
 using std::stringstream;
 
-const Path INFORNA::OUT = "inverse.out";
+const FilePath INFORNA::OUT = "inverse.out";
 const FileLineNo INFORNA::LINE_NO = 13;
 
-INFORNA::INFORNA(const SecStructure& structure, Similitude sd, Distance hd, Attempts ca) :
+INFORNA::INFORNA(const SecStructure& structure, Similitude sd, Distance hd, CombinationAttempts ca) :
         RNAStartInverse(structure, sd, hd, ca)
 {}
 

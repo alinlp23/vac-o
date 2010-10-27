@@ -1,6 +1,6 @@
 #include "RNABackendProxy.h"
 
-void write(const Path& file, FileLinesCt& lines) throw(RNABackendException)
+void write(const FilePath& file, FileLinesCt& lines) throw(RNABackendException)
 {
     std::ofstream out;
     out.exceptions (std::ifstream::eofbit | std::ifstream::failbit | std::ifstream::badbit);
@@ -19,7 +19,7 @@ void write(const Path& file, FileLinesCt& lines) throw(RNABackendException)
     }    
 }
 
-void write(const Path& file, FileLine& line) throw(RNABackendException)
+void write(const FilePath& file, FileLine& line) throw(RNABackendException)
 {
     std::ofstream out;
     out.exceptions (std::ifstream::eofbit | std::ifstream::failbit | std::ifstream::badbit);
@@ -34,7 +34,7 @@ void write(const Path& file, FileLine& line) throw(RNABackendException)
     }    
 }
 
-void read_line(const Path& file, FileLineNo lineno, FileLine& line) throw(RNABackendException)
+void read_line(const FilePath& file, FileLineNo lineno, FileLine& line) throw(RNABackendException)
 {
     std::ifstream in;
     in.exceptions (std::ifstream::eofbit | std::ifstream::failbit | std::ifstream::badbit);

@@ -3,8 +3,8 @@
 
 #include "RNAFold.h"
 
-const Path RNAFold::IN = "fold.in";
-const Path RNAFold::OUT = "fold.out";
+const FilePath RNAFold::IN = "fold.in";
+const FilePath RNAFold::OUT = "fold.out";
 const Command RNAFold::CMD = "RNAfold -noPS < "+ RNAFold::IN + " > " + RNAFold::OUT;
 const FileLineNo RNAFold::LINE_NO = 1;
 

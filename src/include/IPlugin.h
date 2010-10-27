@@ -27,7 +27,6 @@
 #define	_IPLUGIN_H
 #include <list>
 #include "types.h"
-#include "ICombinatoryRegion.h"
 #include "INeighborhood.h"
 #include "IStrategy.h"
 #include "ISolution.h"

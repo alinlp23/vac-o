@@ -28,7 +28,6 @@
 
 #include "ISubject.h"
 #include "ISolution.h"
-#include "ICombinatoryRegion.h"
 
 /**
  * Interface for neighborhoods implementations.

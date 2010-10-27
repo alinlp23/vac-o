@@ -28,6 +28,7 @@
 
 #include "CombinatoryRegion.h"
 #include "IStartProvider.h"
+#include "rna_backends_types.h"
 
 class IFold;
 class IFoldInverse;
