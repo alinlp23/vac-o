@@ -172,5 +172,19 @@ inline string::size_type ensure_found(string::size_type found) throw(StringNotFo
         throw StringNotFound();
 }
 
+/**
+ * Ensure that a given position it's different than string::npos
+ * @param found the position to compare
+ * @param default_value the value to return in case of string::npos
+ * @return found or default
+ */
+inline string::size_type ensure_found(string::size_type found, string::size_type default_value)
+{ 
+    if (found != string::npos)
+        return found;
+    else
+        return default_value;
+}
+
 #endif	/* _RNABACKENDPROXY_H */
 

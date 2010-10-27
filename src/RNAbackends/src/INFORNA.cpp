@@ -1,21 +1,15 @@
-#include <cstdlib>
-#include <fstream>
-#include <iostream>
 #include <sstream>
 #include <string>
 #include <mili/mili.h>
 
-using std::string;
-using std::ofstream;
-using std::ifstream;
-using std::stringstream;
-
 #include "INFORNA.h"
 #include "IStartProvider.h"
 
+using std::string;
+using std::stringstream;
+
 const Path INFORNA::OUT = "inverse.out";
 const FileLineNo INFORNA::LINE_NO = 13;
-
 
 INFORNA::INFORNA(const SecStructure& structure, Similitude sd, Distance hd, Attempts ca) :
         RNAStartInverse(structure, sd, hd, ca)
@@ -106,7 +100,7 @@ size_t INFORNA::read_structure_distance(FileLine& line, size_t offset, Similitud
     try
     {
         const size_t from = ensure_found(line.find_first_of("d", offset)) + 3;
-        const size_t to = ensure_found(line.find_first_of(" ", from));
+        const size_t to = line.size();
         read_value(line, from, to-from, sd);
         return to;
     }
