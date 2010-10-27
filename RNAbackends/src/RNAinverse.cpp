@@ -3,11 +3,11 @@
 #include "IStartProvider.h"
 using std::stringstream;
 
-const Path RNAinverse::IN = "inverse.in";
-const Path RNAinverse::OUT = "inverse.out";
+const FilePath RNAinverse::IN = "inverse.in";
+const FilePath RNAinverse::OUT = "inverse.out";
 const FileLineNo RNAinverse::LINE_NO = 0;
 
-RNAinverse::RNAinverse(const SecStructure& structure, Similitude sd, Distance hd, Attempts ca) :
+RNAinverse::RNAinverse(const SecStructure& structure, Similitude sd, Distance hd, CombinationAttempts ca) :
         RNAStartInverse(structure, sd, hd, ca)
 {}
 

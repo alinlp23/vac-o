@@ -31,8 +31,8 @@
 
 class RNAinverse : public RNAStartInverse
 {
-    static const Path IN;
-    static const Path OUT;    
+    static const FilePath IN;
+    static const FilePath OUT;
     static const FileLineNo LINE_NO;
 
     size_t read_hamming_distance(FileLine&, size_t, Distance&) const throw(RNABackendException);
@@ -41,7 +41,7 @@ class RNAinverse : public RNAStartInverse
     virtual void execute(string&, Distance&, Similitude&) throw(RNABackendException);
     virtual void query_start(IStartProvider*) throw(RNABackendException);
 public:
-    RNAinverse(const SecStructure&, Similitude, Distance, Attempts);
+    RNAinverse(const SecStructure&, Similitude, Distance, CombinationAttempts);
 };
 
 #endif	/* _RNAINVERSE_H */

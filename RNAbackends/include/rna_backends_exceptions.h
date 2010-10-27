@@ -1,8 +1,8 @@
-/*
- * File:   exceptions.h
+/* 
+ * File:   rna_backends_exceptions.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 30, 2010, 11:48 PM
+ * Created on October 27, 2010, 6:42 PM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,17 +20,17 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- *
+ * 
  */
 
-#ifndef _EXCEPTIONS_H
-#define	_EXCEPTIONS_H
+#ifndef _RNA_BACKENDS_EXCEPTIONS_H
+#define	_RNA_BACKENDS_EXCEPTIONS_H
 
 #include <mili/mili.h>
 
-class VACOException{};
+class RNABackendExceptionRoot{};
 
-DEFINE_SPECIFIC_EXCEPTION_TEXT(PluginException, VACOException, "Plugin");
+DEFINE_SPECIFIC_EXCEPTION_TEXT(RNABackendException, RNABackendExceptionRoot, "RNABackend");
 
-#endif	/* _EXCEPTIONS_H */
+#endif	/* _RNA_BACKENDS_EXCEPTIONS_H */
 

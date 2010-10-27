@@ -27,8 +27,8 @@
 #define	_IFOLD_H
 
 #include <biopp/biopp.h>
-#include "types.h"
-#include "exceptions.h"
+#include "rna_backends_types.h"
+#include "rna_backends_exceptions.h"
 
 /**
  * Interface for sequence's folding services.

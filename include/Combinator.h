@@ -29,7 +29,6 @@
 #include <vector>
 #include <list>
 #include <mili/mili.h>
-#include "types.h"
 
 using std::vector;
 using std::list;
@@ -87,11 +86,6 @@ private:
     void move();    
 };
 
-/**
- * Common usage
- */
-typedef Combinator<list<SeqIndex> > SeqIndexesCombinator;
-typedef Combinator<list<SeqIndex> >::Combination SeqIndexesCombination;
 /**
  * Implementation
  */

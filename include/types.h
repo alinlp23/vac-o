@@ -33,28 +33,12 @@
 
 #include <biopp/biopp.h>
 
-typedef std::string SecStructure;
 typedef std::list<NucSequence> NucSequencesCt;
 
 /**
  * ICombinatoryEngine threshold cutoff
  */
 typedef float CutOff;
-
-/**
- * Index position in a sequence
- */
-typedef unsigned int SeqIndex;
-
-/**
- * Distance between sequences
- */
-typedef unsigned int Distance;
-
-/**
- * Similitude between sequences or structures
- */
-typedef float Similitude;
 
 /**
  * SSRegion cache
@@ -80,11 +64,6 @@ typedef float Score;
  * Filename path
  */
 typedef string Path;
-
-/**
- * Free eneregy in secodary structure
- */
-typedef float Fe;
 
 /**
  * Ranking size
@@ -115,8 +94,6 @@ typedef unsigned int RegionIdx;
  * Number of attemps to do something.
  */
 typedef unsigned int Attempts;
-
-typedef std::set<std::string> StringSequencesCt;
 
 #endif	/* _TYPES_H */
 

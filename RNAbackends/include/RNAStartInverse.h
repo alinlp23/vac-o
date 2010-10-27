@@ -28,8 +28,8 @@
 
 #include <string>
 #include "IFoldInverse.h"
-#include "types.h"
 #include "Combinator.h"
+#include "rna_backends_types.h"
 
 using std::string;
 /**
@@ -46,7 +46,7 @@ class RNAStartInverse : public IFoldInverse
     static const char WILDCARD = 'N';
     string rstart;
     StringSequencesCt found;
-    const Attempts combination_attempts;
+    const CombinationAttempts combination_attempts;
     SeqIndexesCombinator* const combinator;
     SeqIndexesCombination positions;
 
@@ -69,7 +69,7 @@ protected:
      */
     virtual void execute(string&, Distance&, Similitude&) throw(RNABackendException) = 0;
 public:
-    RNAStartInverse(const SecStructure&, Similitude, Distance, Attempts);
+    RNAStartInverse(const SecStructure&, Similitude, Distance, CombinationAttempts);
     RNAStartInverse(const RNAStartInverse&);
     RNAStartInverse& operator=(const RNAStartInverse&);
 

@@ -27,6 +27,7 @@
 #define	_SOLUTION_H
 
 #include "ISolution.h"
+#include "ICombinatoryRegion.h"
 
 class Solution : public ISolution
 {

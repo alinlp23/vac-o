@@ -1,7 +1,7 @@
 #include <mili/mili.h>
 #include "RNAStartInverse.h"
 
-RNAStartInverse::RNAStartInverse(const SecStructure& structure, Similitude sd, Distance hd, Attempts ca) :
+RNAStartInverse::RNAStartInverse(const SecStructure& structure, Similitude sd, Distance hd, CombinationAttempts ca) :
         rstart(), found(), combination_attempts(ca), combinator(new SeqIndexesCombinator(structure.size(), hd)),
         positions(), start(), structure(structure), max_structure_distance(sd), max_sequence_distance(hd)
         
@@ -18,7 +18,7 @@ void RNAStartInverse::fold_inverse(NucSequence& sequence) throw(RNABackendExcept
     Distance hd;
     Similitude sd;
 
-    Attempts i = combination_attempts;
+    CombinationAttempts i = combination_attempts;
     bool c;
     do
     {

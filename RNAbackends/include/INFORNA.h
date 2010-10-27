@@ -31,7 +31,7 @@
 
 class INFORNA : public RNAStartInverse
 {    
-    static const Path OUT;    
+    static const FilePath OUT;
     static const FileLineNo LINE_NO;
 
     size_t read_sequence(FileLine&, size_t, string&) const throw(RNABackendException);
@@ -41,7 +41,7 @@ class INFORNA : public RNAStartInverse
     virtual void execute(string&, Distance&, Similitude&) throw(RNABackendException);
     virtual void query_start(IStartProvider*) throw(RNABackendException);
 public:
-    INFORNA(const SecStructure&, Similitude, Distance, Attempts);
+    INFORNA(const SecStructure&, Similitude, Distance, CombinationAttempts);
 };
 
 #endif	/* _INFORNA_H */

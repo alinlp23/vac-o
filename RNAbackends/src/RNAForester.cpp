@@ -1,7 +1,7 @@
 #include "RNAForester.h"
 
-const Path RNAForester::IN = "forester.in";
-const Path RNAForester::OUT = "forester.out";
+const FilePath RNAForester::IN = "forester.in";
+const FilePath RNAForester::OUT = "forester.out";
 const Command RNAForester::CMD = "RNAforester -r --score -f "+ RNAForester::IN +" > "+RNAForester::OUT;
 const FileLineNo RNAForester::LINE_NO = 1;
 

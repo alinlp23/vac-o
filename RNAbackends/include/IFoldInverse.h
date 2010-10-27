@@ -27,7 +27,7 @@
 #define	_IFOLDINVERSE_H
 
 #include <biopp/biopp.h>
-#include "exceptions.h"
+#include "rna_backends_exceptions.h"
 
 class IStartProvider;
 /**

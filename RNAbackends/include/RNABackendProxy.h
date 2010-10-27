@@ -27,22 +27,13 @@
 #define	_RNABACKENDPROXY_H
 #include <cstdlib>
 #include <fstream>
-#include <iostream>
 #include <string>
-#include <list>
 #include <mili/mili.h>
 
-#include "types.h"
-#include "exceptions.h"
+#include "rna_backends_types.h"
+#include "rna_backends_exceptions.h"
 
 using std::string;
-
-//Move this definitions to rna_backends_types.h
-typedef string FileLine;
-typedef string Command;
-typedef unsigned int FileLineNo;
-typedef std::list<string> FileLinesCt;
-#define SUCCESS_EXEC 0
 
 /**
  * Execute a give command using a system call
@@ -60,14 +51,14 @@ inline void exec(const Command& cmd) throw(RNABackendException)
  * @param file the file path
  * @param lines the lines to write
  */
-void write(const Path& file, FileLinesCt& lines) throw(RNABackendException);
+void write(const FilePath& file, FileLinesCt& lines) throw(RNABackendException);
 
 /**
  * Write a file with a single line.
  * @param file the file path
  * @param line the line to write
  */
-void write(const Path& file, FileLine& line) throw(RNABackendException);
+void write(const FilePath& file, FileLine& line) throw(RNABackendException);
 
 /**
  * Read a line from a file
@@ -75,7 +66,7 @@ void write(const Path& file, FileLine& line) throw(RNABackendException);
  * @param lineno the line number to read
  * @param line where to write the read line
  */
-void read_line(const Path& file, FileLineNo lineno, FileLine& line) throw(RNABackendException);
+void read_line(const FilePath& file, FileLineNo lineno, FileLine& line) throw(RNABackendException);
 
 /**
  * Read a value from a file line using offset and length
