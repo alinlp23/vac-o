@@ -74,7 +74,7 @@ DevPlugin::DevPlugin() :
         wt_sequence("CCGCCGCACUUAUCCCUGACGAAUUCUACCAGUCGCGAU"),        
         wt_struct("....((((((.......((.....))....))).))).."),
         vacc_struct("...(((((((....(..((.....))..).))).))))."),
-        ires("(..((.....))..)"),
+        ires(".(..((.....))..)."),
         min_distance(0), cutoff(1), attempts(2), min_distance_param(), cutoff_param(),
         fold_backend(), inverse_backend(), struct_cmp_backend(), seq_cmp_backend(),
         wt_cache(), ssregion(), regions(), neighborhood(), strategy()
@@ -122,8 +122,10 @@ Depth DevPlugin::get_qa_depth() const
 Score DevPlugin::evaluate_solution(const ISolution* solution)
 {
     Score s;
-    cout << "Solution score:" << endl;
-    cin >> s;
+    NucSequence seq;
+    solution->get_sequence(seq);
+    s = Score(seq_cmp_backend->compare(seq, wt_sequence));
+    
     return s;
 }
 
@@ -178,7 +180,7 @@ void DevPlugin::init_comb_regions()
         insert_into(wt_cache, tmp);        
     }
 
-    ssregion = new SSRegion(14, 29, wt_struct, vacc_struct, 1, 0.9f, 10, wt_cache,
+    ssregion = new SSRegion(13, 30, wt_struct, vacc_struct, 1, 0.8f, min_distance, wt_cache,
                             fold_backend, inverse_backend, struct_cmp_backend,
                             seq_cmp_backend);
 

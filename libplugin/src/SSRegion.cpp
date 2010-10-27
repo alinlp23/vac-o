@@ -1,9 +1,11 @@
+#include <algorithm>
 #include "SSRegion.h"
 #include "IFoldInverse.h"
 #include "IStructureCmp.h"
 #include "ISequenceCmp.h"
 #include "SequenceMutator.h"
 #include "IFold.h"
+using std::min;
 
 SSRegion::SSRegion(SeqIndex s, SeqIndex e, const SecStructure& wt,
                    const SecStructure& vaccine, NMutations nm, Similitude simi,
@@ -16,21 +18,25 @@ SSRegion::SSRegion(SeqIndex s, SeqIndex e, const SecStructure& wt,
         fold_backend(fb), inverse_backend(fib), struct_cmp_backend(str_cmp),
         seq_cmp_backend(seq_cmp)
 {}
-#include <iostream>
-using std::cout;
-using std::cin;
-using std::endl;
 
-Score SSRegion::evaluate(const NucSequence& sequence) const
+Score SSRegion::evaluate(const NucSequence& delta) const
 {
     Score s;
-    cout << "Local score for:" << endl;
-    for (size_t i=0; i<sequence.length(); ++i)
+    
+    CAutonomousIterator<NucSequencesCt> it(wildtype_cache);
+    Distance min_hd = end-start;
+    while (!it.end())
     {
-        cout << to_str(sequence[i]);
+        string tmp;
+        for (size_t idx = start; idx<end; ++idx)
+        {
+            tmp += to_str((*it)[idx]);
+        }
+        NucSequence partial = tmp;
+        min_hd = min(min_hd, seq_cmp_backend->compare(delta, partial));
+        ++it;
     }
-    cout << endl;
-    cin >> s;
+    s = min_hd / Score(end-start);    
     return s;
 }
 
