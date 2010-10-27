@@ -29,18 +29,13 @@
 #include <set>
 #include <list>
 #include <string>
-//this is temporal, Combinator.h should be moved to RNABackends/include
-#include "Combinator.h"
+
 typedef std::string SecStructure;
 
 /**
  * Index position in a sequence
  */
 typedef unsigned int SeqIndex;
-
-typedef Combinator<std::list<SeqIndex> > SeqIndexesCombinator;
-
-typedef Combinator<std::list<SeqIndex> >::Combination SeqIndexesCombination;
 
 /**
  * Distance between sequences
