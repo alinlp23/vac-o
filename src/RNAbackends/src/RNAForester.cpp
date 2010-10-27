@@ -1,35 +1,24 @@
-#include <fstream>
-#include <string>
-#include <cstdlib>
-#include <mili/mili.h>
 #include "RNAForester.h"
 
-using std::string;
-using std::ofstream;
-using std::ifstream;
+const Path RNAForester::IN = "forester.in";
+const Path RNAForester::OUT = "forester.out";
+const Command RNAForester::CMD = "RNAforester -r --score -f "+ RNAForester::IN +" > "+RNAForester::OUT;
+const FileLineNo RNAForester::LINE_NO = 1;
 
 Similitude RNAForester::compare(const SecStructure& struct1,
                                 const SecStructure& struct2) const throw(RNABackendException)
-{
-    ofstream out("forester.in");
-    out << struct1 << "\n"
-    << struct2 << "\n";
+{    
+    FileLinesCt lines;
+    insert_into(lines, struct1);
+    insert_into(lines, struct2);
 
-    out.close();
+    write(IN, lines);
+    exec(CMD);
 
-    string cmd = "RNAforester -r --score -f forester.in > forester.out";
-    int status = system(cmd.c_str());
-    if (status)
-        throw RNABackendException("An error ocurred trying to execute: "+cmd);
+    FileLine aux;
+    read_line(OUT, LINE_NO, aux);
 
-    ifstream in("forester.out");
     Similitude s;
-    string aux;
-    /*ignore first line (global optimal score)*/
-    getline(in, aux);
-    /*gets second line (relative score)*/
-    getline(in, aux);
-    from_string<Similitude>(aux, s);
-
+    read_value(aux, s);
     return s;
 }

@@ -27,12 +27,17 @@
 #define	_RNAFOLD_H
 
 #include "IFold.h"
-
+#include "RNABackendProxy.h"
 /**
  * Implementation using the Vienna Package
  */
 class RNAFold : public IFold
 {
+    static const Path IN;
+    static const Path OUT;
+    static const Command CMD;
+    static const FileLineNo LINE_NO;
+    size_t read_free_energy(FileLine&, size_t, Fe&) const throw(RNABackendException);
     virtual Fe fold(const NucSequence&, SecStructure&) const throw(RNABackendException);
 };
 

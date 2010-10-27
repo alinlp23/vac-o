@@ -27,11 +27,18 @@
 #define	_RNAINVERSE_H
 
 #include "RNAStartInverse.h"
-#include "types.h"
+#include "RNABackendProxy.h"
 
 class RNAinverse : public RNAStartInverse
-{    
-    string cmd;
+{
+    static const Path IN;
+    static const Path OUT;
+    static Command CMD;
+    static const FileLineNo LINE_NO;
+
+    size_t read_hamming_distance(FileLine&, size_t, Distance&) const throw(RNABackendException);
+    size_t read_structure_distance(FileLine&, size_t, Similitude&) const throw(RNABackendException);
+    
     virtual void execute(string&, Distance&, Similitude&) throw(RNABackendException);
     virtual void query_start(IStartProvider*) throw(RNABackendException);
 public:

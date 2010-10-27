@@ -1,25 +1,19 @@
-#include <cstdlib>
-#include <fstream>
-#include <iostream>
 #include <sstream>
-#include <string>
-#include <mili/mili.h>
-
-using std::string;
-using std::ofstream;
-using std::ifstream;
-using std::stringstream;
-
 #include "RNAinverse.h"
 #include "IStartProvider.h"
+using std::stringstream;
+
+const Path RNAinverse::IN = "inverse.in";
+const Path RNAinverse::OUT = "inverse.out";
+const FileLineNo RNAinverse::LINE_NO = 0;
 
 RNAinverse::RNAinverse(const SecStructure& structure, Similitude sd, Distance hd, Attempts ca) :
-        RNAStartInverse(structure, sd, hd, ca), cmd()
+        RNAStartInverse(structure, sd, hd, ca)
 {
     stringstream ss;
     int repeat = max_structure_distance == 0 ? -1 : 1;
-    ss << "RNAinverse -R " << repeat << " -a ATGC < inverse.in > inverse.out";
-    cmd = ss.str();
+    ss << "RNAinverse -R " << repeat << " -a ATGC < " << IN << " > " << OUT;
+    CMD = ss.str();
 }
 
 void RNAinverse::query_start(IStartProvider* provider) throw(RNABackendException)
@@ -30,21 +24,16 @@ void RNAinverse::query_start(IStartProvider* provider) throw(RNABackendException
 }
 
 void RNAinverse::execute(string& seq, Distance& hd, Similitude& sd) throw(RNABackendException)
-{
-    ofstream out("inverse.in");
-    out << structure << "\n";
-    out << start << "\n";
+{          
+    FileLinesCt lines;
+    insert_into(lines, structure);
+    insert_into(lines, start);
 
-    out.close();
+    write(IN, lines);
+    exec(CMD);
 
-    int status = system(cmd.c_str());
-    if (status)
-        throw RNABackendException("An error ocurred trying to execute: "+cmd);
-
-    ifstream in("inverse.out");
-
-    string aux;
-    getline(in, aux);
+    FileLine aux;
+    read_line(OUT, LINE_NO, aux);
     /* aux looks like this
      * accagggATCgcaggtaccccgcaGGcgcagAacccta   5 2   d= 2
      *
@@ -53,23 +42,42 @@ void RNAinverse::execute(string& seq, Distance& hd, Similitude& sd) throw(RNABac
      * sequence found. And 2 it's the structure distance to the target structure.
      * If max_structure_distance=0 then, this will be also equal to 0.
      */
-
-    //sequence found
-    seq = aux.substr(0, start.size());
-    for (size_t i=0; i<start.size(); ++i)
-    {
-        //all to lower because we will need to compare this sequence with the
-        //sequences in found set.
+    read_value(aux, 0, start.size(), seq);    
+    for (size_t i=0; i<start.size(); ++i)            
         seq[i] = tolower(seq[i]);
-    }
 
     //hamming distance from the start used
-    size_t from = aux.find_first_not_of(" ", start.size());
-    size_t to = aux.find_first_of(" ", from);
-    from_string<Distance>(aux.substr(from, to-from), hd);
-
+    const size_t sd_offset = read_hamming_distance(aux, start.size(), hd);
     //structure distance from the sequence found to the target structure.
-    from = aux.find_first_not_of(" ", to);
-    to = aux.find_first_of(" ", from);
-    from_string<Similitude>(aux.substr(from, to-from), sd);
+    read_structure_distance(aux, sd_offset, sd);
+}
+
+size_t RNAinverse::read_hamming_distance(FileLine& line, size_t offset, Distance& hd) const throw(RNABackendException)
+{    
+    try
+    {
+        const size_t from = ensure_found(line.find_first_not_of(" ", offset));
+        const size_t to = ensure_found(line.find_first_of(" ", from));
+        read_value(line, from, to-from, hd);
+        return to;
+    }
+    catch (StringNotFound e)
+    {
+        throw RNABackendException("Could not read hamming distance");
+    }    
+}
+
+size_t RNAinverse::read_structure_distance(FileLine& line, size_t offset, Similitude& sd) const throw(RNABackendException)
+{    
+    try
+    {
+        const size_t from = ensure_found(line.find_first_not_of(" ", offset));
+        const size_t to = ensure_found(line.find_first_of(" ", from));
+        read_value(line, from, to-from, sd);
+        return to;
+    }
+    catch (StringNotFound e)
+    {
+        throw RNABackendException("Could not read structure distance");
+    }    
 }
