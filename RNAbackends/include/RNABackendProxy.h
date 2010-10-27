@@ -37,10 +37,12 @@
 
 using std::string;
 
+//Move this definitions to rna_backends_types.h
 typedef string FileLine;
 typedef string Command;
 typedef unsigned int FileLineNo;
 typedef std::list<string> FileLinesCt;
+#define SUCCESS_EXEC 0
 
 /**
  * Execute a give command using a system call
@@ -48,8 +50,8 @@ typedef std::list<string> FileLinesCt;
  */
 inline void exec(const Command& cmd) throw(RNABackendException)
 {
-    int status = system(cmd.c_str());
-    if (status)
+    const int status = system(cmd.c_str());
+    if (status != SUCCESS_EXEC)
         throw RNABackendException("An error ocurred trying to execute: "+cmd);
 }
 
@@ -58,46 +60,14 @@ inline void exec(const Command& cmd) throw(RNABackendException)
  * @param file the file path
  * @param lines the lines to write
  */
-inline void write(const Path& file, FileLinesCt& lines) throw(RNABackendException)
-{
-    std::ofstream out;
-    out.exceptions (std::ifstream::eofbit | std::ifstream::failbit | std::ifstream::badbit);
-    try{
-        out.open(file.c_str());
-        CAutonomousIterator<FileLinesCt> it(lines);
-        while (!it.end())
-        {
-            out << *it << std::endl;
-            ++it;
-        }
-    }
-    catch (std::ifstream::failure e)
-    {
-        throw RNABackendException("An error ocurred trying to write "+file);
-    }
-    out.close();
-}
+void write(const Path& file, FileLinesCt& lines) throw(RNABackendException);
 
 /**
  * Write a file with a single line.
  * @param file the file path
  * @param line the line to write
  */
-inline void write(const Path& file, FileLine& line) throw(RNABackendException)
-{
-    std::ofstream out;
-    out.exceptions (std::ifstream::eofbit | std::ifstream::failbit | std::ifstream::badbit);
-    try
-    {
-        out.open(file.c_str());
-        out << line << std::endl;        
-    }
-    catch (std::ifstream::failure e)
-    {
-        throw RNABackendException("An error ocurred trying to write "+file);
-    }
-    out.close();
-}
+void write(const Path& file, FileLine& line) throw(RNABackendException);
 
 /**
  * Read a line from a file
@@ -105,29 +75,7 @@ inline void write(const Path& file, FileLine& line) throw(RNABackendException)
  * @param lineno the line number to read
  * @param line where to write the read line
  */
-inline void read_line(const Path& file, FileLineNo lineno, FileLine& line) throw(RNABackendException)
-{
-    std::ifstream in;
-    in.exceptions (std::ifstream::eofbit | std::ifstream::failbit | std::ifstream::badbit);
-    try
-    {
-        in.open(file.c_str());
-        if (lineno > 0)
-        {
-            string aux;
-            for (size_t i=0; i<lineno; ++i)
-            {
-                getline(in, aux);
-            }
-        }
-        getline(in, line);
-    }
-    catch (std::ifstream::failure e)
-    {
-        throw RNABackendException("An error ocurred trying to read "+file);
-    }
-    in.close();
-}
+void read_line(const Path& file, FileLineNo lineno, FileLine& line) throw(RNABackendException);
 
 /**
  * Read a value from a file line using offset and length
@@ -139,7 +87,7 @@ inline void read_line(const Path& file, FileLineNo lineno, FileLine& line) throw
 template<class T>
 inline void read_value(const FileLine& line, FileLine::size_type offset, size_t n, T& t) throw(RNABackendException)
 {
-    bool success = from_string(line.substr(offset, n), t);
+    const bool success = from_string(line.substr(offset, n), t);
     if (!success)
         throw RNABackendException("Could not read the value from given line, offset and length");
 }
@@ -152,13 +100,13 @@ inline void read_value(const FileLine& line, FileLine::size_type offset, size_t 
 template<class T>
 inline void read_value(const FileLine& line, T& t) throw(RNABackendException)
 {
-    bool success = from_string(line, t);
+    const bool success = from_string(line, t);
     if (!success)
         throw RNABackendException("Could not read the value from given line");
 }
 
+// MiLi candidates
 struct StringNotFound : std::exception{};
-
 /**
  * Ensure that a given position it's different than string::npos
  * @param found the position to compare
