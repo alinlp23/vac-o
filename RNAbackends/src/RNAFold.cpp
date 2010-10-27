@@ -1,49 +1,48 @@
-#include <cstdlib>
-#include <fstream>
-#include <iostream>
 #include <string>
 #include <mili/mili.h>
 
-using std::string;
-using std::ofstream;
-using std::ifstream;
-
 #include "RNAFold.h"
 
-Fe RNAFold::fold(const NucSequence& sequence, SecStructure& structure) const throw(RNABackendException)
-{
-    string cmd = "RNAfold -noPS < fold.in > fold.out";
-    string sseq;
-    ofstream out("fold.in");
+const Path RNAFold::IN = "fold.in";
+const Path RNAFold::OUT = "fold.out";
+const Command RNAFold::CMD = "RNAfold -noPS < "+ RNAFold::IN + " > " + RNAFold::OUT;
+const FileLineNo RNAFold::LINE_NO = 1;
 
+Fe RNAFold::fold(const NucSequence& sequence, SecStructure& structure) const throw(RNABackendException)
+{            
+    FileLine sseq;
     for (size_t i=0; i<sequence.length(); ++i)
     {
         sseq += to_str(sequence[i])[0];
-    }
-
-    out << sseq << "\n";
-    out.close();
-
-    int status = system(cmd.c_str());
-    if (status)
-        throw RNABackendException("An error ocurred trying to execute: "+cmd);
-
-    ifstream in("fold.out");
+    }    
+    write(IN, sseq);
+    exec(CMD);
+    
     /* fold.out look like this:
      * CGCAGGGAUCGCAGGUACCCCGCAGGCGCAGAUACCCUA
      * ...(((((((....(..((.....))..).))).)))). (-10.80)
     */
-    string aux;
-    //ignore first line (the sequence folded)
-    getline(in, aux);
+    FileLine aux;
+    read_line(OUT, LINE_NO, aux);
 
-    getline(in, aux);
-    structure = aux.substr(0, sequence.length());
+    read_value(aux, 0, sequence.length(), structure);
 
     Fe energy;
-    int from = aux.find_first_not_of(" ", sequence.length()) + 1;
-    int to = aux.find_first_of(" ", from) - 1;
-    from_string<Fe>(aux.substr(from, to-from), energy);
-
+    read_free_energy(aux, sequence.length(), energy);
     return energy;
+}
+
+size_t RNAFold::read_free_energy(FileLine& line, size_t offset, Fe& energy) const throw(RNABackendException)
+{    
+    try
+    {
+        const size_t from = ensure_found(line.find_first_of("(", offset)) + 1;
+        const size_t to = ensure_found(line.find_first_of(")", from)) - 1;
+        read_value(line, from, to-from, energy);
+        return to;
+    }
+    catch (StringNotFound e)
+    {
+        throw RNABackendException("Could not read free energy");
+    }    
 }

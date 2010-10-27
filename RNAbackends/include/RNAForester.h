@@ -27,12 +27,16 @@
 #define	_RNAFORESTER_H
 
 #include "IStructureCmp.h"
-
+#include "RNABackendProxy.h"
 /**
  * Implementation using system call to RNAforester
  */
 class RNAForester : public IStructureCmp
 {
+    static const Path IN;
+    static const Path OUT;
+    static const Command CMD;
+    static const FileLineNo LINE_NO;
     virtual Similitude compare(const SecStructure&,
                                const SecStructure&) const throw(RNABackendException);
 };

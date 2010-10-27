@@ -27,10 +27,17 @@
 #define	_INFORNA_H
 
 #include "RNAStartInverse.h"
-#include "types.h"
+#include "RNABackendProxy.h"
 
 class INFORNA : public RNAStartInverse
 {    
+    static const Path OUT;    
+    static const FileLineNo LINE_NO;
+
+    size_t read_sequence(FileLine&, size_t, string&) const throw(RNABackendException);
+    size_t read_hamming_distance(FileLine&, size_t, Distance&) const throw(RNABackendException);
+    size_t read_structure_distance(FileLine&, size_t, Similitude&) const throw(RNABackendException);
+    
     virtual void execute(string&, Distance&, Similitude&) throw(RNABackendException);
     virtual void query_start(IStartProvider*) throw(RNABackendException);
 public:
