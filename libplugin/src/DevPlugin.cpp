@@ -169,7 +169,7 @@ void DevPlugin::init_comb_regions()
      * Fill wt_cache with sequences that fold to wt_struct
      */
     IStartProvider* devprovider = new DevStartProvider(wt_sequence);
-    IFoldInverse* wt_inverse = new INFORNA(wt_struct, 0, 25, 10);
+    IFoldInverse* wt_inverse = new RNAinverse(wt_struct, 0, 25, 10);
     wt_inverse->query_start(devprovider);
     NucSequence tmp;
     for (size_t i=0; i<5; ++i)

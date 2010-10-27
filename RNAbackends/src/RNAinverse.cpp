@@ -9,12 +9,7 @@ const FileLineNo RNAinverse::LINE_NO = 0;
 
 RNAinverse::RNAinverse(const SecStructure& structure, Similitude sd, Distance hd, Attempts ca) :
         RNAStartInverse(structure, sd, hd, ca)
-{
-    stringstream ss;
-    int repeat = max_structure_distance == 0 ? -1 : 1;
-    ss << "RNAinverse -R " << repeat << " -a ATGC < " << IN << " > " << OUT;
-    CMD = ss.str();
-}
+{}
 
 void RNAinverse::query_start(IStartProvider* provider) throw(RNABackendException)
 {
@@ -28,8 +23,13 @@ void RNAinverse::execute(string& seq, Distance& hd, Similitude& sd) throw(RNABac
     FileLinesCt lines;
     insert_into(lines, structure);
     insert_into(lines, start);
-
     write(IN, lines);
+
+    stringstream ss;
+    int repeat = max_structure_distance == 0 ? -1 : 1;
+    ss << "RNAinverse -R " << repeat << " -a ATGC < " << IN << " > " << OUT;
+    const string CMD = ss.str();
+    
     exec(CMD);
 
     FileLine aux;
@@ -72,7 +72,7 @@ size_t RNAinverse::read_structure_distance(FileLine& line, size_t offset, Simili
     try
     {
         const size_t from = ensure_found(line.find_first_not_of(" ", offset));
-        const size_t to = ensure_found(line.find_first_of(" ", from));
+        const size_t to = ensure_found(line.find_first_of(" ", from), line.size());
         read_value(line, from, to-from, sd);
         return to;
     }

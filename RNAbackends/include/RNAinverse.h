@@ -32,8 +32,7 @@
 class RNAinverse : public RNAStartInverse
 {
     static const Path IN;
-    static const Path OUT;
-    static Command CMD;
+    static const Path OUT;    
     static const FileLineNo LINE_NO;
 
     size_t read_hamming_distance(FileLine&, size_t, Distance&) const throw(RNABackendException);
