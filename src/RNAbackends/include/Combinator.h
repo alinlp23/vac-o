@@ -29,7 +29,7 @@
 #include <vector>
 #include <list>
 #include <mili/mili.h>
-
+#include "rna_backends_types.h"
 using std::vector;
 using std::list;
 
@@ -85,6 +85,9 @@ private:
      */
     void move();    
 };
+
+typedef Combinator<std::list<SeqIndex> > SeqIndexesCombinator;
+typedef Combinator<std::list<SeqIndex> >::Combination SeqIndexesCombination;
 
 /**
  * Implementation
