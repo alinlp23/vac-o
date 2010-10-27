@@ -26,39 +26,14 @@
 #ifndef _EXCEPTIONS_H
 #define	_EXCEPTIONS_H
 
-#include <string>
-#include <exception>
-using std::exception;
-using std::string;
+#include <mili/mili.h>
 
-class Exception : public exception
-{
-    const string message;
-public:
-    explicit Exception(const string& msg): message(msg)
-    {}
-    virtual const char* what() const throw()
-    {
-        return message.c_str();
-    }
+class VACOException{};
 
-    ~Exception() throw() {};
-};
+//move this to rna_backends_exceptions.h
+DEFINE_SPECIFIC_EXCEPTION_TEXT(RNABackendException, VACOException, "RNABackend");
 
-class RNABackendException : public Exception
-{
-public:
-    RNABackendException(const string& msg) : Exception("libRNA says: \n\t"+msg)
-    {}
-};
-
-class PluginException : public Exception
-{
-public:
-    PluginException(const string& msg) :  Exception("PluginAdmin says: \n\t"+msg)
-    {}
-};
-
+DEFINE_SPECIFIC_EXCEPTION_TEXT(PluginException, VACOException, "Plugin");
 
 #endif	/* _EXCEPTIONS_H */
 
