@@ -74,7 +74,7 @@ size_t INFORNA::read_sequence(FileLine& line, size_t offset, string& seq) const 
 
         return to;
     }
-    catch (StringNotFound e)
+    catch (const StringNotFound& e)
     {
         throw RNABackendException("Could not read sequence");
     }
@@ -89,7 +89,7 @@ size_t INFORNA::read_hamming_distance(FileLine& line, size_t offset, Distance& h
         read_value(line, from, to-from, hd);
         return to;
     }
-    catch (StringNotFound e)
+    catch (const StringNotFound& e)
     {
         throw RNABackendException("Could not read hamming distance");
     }
@@ -104,7 +104,7 @@ size_t INFORNA::read_structure_distance(FileLine& line, size_t offset, Similitud
         read_value(line, from, to-from, sd);
         return to;
     }
-    catch (StringNotFound e)
+    catch (const StringNotFound& e)
     {
         sd = 0;
         return line.size();
