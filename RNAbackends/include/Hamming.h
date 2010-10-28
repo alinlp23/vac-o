@@ -40,8 +40,7 @@ public:
  */
 class Hamming : public ISequenceCmp
 {
-    DistanceMatrix matrix;
-    void initialize_distance_matrix();
+    DistanceMatrix matrix;    
     virtual Distance compare(const NucSequence&,
                              const NucSequence&) const throw(RNABackendException);
 public:
