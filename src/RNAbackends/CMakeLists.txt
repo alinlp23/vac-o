@@ -5,8 +5,7 @@ add_library(RNAbackends src/RNABackendProxy.cpp
                         src/RNAStartInverse.cpp
                         src/RNAinverse.cpp
                         src/INFORNA.cpp
-                        src/RNAForester.cpp
-                        src/viennaRNA.c)
+                        src/RNAForester.cpp)
 						
 target_link_libraries (RNAbackends -lRNA)
 		
