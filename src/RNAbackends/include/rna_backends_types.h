@@ -40,7 +40,7 @@ typedef unsigned int SeqIndex;
 /**
  * Distance between sequences
  */
-typedef unsigned int Distance;
+typedef float Distance;
 
 /**
  * Similitude between sequences or structures
@@ -76,6 +76,7 @@ typedef unsigned int FileLineNo;
 typedef std::list<std::string> FileLinesCt;
 
 #define SUCCESS_EXEC 0
+#define MATRIX_SIZE 4
 
 #endif	/* _RNA_BACKENDS_TYPES_H */
 
