@@ -1,11 +1,9 @@
-#include <algorithm>
 #include "SSRegion.h"
 #include "IFoldInverse.h"
 #include "IStructureCmp.h"
 #include "ISequenceCmp.h"
 #include "SequenceMutator.h"
 #include "IFold.h"
-using std::min;
 
 SSRegion::SSRegion(SeqIndex s, SeqIndex e, const SecStructure& wt,
                    const SecStructure& vaccine, NMutations nm, Similitude simi,
@@ -33,7 +31,8 @@ Score SSRegion::evaluate(const NucSequence& delta) const
             tmp += to_str((*it)[idx]);
         }
         NucSequence partial = tmp;
-        min_hd = min(min_hd, seq_cmp_backend->compare(delta, partial));
+
+        minimize(min_hd, seq_cmp_backend->compare(delta, partial));
         ++it;
     }
     s = min_hd / Score(end-start);    

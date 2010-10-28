@@ -41,7 +41,7 @@ size_t RNAFold::read_free_energy(FileLine& line, size_t offset, Fe& energy) cons
         read_value(line, from, to-from, energy);
         return to;
     }
-    catch (StringNotFound e)
+    catch (const StringNotFound& e)
     {
         throw RNABackendException("Could not read free energy");
     }    

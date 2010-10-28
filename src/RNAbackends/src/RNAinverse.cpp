@@ -61,7 +61,7 @@ size_t RNAinverse::read_hamming_distance(FileLine& line, size_t offset, Distance
         read_value(line, from, to-from, hd);
         return to;
     }
-    catch (StringNotFound e)
+    catch (const StringNotFound& e)
     {
         throw RNABackendException("Could not read hamming distance");
     }    
@@ -76,7 +76,7 @@ size_t RNAinverse::read_structure_distance(FileLine& line, size_t offset, Simili
         read_value(line, from, to-from, sd);
         return to;
     }
-    catch (StringNotFound e)
+    catch (const StringNotFound& e)
     {
         throw RNABackendException("Could not read structure distance");
     }    
