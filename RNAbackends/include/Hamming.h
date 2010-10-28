@@ -28,14 +28,26 @@
 
 #include "ISequenceCmp.h"
 
+class IDistanceMatrixProvider
+{
+public:
+    virtual void get_distance_matrix(DistanceMatrix& m) const = 0;
+    virtual ~IDistanceMatrixProvider(){}
+};
+
 /**
- * Very simple hamming distance implementation
+ * Hamming distance implementation using distance matrix
  */
 class Hamming : public ISequenceCmp
 {
-public:
+    DistanceMatrix matrix;
+    void initialize_distance_matrix();
     virtual Distance compare(const NucSequence&,
                              const NucSequence&) const throw(RNABackendException);
+public:
+    Hamming(const IDistanceMatrixProvider* const);
+    Hamming();
+
 };
 
 
