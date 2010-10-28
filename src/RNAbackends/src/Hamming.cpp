@@ -1,24 +1,14 @@
 #include "Hamming.h"
-#include <mili/mili.h>
 
 Hamming::Hamming() : matrix()
 {
-    initialize_distance_matrix();
+    initialize_distance_matrix(matrix);
 }
 
 Hamming::Hamming(const IDistanceMatrixProvider* const provider) : matrix()
 {
-    initialize_distance_matrix();
+    initialize_distance_matrix(matrix);
     provider->get_distance_matrix(matrix);
-}
-
-void Hamming::initialize_distance_matrix()
-{
-    for (size_t i = 0; i < MATRIX_SIZE; ++i)
-    {
-        for (size_t j = 0; j < MATRIX_SIZE; ++j)
-            matrix[i][j] = i==j ? 0.f : 1.f;
-    }
 }
 
 Distance Hamming::compare(const NucSequence& seq1,
@@ -29,10 +19,11 @@ Distance Hamming::compare(const NucSequence& seq1,
         throw RNABackendException("Hamming distance must be calculated over sequences of the same size");
     
     Distance h = 0.f;
-    for (size_t i=0; i<seq1.triplets_length(); ++i)
+    const size_t n_triplets = seq1.triplets_length();
+    for (size_t i=0; i<n_triplets; ++i)
     {
-        Triplet t1 = seq1.get_triplet(i);
-        Triplet t2 = seq2.get_triplet(i);
+        const Triplet t1 = seq1.get_triplet(i);
+        const Triplet t2 = seq2.get_triplet(i);
 
         h += t1.distance(t2, matrix);
     }
