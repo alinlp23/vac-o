@@ -44,6 +44,7 @@ class DevPlugin : public IPlugin
     void init_comb_regions();
     NucSequencesCt wt_cache;
     ICombinatoryRegion* ssregion;
+    ICombinatoryRegion* gcregion;
     CombinatoryRegionsCt regions;
 
     void init_local_search();
@@ -70,14 +71,14 @@ public:
  * Constructor
  */
 DevPlugin::DevPlugin() :
-        vacc_sequence("CGCAGGGAUCGCAGGUACCCCGCAGGCGCAGAUACCCUA"),
+        vacc_sequence("CGCAGGGAUCGCAGGUACCCCGCAGGCGCAGAUAGAGAC"),
         wt_sequence("CCGCCGCACUUAUCCCUGACGAAUUCUACCAGUCGCGAU"),        
         wt_struct("....((((((.......((.....))....))).))).."),
-        vacc_struct("...(((((((....(..((.....))..).))).))))."),
-        ires(".(..((.....))..)."),
+        vacc_struct(".((.(((((.....)).))).))................"),
+        ires(".((.(((((.....)).))).))."),
         min_distance(0), cutoff(1), attempts(2), min_distance_param(), cutoff_param(),
         fold_backend(), inverse_backend(), struct_cmp_backend(), seq_cmp_backend(),
-        wt_cache(), ssregion(), regions(), neighborhood(), strategy()
+        wt_cache(), ssregion(), gcregion(),regions(), neighborhood(), strategy()
 {    
     init_params();    
 }
@@ -143,6 +144,7 @@ void DevPlugin::unload()
     delete struct_cmp_backend;
     delete seq_cmp_backend;
     delete ssregion;
+    delete gcregion;
     delete neighborhood;
     delete strategy;
     delete this;
@@ -179,15 +181,27 @@ void DevPlugin::init_comb_regions()
         wt_inverse->fold_inverse(tmp);
         insert_into(wt_cache, tmp);        
     }
+    delete devprovider;
+    delete wt_inverse;
 
-    ssregion = new SSRegion(13, 30, wt_struct, vacc_struct, 1, 0.8f, min_distance, wt_cache,
+    ssregion = new SSRegion(0, 24, wt_struct, vacc_struct, 1, 0.8f, min_distance, wt_cache,
                             fold_backend, inverse_backend, struct_cmp_backend,
                             seq_cmp_backend);
 
     insert_into(regions, ssregion);
     
-    delete devprovider;
-    delete wt_inverse;
+    AminoSequence aminoacids;    
+    string s;
+    for (size_t i=33; i< 39; ++i)
+    {
+        s += to_str(wt_sequence[i]);
+    }
+    
+    NucSequence seq = s;    
+    seq.translate(aminoacids);
+    gcregion = new GCRegion(33, 39, aminoacids);
+
+    insert_into(regions, gcregion);
 }
 
 void DevPlugin::init_local_search()

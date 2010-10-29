@@ -2,6 +2,8 @@ include_directories(include ../RNAbackends/include)
 add_library(plugin SHARED   src/CombinatoryRegion.cpp
                             src/SSRegion.cpp
                             src/SequenceMutator.cpp
+                            src/TripletsProductor.cpp
+                            src/GCRegion.cpp
                             src/Solution.cpp
                             src/Strategy.cpp
                             src/FirstImprovement.cpp

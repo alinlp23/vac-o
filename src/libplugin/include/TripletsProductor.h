@@ -1,8 +1,8 @@
-/*
- * File:   GCRegion.h
+/* 
+ * File:   TripletsProductor.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 26, 2010, 5:31 PM
+ * Created on October 29, 2010, 12:06 PM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,30 +20,35 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- *
+ * 
  */
 
-#ifndef _GCREGION_H
-#define	_GCREGION_H
+#ifndef _TRIPLETSPRODUCTOR_H
+#define	_TRIPLETSPRODUCTOR_H
 
-#include "CombinatoryRegion.h"
-#include "TripletsProductor.h"
+#include <vector>
+#include <biopp/biopp.h>
 
-class GCRegion : public CombinatoryRegion
+using std::vector;
+
+/**
+ * Iterates over the cartesian product for all the triplets of each
+ * aminoacid in the given AminoSequence
+ */
+class TripletsProductor
 {
-    AminoSequence target_aminoacids;
-    TripletsProductor* const productor;    
-    string rbase;
-    virtual Score evaluate(const NucSequence&) const;
-    virtual Score generate(NucSequence&, NucSequence&);
-    virtual void set_base_sequence(const NucSequence&);
 public:
-    GCRegion(SeqIndex, SeqIndex, const AminoSequence&);
-    GCRegion(const GCRegion&);
-    GCRegion& operator=(const GCRegion&);
+    typedef vector<Triplet> TripletsProduct;
+    TripletsProductor(const AminoSequence& aminoacids);
+    bool next(TripletsProduct& p);
+private:
+    const size_t last;
+    bool more;
+    vector<TripletsIterator> prod_it;
+    TripletsProduct product;
 
-    ~GCRegion();
+    void move(size_t i);
 };
 
-#endif	/* _GCREGION_H */
+#endif	/* _TRIPLETSPRODUCTOR_H */
 
