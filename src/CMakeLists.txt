@@ -1,11 +1,19 @@
 cmake_minimum_required (VERSION 2.6)
 project (vac-o)
 
+option (USE_WEFFC++ "Use Weffc++ flag" OFF)
+
 #common headers
 include_directories(include)
+set(CMAKE_CXX_FLAGS "-ansi -Wall -pedantic")
 
-set(CMAKE_BUILD_TYPE Debug)
-set(CMAKE_CXX_FLAGS_DEBUG "-ansi -Wall -pedantic -ggdb3")
+if (USE_WEFFC++)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Weffc++")
+endif (USE_WEFFC++)
+
+if (CMAKE_CXX_FLAGS_DEBUG)
+    set(CMAKE_CXX_FLAGS_DEBUG "-ggdb3")
+endif(CMAKE_CXX_FLAGS_DEBUG)
 
 #RNAbakends library
 add_subdirectory (RNAbackends)
