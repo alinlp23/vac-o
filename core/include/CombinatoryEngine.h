@@ -68,10 +68,7 @@ public:
      * Constructor
      * @param plg the loaded plugin
      */
-    CombinatoryEngine(IPlugin* const);
-
-    CombinatoryEngine(const CombinatoryEngine&);
-    CombinatoryEngine& operator=(const CombinatoryEngine&);
+    CombinatoryEngine(IPlugin* const);    
 
     /**
      * Run the engine until plg->done() || strategy->done().

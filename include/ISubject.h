@@ -61,9 +61,7 @@ class ISingleSubject
 public:
     ISingleSubject():observer(NULL)
     {}
-
-    ISingleSubject(const ISingleSubject&);
-    ISingleSubject& operator=(const ISingleSubject&);
+    
     virtual ~ISingleSubject(){}
 
     virtual void set(Observer*);

@@ -78,9 +78,7 @@ public:
      */
     bool next(NucSequence&);
     
-    ~SequenceMutator();
-    SequenceMutator(const SequenceMutator&);
-    SequenceMutator& operator=(const SequenceMutator&);
+    ~SequenceMutator();    
 };
 
 #endif	/* _SEQUENCEMUTATOR_H */

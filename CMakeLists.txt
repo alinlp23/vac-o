@@ -5,7 +5,7 @@ project (vac-o)
 include_directories(include)
 
 set(CMAKE_BUILD_TYPE Debug)
-set(CMAKE_CXX_FLAGS_DEBUG "-ansi -Wall -pedantic -ggdb3 -Weffc++")
+set(CMAKE_CXX_FLAGS_DEBUG "-ansi -Wall -pedantic -ggdb3")
 
 #RNAbakends library
 add_subdirectory (RNAbackends)

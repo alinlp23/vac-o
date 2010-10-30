@@ -31,16 +31,14 @@
 
 class GCRegion : public CombinatoryRegion
 {
-    AminoSequence target_aminoacids;
+    const AminoSequence target_aminoacids;
     TripletsProductor* const productor;    
     string rbase;
     virtual Score evaluate(const NucSequence&) const;
     virtual Score generate(NucSequence&, NucSequence&);
     virtual void set_base_sequence(const NucSequence&);
 public:
-    GCRegion(SeqIndex, SeqIndex, const AminoSequence&);
-    GCRegion(const GCRegion&);
-    GCRegion& operator=(const GCRegion&);
+    GCRegion(SeqIndex, SeqIndex, const AminoSequence&);    
 
     ~GCRegion();
 };

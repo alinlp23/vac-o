@@ -66,9 +66,7 @@ public:
              NMutations, Similitude, Distance, const NucSequencesCt&,
              const IFold* const, IFoldInverse* const, const IStructureCmp* const,
              const ISequenceCmp* const);
-
-    SSRegion(const SSRegion&);
-    SSRegion& operator=(const SSRegion&);
+    
 };
 
 #endif	/* _SSREGION_H */
