@@ -69,9 +69,7 @@ protected:
      */
     virtual void execute(string&, Distance&, Similitude&) throw(RNABackendException) = 0;
 public:
-    RNAStartInverse(const SecStructure&, Similitude, Distance, CombinationAttempts);
-    RNAStartInverse(const RNAStartInverse&);
-    RNAStartInverse& operator=(const RNAStartInverse&);
+    RNAStartInverse(const SecStructure&, Similitude, Distance, CombinationAttempts);    
 
     ~RNAStartInverse();
 };
