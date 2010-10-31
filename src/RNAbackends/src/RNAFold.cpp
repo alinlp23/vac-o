@@ -1,6 +1,6 @@
 #include <string>
 #include <mili/mili.h>
-
+#include <iostream>
 #include "RNAFold.h"
 
 const FilePath RNAFold::IN = "fold.in";
@@ -25,8 +25,10 @@ Fe RNAFold::fold(const NucSequence& sequence, SecStructure& structure) const thr
     FileLine aux;
     read_line(OUT, LINE_NO, aux);
 
-    read_value(aux, 0, sequence.length(), structure);
-
+    string str;
+    read_value(aux, 0, sequence.length(), str);    
+    structure = str;    
+    
     Fe energy;
     read_free_energy(aux, sequence.length(), energy);
     return energy;

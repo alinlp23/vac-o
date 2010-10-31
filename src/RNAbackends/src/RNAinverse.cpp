@@ -21,7 +21,7 @@ void RNAinverse::query_start(IStartProvider* provider) throw(RNABackendException
 void RNAinverse::execute(string& seq, Distance& hd, Similitude& sd) throw(RNABackendException)
 {          
     FileLinesCt lines;
-    insert_into(lines, structure);
+    insert_into(lines, structure.to_str());
     insert_into(lines, start);
     write(IN, lines);
 

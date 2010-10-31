@@ -29,13 +29,41 @@
 #include <set>
 #include <list>
 #include <string>
+#include <vector>
 
-typedef std::string SecStructure;
+#include "rna_backends_exceptions.h"
 
 /**
  * Index position in a sequence
  */
 typedef unsigned int SeqIndex;
+
+class SecStructure : private std::vector<SeqIndex>
+{    
+    static const char OPEN_PAIR = '(';
+    static const char CLOSE_PAIR = ')';
+    static const char UNPAIR = '.';
+    
+    void parse_structure(const std::string structure, size_t length) throw(InvalidStructureException);
+public:
+    SecStructure();    
+    SecStructure(const std::string& structure) throw(InvalidStructureException);
+    SecStructure& operator=(const std::string& str) throw(InvalidStructureException);
+    
+    void pair(SeqIndex, SeqIndex) throw(InvalidStructureException);
+    void unpair(SeqIndex);
+    std::string to_str() const;
+    
+    inline bool is_paired(SeqIndex idx) const
+    {
+        return (*this)[idx] != size();
+    }
+
+    inline size_t size() const
+    {
+        return std::vector<SeqIndex>::size();
+    }
+};
 
 /**
  * Distance between sequences

@@ -32,5 +32,7 @@ class RNABackendExceptionRoot{};
 
 DEFINE_SPECIFIC_EXCEPTION_TEXT(RNABackendException, RNABackendExceptionRoot, "RNABackend");
 
+DEFINE_SPECIFIC_EXCEPTION_TEXT(InvalidStructureException, RNABackendExceptionRoot, "Invalid structure");
+
 #endif	/* _RNA_BACKENDS_EXCEPTIONS_H */
 
