@@ -15,6 +15,16 @@ if (CMAKE_CXX_FLAGS_DEBUG)
     set(CMAKE_CXX_FLAGS_DEBUG "-ggdb3")
 endif(CMAKE_CXX_FLAGS_DEBUG)
 
+find_file (MILI mili/mili.h)
+if (MILI-NOTFOUND)
+    message (FATAL_ERROR "You must install MiLi headers: mili.googlecode.com")
+endif (MILI-NOTFOUND)
+
+find_library (BIOPP biopp)
+if (BIOPP-NOTFOUND)
+    message (FATAL_ERROR "You must install biopp: biopp.googlecode.com")
+endif (BIOPP-NOTFOUND)
+
 #RNAbakends library
 add_subdirectory (RNAbackends)
 

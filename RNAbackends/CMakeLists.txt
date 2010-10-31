@@ -1,13 +1,52 @@
-include_directories(include /usr/local/include/ViennaRNA)
-add_library(RNAbackends src/RNABackendProxy.cpp
+include_directories(include)
+set (RNABackends_SRC    src/RNABackendProxy.cpp
                         src/SecStructure.cpp
-                        src/Hamming.cpp
-                        src/RNAFold.cpp
-                        src/RNAStartInverse.cpp
-                        src/RNAinverse.cpp
-                        src/INFORNA.cpp
-                        src/RNAForester.cpp)
-						
-target_link_libraries (RNAbackends -lRNA)
-		
+                        src/RNAStartInverse.cpp)
 
+option (RNAinverse "Compile RNAinverse backend" ON)
+option (INFORNA "Compile INFORNA backend" ON)
+option (RNAfold "Compile RNAfold backend" ON)
+option (RNAforester "Compile RNAforester backend" ON)
+option (Hamming "Compile Hamming backend" ON)
+
+if (RNAinverse)
+    find_program(RNAinverse_PROG RNAinverse)
+    if (RNAinverse_PROG)
+        set (RNABackends_SRC ${RNABackends_SRC} src/RNAinverse.cpp)
+    else (RNAinverse_PROG)
+        message (FATAL_ERROR "You must install RNAinverse")
+    endif (RNAinverse_PROG)
+endif (RNAinverse)
+
+if (INFORNA)
+    find_program(INFORNA_PROG INFO-RNA-2.1)
+    if (INFORNA_PROG)
+        set (RNABackends_SRC ${RNABackends_SRC} src/INFORNA.cpp)
+    else (INFORNA_PROG)
+        message (FATAL_ERROR "You must install INFO-RNA")
+    endif (INFORNA_PROG)
+endif (INFORNA)
+
+if (RNAfold)
+    find_program(RNAfold_PROG RNAfold)
+    if (RNAfold_PROG)
+        set (RNABackends_SRC ${RNABackends_SRC} src/RNAFold.cpp)
+    else (RNAfold_PROG)
+        message (FATAL_ERROR "You must install RNAfold")
+    endif (RNAfold_PROG)
+endif (RNAfold)
+
+if (RNAforester)
+    find_program(RNAforester_PROG RNAforester)
+    if (RNAforester_PROG)
+        set (RNABackends_SRC ${RNABackends_SRC} src/RNAForester.cpp)
+    else (RNAforester_PROG)
+        message (FATAL_ERROR "You must install RNAforester")
+    endif (RNAforester_PROG)
+endif (RNAforester)
+
+if (Hamming)
+    set (RNABackends_SRC ${RNABackends_SRC} src/Hamming.cpp)
+endif (Hamming)
+
+add_library(RNAbackends ${RNABackends_SRC})
