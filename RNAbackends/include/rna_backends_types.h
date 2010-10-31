@@ -46,7 +46,11 @@ class SecStructure
 
     std::vector<SeqIndex> structure;
     
-    void parse_structure(const std::string structure, size_t length) throw(InvalidStructureException);
+    void parse_structure(const std::string& structure, size_t length) throw(InvalidStructureException);
+    inline SeqIndex unpaired_value() const
+    {
+        return structure.size();
+    }
 public:
     SecStructure();    
     SecStructure(const std::string& structure) throw(InvalidStructureException);
@@ -58,7 +62,7 @@ public:
     
     inline bool is_paired(SeqIndex idx) const
     {
-        return structure[idx] != structure.size();
+        return structure[idx] != unpaired_value();
     }
 
     inline size_t size() const

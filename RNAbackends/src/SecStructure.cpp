@@ -1,8 +1,10 @@
 #include "rna_backends_types.h"
 #include <stack>
+#include <algorithm>
 using std::stack;
 using std::string;
 using std::vector;
+using std::swap;
 
 SecStructure::SecStructure() : structure()
 {}
@@ -28,8 +30,9 @@ SecStructure& SecStructure::operator=(const string& str) throw(InvalidStructureE
 void SecStructure::pair(SeqIndex o, SeqIndex c) throw(InvalidStructureException)
 {    
     if (c < o)
-        throw(InvalidStructureException(" Open index must be lower than close index"));    
-    else if (c-o < 4)
+        swap(o, c);
+
+    if (c-o < 4)
         throw(InvalidStructureException("Hairpin loop too small"));
     else if (c >= size())
         throw(InvalidStructureException("Close index out of range"));
@@ -46,7 +49,7 @@ void SecStructure::unpair(SeqIndex i)
 {
     if (is_paired(i))
     {
-        const SeqIndex unpaired = size();
+        const SeqIndex unpaired = unpaired_value();
         structure[structure[i]] = unpaired;
         structure[i] = unpaired;
     }
@@ -71,11 +74,10 @@ string SecStructure::to_str() const
     return str;
 }
 
-void SecStructure::parse_structure(const std::string str, size_t length) throw(InvalidStructureException)
+void SecStructure::parse_structure(const std::string& str, size_t length) throw(InvalidStructureException)
 {
-    if (size() == 0)
-        structure.resize(length, length);
-
+    
+    structure.resize(length, length);
     stack<SeqIndex> s;
     for (size_t i = 0; i<length; ++i)
     {        
