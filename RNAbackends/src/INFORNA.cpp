@@ -26,7 +26,7 @@ void INFORNA::execute(string& seq, Distance& hd, Similitude& sd) throw(RNABacken
 {
     stringstream ss;
     int repeat = max_structure_distance == 0 ? -1 : 1;
-    ss << "INFO-RNA-2.1 '" << structure << "'"
+    ss << "INFO-RNA-2.1 '" << structure.to_str() << "'"
        << " -c '" << start << "'"
        << " -R " << repeat << " > " << OUT;
 

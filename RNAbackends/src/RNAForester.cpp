@@ -9,8 +9,8 @@ Similitude RNAForester::compare(const SecStructure& struct1,
                                 const SecStructure& struct2) const throw(RNABackendException)
 {    
     FileLinesCt lines;
-    insert_into(lines, struct1);
-    insert_into(lines, struct2);
+    insert_into(lines, struct1.to_str());
+    insert_into(lines, struct2.to_str());
 
     write(IN, lines);
     exec(CMD);

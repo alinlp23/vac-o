@@ -1,5 +1,6 @@
 include_directories(include /usr/local/include/ViennaRNA)
 add_library(RNAbackends src/RNABackendProxy.cpp
+                        src/SecStructure.cpp
                         src/Hamming.cpp
                         src/RNAFold.cpp
                         src/RNAStartInverse.cpp
