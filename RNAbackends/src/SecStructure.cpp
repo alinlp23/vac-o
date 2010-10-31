@@ -78,6 +78,7 @@ void SecStructure::parse_structure(const std::string& str, size_t length) throw(
 {
     
     structure.resize(length, length);
+    const SeqIndex unpaired = unpaired_value();
     stack<SeqIndex> s;
     for (size_t i = 0; i<length; ++i)
     {        
@@ -85,7 +86,7 @@ void SecStructure::parse_structure(const std::string& str, size_t length) throw(
         switch (str[i])
         {
             case UNPAIR:
-                structure[i] = length;
+                structure[i] = unpaired;
                 break;
             case OPEN_PAIR:
                 s.push(i);
