@@ -38,11 +38,13 @@
  */
 typedef unsigned int SeqIndex;
 
-class SecStructure : private std::vector<SeqIndex>
+class SecStructure
 {    
     static const char OPEN_PAIR = '(';
     static const char CLOSE_PAIR = ')';
     static const char UNPAIR = '.';
+
+    std::vector<SeqIndex> structure;
     
     void parse_structure(const std::string structure, size_t length) throw(InvalidStructureException);
 public:
@@ -56,12 +58,12 @@ public:
     
     inline bool is_paired(SeqIndex idx) const
     {
-        return (*this)[idx] != size();
+        return structure[idx] != structure.size();
     }
 
     inline size_t size() const
     {
-        return std::vector<SeqIndex>::size();
+        return structure.size();
     }
 };
 
