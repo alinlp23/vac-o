@@ -1,24 +1,25 @@
 #include "rna_backends_types.h"
-#include <iostream>
+#include <stack>
+using std::stack;
 using std::string;
 using std::vector;
 
-SecStructure::SecStructure()
+SecStructure::SecStructure() : structure()
 {}
 
-SecStructure::SecStructure(const string& structure) throw(InvalidStructureException) :
-        vector<SeqIndex>(structure.size())
+SecStructure::SecStructure(const string& str) throw(InvalidStructureException) :
+        structure(str.size())
 {
-    parse_structure(structure, structure.size());
+    parse_structure(str, str.size());
 }
 
 SecStructure& SecStructure::operator=(const string& str) throw(InvalidStructureException)
 {    
-    this->clear();
+    structure.clear();
     if (!str.empty())
     {
         const size_t length = str.size();
-        this->reserve(length);
+        structure.reserve(length);
         parse_structure(str, length);
     }
     return *this;
@@ -36,8 +37,8 @@ void SecStructure::pair(SeqIndex o, SeqIndex c) throw(InvalidStructureException)
     {
         unpair(o);
         unpair(c);
-        (*this)[o] = c;
-        (*this)[c] = o;
+        structure[o] = c;
+        structure[c] = o;
     }        
 }
 
@@ -46,8 +47,8 @@ void SecStructure::unpair(SeqIndex i)
     if (is_paired(i))
     {
         const SeqIndex unpaired = size();
-        (*this)[(*this)[i]] = unpaired;
-        (*this)[i] = unpaired;
+        structure[structure[i]] = unpaired;
+        structure[i] = unpaired;
     }
 }
 
@@ -59,7 +60,7 @@ string SecStructure::to_str() const
     {        
         if (is_paired(i))
         {            
-            if (i<(*this)[i])
+            if (i<structure[i])
                 str += OPEN_PAIR;
             else
                 str += CLOSE_PAIR;
@@ -70,40 +71,38 @@ string SecStructure::to_str() const
     return str;
 }
 
-void SecStructure::parse_structure(const std::string structure, size_t length) throw(InvalidStructureException)
+void SecStructure::parse_structure(const std::string str, size_t length) throw(InvalidStructureException)
 {
     if (size() == 0)
-    {
-        //We need this to make the vector aware of it's size
-        //due to operator[] doesn't change the size of the vector.
-        for (size_t i=0; i<length; ++i)
-            this->push_back(length);
-    }
+        structure.resize(length, length);
 
-    std::list<SeqIndex> stack;        
+    stack<SeqIndex> s;
     for (size_t i = 0; i<length; ++i)
-    {
+    {        
         SeqIndex open;        
-        switch (structure[i])
+        switch (str[i])
         {
             case UNPAIR:
-                (*this)[i] = length;
+                structure[i] = length;
                 break;
             case OPEN_PAIR:
-                stack.push_front(i);
+                s.push(i);
                 break;
             case CLOSE_PAIR:
-                open = stack.front();                
-                pair(open, i);
-                stack.pop_front();
+                if(!s.empty())
+                {
+                    open = s.top();
+                    pair(open, i);
+                    s.pop();
+                }
+                else
+                    throw(InvalidStructureException(" Unexpected closing pair"));
                 break;
             default:
                 throw(InvalidStructureException(" Unexpected symbol: "+structure[i]));
                 break;
         }
     }    
-    if (!stack.empty())
+    if (!s.empty())
         throw(InvalidStructureException(" Pairs pending to close"));    
 }
-
-
