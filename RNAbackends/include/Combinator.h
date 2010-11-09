@@ -62,13 +62,13 @@ public:
      * @param e the container of elements to generate combinations
      * @param n the size of the combinations.
      */
-    Combinator(const C& e, size_t n);
+    Combinator(const C& e, size_t n) throw(CombinatorException);
     /**
      * Constructor
      * @param range the container of elements will be generated from 0 to range-1
      * @param n the size of the combinations.
      */
-    Combinator(size_t range, size_t n);
+    Combinator(size_t range, size_t n) throw(CombinatorException);
 private:
     typedef typename C::const_iterator ConstIterator;
     C elements;
@@ -94,14 +94,22 @@ typedef Combinator<std::list<SeqIndex> >::Combination SeqIndexesCombination;
  */
 
 template<class C>
-Combinator<C>::Combinator(const C& e, size_t n) : elements(e), combination(n), k(n), end(), start(), kit()
+Combinator<C>::Combinator(const C& e, size_t n) throw(CombinatorException) :
+        elements(e), combination(n), k(n), end(), start(), kit()
 {
+    if (e.size() < n)
+        throw CombinatorException();
+
     begin();
 }
 
 template<class C>
-Combinator<C>::Combinator(size_t range, size_t n) : elements(range), combination(n), k(n), end(), start(), kit()
+Combinator<C>::Combinator(size_t range, size_t n) throw(CombinatorException) :
+        elements(range), combination(n), k(n), end(), start(), kit()
 {
+    if (range < n)
+        throw CombinatorException();
+
     C range_ct;
     for(size_t i=0; i<range; ++i)
     {
@@ -131,13 +139,18 @@ void Combinator<C>::begin()
 template<class C>
 void Combinator<C>::move()
 {
-    ConstIterator it = start;
-    for(size_t i = 0; i<k; ++i)
+    if (k==0)
+        kit = end;
+    else
     {
-        combination[i] = *it;
-        if (i == k-1)
-            kit = it;
-        ++it;
+        ConstIterator it = start;
+        for(size_t i = 0; i<k; ++i)
+        {
+            combination[i] = *it;
+            if (i == k-1)
+                kit = it;
+            ++it;
+        }
     }
 }
 
