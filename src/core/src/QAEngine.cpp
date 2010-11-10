@@ -1,3 +1,4 @@
+#include <mili/mili.h>
 #include "QAEngine.h"
 #include <iostream>
 using std::cout;
@@ -21,5 +22,12 @@ void QAEngine::update(const SequenceOptimization* candidate)
 bool QAEngine::validate(const NucSequence& sequence) const
 {
     //validate the sequence using the QARegions
-    return true;
+    CAutonomousIterator<QARegionsCt> rs(regions);
+    bool pass(true);
+    while (!rs.end() && pass)
+    {
+        pass = (*rs)->validate(sequence);
+        ++rs;
+    }
+    return pass;
 }

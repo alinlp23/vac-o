@@ -26,8 +26,12 @@
 #ifndef _QAREGION_H
 #define	_QAREGION_H
 
-#include "IQARegion.h"
+#include <queue>
+#include "rna_backends_types.h"
 #include "types.h"
+#include "IQARegion.h"
+
+using std::queue;
 
 class IQAMutator;
 class IQAValidator;
@@ -36,11 +40,15 @@ class QARegion : public IQARegion
 {
     SeqIndex start;
     SeqIndex end;
+    Depth depth;
+
     IQAMutator* const mutator;
     const IQAValidator* const validator;
     virtual bool validate(const NucSequence&) const;
+    bool validate_mutants(const NucSequence&, const NucSequence&, queue<NucSequence>&) const;
 public:
-    QARegion(SeqIndex, SeqIndex, IQAMutator* const, const IQAValidator* const);    
+    QARegion(SeqIndex, SeqIndex, Depth, IQAMutator* const, const IQAValidator* const);
+    ~QARegion();
 };
 
 #endif	/* _QAREGION_H */

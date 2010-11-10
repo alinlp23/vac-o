@@ -35,6 +35,11 @@
 #include "SSRegion.h"
 #include "GCRegion.h"
 
+/*QA regions*/
+#include "AllMutator.h"
+#include "RandomMutator.h"
+#include "QARegion.h"
+
 /*libRNA providers*/
 #include "RNAFold.h"
 #include "RNAinverse.h"
