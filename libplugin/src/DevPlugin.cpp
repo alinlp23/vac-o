@@ -4,6 +4,7 @@ using std::cout;
 using std::cin;
 using std::endl;
 #include "IStartProvider.h"
+#include "SSValidator.h"
 
 class DevStartProvider : public IStartProvider
 {
@@ -47,6 +48,9 @@ class DevPlugin : public IPlugin
     ICombinatoryRegion* gcregion;
     CombinatoryRegionsCt regions;
 
+    void init_qa_regions();
+    IQARegion* rnd_ss;
+
     void init_local_search();
     INeighborhood* neighborhood;
     IStrategy* strategy;
@@ -71,22 +75,24 @@ public:
  * Constructor
  */
 DevPlugin::DevPlugin() :
-        vacc_sequence("CGCAGGGAUCGCAGGUACCCCGCAGGCGCAGAUAGAGAC"),
+        vacc_sequence("CGCAGGGACTGCAGGTACCCCGCAGGCGCAGATAGAGAC"),
         wt_sequence("CCGCCGCACUUAUCCCUGACGAAUUCUACCAGUCGCGAU"),        
         wt_struct("....((((((.......((.....))....))).))).."),
         vacc_struct(".((.(((((.....)).))).))................"),
         ires(".((.(((((.....)).))).))."),
         min_distance(0), cutoff(1), attempts(2), min_distance_param(), cutoff_param(),
         fold_backend(), inverse_backend(), struct_cmp_backend(), seq_cmp_backend(),
-        wt_cache(), ssregion(), gcregion(),regions(), neighborhood(), strategy()
+        wt_cache(), ssregion(), gcregion(),regions(), rnd_ss(), neighborhood(), strategy()
 {    
     init_params();    
+
 }
 
 void DevPlugin::configure()
 {
     init_backends();
     init_comb_regions();
+    init_qa_regions();
     init_local_search();
 }
 
@@ -113,7 +119,9 @@ IStrategy* DevPlugin::get_strategy() const
 }
 
 void DevPlugin::get_qa_regions(QARegionsCt& qaregions) const
-{}
+{
+    insert_into(qaregions, rnd_ss);
+}
 
 Depth DevPlugin::get_qa_depth() const
 {
@@ -147,6 +155,7 @@ void DevPlugin::unload()
     delete gcregion;
     delete neighborhood;
     delete strategy;
+    delete rnd_ss;
     delete this;
 }
 
@@ -162,7 +171,7 @@ void DevPlugin::init_params()
 void DevPlugin::init_backends()
 {
     fold_backend = new RNAFold;
-    inverse_backend = new INFORNA(ires, 0, 10, 100);
+    inverse_backend = new INFORNA(ires, 0, 20, 100);
     struct_cmp_backend = new RNAForester;
     seq_cmp_backend = new Hamming;    
 }
@@ -204,10 +213,15 @@ void DevPlugin::init_comb_regions()
     insert_into(regions, gcregion);
 }
 
+void DevPlugin::init_qa_regions()
+{
+    rnd_ss = new QARegion(0, 24, 3, new RandomMutator(5, 10), new SSValidator());
+}
+
 void DevPlugin::init_local_search()
 {
     neighborhood = new Neighborhood(regions, cutoff, attempts);
-    strategy = new FirstImprovement(neighborhood, 3, 1);
+    strategy = new FirstImprovement(neighborhood, 10, 5);
     neighborhood->set(strategy);
 }
 

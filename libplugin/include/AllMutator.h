@@ -1,8 +1,8 @@
-/*
- * File:   IQAMutator.h
+/* 
+ * File:   AllMutator.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 27, 2010, 7:20 PM
+ * Created on November 9, 2010, 4:06 PM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,35 +20,39 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- *
+ * 
  */
 
-#ifndef _IQAMUTATOR_H
-#define	_IQAMUTATOR_H
+#ifndef _ALLMUTATOR_H
+#define	_ALLMUTATOR_H
 
-#include <biopp/biopp.h>
+#include "types.h"
+#include "IQAMutator.h"
+class SequenceMutator;
 
 /**
- * Interface for sequences mutators used for QA.
+ * Adapts SequenceMutator to IQAMutator
+ * 
+ * Iterates over all possible mutations, from the
+ * 'mutations' simultaneos mutations down to
+ * every single mutation.
  */
-class IQAMutator
+class AllMutator : public IQAMutator
 {
+    SequenceMutator* mutator;
+    NMutations mutations;
+    
+    virtual bool next(NucSequence&);
+    virtual void set_base_sequence(const NucSequence&);
 public:
     /**
-     * Gets the next mutation.
-     * @param seq the sequence to write to the mutation.
-     * @return If there are more mutations pending.
+     * Constructor
+     * @param mutations the maxium number of simultaneos mutations
      */
-    virtual bool next(NucSequence&) = 0;
-
-    /**
-     * Sets the base sequence to generate mutants
-     * @param seq the sequence.
-     */
-    virtual void set_base_sequence(const NucSequence&) = 0;
-
-    virtual ~IQAMutator() {}
+    AllMutator(NMutations);
+    ~AllMutator();
 };
 
-#endif	/* _IQAMUTATOR_H */
+
+#endif	/* _ALLMUTATOR_H */
 

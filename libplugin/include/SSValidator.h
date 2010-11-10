@@ -1,8 +1,8 @@
-/*
- * File:   IQAMutator.h
+/* 
+ * File:   SSValidator.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 27, 2010, 7:20 PM
+ * Created on November 10, 2010, 4:26 PM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,35 +20,21 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- *
+ * 
  */
 
-#ifndef _IQAMUTATOR_H
-#define	_IQAMUTATOR_H
+#ifndef _SSVALIDATOR_H
+#define	_SSVALIDATOR_H
 
-#include <biopp/biopp.h>
+#include "IQAValidator.h"
 
-/**
- * Interface for sequences mutators used for QA.
- */
-class IQAMutator
+class SSValidator : public IQAValidator
 {
+    virtual bool validate(const NucSequence&) const;
 public:
-    /**
-     * Gets the next mutation.
-     * @param seq the sequence to write to the mutation.
-     * @return If there are more mutations pending.
-     */
-    virtual bool next(NucSequence&) = 0;
-
-    /**
-     * Sets the base sequence to generate mutants
-     * @param seq the sequence.
-     */
-    virtual void set_base_sequence(const NucSequence&) = 0;
-
-    virtual ~IQAMutator() {}
+    SSValidator();
 };
 
-#endif	/* _IQAMUTATOR_H */
+
+#endif	/* _SSVALIDATOR_H */
 

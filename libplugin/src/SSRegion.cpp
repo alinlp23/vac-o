@@ -26,10 +26,9 @@ Score SSRegion::evaluate(const NucSequence& delta) const
     while (!it.end())
     {
         string tmp;
-        for (size_t idx = start; idx<end; ++idx)
-        {
+        for (size_t idx = start; idx<end; ++idx)        
             tmp += to_str((*it)[idx]);
-        }
+        
         NucSequence partial = tmp;
 
         minimize(min_hd, seq_cmp_backend->compare(delta, partial));
@@ -46,10 +45,9 @@ Score SSRegion::generate(NucSequence& sequence, NucSequence& delta)
     {
         inverse_backend->fold_inverse(delta);
         sequence = base_sequence;
-        for (size_t idx=0; idx<delta.length(); ++idx)
-        {
+        for (size_t idx=0; idx<delta.length(); ++idx)        
             sequence[start+idx] = delta[idx];
-        }
+        
         pass = cache_compare(sequence) && structure_compare(sequence);
     }
     while (!pass);
@@ -66,10 +64,9 @@ void SSRegion::set_base_sequence(const NucSequence& sequence)
 void SSRegion::get_partial_start(IFoldInverse* const backend)
 {
     string tmp;
-    for (size_t idx = start; idx<end; ++idx)
-    {
+    for (size_t idx = start; idx<end; ++idx)    
         tmp += to_str(base_sequence[idx]);
-    }
+    
     NucSequence partial = tmp;
     backend->set_start(partial);
 }
