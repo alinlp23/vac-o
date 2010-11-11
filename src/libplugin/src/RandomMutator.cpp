@@ -12,7 +12,7 @@ inline void initialize_mutation_matrix(DistanceMatrix& matrix)
 }
 
 RandomMutator::RandomMutator(NMutations mutations, NMutations mutants) :
-        sequence(), mutations(mutations), mutants(mutants), counter(0), matrix(), rnd(0,1)
+        sequence(), mutations(mutations), mutants(mutants), counter(0), matrix(), rnd(0.f,1.f)
 {
     initialize_mutation_matrix(matrix);    
 }
