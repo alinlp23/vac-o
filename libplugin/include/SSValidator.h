@@ -27,24 +27,19 @@
 #define	_SSVALIDATOR_H
 
 #include "rna_backends_types.h"
+#include "IFold.h"
+#include "IStructureCmp.h"
+#include "SimilitudeCmp.h"
 #include "IQAValidator.h"
 
-class IStructureCmp;
-class IFold;
-
-enum SimilitudePolicy
-{
-    MinSimilitude, MaxSimilitude
-};
-
+template<SimilitudePolicy policy>
 class SSValidator : public IQAValidator
 {
     const IFold* const fold_backend;
     const IStructureCmp* const struct_cmp_backend;
 
     const SecStructure target_structure;
-    const Similitude similitude;
-    const SimilitudePolicy cmp_policy;
+    const Similitude similitude;    
 
     /**
      * Validate a sequence, doing the folding and comparing the
@@ -59,12 +54,29 @@ public:
      * @param fb fold backend
      * @param strb Structure compare backend
      * @param structure Target secondary structure
-     * @param simil Target similitude
-     * @param sp The similitude policy.
+     * @param simil Target similitude     
      */
-    SSValidator(const IFold*, const IStructureCmp*, const SecStructure&, Similitude, SimilitudePolicy);
+    SSValidator(const IFold*, const IStructureCmp*, const SecStructure&, Similitude);
 };
 
+//Implementation
+
+template<SimilitudePolicy policy>
+SSValidator<policy>::SSValidator(const IFold* fb, const IStructureCmp* strb,
+        const SecStructure& str, Similitude simil) :
+        fold_backend(fb), struct_cmp_backend(strb), target_structure(str),
+        similitude(simil)
+{}
+
+template<SimilitudePolicy policy>
+bool SSValidator<policy>::validate(const NucSequence& seq) const
+{
+    SecStructure seq_struct;
+    fold_backend->fold(seq, seq_struct);
+    const Similitude s = struct_cmp_backend->compare(target_structure, seq_struct);
+
+    return SimilitudeCmp<policy>::cmp(similitude, s);
+}
 
 #endif	/* _SSVALIDATOR_H */
 

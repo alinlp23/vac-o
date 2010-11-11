@@ -235,7 +235,7 @@ void DevPlugin::init_comb_regions()
 void DevPlugin::init_qa_regions()
 {
     rnd_ss = new QARegion(0, 24, 3, new RandomMutator(5, 10), 
-            new SSValidator(fold_backend, struct_cmp_backend, wt_struct, -0.5f, MaxSimilitude));
+            new SSValidator<MaxSimilitude>(fold_backend, struct_cmp_backend, wt_struct, -0.5f));
 }
 
 void DevPlugin::init_local_search()

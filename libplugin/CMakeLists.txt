@@ -4,8 +4,7 @@ add_library(plugin SHARED   src/CombinatoryRegion.cpp
                             src/SequenceMutator.cpp
                             src/AllMutator.cpp
                             src/RandomMutator.cpp
-                            src/QARegion.cpp
-                            src/SSValidator.cpp
+                            src/QARegion.cpp                            
                             src/TripletsProductor.cpp
                             src/GCRegion.cpp
                             src/Solution.cpp
