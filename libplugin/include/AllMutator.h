@@ -28,7 +28,7 @@
 
 #include "types.h"
 #include "IQAMutator.h"
-class SequenceMutator;
+#include "SequenceMutator.h"
 
 /**
  * Adapts SequenceMutator to IQAMutator
@@ -39,7 +39,7 @@ class SequenceMutator;
  */
 class AllMutator : public IQAMutator
 {
-    SequenceMutator* mutator;
+    SequenceMutator mutator;
     const NMutations mutations;
     
     virtual bool next(NucSequence&);
@@ -47,10 +47,10 @@ class AllMutator : public IQAMutator
 public:
     /**
      * Constructor
+     * @param length the sequence's length
      * @param mutations the maxium number of simultaneos mutations
      */
-    AllMutator(NMutations);
-    ~AllMutator();
+    AllMutator(size_t, NMutations);
 };
 
 

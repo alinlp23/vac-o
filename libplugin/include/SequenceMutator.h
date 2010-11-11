@@ -26,13 +26,10 @@
 #ifndef _SEQUENCEMUTATOR_H
 #define	_SEQUENCEMUTATOR_H
 
-#include "vector"
+#include "exceptions.h"
 #include "types.h"
 #include "Combinator.h"
 #include "rna_backends_types.h"
-
-using std::vector;
-
 /**
  * Iterator over sequence mutations.
  * From N simultaneos mutations to single mutations.
@@ -41,7 +38,7 @@ class SequenceMutator
 {
     NucSequence sequence;
     NucSequence mutated;
-    
+    const size_t seq_length;
     NMutations mutations;
     
     SeqIndexesCombinator* const combinator;
@@ -64,6 +61,11 @@ class SequenceMutator
      * @return If there are more mutations pending.
      */
     bool next_mutation(NucSequence&);
+
+    /**
+     * Initialize the mutator
+     */
+    void begin();
 public:
     /**
      * Constructor
@@ -71,12 +73,24 @@ public:
      * @param max_mutations the maxium number of simultaneos mutations
      */
     SequenceMutator(const NucSequence&, NMutations);
+
+    /**
+     * Constructor
+     * @param length the sequence length
+     * @param max_mutations the maxium number of simultaneos mutations
+     */
+    SequenceMutator(size_t, NMutations);
     /**
      * Gets the next mutation.
      * @param seq the sequence to write to the mutation.
      * @return If there are more mutations pending.
      */
     bool next(NucSequence&);
+    /**
+     * Re-initialize the mutator using the given sequence
+     * @param seq the sequence.
+     */
+    void begin(const NucSequence&) throw(PluginException);
     
     ~SequenceMutator();    
 };
