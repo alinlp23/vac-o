@@ -42,6 +42,8 @@ void QAEngine::update(const SequenceOptimization* candidate)
     cout << endl;
     if (validate(candidate->first))
         notify(candidate);
+    else
+        delete candidate;
 }
 
 bool QAEngine::validate(const NucSequence& sequence) const
