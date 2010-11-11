@@ -50,12 +50,12 @@ void Strategy::run(const ISolution* init, ISolutionObserver* obs)
     }
 }
 
-bool Strategy::max_idle_iterations_expired()
+bool Strategy::max_idle_iterations_expired() const
 {
     return current_iteration - best_iteration >= max_idle_iterations;
 }
 
-bool Strategy::max_iterations_expired()
+bool Strategy::max_iterations_expired() const
 {
     return current_iteration >= max_iterations;
 }

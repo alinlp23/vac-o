@@ -5,10 +5,9 @@
 IPlugin* PluginAdmin::load(const Path& file) throw(PluginException)
 {
     IPlugin* plg;
-    char* const fileName = strdup(file.c_str());
 
-    handle = dlopen(fileName, RTLD_LAZY);
-
+    handle = dlopen(file.c_str(), RTLD_LAZY);
+    
     bool success(handle != NULL);
     if (success)
     {
@@ -27,16 +26,16 @@ IPlugin* PluginAdmin::load(const Path& file) throw(PluginException)
 
         if (create_plugin == NULL)
         {
+            const string err = dlerror();
             dlclose(handle);
-            success = false;
+            throw  PluginException(err);
         }
         else
             plg = create_plugin();
     }
     else
         throw  PluginException(dlerror());
-
-    free(fileName);
+    
     return plg;
 }
 
