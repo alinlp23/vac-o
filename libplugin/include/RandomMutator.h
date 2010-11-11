@@ -46,12 +46,12 @@ public:
 class RandomMutator : public IQAMutator
 {
     NucSequence sequence;
-    NMutations mutations;
-    NMutations mutants;
+    const NMutations mutations;
+    const NMutations mutants;
     NMutations counter;
     MutationMatrix matrix;
     
-    Randomizer<float>* const rnd;
+    Randomizer<float> rnd;
     
     virtual bool next(NucSequence&);
     virtual void set_base_sequence(const NucSequence&);
@@ -69,9 +69,7 @@ public:
      * @param mutants the number of mutants being generated.
      * @param provider the mutation matrix provider
      */
-    RandomMutator(NMutations, NMutations, const IMutationMatrixProvider* const);
-
-    ~RandomMutator();
+    RandomMutator(NMutations, NMutations, const IMutationMatrixProvider* const);    
 };
 
 #endif	/* _RANDOMMUTATOR_H */

@@ -101,7 +101,7 @@ int main(int argc, char** argv)
 
     QARegionsCt qa_regions;
     plg->get_qa_regions(qa_regions);
-    QAEngine qa_engine(plg->get_qa_depth(), qa_regions);
+    QAEngine qa_engine(qa_regions);
 
     SequenceRanker ranker(plg->get_ranking_size());
 

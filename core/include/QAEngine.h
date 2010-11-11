@@ -37,8 +37,7 @@
 class IPlugin;
 
 class QAEngine : public IObserver<SequenceOptimization>, public ISubject<SequenceOptimization>
-{
-    Depth depth;
+{    
     QARegionsCt regions;
     /**
      * Implements the IObserver<NucSequence> interface.
@@ -54,11 +53,10 @@ class QAEngine : public IObserver<SequenceOptimization>, public ISubject<Sequenc
     bool validate(const NucSequence&) const;
 public:
     /**
-     * Constructor will ask the plugin for needed data.
-     * @param depth the depth for the QA tree
+     * Constructor will ask the plugin for needed data.     
      * @param regions the QA regions
      */
-    QAEngine(Depth, const QARegionsCt&);
+    QAEngine(const QARegionsCt&);
 };
 
 #endif	/* _QAENGINE_H */

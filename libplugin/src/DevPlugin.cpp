@@ -60,8 +60,7 @@ class DevPlugin : public IPlugin
     virtual const ISolution* get_initial_solution() const;
     virtual INeighborhood* get_neighborhood() const;
     virtual IStrategy* get_strategy() const;
-    virtual void get_qa_regions(QARegionsCt& qaregions) const;
-    virtual Depth get_qa_depth() const;
+    virtual void get_qa_regions(QARegionsCt& qaregions) const;    
     virtual Score evaluate_solution(const ISolution*);
     virtual RankingSize get_ranking_size() const;
     virtual void unload();
@@ -121,11 +120,6 @@ IStrategy* DevPlugin::get_strategy() const
 void DevPlugin::get_qa_regions(QARegionsCt& qaregions) const
 {
     insert_into(qaregions, rnd_ss);
-}
-
-Depth DevPlugin::get_qa_depth() const
-{
-    return 5;
 }
 
 Score DevPlugin::evaluate_solution(const ISolution* solution)

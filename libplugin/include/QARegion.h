@@ -38,16 +38,17 @@ class IQAValidator;
 
 class QARegion : public IQARegion
 {
-    SeqIndex start;
-    SeqIndex end;
-    Depth depth;
+    const SeqIndex start;
+    const SeqIndex end;
+    const Depth depth;
 
     IQAMutator* const mutator;
     const IQAValidator* const validator;
+    
     virtual bool validate(const NucSequence&) const;
     bool validate_mutants(const NucSequence&, const NucSequence&, queue<NucSequence>&) const;
 public:
-    QARegion(SeqIndex, SeqIndex, Depth, IQAMutator* const, const IQAValidator* const);
+    QARegion(SeqIndex, SeqIndex, Depth, IQAMutator*, const IQAValidator*);
     ~QARegion();
 };
 
