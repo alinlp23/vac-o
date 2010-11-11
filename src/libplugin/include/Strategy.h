@@ -48,8 +48,8 @@ protected:
     Score selected_neighbor_score;
     Score current_score;
 
-    bool max_idle_iterations_expired();
-    bool max_iterations_expired();
+    bool max_idle_iterations_expired() const ;
+    bool max_iterations_expired() const;
 
     virtual void run(const ISolution*, ISolutionObserver*);
     virtual bool done();
