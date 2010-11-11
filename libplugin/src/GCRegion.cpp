@@ -17,14 +17,13 @@ Score GCRegion::evaluate(const NucSequence& delta) const
 
 Score GCRegion::generate(NucSequence& sequence, NucSequence& delta)
 {
-    TripletsProductor::TripletsProduct current_prod;
-    bool more(true);
+    TripletsProductor::TripletsProduct current_prod;    
     string raw;
     delta = rbase;
     const size_t ntriplets = delta.triplets_length();
     do
     {
-        more = productor->next(current_prod);
+        productor->next(current_prod);
         raw.clear();
         for (size_t i=0; i< ntriplets; ++i)
         {

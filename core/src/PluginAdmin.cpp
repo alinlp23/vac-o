@@ -33,8 +33,7 @@ IPlugin* PluginAdmin::load(const Path& file) throw(PluginException)
         else
             plg = create_plugin();
     }
-
-    if (!success)
+    else
         throw  PluginException(dlerror());
 
     free(fileName);
