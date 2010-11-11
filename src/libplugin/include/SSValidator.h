@@ -26,13 +26,43 @@
 #ifndef _SSVALIDATOR_H
 #define	_SSVALIDATOR_H
 
+#include "rna_backends_types.h"
 #include "IQAValidator.h"
+
+class IStructureCmp;
+class IFold;
+
+enum SimilitudePolicy
+{
+    MinSimilitude, MaxSimilitude
+};
 
 class SSValidator : public IQAValidator
 {
+    const IFold* const fold_backend;
+    const IStructureCmp* const struct_cmp_backend;
+
+    const SecStructure target_structure;
+    const Similitude similitude;
+    const SimilitudePolicy cmp_policy;
+
+    /**
+     * Validate a sequence, doing the folding and comparing the
+     * two structures.
+     * @param seq the sequence to validate
+     * @return It depends on cmp_policy if it check for maxium o minium similitude.
+     */
     virtual bool validate(const NucSequence&) const;
 public:
-    SSValidator();
+    /**
+     * Constructor
+     * @param fb fold backend
+     * @param strb Structure compare backend
+     * @param structure Target secondary structure
+     * @param simil Target similitude
+     * @param sp The similitude policy.
+     */
+    SSValidator(const IFold*, const IStructureCmp*, const SecStructure&, Similitude, SimilitudePolicy);
 };
 
 
