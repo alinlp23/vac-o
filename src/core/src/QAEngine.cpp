@@ -3,8 +3,8 @@
 #include <iostream>
 using std::cout;
 using std::endl;
-QAEngine::QAEngine(Depth depth, const QARegionsCt& regions):
-        depth(depth), regions(regions)
+QAEngine::QAEngine(const QARegionsCt& regions):
+        regions(regions)
 {}
 
 void QAEngine::update(const SequenceOptimization* candidate)

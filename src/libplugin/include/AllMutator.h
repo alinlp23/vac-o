@@ -40,7 +40,7 @@ class SequenceMutator;
 class AllMutator : public IQAMutator
 {
     SequenceMutator* mutator;
-    NMutations mutations;
+    const NMutations mutations;
     
     virtual bool next(NucSequence&);
     virtual void set_base_sequence(const NucSequence&);

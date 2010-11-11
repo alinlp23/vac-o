@@ -12,21 +12,16 @@ inline void initialize_mutation_matrix(DistanceMatrix& matrix)
 }
 
 RandomMutator::RandomMutator(NMutations mutations, NMutations mutants) :
-        sequence(), mutations(mutations), mutants(mutants), counter(0), matrix(), rnd(new Randomizer<float>(0,1))
+        sequence(), mutations(mutations), mutants(mutants), counter(0), matrix(), rnd(0,1)
 {
     initialize_mutation_matrix(matrix);    
 }
 
 RandomMutator::RandomMutator(NMutations mutations, NMutations mutants, const IMutationMatrixProvider* provider) :
-sequence(), mutations(mutations), mutants(mutants), counter(0), matrix(), rnd(new Randomizer<float>(0,1))
+sequence(), mutations(mutations), mutants(mutants), counter(0), matrix(), rnd(0,1)
 {
     initialize_mutation_matrix(matrix);
     provider->get_mutation_matrix(matrix);
-}
-
-RandomMutator::~RandomMutator()
-{
-    delete rnd;
 }
 
 bool RandomMutator::next(NucSequence& seq)
@@ -41,8 +36,8 @@ bool RandomMutator::next(NucSequence& seq)
         const size_t length = sequence.length();
         while (i<mutations)
         {
-            const SeqIndex pos = int(rnd->get()*length);
-            const float prob = rnd->get();
+            const SeqIndex pos = int(rnd.get()*length);
+            const float prob = rnd.get();
 
             Nucleotide b = Nucleotide(0);
             float acc = matrix[seq[pos]][b];
