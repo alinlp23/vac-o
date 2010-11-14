@@ -5,3 +5,6 @@ add_library(core    src/CombinatoryEngine.cpp
                     src/SequenceOptimization.cpp
                     src/SequenceRanker.cpp)
 					
+if (COMPILE_TESTS)
+    add_subdirectory (testing)
+endif (COMPILE_TESTS)
