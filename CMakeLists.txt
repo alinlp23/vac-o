@@ -25,6 +25,20 @@ if (BIOPP-NOTFOUND)
     message (FATAL_ERROR "You must install biopp: biopp.googlecode.com")
 endif (BIOPP-NOTFOUND)
 
+option (COMPILE_TESTS "Compile tests" ON)
+if (COMPILE_TESTS)
+    find_library(GTEST gtest)
+    if (GTEST-NOTFOUND)
+        message (FATAL_ERROR "You must install googletest: googletest.googlecode.com")
+    endif (GTEST-NOTFOUND)
+
+    find_library(GMOCK gmock)
+    if (GMOCK-NOTFOUND)
+        message (FATAL_ERROR "You must install googlemock: googlemock.googlecode.com")
+    endif (GMOCK-NOTFOUND)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")    
+endif (COMPILE_TESTS)
+
 #RNAbakends library
 add_subdirectory (RNAbackends)
 
@@ -38,5 +52,4 @@ add_subdirectory (core)
 include_directories(core/include)
 add_executable(vac-o core/src/main.cpp)
 
-target_link_libraries (vac-o  core -lbiopp -ldl)
-
+target_link_libraries (vac-o core biopp dl)
