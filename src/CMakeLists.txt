@@ -15,6 +15,11 @@ if (CMAKE_CXX_FLAGS_DEBUG)
     set(CMAKE_CXX_FLAGS_DEBUG "-ggdb3")
 endif(CMAKE_CXX_FLAGS_DEBUG)
 
+option (COVERAGE "Compile with coverage flags" OFF)
+if (COVERAGE)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
+endif (COVERAGE)
+
 find_file (MILI mili/mili.h)
 if (MILI-NOTFOUND)
     message (FATAL_ERROR "You must install MiLi headers: mili.googlecode.com")
@@ -35,8 +40,7 @@ if (COMPILE_TESTS)
     find_library(GMOCK gmock)
     if (GMOCK-NOTFOUND)
         message (FATAL_ERROR "You must install googlemock: googlemock.googlecode.com")
-    endif (GMOCK-NOTFOUND)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")    
+    endif (GMOCK-NOTFOUND)    
 endif (COMPILE_TESTS)
 
 #RNAbakends library
