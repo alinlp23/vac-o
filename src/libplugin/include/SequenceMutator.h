@@ -40,6 +40,7 @@ class SequenceMutator
     NucSequence mutated;
     const size_t seq_length;
     NMutations mutations;
+    const NMutations rmutations;
     
     SeqIndexesCombinator* const combinator;
     SeqIndexesCombination positions;

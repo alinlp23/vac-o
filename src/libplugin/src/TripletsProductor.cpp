@@ -41,7 +41,9 @@ bool TripletsProductor::next(TripletsProduct& p)
 {
     bool cont(more);
     p = product;
-    move(last);
+    if (more)
+        move(last);
+    
     return cont;
 }
 

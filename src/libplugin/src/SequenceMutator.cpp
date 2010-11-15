@@ -27,13 +27,14 @@
 
 SequenceMutator::SequenceMutator(const NucSequence& seq, NMutations max) :
         sequence(seq), mutated(seq), seq_length(seq.length()), mutations(max),
-        combinator(new SeqIndexesCombinator(seq.length(), max)), positions()
+        rmutations(max), combinator(new SeqIndexesCombinator(seq.length(), max)),
+        positions()
 {    
     begin();
 }
 
 SequenceMutator::SequenceMutator(size_t length, NMutations max) :
-        sequence(), mutated(), seq_length(length), mutations(max),
+        sequence(), mutated(), seq_length(length), mutations(max), rmutations(max),
         combinator(new SeqIndexesCombinator(length, max)), positions()
 {}
 
@@ -45,7 +46,7 @@ SequenceMutator::~SequenceMutator()
 void SequenceMutator::begin()
 {
     combinator->begin();
-    combinator->next(positions);
+    combinator->next(positions);    
     reset();
 }
 
@@ -54,6 +55,8 @@ void SequenceMutator::begin(const NucSequence& seq) throw(PluginException)
     if (seq.length() != seq_length)
         throw PluginException(" SequenceMutator: sequence length must be equal to the length given at initialization");
 
+    mutations = rmutations;
+    combinator->update(mutations);
     sequence = seq;
     mutated = seq;
     begin();
