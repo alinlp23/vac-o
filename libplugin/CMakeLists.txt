@@ -14,3 +14,7 @@ add_library(plugin SHARED   src/CombinatoryRegion.cpp
                             src/DevPlugin.cpp)
 								
 target_link_libraries (plugin RNAbackends)
+
+if (COMPILE_TESTS)
+    add_subdirectory (testing)
+endif (COMPILE_TESTS)
