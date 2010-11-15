@@ -29,6 +29,11 @@
 #include <gmock/gmock.h>
 #include "IStrategy.h"
 
+using ::testing::Return;
+using ::testing::_;
+using ::testing::Invoke;
+using ::testing::DoAll;
+
 class SolutionScorerMock : public ISolutionScorer
 {
 public:
@@ -43,7 +48,16 @@ public:
 
 class StrategyMock : public IStrategy
 {    
-public:    
+public:
+    void assign_scorer(const ISolutionScorer* s)
+    {
+        scorer = s;
+    }
+    const ISolutionScorer* scorer;
+    StrategyMock()
+    {
+        ON_CALL(*this, set_scorer(_)).WillByDefault(DoAll(Invoke(this, &StrategyMock::assign_scorer), Return()));
+    }
     MOCK_METHOD2(run, void(const ISolution*, ISolutionObserver*));
     MOCK_METHOD1(set_scorer, void(const ISolutionScorer*));
     MOCK_METHOD1(update, bool(const ISolution*));
