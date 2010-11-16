@@ -1,8 +1,8 @@
-/*
- * File:   IFold.h
+/* 
+ * File:   FoldInverseMock.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 26, 2010, 5:25 PM
+ * Created on November 15, 2010, 8:52 PM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,32 +20,23 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- *
+ * 
  */
 
-#ifndef _IFOLD_H
-#define	_IFOLD_H
+#ifndef _FOLDINVERSEMOCK_H
+#define	_FOLDINVERSEMOCK_H
 
-#include <biopp/biopp.h>
-#include "rna_backends_types.h"
-#include "rna_backends_exceptions.h"
+#include <gmock/gmock.h>
+#include "IFoldInverse.h"
 
-/**
- * Interface for sequence's folding services.
- */
-class IFold
+class FoldInverseMock : public IFoldInverse
 {
 public:
-    /**
-     * Fold an ARN sequence
-     * @param sequence the ARN sequence to fold.
-     * @param structure the structure where to write the folding.
-     * @return The free energy in the structure.
-     */
-    virtual Fe fold(const NucSequence&, SecStructure&) const THROW(RNABackendException) = 0;
-
-    virtual ~IFold() {}
+    MOCK_METHOD1(fold_inverse, void(NucSequence&));
+    MOCK_METHOD1(set_start, void(const NucSequence&));
+    MOCK_METHOD1(query_start, void(IStartProvider*));
 };
 
-#endif	/* _IFOLD_H */
+
+#endif	/* _FOLDINVERSEMOCK_H */
 

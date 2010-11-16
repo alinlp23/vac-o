@@ -44,7 +44,7 @@ public:
      * @return The distance between sequences.
      */
     virtual Distance compare(const NucSequence&,
-                             const NucSequence&) const throw(RNABackendException) = 0;
+                             const NucSequence&) const THROW(RNABackendException) = 0;
 
     virtual ~ISequenceCmp() {}
 };

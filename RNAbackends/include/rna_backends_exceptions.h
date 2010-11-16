@@ -27,6 +27,11 @@
 #define	_RNA_BACKENDS_EXCEPTIONS_H
 
 #include <mili/mili.h>
+#ifndef NO_THROW_SPEC
+#       define THROW(x) throw x
+#else
+#       define THROW(x)
+#endif
 
 class RNABackendExceptionRoot{};
 

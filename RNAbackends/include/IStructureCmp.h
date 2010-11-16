@@ -43,7 +43,7 @@ public:
      * @return The similitude between structures.
      */
     virtual Similitude compare(const SecStructure& struct1,
-                               const SecStructure& struct2) const throw(RNABackendException) = 0;
+                               const SecStructure& struct2) const THROW(RNABackendException) = 0;
 
     virtual ~IStructureCmp() {}
 };
