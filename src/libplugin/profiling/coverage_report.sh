@@ -5,9 +5,8 @@ cd gcov
 cp ../../CMakeFiles/plugin.dir/src/*.gcno .
 cp ../../CMakeFiles/plugin.dir/src/*.gcda .
 
-gcov -o SequenceMutator.cpp.gcno ../../src/SequenceMutator.cpp
-gcov -o TripletsProductor.cpp.gcno ../../src/TripletsProductor.cpp
-gcov -o SSRegion.cpp.gcno ../../src/SSRegion.cpp
+cp ../../testing/CMakeFiles/libplugin_tests.dir/*.gcno .
+cp ../../testing/CMakeFiles/libplugin_tests.dir/*.gcda .
 
 cd ..
 geninfo --output-filename libplugin-coverage.info gcov
