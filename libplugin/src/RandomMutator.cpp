@@ -27,7 +27,7 @@
 #include "rna_backends_types.h"
 #include "RandomMutator.h"
 
-inline void initialize_mutation_matrix(DistanceMatrix& matrix)
+inline void initialize_mutation_matrix(MutationMatrix& matrix)
 {
     for (size_t i = 0; i < MATRIX_SIZE; ++i)
     {
@@ -62,7 +62,19 @@ bool RandomMutator::next(NucSequence& seq)
         while (i<mutations)
         {
             const SeqIndex pos = int(rnd.get()*length);
-            const float prob = rnd.get();
+            float prob;
+
+            do{
+                /*
+                 * This is useful to disable mutation between some bases.
+                 * To disable i->j mutations, set matrix[i][j] = 0.f
+                 *
+                 * If we don't ensure prob != 0 this is not possible. Anyways
+                 * the probability of getting exactly 0 (or any number) from a
+                 * random generator it's also 0.
+                */
+                prob = rnd.get();
+            } while(prob == 0.f);
 
             Nucleotide b = Nucleotide(0);
             float acc = matrix[seq[pos]][b];

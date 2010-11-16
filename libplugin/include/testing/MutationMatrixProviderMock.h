@@ -1,8 +1,8 @@
 /* 
- * File:   rna_backends_exceptions.h
+ * File:   MutationMatrixProviderMock.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on October 27, 2010, 6:42 PM 
+ * Created on November 16, 2010, 3:57 PM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -23,23 +23,18 @@
  * 
  */
 
-#ifndef _RNA_BACKENDS_EXCEPTIONS_H
-#define	_RNA_BACKENDS_EXCEPTIONS_H
+#ifndef _MUTATIONMATRIXPROVIDERMOCK_H
+#define	_MUTATIONMATRIXPROVIDERMOCK_H
 
-#include <mili/mili.h>
-#ifndef NO_THROW_SPEC
-#       define THROW(x) throw(x)
-#else
-#       define THROW(x)
-#endif
+#include <gmock/gmock.h>
+#include "RandomMutator.h"
 
-class RNABackendExceptionRoot{};
+class MutationMatrixProviderMock : public IMutationMatrixProvider
+{
+public:
+    MOCK_CONST_METHOD1(get_mutation_matrix, void(MutationMatrix& m));
+};
 
-DEFINE_SPECIFIC_EXCEPTION_TEXT(RNABackendException, RNABackendExceptionRoot, "RNABackend");
 
-DEFINE_SPECIFIC_EXCEPTION_TEXT(InvalidStructureException, RNABackendExceptionRoot, "Invalid structure");
-
-DEFINE_SPECIFIC_EXCEPTION_TEXT(CombinatorException, RNABackendExceptionRoot, "Out of range");
-
-#endif	/* _RNA_BACKENDS_EXCEPTIONS_H */
+#endif	/* _MUTATIONMATRIXPROVIDERMOCK_H */
 
