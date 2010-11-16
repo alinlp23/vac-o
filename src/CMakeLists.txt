@@ -40,7 +40,9 @@ if (COMPILE_TESTS)
     find_library(GMOCK gmock)
     if (GMOCK-NOTFOUND)
         message (FATAL_ERROR "You must install googlemock: googlemock.googlecode.com")
-    endif (GMOCK-NOTFOUND)    
+    endif (GMOCK-NOTFOUND)
+
+    ADD_DEFINITIONS(-DNO_THROW_SPEC)
 endif (COMPILE_TESTS)
 
 #RNAbakends library

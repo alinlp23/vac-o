@@ -40,8 +40,7 @@ public:
      * Make the inverse folding
      * @param sequence the NucSequence to write to.
      */
-    virtual void fold_inverse(NucSequence&) throw(RNABackendException) = 0;
-
+    virtual void fold_inverse(NucSequence&) THROW(RNABackendException) = 0;
     /**
      * Sets the start sequence for the backend.
      * @param seq the NucSequence.
@@ -53,7 +52,7 @@ public:
      * the given IStartProvider.
      * @param provider a start sequences provider.
      */
-    virtual void query_start(IStartProvider*) throw(RNABackendException) = 0;
+    virtual void query_start(IStartProvider*) THROW(RNABackendException) = 0;
 
     virtual ~IFoldInverse() {}
 };

@@ -1,8 +1,8 @@
-/*
- * File:   IFold.h
+/* 
+ * File:   SequenceCmpMock.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 26, 2010, 5:25 PM
+ * Created on November 15, 2010, 8:52 PM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,32 +20,20 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- *
+ * 
  */
 
-#ifndef _IFOLD_H
-#define	_IFOLD_H
+#ifndef _SEQUENCECMPMOCK_H
+#define	_SEQUENCECMPMOCK_H
 
-#include <biopp/biopp.h>
-#include "rna_backends_types.h"
-#include "rna_backends_exceptions.h"
+#include <gmock/gmock.h>
+#include "ISequenceCmp.h"
 
-/**
- * Interface for sequence's folding services.
- */
-class IFold
+class SequenceCmpMock : public ISequenceCmp
 {
 public:
-    /**
-     * Fold an ARN sequence
-     * @param sequence the ARN sequence to fold.
-     * @param structure the structure where to write the folding.
-     * @return The free energy in the structure.
-     */
-    virtual Fe fold(const NucSequence&, SecStructure&) const THROW(RNABackendException) = 0;
-
-    virtual ~IFold() {}
+    MOCK_CONST_METHOD2(compare, Distance(const NucSequence&, const NucSequence&));
 };
 
-#endif	/* _IFOLD_H */
+#endif	/* _SEQUENCECMPMOCK_H */
 
