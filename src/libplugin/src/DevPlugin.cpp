@@ -74,6 +74,8 @@ class DevPlugin : public IPlugin
     CombinatoryRegionsCt regions;
 
     void init_qa_regions();
+    IQAMutator* mutator;
+    IQAValidator* validator;
     IQARegion* rnd_ss;
 
     void init_local_search();
@@ -174,6 +176,8 @@ void DevPlugin::unload()
     delete gcregion;
     delete neighborhood;
     delete strategy;
+    delete mutator;
+    delete validator;
     delete rnd_ss;
     delete this;
 }
@@ -234,8 +238,10 @@ void DevPlugin::init_comb_regions()
 
 void DevPlugin::init_qa_regions()
 {
-    rnd_ss = new QARegion(0, 24, 3, new RandomMutator(5, 10), 
-            new SSValidator<MaxSimilitude>(fold_backend, struct_cmp_backend, wt_struct, -0.5f));
+    mutator = new RandomMutator(5, 10);
+    validator = new SSValidator<MaxSimilitude>(fold_backend, struct_cmp_backend, wt_struct, -0.5f);
+
+    rnd_ss = new QARegion(0, 24, 3, mutator, validator);
 }
 
 void DevPlugin::init_local_search()

@@ -1,8 +1,8 @@
-/*
- * File:   IFold.h
+/* 
+ * File:   QAValidatorMock.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 26, 2010, 5:25 PM
+ * Created on November 16, 2010, 6:23 PM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,32 +20,21 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- *
+ * 
  */
 
-#ifndef _IFOLD_H
-#define	_IFOLD_H
+#ifndef _QAVALIDATORMOCK_H
+#define	_QAVALIDATORMOCK_H
 
-#include <biopp/biopp.h>
-#include "rna_backends_types.h"
-#include "rna_backends_exceptions.h"
+#include <gmock/gmock.h>
+#include "IQAValidator.h"
 
-/**
- * Interface for sequence's folding services.
- */
-class IFold
+class QAValidatorMock : public IQAValidator
 {
 public:
-    /**
-     * Fold an ARN sequence
-     * @param sequence the ARN sequence to fold.
-     * @param structure the structure where to write the folding.
-     * @return The free energy in the structure.
-     */
-    virtual Fe fold(const NucSequence&, SecStructure&) const THROW((RNABackendException)) = 0;
-
-    virtual ~IFold() {}
+    MOCK_CONST_METHOD1(validate, bool(const NucSequence&));
 };
 
-#endif	/* _IFOLD_H */
+
+#endif	/* _QAVALIDATORMOCK_H */
 
