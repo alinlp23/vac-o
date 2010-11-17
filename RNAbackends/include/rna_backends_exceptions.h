@@ -28,7 +28,7 @@
 
 #include <mili/mili.h>
 #ifndef NO_THROW_SPEC
-#       define THROW(x) throw(x)
+#       define THROW(x) throw x
 #else
 #       define THROW(x)
 #endif

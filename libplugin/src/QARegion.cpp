@@ -35,12 +35,6 @@ QARegion::QARegion(SeqIndex s, SeqIndex e, Depth d, IQAMutator* m, const IQAVali
         start(s), end(e), depth(d), mutator(m), validator(v)
 {}
 
-QARegion::~QARegion()
-{
-    delete mutator;
-    delete validator;
-}
-
 bool QARegion::validate(const NucSequence& seq) const
 {    
     Depth d = 0;
@@ -56,12 +50,24 @@ bool QARegion::validate(const NucSequence& seq) const
     mutants.push(region);
     bool pass = validator->validate(seq);
 
-    while (d<depth && !mutants.empty() && pass)
+    while (pass && d<depth && !mutants.empty())
+    {   
+        pass = validate_level(seq, mutants);
+        ++d;
+    }
+    return pass;
+}
+
+bool QARegion::validate_level(const NucSequence& seq, queue<NucSequence>& mutants) const
+{
+    bool pass(true);
+    size_t mlevel = mutants.size();
+    while (pass && mlevel > 0)
     {
         const NucSequence current = mutants.front();
         mutants.pop();
         pass = validate_mutants(seq, current, mutants);
-        ++d;
+        --mlevel;
     }
     return pass;
 }
@@ -73,7 +79,7 @@ bool QARegion::validate_mutants(const NucSequence& seq, const NucSequence& regio
     mutator->set_base_sequence(region);
     NucSequence mutant;
     NucSequence complete_mutant = seq;
-    while (mutator->next(mutant) && pass)
+    while (pass && mutator->next(mutant))
     {
         //restore the complete sequence in order to validate it.
         for (SeqIndex i=0; i<mutant.length(); ++i)
