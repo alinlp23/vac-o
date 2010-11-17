@@ -33,6 +33,8 @@ TEST_F(SSValidatorTest, MinSimilitude)
 
     EXPECT_TRUE(validator->validate(s));
     EXPECT_FALSE(validator->validate(s));
+
+    delete validator;
 }
 
 TEST_F(SSValidatorTest, MaxSimilitude)
@@ -43,6 +45,8 @@ TEST_F(SSValidatorTest, MaxSimilitude)
 
     EXPECT_FALSE(validator->validate(s));
     EXPECT_TRUE(validator->validate(s));
+
+    delete validator;
 }
 
 
