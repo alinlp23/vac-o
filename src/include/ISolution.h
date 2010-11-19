@@ -28,6 +28,7 @@
 
 #include <biopp/biopp.h>
 #include "types.h"
+#include "exceptions.h"
 
 /**
  * Solutions represents the search space in any local search strategy.
@@ -43,7 +44,7 @@ public:
      * @param seq the new complete sequence
      * @param op the local optimization for the region being updated.
      */
-    virtual void update_solution(RegionIdx, const NucSequence&, const LocalOptimization&) = 0;
+    virtual void update_solution(RegionIdx, const NucSequence&, const LocalOptimization&) THROW((PluginException))= 0;
 
     /**
      * Gets the complete sequence of this solution
