@@ -1,8 +1,8 @@
-/*
- * File:   exceptions.h
+/* 
+ * File:   CombinatoryRegionMock.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on September 30, 2010, 11:48 PM
+ * Created on November 19, 2010, 5:03 PM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,22 +20,28 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- *
+ * 
  */
 
-#ifndef _EXCEPTIONS_H
-#define	_EXCEPTIONS_H
+#ifndef _COMBINATORYREGIONMOCK_H
+#define	_COMBINATORYREGIONMOCK_H
 
-#include <mili/mili.h>
-#ifndef NO_THROW_SPEC
-#       define THROW(x) throw x
-#else
-#       define THROW(x)
-#endif
+#include <gmock/gmock.h>
+#include "CombinatoryRegion.h"
 
-class VACOException{};
+class CombinatoryRegionMock : public CombinatoryRegion
+{
+public:
+    CombinatoryRegionMock() : CombinatoryRegion(0,0){}
+    MOCK_CONST_METHOD1(evaluate, Score(const NucSequence&));
+    MOCK_METHOD2(generate, Score(NucSequence&, NucSequence&));
 
-DEFINE_SPECIFIC_EXCEPTION_TEXT(PluginException, VACOException, "Plugin");
+    void set_bounds(SeqIndex s, SeqIndex e)
+    {
+        start = s;
+        end = e;
+    }
+};
 
-#endif	/* _EXCEPTIONS_H */
+#endif	/* _COMBINATORYREGIONMOCK_H */
 

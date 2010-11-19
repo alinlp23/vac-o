@@ -34,7 +34,7 @@ class Solution : public ISolution
     NucSequence sequence;
     LocalOptimizationCt components;
 
-    virtual void update_solution(RegionIdx, const NucSequence&, const LocalOptimization&);
+    virtual void update_solution(RegionIdx, const NucSequence&, const LocalOptimization&) throw(PluginException);
     virtual void get_sequence(NucSequence&) const;
     virtual Score compute_local_score(RegionIdx) const;
     virtual ISolution* clone() const;

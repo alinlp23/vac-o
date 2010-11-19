@@ -49,10 +49,15 @@ Solution::Solution(const NucSequence& seq, const LocalOptimizationCt& comp) :
         sequence(seq), components(comp)
 {}
 
-void Solution::update_solution(RegionIdx r, const NucSequence& seq, const LocalOptimization& op)
+void Solution::update_solution(RegionIdx r, const NucSequence& seq, const LocalOptimization& op) throw(PluginException)
 {
-    components[r] = op;
-    sequence = seq;
+    if (r < components.size() && seq.length() == sequence.length())
+    {
+        components[r] = op;
+        sequence = seq;
+    }
+    else
+        throw(PluginException(" Out of range while updating solution component"));
 }
 
 void Solution::get_sequence(NucSequence& seq) const
