@@ -35,6 +35,7 @@ public:
     CombinatoryRegionMock() : CombinatoryRegion(0,0){}
     MOCK_CONST_METHOD1(evaluate, Score(const NucSequence&));
     MOCK_METHOD2(generate, Score(NucSequence&, NucSequence&));
+    MOCK_METHOD1(set_base_sequence, void(const NucSequence&));
 
     void set_bounds(SeqIndex s, SeqIndex e)
     {
