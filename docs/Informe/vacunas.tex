@@ -1,0 +1,209 @@
+\chapter{Dise\~no de vacunas atenuadas}
+\label{diseno}
+\epigraph{Science is always wrong. It never solves a problem without creating
+ten more.}%
+{George Bernard Shaw}
+
+Una vacuna atenuada es aquella que es creada reduciendo la virulencia de un
+pat\'ogeno pero aun as\'i, manteni\'endolo viable (``vivo''). Antes de
+adentrarnos en los detalles de lo que plantea este trabajo como metodolog\'ia
+para racionalizar el dise\~no de vacunas atenuadas, veremos brevemente algunos
+antecedentes y cual fue, y sigue siendo, la metodolog\'ia cl\'asica para la
+producci\'on de este tipo de vacunas.
+
+\section{Dise\~no cl\'asico}
+
+La metodolog\'ia para la producci\'on de vacunas atenuadas ha sido
+hist\'oricamente, el pasaje del virus a trav\'es de cultivos de c\'elulas
+distintas a las c\'elulas hu\'esped. De esta manera, el virus tiende a
+``evolucionar'' para adaptarse al nuevo hu\'esped y ser capaz de reproducirse.
+
+Este concepto de ``evoluci\'on'', se traduce en alguna cantidad de mutaciones
+sobre la secuencia de nucle\'otidos del virus y que se espera, reduzcan su
+capacidad de reproducirse en el hu\'esped original. Luego, son precisamente
+estas mutaciones las que le confieren la atenuaci\'on y dan lugar a la vacuna
+atenuada.
+
+La principal desventaja en este proceso, es que las mutaciones que se producen
+son totalmente impredecibles y aun cuando estas mutaciones derivan en un virus
+atenuado, este podr\'ia revertir a la virulencia dependiendo de la naturaleza de
+las mutaciones que generan la atenuaci\'on\cite{Badgett02}. Adem\'as, como vimos
+en la secci\'on~\ref{virus}, la alta frecuencia de mutaciones que poseen los
+virus \ac{RNA} aumenta la probabilidad de reversi\'on a la virulencia. De hecho,
+esto es lo que ocurre con muchas vacunas atenuadas y en particular, con la
+\ac{OPV}.
+
+A pesar de este peligro de reversi\'on a la virulencia, esta sigue siendo la
+principal metodolog\'ia para la producci\'on de vacunas atenuadas. Esto se debe,
+fundamentalmente, a la falta de conocimiento sobre el significado o incidencia
+de las mutaciones en la atenuaci\'on de un determinado virus. Sin embargo, los
+recientes avances en la virolog\'ia molecular, han permitido explorar nuevas
+t\'ecnicas que permitan controlar la replicaci\'on de un virus o su virulencia y
+esto abri\'o la puerta a lo que se denomina ``dise\~no racional de vacunas
+atenuadas''\cite{Lauring10}.
+
+\section{Dise\~no racional}
+
+La idea central en esta nueva metodolog\'ia, en la que se enmarca en este
+trabajo, es explotar el conocimiento que se ha producido en los \'ultimos
+a\~nos acerca de la biolog\'ia molecular de determinados virus. Pudiendo
+controlar la replicaci\'on de un virus o su virulencia, ser\'ia posible
+dise\~nar vacunas atenuadas ``seguras'' evitando la impredecibilidad de las
+atenuaciones emp\'iricas obtenidas mediante el dise\~no cl\'asico.
+
+\subsection{Antecedentes}
+
+Existen diferentes aproximaciones al dise\~no racional de vacunas
+atenuadas\cite{Lauring10}. En general, todas estas aproximaciones se encuentran
+en fase experimental y todav\'ia no se han aplicado en producci\'on. A
+continuaci\'on hacemos menci\'on a tan solo dos de ellas, fundamentalmente para
+marcar la diferencia con el dise\~no cl\'asico que presentamos anteriormente.
+
+\subsubsection{Fidelidad en la replicaci\'on\cite{Vignuzzi08}} 
+
+Como ya vimos en la secci\'on~\ref{virus}, la alta frecuencia de mutaciones en
+los virus \ac{RNA} se debe a la alta tasa de error en su \ac{RNA} polimerasa.
+Luego, modificando la \ac{RNA} polimerasa de tal manera que se reduzca su tasa
+de error, se obtendr\'ia un virus atenuado mas estable y con menor probabilidad
+de revertir a la virulencia en las sucesivas replicaciones. 
+
+La principal desventaja de esta aproximaci\'on radica en que las
+posibles variantes sobre la \ac{RNA} polimerasa deben ser determinadas y
+evaluadas experimentalmente para cada virus en particular.
+
+\subsubsection{(De-)Optimizaci\'on de codones\cite{Mueller10, Coleman08}} 
+
+Si recordamos lo dicho en la secci\'on~\ref{bio-esencial} sobre el c\'odigo
+gen\'etico, vimos que cada amino\'acido puede ser codificado hasta por 6
+codones distintos. Es decir, distintas secuencias de nucle\'otidos resultan
+equivalentes en t\'erminos de los amino\'acidos que codifican. Concretamente,
+una prote\'ina de 300 amino\'acidos puede ser codificada por aproximadamente, 
+$10^{151}$ secuencias de nucle\'otidos. 
+
+Sin embargo, experimentalmente se pudo comprobar que algunos codones son mas
+frecuentes que otros (``codon bias''). Similarmente, pero de manera
+independiente, se comprob\'o que determinados pares de codones son mas
+frecuentes que otros (``codon pair bias''). Aunque todav\'ia no esta claro a que
+se debe esta ``parcialidad'' en el uso de codones o pares de codones, se supone
+que afectar\'ia el proceso de s\'intesis de prote\'inas
+(traducci\'on). 
+
+Lo que se propone con esta aproximaci\'on, es determinar las secuencias de
+nucle\'otidos que conserven la secuencia aminoac\'idica del virus pero que al
+mismo tiempo, tiendan a usar codones y pares de codones menos frecuentes. De
+esta manera, la atenuaci\'on del virus se obtendr\'ia debilitando su capacidad
+de traducci\'on y replicaci\'on. 
+
+Entre las ventajas que presenta esta metodolog\'ia, se destaca por un lado que
+la atenuaci\'on es el resultado de un an\'alisis sistem\'atico y por lo tanto,
+aplicable a diferentes virus de manera autom\'atica. Por otro lado, la alta
+cantidad de cambios que se realizan sobre el virus original sugieren una menor
+probabilidad de revertir a la virulencia.
+
+\subsection{Propuesta}
+
+La propuesta que realizamos en este trabajo tiene algunos puntos en com\'un con
+la ``(de-)optimizaci\'on de codones'' que presentamos anteriormente. En
+particular, ambas aproximaciones comparten la idea de sistematizar el dise\~no
+de forma tal que pueda ser usado para diferentes virus. Esto implica
+fundamentalmente, plasmar la metodolog\'ia en la implementaci\'on de un software
+que a partir de una serie de datos provistos por el usuario, devuelva como
+resultado una o varias secuencias de nucle\'otidos que representen posibles
+atenuaciones del virus.
+
+De una forma mas abstracta, podemos pensar en un software para el dise\~no de
+secuencias de nucle\'otidos basado en restricciones. Fundamentalmente, lo que se
+busca es ``generar'' secuencias que satisfagan determinadas propiedades o
+restricciones. En particular, aquellas que permitan considerar a las secuencias
+generadas como virus atenuados.
+
+En este sentido, se podr\'ia trazar una analog\'ia con los algoritmos para la
+predicci\'on inversa de estructura secundaria (\textit{inverse folding}). En
+esencia, estos algoritmos ``dise\~nan'' secuencias de \ac{RNA} que tengan como
+estructura secundaria \ac{mfe}, la estructura dada por el usuario. De hecho,
+como mencionamos en la secci\'on~\ref{inverse}, el problema se plantea
+computacionalmente como un \ac{CSP}.
+
+La principal innovaci\'on de esta propuesta es que se pone el foco en la
+importancia del \ac{IRES} y su estructura secundaria, en la traducci\'on y
+replicaci\'on de diferentes virus \ac{RNA}. En especial y tal como vimos en la
+secci\'on~\ref{virus}, del poliovirus.
+
+Lo que nos proponemos en este trabajo, es realizar un an\'alisis
+sistem\'atico de las posibles variantes al \ac{IRES} de los virus atenuados
+Sabin (y eventualmente cualquier otro) que conserven la estructura secundaria y
+en consecuencia, la atenuaci\'on del virus. Luego, maximizando la cantidad de
+mutaciones necesarias para revertir a secuencias semejantes a las pat\'ogenas o
+revertantes, estar\'iamos reduciendo la probabilidad de que el virus atenuado
+sufra reversi\'on a la virulencia.
+
+En resumen, podr\'iamos plantear el problema de la siguiente manera:
+\begin{itemize}
+ \item \textbf{Entrada:} Genoma del virus atenuado, genoma del pat\'ogeno o
+revertantes y un conjunto de restricciones. Fundamentalmente, la conservaci\'on
+de la estructura secundaria del \ac{IRES} del virus atenuado.
+ \item \textbf{Objetivo:} Satisfaciendo las restricciones impuestas, maximizar
+la cantidad de mutaciones necesarias para convertir el virus atenuado en alguna
+secuencia pat\'ogena o revertante.
+ \item \textbf{Salida:} Una o varias secuencias, candidatas a ``mejorar'' el
+virus atenuado.
+\end{itemize}
+
+Como mencionamos en la secci\'on~\ref{propuesta} esto puede ser visto como un
+problema de \textbf{``optimizaci\'on combinatoria basado en restricciones''}.
+Pero para hacerlo, primero se deben identificar algunos elementos fundamentales
+que permitan definir el problema.
+
+Sea $N$ la longitud de la secuencia de \ac{RNA} del virus atenuado, y para $k
+\in \mathbb{N}$ sea $\mathcal{S}_{k}$ el conjunto de secuencias de \ac{RNA} de
+longitud $k$. Entonces definimos:
+
+\begin{itemize} 
+ \item \textbf{Espacio de soluciones:} $\mathcal{S}_{N}$
+
+ \item \textbf{Componentes variables de una soluci\'on:} $s_{1},s_{2}, \dots,
+s_{n}$ tal que $s_{i} \in \mathcal{S}_{N_{i}}$ con $1 \le i \le n$ y $0 < N_{i}
+\le N$
+
+ \item \textbf{Restricciones sobre las componentes:} Conservaci\'on de la
+estructura secundaria o de la secuencia aminoac\'idica con respecto al virus
+atenuado, entre otras.
+
+ \item \textbf{Funci\'on ``objetivo'' o de evaluaci\'on:} $f: \mathcal{S}_{N}
+\rightarrow \mathbb{R}$ tal que $f(s)$ calcula la distancia entre la soluci\'on
+$s$ y alguna secuencia pat\'ogena o revertante.
+\end{itemize}
+
+Lo primero que podemos mencionar es que para cualquier virus \ac{RNA}, recorrer
+el espacio de soluciones de manera exhaustiva es inviable ya que por ejemplo,
+para el caso del poliovirus, $N \simeq 7,500$. Es decir que existen
+aproximadamente $4^{7,500}$ posibles secuencias de \ac{RNA}.
+
+Por otro lado, la posibilidad de evaluar los posibles valores para cada
+componente $s_{i}$ de manera exhaustiva, depender\'a fundamentalmente del tipo
+de restricci\'on impuesta sobre esa componente y de la longitud $N_{i}$. En
+particular para los virus atenuados Sabin y la conservaci\'on de la estructura
+secundaria del \ac{IRES} ($N_{i} \simeq 400$), la evaluaci\'on exhaustiva
+ser\'ia inviable.
+
+Por ultimo, nos queda por definir la funci\'on de evaluaci\'on $f:
+\mathcal{S}_{N} \rightarrow \mathbb{R}$. En principio se podr\'ia pensar que la
+imagen de la funci\'on, sea $\mathbb{N}$ en lugar de $\mathbb{R}$. De hecho,
+este es el caso si la funci\'on calcula la distancia de Hamming est\'andar.
+Esto es, sumar 1 por cada una de las bases en las que difiere la secuencia
+soluci\'on de la secuencia pat\'ogena. Pero de esta manera se estar\'ia
+suponiendo que la probabilidad de mutaci\'on entre las bases es uniforme y
+esto no es as\'i necesariamente. 
+
+Luego, determinando emp\'iricamente la probabilidad de mutaci\'on de cada base
+hacia cualquiera de las otras tres, se podr\'ia incluir esta informaci\'on en la
+funci\'on de evaluaci\'on. Eventualmente, tambi\'en se podr\'ian considerar
+c\'alculos de distancia mas complejos como es el caso de la ``Distancia de
+Levenshtein''.
+
+Con el problema planteado de esta manera, se pueden utilizar diferentes
+algoritmos de b\'usqueda local para que partiendo de una secuencia de \ac{RNA}
+inicial, en este caso el virus atenuado, recorrer el espacio de b\'usqueda
+$\mathcal{S}_{N}$ teniendo como objetivo, maximizar la funci\'on de evaluaci\'on
+$f$.
+
