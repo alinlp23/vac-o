@@ -85,5 +85,9 @@ TEST_F(SolutionTest, UpdateSolutionException)
     NucSequence cseq;
     EXPECT_THROW(s->update_solution(2, cseq, op), PluginException);
 
+    string str = "AA";
+    cseq = str;
+    EXPECT_THROW(s->update_solution(0, cseq, op), PluginException);
+
     delete s;
 }
