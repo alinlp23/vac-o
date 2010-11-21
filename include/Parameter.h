@@ -26,6 +26,7 @@
 #ifndef _PARAMETER_H
 #define	_PARAMETER_H
 
+#include <mili/mili.h>
 #include "IParameter.h"
 
 template<class Type>
