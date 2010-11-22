@@ -239,7 +239,7 @@ void DevPlugin::init_comb_regions()
 void DevPlugin::init_qa_regions()
 {
     mutator = new RandomMutator(5, 10);
-    validator = new SSValidator<MaxSimilitude>(fold_backend, struct_cmp_backend, wt_struct, -0.5f);
+    validator = new SSValidator<MaxSimilitude>(fold_backend, struct_cmp_backend, wt_struct, .5f);
 
     rnd_ss = new QARegion(0, 24, 3, mutator, validator);
 }
@@ -247,7 +247,7 @@ void DevPlugin::init_qa_regions()
 void DevPlugin::init_local_search()
 {
     neighborhood = new Neighborhood(regions, cutoff, attempts);
-    strategy = new FirstImprovement(neighborhood, 10, 5);
+    strategy = new BestImprovement(neighborhood, 10, 5);
     neighborhood->set(strategy);
 }
 

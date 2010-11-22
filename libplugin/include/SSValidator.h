@@ -73,9 +73,14 @@ bool SSValidator<policy>::validate(const NucSequence& seq) const
 {
     SecStructure seq_struct;
     fold_backend->fold(seq, seq_struct);
-    const Similitude s = struct_cmp_backend->compare(target_structure, seq_struct);
 
-    return SimilitudeCmp<policy>::cmp(similitude, s);
+    bool pass(true);
+    if (seq_struct.pair_length() > 0)
+    {
+        const Similitude s = struct_cmp_backend->compare(target_structure, seq_struct);
+        pass = SimilitudeCmp<policy>::cmp(similitude, s);
+    }
+    return pass;
 }
 
 #endif	/* _SSVALIDATOR_H */

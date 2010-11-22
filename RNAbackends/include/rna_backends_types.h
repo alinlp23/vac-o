@@ -65,6 +65,17 @@ public:
         return structure[idx] != unpaired_value();
     }
 
+    inline size_t pair_length() const
+    {
+        size_t paired = 0;
+        for (SeqIndex i=0; i<structure.size(); ++i)
+        {
+            if (is_paired(i))
+                paired++;
+        }
+        return paired/2;
+    }
+
     inline size_t size() const
     {
         return structure.size();

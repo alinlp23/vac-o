@@ -10,6 +10,7 @@ add_library(plugin SHARED   src/CombinatoryRegion.cpp
                             src/Solution.cpp
                             src/Strategy.cpp
                             src/FirstImprovement.cpp
+                            src/BestImprovement.cpp
                             src/Neighborhood.cpp
                             src/DevPlugin.cpp)
 								

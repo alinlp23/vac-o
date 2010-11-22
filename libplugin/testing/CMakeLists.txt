@@ -9,6 +9,7 @@
                                 SolutionTests.cpp
                                 NeighborhoodTests.cpp
                                 FirstImprovementTests.cpp
+                                BestImprovementTests.cpp
                                 ParameterTests.cpp)
 
 add_executable(libplugin_tests ${libplugin_testing_src})

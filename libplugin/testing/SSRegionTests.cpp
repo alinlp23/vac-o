@@ -89,6 +89,12 @@ public:
             EXPECT_EQ(seq[i], base[i]);
         }
     }
+
+    Fe fake_fold(const NucSequence& seq, SecStructure& str)
+    {
+        str = "((...))";
+        return -3.f;
+    }
 };
 
 TEST_F(SSRegionTest, SetBaseSequencePartial)
@@ -182,7 +188,8 @@ TEST_F(SSRegionTest, CheckMutations)
             .WillRepeatedly(Return(.5f));
 
     EXPECT_CALL(fold_backend, fold(_,_))
-            .Times(times);
+            .Times(times)
+            .WillRepeatedly(Invoke(this, &SSRegionTest::fake_fold));
 
     EXPECT_CALL(inverse_backend, fold_inverse(_))
             .Times(1)
@@ -215,7 +222,8 @@ TEST_F(SSRegionTest, CheckMutationsStopAsSoonAsFail)
             .WillRepeatedly(Return(.5f)); //210 times
 
     EXPECT_CALL(fold_backend, fold(_,_))
-            .Times(times);
+            .Times(times)
+            .WillRepeatedly(Invoke(this, &SSRegionTest::fake_fold));
 
     EXPECT_CALL(inverse_backend, fold_inverse(_))
             .Times(2)

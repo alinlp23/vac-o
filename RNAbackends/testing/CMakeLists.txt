@@ -19,5 +19,7 @@ if (Hamming)
     set(backends_testing_src ${backends_testing_src} HammingTests.cpp)
 endif (Hamming)
 
+set(backends_testing_src ${backends_testing_src} SecStructureTests.cpp)
+
 add_executable(backends_tests ${backends_testing_src})
 target_link_libraries (backends_tests RNAbackends biopp pthread gtest_main gmock)
