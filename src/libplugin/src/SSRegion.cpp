@@ -123,7 +123,9 @@ bool SSRegion::structure_compare(const NucSequence& seq)
     while (mutator.next(mutated) && pass)
     {
         fold_backend->fold(mutated, mutated_struct);
-        pass = max_similitude > struct_cmp_backend->compare(wt_structure, mutated_struct);
+        
+        if (mutated_struct.pair_length() > 0)
+            pass = max_similitude > struct_cmp_backend->compare(wt_structure, mutated_struct);
     }
     return pass;
 }

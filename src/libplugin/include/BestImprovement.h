@@ -1,8 +1,8 @@
-/*
- * File:   libplugin.h
+/* 
+ * File:   BestImprovement.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on October 1, 2010, 12:55 AM
+ * Created on November 22, 2010, 12:31 PM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,39 +20,22 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- *
+ * 
  */
 
-#ifndef _LIBPLUGIN_H
-#define	_LIBPLUGIN_H
-#include <mili/mili.h>
-#include "IPlugin.h"
+#ifndef _BESTIMPROVEMENT_H
+#define	_BESTIMPROVEMENT_H
 
-/*Parameters*/
-#include "Parameter.h"
-
-/*Combinatory regions*/
-#include "SSRegion.h"
-#include "GCRegion.h"
-
-/*QA regions*/
-#include "AllMutator.h"
-#include "RandomMutator.h"
-#include "QARegion.h"
-
-/*libRNA providers*/
-#include "RNAFold.h"
-#include "RNAinverse.h"
-#include "INFORNA.h"
-#include "RNAForester.h"
-#include "Hamming.h"
-
-/*LocalSearch*/
-#include "Solution.h"
 #include "Strategy.h"
-#include "Neighborhood.h"
-#include "FirstImprovement.h"
-#include "BestImprovement.h"
 
-#endif	/* _LIBPLUGIN_H */
+class BestImprovement : public Strategy
+{
+    virtual bool select_neighbor();
+    virtual bool update(const ISolution*);
+    Score selected;    
+public:
+    BestImprovement(const INeighborhood*, Iteration, Iteration);
+};
+
+#endif	/* _BESTIMPROVEMENT_H */
 
