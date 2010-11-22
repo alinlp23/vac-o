@@ -24,13 +24,15 @@
  */
 
 #include <string>
+#include <sstream>
 #include <mili/mili.h>
-#include <iostream>
 #include "RNAFold.h"
+#include "RNABackendsConfig.h"
+
+using std::stringstream;
 
 const FilePath RNAFold::IN = "fold.in";
 const FilePath RNAFold::OUT = "fold.out";
-const Command RNAFold::CMD = "RNAfold -noPS < "+ RNAFold::IN + " > " + RNAFold::OUT;
 const FileLineNo RNAFold::LINE_NO = 1;
 
 Fe RNAFold::fold(const NucSequence& sequence, SecStructure& structure) const throw(RNABackendException)
@@ -41,6 +43,10 @@ Fe RNAFold::fold(const NucSequence& sequence, SecStructure& structure) const thr
         sseq += to_str(sequence[i])[0];
     }    
     write(IN, sseq);
+    
+    stringstream ss;
+    ss << RNAfold_PROG << " -noPS < " << IN << " > " << OUT;
+    const Command CMD = ss.str();
     exec(CMD);
     
     /* fold.out look like this:

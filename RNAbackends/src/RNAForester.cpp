@@ -23,16 +23,25 @@
  *
  */
 
+#include <sstream>
+
 #include "RNAForester.h"
+#include "RNABackendsConfig.h"
+
+using std::stringstream;
 
 const FilePath RNAForester::IN = "forester.in";
 const FilePath RNAForester::OUT = "forester.out";
-const Command RNAForester::CMD = "RNAforester -r --score -f "+ RNAForester::IN +" > "+RNAForester::OUT;
 const FileLineNo RNAForester::LINE_NO = 1;
 
-Similitude RNAForester::compare(const SecStructure& struct1,
-                                const SecStructure& struct2) const throw(RNABackendException)
-{    
+Similitude RNAForester::compare(const SecStructure& struct1, const SecStructure& struct2) const throw(RNABackendException)
+{
+    stringstream ss;
+    ss << RNAforester_PROG << " -r --score -f "
+       << IN << " > " << OUT;
+
+    const Command CMD = ss.str();
+
     FileLinesCt lines;
     insert_into(lines, struct1.to_str());
     insert_into(lines, struct2.to_str());

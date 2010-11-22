@@ -75,6 +75,9 @@ void RNAStartInverse::fold_inverse(NucSequence& sequence) throw(RNABackendExcept
 
 void RNAStartInverse::set_start(const NucSequence& sequence)
 {
+    if (sequence.length() < max_sequence_distance)
+        throw RNABackendException("Start sequence must have at least 'max_sequence_distance' length");
+    
     //clear any previous start and found set.
     start.clear();
     found.clear();
