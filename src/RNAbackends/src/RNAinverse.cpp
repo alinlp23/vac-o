@@ -24,6 +24,7 @@
  */
 
 #include <sstream>
+#include "RNABackendsConfig.h"
 #include "RNAinverse.h"
 #include "IStartProvider.h"
 using std::stringstream;
@@ -52,7 +53,7 @@ void RNAinverse::execute(string& seq, Distance& hd, Similitude& sd) throw(RNABac
 
     stringstream ss;
     int repeat = max_structure_distance == 0 ? -1 : 1;
-    ss << "RNAinverse -R " << repeat << " -a ATGC < " << IN << " > " << OUT;
+    ss << RNAinverse_PROG << " -R " << repeat << " -a ATGC < " << IN << " > " << OUT;
     const string CMD = ss.str();
     
     exec(CMD);

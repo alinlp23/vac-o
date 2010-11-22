@@ -36,8 +36,7 @@ Hamming::Hamming(const IDistanceMatrixProvider* const provider) : matrix()
     provider->get_distance_matrix(matrix);
 }
 
-Distance Hamming::compare(const NucSequence& seq1,
-                          const NucSequence& seq2) const throw(RNABackendException)
+Distance Hamming::compare(const NucSequence& seq1, const NucSequence& seq2) const throw(RNABackendException)
 {
     
     if (seq1.length() != seq2.length())

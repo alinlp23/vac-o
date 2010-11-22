@@ -1,8 +1,8 @@
-/*
- * File:   RNAForester.h
+/* 
+ * File:   StartProviderMock.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on October 1, 2010, 7:00 PM
+ * Created on November 21, 2010, 7:07 PM 
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,25 +20,22 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- *
+ * 
  */
 
-#ifndef _RNAFORESTER_H
-#define	_RNAFORESTER_H
+#ifndef _STARTPROVIDERMOCK_H
+#define	_STARTPROVIDERMOCK_H
 
-#include "IStructureCmp.h"
-#include "RNABackendProxy.h"
-/**
- * Implementation using system call to RNAforester
- */
-class RNAForester : public IStructureCmp
+#include <gmock/gmock.h>
+#include "IStartProvider.h"
+
+class StartProviderMock : public IStartProvider
 {
-    static const FilePath IN;
-    static const FilePath OUT;    
-    static const FileLineNo LINE_NO;
-    virtual Similitude compare(const SecStructure&,
-                               const SecStructure&) const throw(RNABackendException);
+public:
+    MOCK_METHOD1(get_partial_start, void(IFoldInverse* const));
+    MOCK_METHOD1(get_complete_start, void(IFoldInverse* const));
 };
 
-#endif	/* _RNAFORESTER_H */
+
+#endif	/* _STARTPROVIDERMOCK_H */
 
