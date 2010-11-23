@@ -11,10 +11,11 @@ add_library(plugin SHARED   src/CombinatoryRegion.cpp
                             src/Strategy.cpp
                             src/FirstImprovement.cpp
                             src/BestImprovement.cpp
+                            src/SimulatedAnnealing.cpp
                             src/Neighborhood.cpp
                             src/DevPlugin.cpp)
 								
-target_link_libraries (plugin RNAbackends)
+target_link_libraries (plugin RNAbackends -lm)
 
 if (COMPILE_TESTS)
     add_subdirectory (testing)

@@ -1,8 +1,8 @@
 /*
- * File:   FirstImprovement.cpp
+ * File:   BestImprovement.cpp
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 10, 2010, 4:26 PM
+ * Created on November 22, 2010, 4:26 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -24,7 +24,7 @@
  */
 
 #include "BestImprovement.h"
-#include <iostream>
+
 BestImprovement::BestImprovement(const INeighborhood* ne, Iteration max, Iteration max_idle):
         Strategy(ne,max, max_idle), selected() {}
 

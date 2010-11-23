@@ -194,7 +194,7 @@ void DevPlugin::init_params()
 void DevPlugin::init_backends()
 {
     fold_backend = new RNAFold;
-    inverse_backend = new INFORNA(ires, 0, 20, 100);
+    inverse_backend = new INFORNA(ires, 2, 20, 100);
     struct_cmp_backend = new RNAForester;
     seq_cmp_backend = new Hamming;    
 }
@@ -247,7 +247,7 @@ void DevPlugin::init_qa_regions()
 void DevPlugin::init_local_search()
 {
     neighborhood = new Neighborhood(regions, cutoff, attempts);
-    strategy = new BestImprovement(neighborhood, 10, 5);
+    strategy = new SimulatedAnnealing(neighborhood, 10, 3, 2, .8f, 3.f, 1.5f);
     neighborhood->set(strategy);
 }
 

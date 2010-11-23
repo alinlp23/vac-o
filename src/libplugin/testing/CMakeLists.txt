@@ -10,6 +10,7 @@
                                 NeighborhoodTests.cpp
                                 FirstImprovementTests.cpp
                                 BestImprovementTests.cpp
+                                SimulatedAnnealingTests.cpp
                                 ParameterTests.cpp)
 
 add_executable(libplugin_tests ${libplugin_testing_src})
