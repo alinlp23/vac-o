@@ -53,6 +53,7 @@
 #include "Neighborhood.h"
 #include "FirstImprovement.h"
 #include "BestImprovement.h"
+#include "SimulatedAnnealing.h"
 
 #endif	/* _LIBPLUGIN_H */
 

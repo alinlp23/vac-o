@@ -58,10 +58,10 @@ bool RandomMutator::next(NucSequence& seq)
     {        
         seq = sequence;
         NMutations i = 0;
-        const size_t length = sequence.length();
+        const size_t length = sequence.length()-1;
         while (i<mutations)
         {
-            const SeqIndex pos = int(rnd.get()*length);
+            const SeqIndex pos = SeqIndex(rnd.get()*length);
             float prob;
 
             do{

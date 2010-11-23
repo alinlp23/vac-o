@@ -53,6 +53,7 @@ protected:
 
     virtual void run(const ISolution*, ISolutionObserver*);
     virtual bool done();
+    virtual void clean_up();
 
     virtual bool select_neighbor() = 0;
 public:

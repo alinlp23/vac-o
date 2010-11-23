@@ -41,7 +41,7 @@ void Strategy::run(const ISolution* init, ISolutionObserver* obs)
     current_solution = init;
     current_score = scorer->evaluate(current_solution);
     while (!done())
-    {
+    {        
         ++current_iteration;
         neighborhood->explore(current_solution);
 
@@ -63,6 +63,7 @@ void Strategy::run(const ISolution* init, ISolutionObserver* obs)
         }
     }
     //Final clean up
+    clean_up();
     if (selected_neighbor)
         delete selected_neighbor;
     else
@@ -89,3 +90,6 @@ bool Strategy::done()
 {
     return max_idle_iterations_expired() || max_iterations_expired();
 }
+
+void Strategy::clean_up()
+{}
