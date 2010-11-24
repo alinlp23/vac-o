@@ -9,8 +9,11 @@ cp ../../testing/CMakeFiles/core_tests.dir/*.gcno .
 cp ../../testing/CMakeFiles/core_tests.dir/*.gcda .
 
 cd ..
-geninfo --output-filename core-coverage.info gcov
+gcov ../src/*.cpp -o gcov
+lcov --directory ./ --capture --output-file lcov_tmp.info -b ./
+lcov --extract lcov_tmp.info "$HOME/*" --output-file core-coverage.info
 genhtml -o coverage -t "vac-o core pacakge" core-coverage.info
-
+rm lcov_tmp.info core-coverage.info
+rm -fr gcov
 
 
