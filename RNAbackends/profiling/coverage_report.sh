@@ -9,8 +9,10 @@ cp ../../testing/CMakeFiles/backends_tests.dir/*.gcno .
 cp ../../testing/CMakeFiles/backends_tests.dir/*.gcda .
 
 cd ..
-geninfo --output-filename backends-coverage.info gcov
+gcov ../src/*.cpp -o gcov
+lcov --directory ./ --capture --output-file lcov_tmp.info -b ./
+lcov --extract lcov_tmp.info "$HOME/*" --output-file backends-coverage.info
 genhtml -o coverage -t "vac-o RNAbackends pacakge" backends-coverage.info
-
-
+rm lcov_tmp.info backends-coverage.info
+rm -fr gcov
 
