@@ -1,1 +1,63 @@
 \chapter{Proceso de desarrollo}
+\epigraph{How does a project get to be a year late?... One day at a time.}%
+{Fred Brooks}
+
+A esta altura ya hemos presentado los principales conceptos biol\'ogicos
+involucrados en este trabajo, el dise\~no de vacunas atenuadas y la
+formalizaci\'on del problema que nos propusimos resolver. En los cap\'itulos
+restantes veremos los aspectos t\'ecnicos mas relevantes sobre el desarrollo del
+software.
+
+\section{Modelo de desarrollo}
+
+Para llevar adelante el desarrollo del software, se opto por el cl\'asico
+modelo de cascada. Fundamentalmente debido a su simplicidad y a que los
+requerimientos con que deb\'ia cumplir el software estaban bien definidos desde
+el inicio. No solo a nivel funcional, sino tambi\'en en cuanto a principios del
+dise\~no orientado a objetos.
+
+\subsection{Etapas de la cascada}
+
+Las etapas que se llevaron a cabo durante el desarrollo de este trabajo y que
+veremos con mayor detenimiento en los siguientes cap\'itulos, fueron las
+siguientes:
+\begin{enumerate}
+ \item Especificaci\'on de requerimientos.
+ \item Dise\~no.
+ \item Implementaci\'on.
+ \item Verificaci\'on.
+\end{enumerate}
+
+Quedaron fuera del alcance, las etapas ``Instalaci\'on'' y por supuesto,
+``Mantenimiento''.
+
+\section{Ecosistema}
+
+El ``ecosistema'' de herramientas que se utilizaron para llevar adelante el
+proceso de desarrollo son las siguientes:
+
+\begin{itemize}
+ \item \textbf{Lenguaje de programaci\'on:} El software se implemento en
+\textbf{C++}\footnote{\url{http://cplusplus.com}}.
+ \item \textbf{Lenguaje de dise\~no:} El dise\~no del software se hizo
+utilizando \textbf{UML}\footnote{\url{http://www.uml.org}}.
+ \item \textbf{Control de versiones:} Se utilizo el sistema de control de
+versiones \ac{SVN}\footnote{\url{http://subversion.apache.org}} y puede ser
+consultado en \url{http://vac-o.googlecode.com}.
+ \item \textbf{Sistema de ``construcci\'on'':} Para automatizar el
+proceso de compilaci\'on del c\'odigo fuente se
+utilizo \textbf{CMake}\footnote{\url{http://www.cmake.org}}.
+ \item \textbf{Automatizaci\'on de pruebas:} Para realizar la verificaci\'on del
+software, se opto por implementar pruebas
+unitarias utilizando
+\textbf{google-test}\footnote{\url{http://googletest.googlecode.com}} y
+\textbf{google-mock}\footnote{\url{http://googlemock.googlecode.com}}. 
+ \item \textbf{An\'alisis est\'atico:} Se utilizaron las herramientas
+\textbf{astyle}\footnote{\url{http://astyle.sourceforge.net}} y
+\textbf{cppcheck}\footnote{
+\url{http://sourceforge.net/apps/mediawiki/cppcheck}}.
+ \item \textbf{An\'alisis din\'amico:} Se utilizaron las herramientas
+\textbf{valgrind}\footnote{\url{http://valgrind.org}} y
+\textbf{gcov}\footnote{\url{http://gcc.gnu.org/onlinedocs/gcc/Gcov.html}} para
+verificar la ausencia de ``memory leaks'' y la cobertura de las pruebas.
+\end{itemize}

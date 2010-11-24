@@ -1,1 +1,165 @@
 \chapter{Requerimientos}
+\epigraph{If you think it's simple, then you have misunderstood the problem.}%
+{Bjarne Stroustrup}
+
+Los requerimientos del software fueron provistos por miembros de \ac{FuDePAN} y
+quedaron documentados en la ``Especificaci\'on de Requerimientos de Software''
+que se anexa a este trabajo. A continuaci\'on haremos menci\'on a los
+requerimientos mas relevantes y que nos permitan introducir los principales
+aspectos del software.
+
+\section{Descripci\'on general}
+
+Retomando lo dicho en la secci\'on~\ref{vacunas-propuesta}, podr\'iamos
+resumir los requerimientos funcionales de \ac{vac-o} de la siguiente manera:
+
+\begin{itemize}
+ \item \textbf{Entrada:} Genoma del virus atenuado, genoma del pat\'ogeno o
+revertantes y un conjunto de restricciones sobre partes de la secuencias del
+virus atenuado.
+ \item \textbf{Objetivo:} Satisfaciendo las restricciones impuestas, maximizar
+la cantidad de mutaciones necesarias para convertir el virus atenuado en alguna
+secuencia pat\'ogena o revertante.
+ \item \textbf{Salida:} Una o varias secuencias, candidatas a ``mejorar'' el
+virus atenuado.
+\end{itemize}
+
+Desde el punto de vista del dise\~no, el sistema deb\'ia ser altamente modular,
+de forma que sea apto para encontrar secuencias gen\'omicas para diferentes
+tipos de organismos. En este sentido, se debieron seguir los principios de
+dise\~no conocidos por el acr\'onimo \textbf{SOLID}\cite{Martin00}.
+
+\section{Extensiones}
+
+Uno de los principales requerimientos con que deb\'ia cumplir el software es
+que sea vers\'atil. Es decir, que permita ser configurado y extendido de una
+forma simple y sin modificar sus componentes centrales.
+
+En este sentido, se propuso desde un comienzo un software que funcionar\'ia en
+base a la informaci\'on provista por una extensi\'on o \textit{plugin}.
+B\'asicamente, la responsabilidad de una extensi\'on ser\'ia la de proveer a
+\ac{vac-o} la informaci\'on relevante para cada virus atenuado que se desee
+optimizar. En particular, el genoma del virus atenuado, el genoma del
+pat\'ogeno y el conjunto de restricciones que se deben satisfacer durante la
+b\'usqueda. Las extensiones tambi\'en ser\'ian responsables de evaluar las
+secuencias candidatas y de determinar la estrategia de b\'usqueda.
+
+
+\section{Regiones combinatorias}
+
+Como ya mencionamos anteriormente, el problema se puede ver como un problema de
+``optimizaci\'on combinatoria basado en restricciones''. Luego, un ingrediente
+que no podemos dejar de mencionar son precisamente, las restricciones o
+``regiones combinatorias''. Fundamentalmente, representan las componentes
+variables de cada soluci\'on y definen en gran medida el espacio de b\'usqueda.
+
+En este contexto nos referimos a las ``variantes'' de una regi\'on como los
+posibles valores (secuencias de \ac{RNA}) que satisfacen la restricci\'on
+impuesta. Luego podemos definir a una regi\'on combinatoria de la siguiente
+manera.
+\begin{definition}
+\label{region}
+Dada una secuencia de \ac{RNA} $S$ de longitud $n$, una regi\'on combinatoria
+sobre $S$ sera una 4-upla $(inicio, fin, tipo, eval)$ tal que:
+\begin{itemize}
+ \item $0 \le inicio < fin \le n$
+ \item $tipo$ determina la restricci\'on sobre la regi\'on y por ende, queda
+definido un conjunto $\mathcal{V}$ de posibles variantes a la regi\'on.
+ \item $eval: \mathcal{V} \rightarrow (0,1)$ es una funci\'on de evaluaci\'on
+local a la regi\'on que determina la bondad de una variante determinada.
+\end{itemize}
+\end{definition}
+
+Si suponemos $N \ge 1$ y $R_{1}, \dots, R_{N}$ regiones combinatorias.
+Entonces tendremos que el n\'umero de posibles secuencias que \ac{vac-o}
+``deber\'ia'' evaluar, sera igual al producto cartesiano $\mathcal{V}_{1} \times
+\dots \times \mathcal{V}_{N}$ con  $\mathcal{V}_{1}, \dots, \mathcal{V}_{N}$
+variantes de cada regi\'on combinatoria respectivamente.
+
+Inicialmente, se contemplaron dos tipos de regiones combinatorias aunque se debe
+tener en cuenta la posibilidad de que en el futuro se agreguen mas. Estos tipos
+de regiones combinatorias o restricciones son:
+\begin{itemize}
+ \item Conservaci\'on de la estructura secundaria de \ac{RNA}.
+ \item Conservaci\'on del c\'odigo gen\'etico.
+\end{itemize}
+
+Adem\'as, para el caso de la ``conservaci\'on de estructura secundaria de
+\ac{RNA}'' se deb\'ia contar con la posibilidad de utilizar diferentes
+algoritmos de predicci\'on directa e inversa de manera ``transparente''.
+
+\section{Estrategias de b\'usqueda}
+
+Otro de los aspectos ``configurables'' del software deb\'ia ser la estrategia
+de b\'usqueda utilizada. En este sentido, la extensi\'on es responsable de
+proveer al sistema la ``forma'' de recorrer el espacio de b\'usqueda y al mismo
+tiempo determinar cuando se debe terminar el recorrido.
+
+Vale aclarar que todos los algoritmos de b\'usqueda local son ``incompletos''
+en el sentido de que no recorren exhaustivamente el espacio de b\'usqueda como
+si lo hacen los algoritmos mas tradicionales o sistem\'aticos. Luego, es
+necesario contar con un criterio de terminaci\'on que suele estar relacionado
+con la cantidad de iteraciones realizadas, la ``calidad'' de las soluciones
+encontradas o la cantidad de iteraciones sin que se produzcan mejores
+soluciones.
+
+\section{Control de calidad}
+
+Cada secuencia encontrada por \ac{vac-o} durante el recorrido del espacio
+de b\'usqueda, debe ser sometida a un ``control de calidad''. B\'asicamente
+se pretende simular las mutaciones acumuladas que se producen en las sucesivas
+replicaciones del virus en la naturaleza y sobre cada secuencia mutante,
+verificar determinadas propiedades que brinden mayor seguridad sobre la
+atenuaci\'on del virus.
+
+An\'alogamente a las regiones combinatorias, definimos las regiones de
+validaci\'on de la siguiente manera.
+
+\begin{definition}
+Dada una secuencia de \ac{RNA} $S$ de longitud $n$, una regi\'on de validaci\'on
+sobre $S$ sera una 4-upla $(inicio, fin, prueba, criterio)$ tal que:
+\begin{itemize}
+ \item $0 \le inicio < fin \le n$
+ \item $prueba$ determina la forma en que se producen las mutaciones.
+ \item $criterio$ determina la propiedad que deben cumplir todas las secuencias
+mutantes generadas.
+\end{itemize}
+\end{definition}
+
+Se puede pensar al control de calidad como la generaci\'on de un \'arbol de
+secuencias. La ra\'iz del \'arbol sera la secuencia candidata y los nodos del
+\'arbol ser\'an las secuencias mutantes generadas. Luego, diremos que una
+secuencia candidata pasa el control de calidad sobre una regi\'on de
+validaci\'on, cuando sea posible generar todos los nodos del \'arbol para una
+profundidad dada. Por ultimo, solo ser\'an consideradas aquellas secuencias
+candidatas que pasen el control de calidad sobre todas las regiones de
+validaci\'on.
+
+Para las formas de producir mutaciones acumuladas se contemplaron dos
+alternativas:
+\begin{itemize}
+ \item Mutaciones sistem\'aticas.
+ \item Mutaciones aleatorias.
+\end{itemize}
+
+Por otro lado, las propiedades que se contemplaron como criterio de
+verificaci\'on son:
+\begin{itemize}
+ \item Similitud estructural.
+ \item Disimilitud estructural.
+\end{itemize}
+
+De todas formas, se deb\'ia contemplar la posibilidad de que en el
+futuro se agreguen otras formas de generar mutaciones y otros criterios de
+verificaci\'on.
+
+\section{Ranking de secuencias candidatas}
+
+Finalmente, nos queda por describir el ranking de secuencias candidatas y que
+representa fundamentalmente el resultado de la ejecuci\'on de \ac{vac-o}.
+
+Esto es simplemente un listado de secuencias de \ac{RNA}, ordenadas seg\'un la
+evaluaci\'on que hiciera la extensi\'on. B\'asicamente, las secuencias mejor
+evaluadas ser\'an aquellas que est\'en a mayor distancia (para alguna
+definici\'on de distancia) de la secuencia pat\'ogena o revertante y por ende,
+tendr\'an menor probabilidad de sufrir reversi\'on a la virulencia.
