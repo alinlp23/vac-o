@@ -85,7 +85,10 @@ responsabilidades y dejaremos como lectura adicional la ``Especificaci\'on de
 Dise\~no de Software'' que contiene una descripci\'on detallada de todos los
 componentes de la arquitectura presentada. Al mismo tiempo, profundizar sobre
 estos componentes, nos permitir\'a introducir los principales patrones de
-dise\~no que se utilizaron de forma an\'aloga en los dem\'as.
+dise\~no que se utilizaron de forma an\'aloga en otras partes del sistema.
+Entre otros, se destacan ``Iterator'', ``Observer'', ``Template Method'' y
+``Visitor''. Para una descripci\'on de estos y otros patrones del dise\~no
+orientado a objetos, ver \cite{Gamma95}.
 
 \section{Librer\'ias externas}
 
@@ -117,9 +120,10 @@ de \ac{RNA}.
 
 En esto podemos ver la idea del principio de dise\~no \ac{DIP}. Haciendo que el
 sistema dependa de estas interfaces en lugar de sus respectivas
-implementaciones logramos abstraer los detalles de cada librer\'ia externa y
+implementaciones conseguimos abstraer los detalles de cada librer\'ia externa y
 logramos un software mas vers\'atil. En el capitulo~\ref{librerias} veremos
-algunos detalles sobre las implementaciones de estas interfaces.
+algunos detalles sobre las implementaciones de estas interfaces en las que
+intervienen los patrones de dise\~no ``Iterator'' y ``Visitor''.
 
 \section{Motor combinatorio}
 
@@ -127,3 +131,89 @@ El componente ``CombinatoryEngine'' contiene todo lo referente al recorrido del
 espacio de b\'usqueda por lo que es claramente, uno de los componentes
 principales de \ac{vac-o}. Esto es fundamentalmente, las regiones
 combinatorias y las diferentes estrategias de b\'usqueda.
+
+Para permitir que el software sea de utilidad para diferentes tipos de virus,
+tanto las regiones combinatorias como la estrategia de b\'usqueda utilizada
+para la optimizaci\'on, deb\'ian ser altamente configurables. Luego, el
+objetivo sobre este componente, fue capturar la estructura general de los
+algoritmos de b\'usqueda local que suelen denominarse de ``mejoramiento
+iterativo''. Algunos de estos algoritmos son:
+
+\begin{itemize}
+ \item First Improvement
+ \item Best Improvement
+ \item Simulated Annealing
+ \item Tabu Search
+\end{itemize}
+
+En todos estos algoritmos, y en general en la b\'usqueda local, est\'an
+presentes los conceptos de ``vecindario'' (neighborhood) y de ``movimiento''
+(step) que veremos con mayor detenimiento en el capitulo~\ref{busqueda}.
+Mientras tanto, la siguiente introducci\'on nos servir\'a para justificar
+las interfaces propuestas.
+
+Si el espacio de b\'usqueda es $\mathcal{S}$, entonces un ``vecindario'' sera
+una relaci\'on $\mathcal{N} \subseteq \mathcal{S} \times \mathcal{S}$ y el
+``movimiento'' (entre soluciones en el espacio de b\'usqueda) sera una funci\'on
+$step: \mathcal{S} \rightarrow \mathcal{D}(\mathcal{S})$. Donde $\mathcal{D}(S)$
+denota el conjunto de distribuciones de probabilidad sobre un conjunto dado $S$
+y donde una distribuci\'on de probabilidad $D \in \mathcal{D}(S)$ es una
+funci\'on $D:S \rightarrow \mathbb{R}^{+}_{0}$ que mapea los elementos de $S$ a
+sus respectivas probabilidades.
+
+Luego, en cada iteraci\'on de la b\'usqueda, hay dos responsabilidades bien
+diferenciadas e independientes. Por un lado, se debe explorar el ``vecindario''
+de la soluci\'on actual. Es decir, si la soluci\'on actual es $s$ y el
+``vecindario'' es $\mathcal{N}$, debemos generar el conjunto de soluciones
+$\mathcal{N}(s)$. Por otro lado, una vez que se tiene el conjunto
+$\mathcal{N}(s)$ de ``vecinos'' de $s$, se debe seleccionar uno de ellos
+utilizando la funci\'on $step$. Notar que no siempre la soluci\'on seleccionada
+sera mejor que la soluci\'on actual. Inclusive los algoritmos que permiten los
+llamados, ``movimientos malos'' (seleccionar con una probabilidad $p$ una
+soluci\'on peor que la actual) suelen conducir a mejores resultados.
+
+En este sentido se propusieron la siguientes interfaces:
+
+\begin{itemize}
+ \item \textbf{ICombinatoryRegion:} Genera las variantes de la regi\'on
+combinatoria que satisfagan la restricci\'on asociada.
+ \item \textbf{ISolution:} Representa una soluci\'on en el espacio de
+b\'usqueda.
+ \item \textbf{INeighborhood:} Explora el vecindario de una soluci\'on.
+ \item \textbf{IStrategy:} Decide como pasar de una soluci\'on a la siguiente y
+notifica las soluciones que ``mejoran'' a la soluci\'on anterior.
+ \item \textbf{ICombinatoryEngine:} Inicia la b\'usqueda y notifica a otros
+componentes del sistema las sucesivas soluciones encontradas.
+\end{itemize}
+
+Para terminar de entender la interacci\'on entre estas interfaces, en la
+Figura~\ref{motor} se puede ver el diagrama de secuencia del motor combinatorio.
+
+\begin{figure} 
+  \centering
+  \includegraphics[scale=0.45]{sequence.png}
+  \caption{Motor combinatorio de vac-o.}
+\label{motor}
+\end{figure}
+
+El principal patr\'on de dise\~no que utilizamos en este componente es el que
+se denomina ``Observer'' y que sirve fundamentalmente para lograr la
+comunicaci\'on entre diferentes objetos sin que se produzca acoplamiento. La
+idea es establecer una relaci\'on entre un emisor y uno, o varios receptores
+sin necesidad de generar una dependencia entre el objeto emisor y el objeto
+receptor. Adem\'as para permitir el uso del patr\'on ``Observer'' entre
+diferentes tipos de objetos, se propuso el patr\'on de dise\~no ``Template
+Method''.
+
+En nuestro caso, \textbf{INeighborhood} notifica a \textbf{IStrategy} por cada
+soluci\'on que se genera mientras se explora el vecindario de la soluci\'on
+actual. Posteriormente, si la soluci\'on seleccionada es mejor que la soluci\'on
+actual, \textbf{IStrategy} notifica a \textbf{ICombinatoryEngine} la soluci\'on
+seleccionada y este a su vez, la notifica a otros componentes de \ac{vac-o}
+(control de calidad).
+
+Una vez mas, remarcamos que las dependencias son entre interfaces y no entre
+implementaciones como establece el principio de dise\~no \ac{DIP}. Esto nos
+brinda la versatilidad de definir diferentes tipos de regiones combinatorias y
+estrategias de b\'usqueda sin modificar en absoluto la implementaci\'on del
+motor combinatorio.
