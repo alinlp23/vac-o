@@ -15,12 +15,12 @@ protected:
     FoldMock fold_backend;
     StructureCmpMock str_cmp_backend;
 public:
-    Fe fake_fold(const NucSequence& seq, SecStructure& str)
+    Fe fake_fold(const NucSequence& seq, SecStructure& str, bool circ)
     {
         str = "((...))";
         return -3.f;
     }
-    Fe fake_bad_fold(const NucSequence& seq, SecStructure& str)
+    Fe fake_bad_fold(const NucSequence& seq, SecStructure& str, bool circ)
     {
         str = ".......";
         return 0.f;
@@ -29,7 +29,7 @@ public:
 
 TEST_F(SSValidatorTest, MinSimilitude)
 {
-    EXPECT_CALL(fold_backend, fold(_,_))
+    EXPECT_CALL(fold_backend, fold(_,_,false))
             .Times(2)
             .WillRepeatedly(Invoke(this, &SSValidatorTest::fake_fold));
     EXPECT_CALL(str_cmp_backend, compare(_,_))
@@ -38,7 +38,7 @@ TEST_F(SSValidatorTest, MinSimilitude)
             .WillOnce(Return(.3f));
 
     SecStructure str(".(...).");
-    IQAValidator* validator = new SSValidator<MinSimilitude>(&fold_backend, &str_cmp_backend, str, .4f);
+    IQAValidator* validator = new SSValidator<MinSimilitude>(&fold_backend, &str_cmp_backend, str, .4f, false);
     NucSequence s;
 
     EXPECT_TRUE(validator->validate(s));
@@ -49,7 +49,7 @@ TEST_F(SSValidatorTest, MinSimilitude)
 
 TEST_F(SSValidatorTest, MaxSimilitude)
 {
-    EXPECT_CALL(fold_backend, fold(_,_))
+    EXPECT_CALL(fold_backend, fold(_,_,false))
             .Times(2)
             .WillRepeatedly(Invoke(this, &SSValidatorTest::fake_fold));
     EXPECT_CALL(str_cmp_backend, compare(_,_))
@@ -58,7 +58,7 @@ TEST_F(SSValidatorTest, MaxSimilitude)
             .WillOnce(Return(.3f));
 
     SecStructure str(".(...).");
-    IQAValidator* validator = new SSValidator<MaxSimilitude>(&fold_backend, &str_cmp_backend, str, .4f);
+    IQAValidator* validator = new SSValidator<MaxSimilitude>(&fold_backend, &str_cmp_backend, str, .4f, false);
     NucSequence s;
 
     EXPECT_FALSE(validator->validate(s));
@@ -69,7 +69,7 @@ TEST_F(SSValidatorTest, MaxSimilitude)
 
 TEST_F(SSValidatorTest, BadFold)
 {
-    EXPECT_CALL(fold_backend, fold(_,_))
+    EXPECT_CALL(fold_backend, fold(_,_,true))
             .Times(2)
             .WillOnce(Invoke(this, &SSValidatorTest::fake_fold))
             .WillOnce(Invoke(this, &SSValidatorTest::fake_bad_fold));
@@ -78,7 +78,7 @@ TEST_F(SSValidatorTest, BadFold)
             .WillOnce(Return(.3f));
 
     SecStructure str(".(...).");
-    IQAValidator* validator = new SSValidator<MaxSimilitude>(&fold_backend, &str_cmp_backend, str, .4f);
+    IQAValidator* validator = new SSValidator<MaxSimilitude>(&fold_backend, &str_cmp_backend, str, .4f, true);
     NucSequence s;
 
     EXPECT_TRUE(validator->validate(s));

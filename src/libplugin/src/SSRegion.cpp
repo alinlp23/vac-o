@@ -32,12 +32,12 @@
 
 SSRegion::SSRegion(SeqIndex s, SeqIndex e, const SecStructure& wt,
                    const SecStructure& vaccine, NMutations nm, Similitude simi,
-                   Distance dis, const NucSequencesCt& wt_cache, const IFold* const fb,
+                   Distance dis, const NucSequencesCt& wt_cache, bool circ, const IFold* const fb,
                    IFoldInverse* const fib, const IStructureCmp* const str_cmp,
                    const ISequenceCmp* const seq_cmp) :
         CombinatoryRegion(s, e),
         wt_structure(wt), vaccine_structure(vaccine), max_mutations(nm),
-        max_similitude(simi), min_distance(dis), wildtype_cache(wt_cache),
+        max_similitude(simi), min_distance(dis), wildtype_cache(wt_cache), circ(circ),
         fold_backend(fb), inverse_backend(fib), struct_cmp_backend(str_cmp),
         seq_cmp_backend(seq_cmp)
 {}
@@ -122,7 +122,7 @@ bool SSRegion::structure_compare(const NucSequence& seq)
 
     while (mutator.next(mutated) && pass)
     {
-        fold_backend->fold(mutated, mutated_struct);
+        fold_backend->fold(mutated, mutated_struct, circ);
         
         if (mutated_struct.pair_length() > 0)
             pass = max_similitude > struct_cmp_backend->compare(wt_structure, mutated_struct);

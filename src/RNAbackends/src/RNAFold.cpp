@@ -35,10 +35,7 @@ const FilePath RNAFold::IN = "fold.in";
 const FilePath RNAFold::OUT = "fold.out";
 const FileLineNo RNAFold::LINE_NO = 1;
 
-RNAFold::RNAFold(bool circ) : circ(circ)
-{}
-
-Fe RNAFold::fold(const NucSequence& sequence, SecStructure& structure) const throw(RNABackendException)
+Fe RNAFold::fold(const NucSequence& sequence, SecStructure& structure, bool circ) const throw(RNABackendException)
 {            
     FileLine sseq;
     for (size_t i = 0; i<sequence.length(); ++i)

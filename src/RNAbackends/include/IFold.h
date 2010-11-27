@@ -40,9 +40,10 @@ public:
      * Fold an ARN sequence
      * @param sequence the ARN sequence to fold.
      * @param structure the structure where to write the folding.
+     * @param circ if the structure it's circular.
      * @return The free energy in the structure.
      */
-    virtual Fe fold(const NucSequence&, SecStructure&) const THROW((RNABackendException)) = 0;
+    virtual Fe fold(const NucSequence&, SecStructure&, bool) const THROW((RNABackendException)) = 0;
 
     virtual ~IFold() {}
 };

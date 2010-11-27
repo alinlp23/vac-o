@@ -39,7 +39,8 @@ class SSValidator : public IQAValidator
     const IStructureCmp* const struct_cmp_backend;
 
     const SecStructure target_structure;
-    const Similitude similitude;    
+    const Similitude similitude;
+    const bool circ;
 
     /**
      * Validate a sequence, doing the folding and comparing the
@@ -56,23 +57,23 @@ public:
      * @param structure Target secondary structure
      * @param simil Target similitude     
      */
-    SSValidator(const IFold*, const IStructureCmp*, const SecStructure&, Similitude);
+    SSValidator(const IFold*, const IStructureCmp*, const SecStructure&, Similitude, bool);
 };
 
 //Implementation
 
 template<SimilitudePolicy policy>
 SSValidator<policy>::SSValidator(const IFold* fb, const IStructureCmp* strb,
-        const SecStructure& str, Similitude simil) :
+        const SecStructure& str, Similitude simil, bool circ) :
         fold_backend(fb), struct_cmp_backend(strb), target_structure(str),
-        similitude(simil)
+        similitude(simil), circ(circ)
 {}
 
 template<SimilitudePolicy policy>
 bool SSValidator<policy>::validate(const NucSequence& seq) const
 {
     SecStructure seq_struct;
-    fold_backend->fold(seq, seq_struct);
+    fold_backend->fold(seq, seq_struct, circ);
 
     bool pass(true);
     if (seq_struct.pair_length() > 0)

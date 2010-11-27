@@ -193,7 +193,7 @@ void DevPlugin::init_params()
 
 void DevPlugin::init_backends()
 {
-    fold_backend = new RNAFold(true);
+    fold_backend = new RNAFold;
     inverse_backend = new INFORNA(ires, 2, 20, 100);
     struct_cmp_backend = new RNAForester;
     seq_cmp_backend = new Hamming;    
@@ -216,7 +216,7 @@ void DevPlugin::init_comb_regions()
     delete devprovider;
     delete wt_inverse;
 
-    ssregion = new SSRegion(0, 24, wt_struct, vacc_struct, 1, 0.8f, min_distance, wt_cache,
+    ssregion = new SSRegion(0, 24, wt_struct, vacc_struct, 1, 0.8f, min_distance, wt_cache, false,
                             fold_backend, inverse_backend, struct_cmp_backend,
                             seq_cmp_backend);
 
@@ -239,7 +239,7 @@ void DevPlugin::init_comb_regions()
 void DevPlugin::init_qa_regions()
 {
     mutator = new RandomMutator(5, 10);
-    validator = new SSValidator<MaxSimilitude>(fold_backend, struct_cmp_backend, wt_struct, .5f);
+    validator = new SSValidator<MaxSimilitude>(fold_backend, struct_cmp_backend, wt_struct, .5f, false);
 
     rnd_ss = new QARegion(0, 24, 3, mutator, validator);
 }
@@ -247,7 +247,7 @@ void DevPlugin::init_qa_regions()
 void DevPlugin::init_local_search()
 {
     neighborhood = new Neighborhood(regions, cutoff, attempts);
-    strategy = new SimulatedAnnealing(neighborhood, 10, 3, 2, .8f, 3.f, .5f);
+    strategy = new SimulatedAnnealing(neighborhood, 10, 5, 2, .8f, 3.f, .05f);
     neighborhood->set(strategy);
 }
 

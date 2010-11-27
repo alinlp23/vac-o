@@ -43,6 +43,7 @@ class SSRegion : public CombinatoryRegion, public IStartProvider
     Similitude max_similitude;
     Distance min_distance;
     const NucSequencesCt wildtype_cache;
+    const bool circ;
 
     /*libRNA backends*/
     const IFold* const fold_backend;
@@ -63,7 +64,7 @@ class SSRegion : public CombinatoryRegion, public IStartProvider
     virtual void get_complete_start(IFoldInverse* const);
 public:
     SSRegion(SeqIndex, SeqIndex, const SecStructure&, const SecStructure&,
-             NMutations, Similitude, Distance, const NucSequencesCt&,
+             NMutations, Similitude, Distance, const NucSequencesCt&, bool,
              const IFold* const, IFoldInverse* const, const IStructureCmp* const,
              const ISequenceCmp* const);
     

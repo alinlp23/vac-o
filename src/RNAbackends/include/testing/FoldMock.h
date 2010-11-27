@@ -32,7 +32,7 @@
 class FoldMock : public IFold
 {
 public:
-    MOCK_CONST_METHOD2(fold, Fe(const NucSequence&, SecStructure&));
+    MOCK_CONST_METHOD3(fold, Fe(const NucSequence&, SecStructure&, bool));
 };
 
 #endif	/* _FOLDMOCK_H */
