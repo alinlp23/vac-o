@@ -9,7 +9,7 @@
 \author{Santiago Videla}
 \title{Especificaci\'on de Dise\~no de Software}
 \pagestyle{headings}
-
+\date{12 de octubre de 2010}
 \begin{document}
 \maketitle
 \newpage
@@ -17,71 +17,78 @@
 \newpage
 \section{Introducci\'on}
   \subsection{Prop\'osito}
-  El prop\'osito de este documento es la especificaci\'on de
+
+El prop\'osito de este documento es la especificaci\'on de
 dise\~no de software para la primer versi\'on del producto ``vac-o''.
 
-  La confecci\'on de este documento se enmarca dentro del desarrollo de la tesis
+La confecci\'on de este documento se enmarca dentro del desarrollo de la tesis
 de grado de la carrera Lic. en Cs. de la Computaci\'on de la FaMAF - UNC,
 \textbf{``Dise\~no de vacunas atenuadas con menor probabilidad de sufrir
 reversi\'on a la virulencia''} a cargo de Santiago Videla, con la direcci\'on
 de la Dra. Laura Alonso i Alemany (FaMAF) y la colaboraci\'on de Daniel
 Gutson (FuDePAN).
 
-  El documento esta dirigido a las personas involucradas en el desarrollo de la
+El documento esta dirigido a las personas involucradas en el desarrollo de la
 tesis como as\'i tambi\'en a los colaboradores de FuDePAN que eventualmente
 podr\'ian participar en las etapas de desarrollo y mantenimiento del software.
 
-  \subsection{Descripci\'on general del documento}
-  En la secci\'on~\ref{considerations} se mencionan los objetivos, la
+\subsection{Descripci\'on general del documento}
+
+En la secci\'on~\ref{considerations} se mencionan los objetivos, la
 metodolog\'ia adoptada y las dependencias del dise\~no.
 
-  En la secci\'on~\ref{architecture} se muestra la arquitectura del
+En la secci\'on~\ref{architecture} se muestra la arquitectura del
 sistema con sus principales componentes e interacciones.
 
-  En la secci\'on~\ref{hld} se presenta el dise\~no de alto nivel del sistema,
+En la secci\'on~\ref{hld} se presenta el dise\~no de alto nivel del sistema,
 sus interfaces y paquetes principales.
 
-  En la secci\'on~\ref{lld} se presenta el dise\~no de bajo nivel del sistema,
+En la secci\'on~\ref{lld} se presenta el dise\~no de bajo nivel del sistema,
 las clases concretas y sus relaciones para cada paquete.
 
 \section{Consideraciones de Dise\~no}
-  \label{considerations}
-  \subsection{Objetivos}
-  Principalmente se pretende lograr un dise\~no que cumpla con los principios
+\label{considerations}
+
+\subsection{Objetivos}
+
+Principalmente se pretende lograr un dise\~no que cumpla con los principios
 fundamentales del dise\~no orientado a objetos, com\'unmente conocidos por el
 acr\'onimo ``SOLID'' \cite{martin00}.
 
-  En particular, se pone especial \'enfasis en respetar los principios OCP
-(Open Closed Principle) y DIP (Dependency Inversion Principle) debido a su
-importancia para obtener un sistema que sea f\'acilmente extensible y
-configurable con el fin de satisfacer las necesidades de los usuarios.
+En particular, se pone especial \'enfasis en respetar los principios OCP
+(\textit{Open-Closed Principle}) y DIP (\textit{Dependency Inversion Principle})
+debido a su importancia para obtener un sistema que sea f\'acilmente extensible
+y configurable con el fin de satisfacer las necesidades de los usuarios.
   
-  \subsection{Metodolog\'ia}
-  La metodolog\'ia utilizada para realizar el an\'alisis y descripci\'on del
+\subsection{Metodolog\'ia}
+
+La metodolog\'ia utilizada para realizar el an\'alisis y descripci\'on del
 dise\~no se denomina ``Dise\~no dirigido por responsabilidades''
-\cite{wirfsbrok03}. Esta t\'ecnica se enfoca en \textit{que} acciones
+\cite{wirfsbrok03}. Esta t\'ecnica se enfoca en \textit{qu\'e} acciones
 (responsabilidades) deben ser cubiertas por el sistema y que objetos ser\'an los
-responsables de llevarlas a cabo. \textit{Como} se realizara cada acci\'on,
+responsables de llevarlas a cabo. \textit{C\'omo} se realizara cada acci\'on,
 queda en un segunda plano.
 
-  \subsection{Dependencias}
-  Se asume para la confecci\'on de este dise\~no, el acceso a diferentes
-librer\'ias externas que ser\'an fundamentales para el correcto funcionamiento
-del sistema en su conjunto.
-  Respetando la metodolog\'ia adoptada, no se har\'a referencia directa a una u
-otra librer\'ia, sino a los servicios que las mismas debe ser capaces de proveer
-al sistema.
+\subsection{Dependencias}
 
-  \subsection{Herramientas y convenciones}
-  Se utiliza UML\cite{uml} como lenguaje de modelado y ArgoUML\cite{argoUML}
+Se asume para la confecci\'on de este dise\~no, el acceso a diferentes
+librer\'ias externas que ser\'an fundamentales para el correcto funcionamiento
+del sistema en su conjunto. Respetando la metodolog\'ia adoptada, no se har\'a
+referencia directa a una u otra librer\'ia, sino a los servicios que las mismas
+debe ser capaces de proveer al sistema.
+
+\subsection{Herramientas y convenciones}
+
+Se utiliza UML\cite{uml} como lenguaje de modelado y ArgoUML\cite{argoUML}
 como herramienta para la confecci\'on de diagramas. Adem\'as se adopta la
 convenci\'on de nombrar a las interfaces anteponiendo una \textit{``I''} al
-nombre de la clase concreta que la implementa (interface:
-\textit{``IPersona''}, clase concreta: \textit{``Persona''}).
+nombre de la clase concreta que la implementa (interface: \textit{``IPersona''},
+clase concreta: \textit{``Persona''}).
 
 \section{Arquitectura del Sistema}
-  \label{architecture}
-  En la Figura~\ref{uml:architecture} se presenta un diagrama de la
+\label{architecture}
+
+En la Figura~\ref{uml:architecture} se presenta un diagrama de la
 arquitectura del sistema y la interacci\'on entre sus componentes principales.
 A continuaci\'on se da una breve descripci\'on de cada uno de ellos:
 

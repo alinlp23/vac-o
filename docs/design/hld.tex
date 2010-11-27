@@ -1,9 +1,16 @@
 \section{Dise\~no de alto nivel}
 \label{hld}
+
 \subsection{Interfaces - Responsabilidades - Colaboradores}
+
 En esta secci\'on se presentan las principales interfaces que intervienen en el
 sistema, sus respectivas responsabilidades y colaboradores. En la
 Figura~\ref{uml:hld} se puede ver el diagrama de clases correspondiente.
+
+Finalmente, en la Figura~\ref{uml:sequence} se presenta el diagrama de
+secuencia correspondiente a la comunicaci\'on entre las principales entidades
+del sistema.
+
 \begin{figure}  
   \centering
   \includegraphics[scale=0.5, angle=90]{hld.png}  
@@ -153,16 +160,11 @@ o no el control de calidad.
 
   \subsubsection{IRanker}
     \paragraph{Responsabilidad:} Mantener un \textit{ranking} de secuencias en
-base a evaluaci\'on global de cada una de ellas.    
-
-\paragraph{}
-Finalmente, en la Figura~\ref{uml:sequence} se presenta el diagrama de
-secuencia correspondiente a la comunicaci\'on entre las principales entidades en
-el sistema.
+base a evaluaci\'on global de cada una de ellas.   
 
 \begin{figure}
   \centering
-  \includegraphics[scale=0.5]{sequence.png}  
+  \includegraphics[scale=0.45]{sequence.png}  
   \caption{UML - Pasaje de mensajes}
   \label{uml:sequence}
 \end{figure}
