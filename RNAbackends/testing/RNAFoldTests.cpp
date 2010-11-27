@@ -8,7 +8,7 @@ TEST(RNAFoldTest, Fold)
     string s = "CGCAGGGAUCG";
     NucSequence seq = s;
 
-    IFold* fold = new RNAFold;
+    IFold* fold = new RNAFold(false);
     SecStructure structure;
     EXPECT_EQ(fold->fold(seq, structure), -10.8f);
 
