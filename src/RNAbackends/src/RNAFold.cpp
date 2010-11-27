@@ -35,19 +35,24 @@ const FilePath RNAFold::IN = "fold.in";
 const FilePath RNAFold::OUT = "fold.out";
 const FileLineNo RNAFold::LINE_NO = 1;
 
+RNAFold::RNAFold(bool circ) : circ(circ)
+{}
+
 Fe RNAFold::fold(const NucSequence& sequence, SecStructure& structure) const throw(RNABackendException)
 {            
     FileLine sseq;
-    for (size_t i=0; i<sequence.length(); ++i)
-    {
+    for (size_t i = 0; i<sequence.length(); ++i)
         sseq += to_str(sequence[i])[0];
-    }    
+    
     write(IN, sseq);
     
     stringstream ss;
-    ss << RNAfold_PROG << " -noPS < " << IN << " > " << OUT;
-    const Command CMD = ss.str();
-    exec(CMD);
+    ss << RNAfold_PROG << " -noPS ";
+    if (circ)
+        ss << "-circ ";
+    ss << "< " << IN << " > " << OUT;
+    const Command CMD = ss.str();    
+    exec(CMD);    
     
     /* fold.out look like this:
      * CGCAGGGAUCGCAGGUACCCCGCAGGCGCAGAUACCCUA

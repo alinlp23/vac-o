@@ -47,7 +47,7 @@ bool QARegion::validate(const NucSequence& seq) const
         str_r += to_str(seq[i]);
     region = str_r;
     
-    mutants.push(region);
+    insert_into(mutants, region);
     bool pass = validator->validate(seq);
 
     while (pass && d<depth && !mutants.empty())
@@ -87,7 +87,7 @@ bool QARegion::validate_mutants(const NucSequence& seq, const NucSequence& regio
 
         pass = validator->validate(complete_mutant);
         if (pass)
-            mutants.push(mutant);
+            insert_into(mutants, mutant);
     }    
     return pass;
 }
