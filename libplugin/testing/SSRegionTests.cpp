@@ -90,7 +90,7 @@ public:
         }
     }
 
-    Fe fake_fold(const NucSequence& seq, SecStructure& str)
+    Fe fake_fold(const NucSequence& seq, SecStructure& str, bool circ)
     {
         str = "((...))";
         return -3.f;
@@ -99,7 +99,7 @@ public:
 
 TEST_F(SSRegionTest, SetBaseSequencePartial)
 {
-    SSRegion ssregion(start, end, wt, va, 0, 0.8f, 10, wt_cache,
+    SSRegion ssregion(start, end, wt, va, 0, 0.8f, 10, wt_cache, false,
             &fold_backend, &inverse_backend, &str_cmp_backend, &seq_cmp_backend);
 
     EXPECT_CALL(inverse_backend, query_start(&ssregion))
@@ -116,7 +116,7 @@ TEST_F(SSRegionTest, SetBaseSequencePartial)
 
 TEST_F(SSRegionTest, SetBaseSequenceComplete)
 {
-    SSRegion ssregion(start, end, wt, va, 0, 0.8f, 10, wt_cache,
+    SSRegion ssregion(start, end, wt, va, 0, 0.8f, 10, wt_cache, false,
             &fold_backend, &inverse_backend, &str_cmp_backend, &seq_cmp_backend);
 
     EXPECT_CALL(inverse_backend, query_start(&ssregion))
@@ -133,7 +133,7 @@ TEST_F(SSRegionTest, SetBaseSequenceComplete)
 
 TEST_F(SSRegionTest, GenerateWithEmptyCacheZeroMutations)
 {
-    SSRegion ssregion(start, end, wt, va, 0, 0.8f, 10, wt_cache,
+    SSRegion ssregion(start, end, wt, va, 0, 0.8f, 10, wt_cache, false,
             &fold_backend, &inverse_backend, &str_cmp_backend, &seq_cmp_backend);
 
     EXPECT_CALL(inverse_backend, query_start(_))
@@ -172,7 +172,7 @@ TEST_F(SSRegionTest, CheckMutations)
     NMutations mutations = 2;
     const size_t times = 210; // 7*3^1 + 21*3^2
 
-    SSRegion ssregion(start, end, wt, va, mutations, .8f, 10, wt_cache,
+    SSRegion ssregion(start, end, wt, va, mutations, .8f, 10, wt_cache, false,
             &fold_backend, &inverse_backend, &str_cmp_backend, &seq_cmp_backend);
 
     EXPECT_CALL(inverse_backend, query_start(_))
@@ -187,7 +187,7 @@ TEST_F(SSRegionTest, CheckMutations)
             .Times(times)
             .WillRepeatedly(Return(.5f));
 
-    EXPECT_CALL(fold_backend, fold(_,_))
+    EXPECT_CALL(fold_backend, fold(_,_,false))
             .Times(times)
             .WillRepeatedly(Invoke(this, &SSRegionTest::fake_fold));
 
@@ -204,7 +204,7 @@ TEST_F(SSRegionTest, CheckMutationsStopAsSoonAsFail)
     NMutations mutations = 2;
     const size_t times = 212; //7*3^1 + 21*3^2 + 2
 
-    SSRegion ssregion(start, end, wt, va, mutations, .8f, 10, wt_cache,
+    SSRegion ssregion(start, end, wt, va, mutations, .8f, 10, wt_cache, true,
             &fold_backend, &inverse_backend, &str_cmp_backend, &seq_cmp_backend);
 
     EXPECT_CALL(inverse_backend, query_start(_))
@@ -221,7 +221,7 @@ TEST_F(SSRegionTest, CheckMutationsStopAsSoonAsFail)
             .WillOnce(Return(.9f)) // stop
             .WillRepeatedly(Return(.5f)); //210 times
 
-    EXPECT_CALL(fold_backend, fold(_,_))
+    EXPECT_CALL(fold_backend, fold(_,_,true))
             .Times(times)
             .WillRepeatedly(Invoke(this, &SSRegionTest::fake_fold));
 
@@ -236,7 +236,7 @@ TEST_F(SSRegionTest, CheckMutationsStopAsSoonAsFail)
 TEST_F(SSRegionTest, CheckCache)
 {
     fill_cache();
-    SSRegion ssregion(start, end, wt, va, 0, .8f, 4, wt_cache,
+    SSRegion ssregion(start, end, wt, va, 0, .8f, 4, wt_cache, false,
             &fold_backend, &inverse_backend, &str_cmp_backend, &seq_cmp_backend);
 
     EXPECT_CALL(inverse_backend, query_start(_))
@@ -266,7 +266,7 @@ TEST_F(SSRegionTest, CheckCache)
 TEST_F(SSRegionTest, CheckCacheStopAsSoonAsFail)
 {
     fill_cache();
-    SSRegion ssregion(start, end, wt, va, 0, .8f, 4, wt_cache,
+    SSRegion ssregion(start, end, wt, va, 0, .8f, 4, wt_cache, false,
             &fold_backend, &inverse_backend, &str_cmp_backend, &seq_cmp_backend);
 
     EXPECT_CALL(inverse_backend, query_start(_))

@@ -35,12 +35,9 @@ class RNAFold : public IFold
 {
     static const FilePath IN;
     static const FilePath OUT;    
-    static const FileLineNo LINE_NO;
-    bool circ;
+    static const FileLineNo LINE_NO;    
     size_t read_free_energy(FileLine&, size_t, Fe&) const throw(RNABackendException);
-    virtual Fe fold(const NucSequence&, SecStructure&) const throw(RNABackendException);
-public:
-    RNAFold(bool circ);
+    virtual Fe fold(const NucSequence&, SecStructure&, bool circ) const throw(RNABackendException);
 };
 
 #endif	/* _RNAFOLD_H */
