@@ -27,7 +27,7 @@ La bioinform\'atica fue precedida por lo que se llam\'o, \textit{biolog\'ia
 computacional}. Aunque no hay una definici\'on precisa para ninguno de
 los dos t\'erminos, la biolog\'ia computacional se caracterizo por enfocarse
 en los aspectos te\'oricos/formales de las Ciencias de la Computaci\'on,
-mientras que la bioinform\'atica supo estar mas relacionada con el
+mientras que la bioinform\'atica supo estar m\'as relacionada con el
 procesamiento de grandes vol\'umenes de datos, usualmente, almacenados en la
 Internet. Actualmente, se suele hacer referencia a ambos t\'erminos de manera
 indiferente.
@@ -38,9 +38,11 @@ A continuaci\'on presentamos algunos de los problemas o temas de investigaci\'on
 abordados por la bioinform\'atica.
 
 \begin{itemize}
- \item \textbf{An\'alisis de secuencias de \ac{DNA} o \ac{RNA}}. TBD
- \item \textbf{Dise\~no de secuencias de \ac{DNA} o \ac{RNA}}. TBD
- \item \textbf{Predicci\'on de interacci\'on entre prote\'inas}. TBD
+ \item \textbf{An\'alisis de secuencias de \ac{DNA} o \ac{RNA}}.
+ \item \textbf{Dise\~no de secuencias de \ac{DNA} o \ac{RNA}}.
+ \item \textbf{Predicci\'on de interacci\'on entre prote\'inas}.
+ \item \textbf{An\'alisis de mutaciones en el c\'ancer}
+ \item \textbf{Biolog\'ia evolutiva computacional}
 \end{itemize}
 
 \section{Predicci\'on de estructura secundaria}
@@ -55,16 +57,16 @@ secuencias de \ac{RNA} pueden tener la misma estructura secundaria, por lo que
 tambi\'en nos interesa determinar para una estructura secundaria dada, las
 secuencias de \ac{RNA} que conservan esa estructura. 
 
-En ingles, se suele denominar a estos dos problemas ``folding'' e
-``inverse folding'' respectivamente. A continuaci\'on describimos brevemente las
-diferentes aproximaciones a cada uno de ellos.
+En ingl\'es, se suele denominar a estos dos problemas \textit{folding} e
+\textit{inverse folding} respectivamente. A continuaci\'on describimos
+brevemente las diferentes aproximaciones a cada uno de ellos.
 
 Por lo mencionado en la secciones~\ref{estructura} y \ref{virus}, predecir la
 estructura secundaria de una secuencia de \ac{RNA} y conocer las posibles
 secuencias que conservan una estructura secundaria determinada, es de gran
 importancia en este trabajo.
 
-\subsection{Predicci\'on directa (folding)}
+\subsection{Predicci\'on directa (\textit{folding})}
 \label{folding}
 Existen esencialmente 2 tipos de algoritmos para determinar o predecir la
 estructura secundaria de una secuencia de \ac{RNA}.
@@ -81,8 +83,8 @@ comparar secuencias y estructuras con el fin de obtener una estructura por
 Si bien la ``predicci\'on comparativa'' presenta un incremento en la fidelidad
 de los resultados obtenidos con respecto a la ``predicci\'on por \ac{mfe}''
 \cite{Gardner04}, este tipo de algoritmos requieren la existencia de un conjunto
-de secuencias relacionadas entre si (homologas) y esto no siempre es posible. En
-particular para este trabajo nos interesa poder realizar predicciones de la
+de secuencias relacionadas entre si (hom\'ologas) y esto no siempre es posible.
+En particular para este trabajo nos interesa poder realizar predicciones de la
 estructura secundaria a partir de una sola secuencia, por lo que la
 ``predicci\'on comparativa'' fue descartada.
 
@@ -93,7 +95,7 @@ $\mathcal{O}(N^{3})$ donde $N$ es la longitud de la secuencia, aunque
 \textbf{RNAfold} se presenta como una versi\'on mejorada y mas eficiente en la
 pr\'actica. Como ya mencionamos en la secci\'on~\ref{estructura}, para lograr
 esta complejidad polinomial, es necesario suponer la ausencia de
-\textit{pseudo-knots}. De lo contrario, esta demostrado que el problema es
+\textit{pseudo-knots}. De lo contrario, est\'a demostrado que el problema es
 NP-completo\cite{Lyngso00}.
 
 A continuaci\'on, se puede ver un ejemplo de una predicci\'on realizada con
@@ -116,8 +118,12 @@ secundaria representada con par\'entesis y puntos. Donde los pares de
 par\'entesis indican las bases ``apareadas'' o ``unidas'' y los puntos, las
 bases libres.
 
-\subsection{Predicci\'on inversa (inverse folding)}
+\subsection{Predicci\'on inversa (\textit{inverse folding})}
 \label{inverse}
+Como ya mencionamos, este problema consiste en determinar las secuencias de
+\ac{RNA} que tienen una estructura secundaria determinada y es fundamental
+para el dise\~no racional de secuencias de \ac{RNA}.
+
 Las principales implementaciones que abordan este problema, lo plantean como un
 \ac{CSP} y utilizan variantes de b\'usqueda local estoc\'astica para
 resolverlo. La funci\'on objetivo y que se desea minimizar, es la distancia
@@ -128,7 +134,7 @@ contexto, una secuencia soluci\'on es aquella cuya predicci\'on de estructura
 secundaria da como resultado la estructura buscada.} y la estructura secundaria
 dada. 
 
-Si bien la complejidad de este problema no esta determinada, a diferencia de
+Si bien la complejidad de este problema no est\'a determinada, a diferencia de
 otros \ac{CSP}, la evaluaci\'on de las posibles soluciones es muy costosa ya que
 implica la ``predicci\'on \ac{mfe}'' sobre cada secuencia candidata
 ($\mathcal{O}(N^{3})$). Luego, se deben utilizar diferentes t\'ecnicas que
@@ -159,7 +165,9 @@ local estoc\'astica mas complejos.
 Notar que las tres implementaciones dependen de la generaci\'on de n\'umeros
 \textit{pseudo aleatorios} y ya que la ``semilla'' utilizada es variable (salvo
 \textbf{RNA-SSD} que permite fijar la semilla), se debe tener en cuenta el no
-determinismo.
+determinismo. Es decir, en sucesivas ejecuciones del algoritmo y utilizando los
+mismos par\'ametros, se podr\'ian obtener distintos resultados. Esto sera clave
+a la hora de sistematizar y automatizar el uso de estos algoritmos.
 
 A continuaci\'on, mostramos un ejemplo de una predicci\'on inversa usando
 \textbf{RNAinverse} sobre la estructura obtenida anteriormente con

@@ -3,7 +3,7 @@
 \epigraph{Essentially, all models are wrong, but some are useful.}%
 {George E. P. Box}
 
-Siendo este un trabajo desde las Ciencias de la Computaci\'on, seria absurdo
+Siendo este un trabajo desde las Ciencias de la Computaci\'on, ser\'ia absurdo
 intentar abordar rigurosamente todos los conceptos biol\'ogicos involucrados
 en, por ejemplo, la replicaci\'on de un virus dentro de una c\'elula. Al mismo
 tiempo, para poder comprender la complejidad del problema que este trabajo se
@@ -14,7 +14,7 @@ elementales que veremos a continuaci\'on.
 \section{Lo esencial}
 \label{bio-esencial}
 
-Mas all\'a de la complejidad que existe dentro de un c\'elula, sus componentes
+M\'as all\'a de la complejidad que existe dentro de un c\'elula, sus componentes
 y funcionamiento, se destacan tres macro mol\'eculas fundamentales compuestas
 por mol\'eculas peque\~nas:
 \begin{itemize}
@@ -41,7 +41,7 @@ La entidad que transforma el \ac{DNA} en \ac{RNA} se denomina \ac{RNA}
 polimerasa, y el proceso de transformaci\'on se conoce como
 \textit{transcripci\'on}. Por otro lado, la entidad que transforma el
 \ac{RNA} en prote\'inas, se denomina ribosoma y el proceso de esta
-tranformaci\'on es conocido como \textit{traducci\'on}.
+transformaci\'on es conocido como \textit{traducci\'on}.
 
 \subsubsection{\'Acidos nucleicos}
 
@@ -59,8 +59,8 @@ describirse por su secuencia de nucle\'otidos.
 El \ac{DNA} se presenta como una doble cadena de nucle\'otidos, en la que las 2
 hebras est\'an unidas a trav\'es de las bases complementarias (reglas de
 Watson-Crick\footnote{Fracis H. Crick y James D. Watson recibieron en 1962 el
-Premio Nobel en Fisiolog\'ia o Medicina.}), \ac{A} con
-\ac{T} y \ac{C} con \ac{G}.
+Premio Nobel en Fisiolog\'ia o Medicina.}), \ac{A} con \ac{T} y \ac{C} con
+\ac{G}.
 
 En contraste con el \ac{DNA}, el \ac{RNA} se presenta como una cadena simple de
 nucle\'otidos. No obstante esto, el \ac{RNA} tambi\'en puede plegarse siguiendo
@@ -79,11 +79,11 @@ Al igual que lo \'acidos nucleicos, las prote\'inas son macro mol\'eculas
 compuestas por mol\'eculas peque\~nas, pero en este caso las mol\'eculas que
 las componen, se denominan amino\'acidos. Tambi\'en al igual que con los
 nucle\'otidos, dejaremos de lado la descripci\'on qu\'imica de los
-amino\'acidos y nos centraremos en los aspectos que sean mas relevantes para
+amino\'acidos y nos centraremos en los aspectos que sean m\'as relevantes para
 este trabajo.
 
-Existen 20 amino\'acidos diferentes que suelen representarse por su
-nombre abreviado (usando 3 letras o 1 letra). Las prote\'inas son esencialmente
+Existen 20 amino\'acidos diferentes que suelen representarse por su nombre
+abreviado (usando 3 letras o 1 letra). Las prote\'inas son esencialmente
 secuencias de al menos 50 amino\'acidos y son responsables de diferentes tareas
 fundamentales para el correcto funcionamiento de la c\'elula. Sin ir mas lejos,
 el proceso de traducci\'on, es decir la s\'intesis de prote\'inas, lo realizan
@@ -92,7 +92,7 @@ lector se preguntara, ?`qu\'e fue primero, el ribosoma o la prote\'ina?.}.
 
 \subsubsection{Del \ac{DNA} a las prote\'inas}
 
-Como ya vimos mas arriba, el dogma central nos dice que la informaci\'on en la
+Como ya vimos m\'as arriba, el dogma central nos dice que la informaci\'on en la
 c\'elula fluye desde el \ac{DNA} hasta convertirse en prote\'inas a trav\'es de
 transformaciones moleculares denominadas \textit{transcripci\'on} y
 \textit{traducci\'on}. Tambi\'en vimos, en muy pocas palabras, que tanto el
@@ -107,10 +107,10 @@ cuales el material gen\'etico (secuencia de nucle\'otidos) se traduce en
 prote\'inas (secuencia de amino\'acidos). El c\'odigo define una relaci\'on
 entre secuencias de 3 nucle\'otidos, llamadas codones, y los amino\'acidos. A
 cada codon le corresponde a lo sumo un amino\'acido, pero como veremos en
-seguida, cada amino\'acido puede estar relacionado con mas de un codon.
+seguida, cada amino\'acido puede estar relacionado con m\'as de un codon.
 
 Como vimos anteriormente, en el \ac{RNA} aparecen 4 nucle\'otidos. Luego,
-la cantidad de codones posibles, esta dada por $4^{3} = 64$ codones
+la cantidad de codones posibles, est\'a dada por $4^{3} = 64$ codones
 posibles. Por otro lado, dijimos que existen 20 amino\'acidos, lo que
 r\'apidamente nos hace notar que la relaci\'on definida por el c\'odigo
 gen\'etico, no puede ser inyectiva. En criollo, la misma secuencia de
@@ -167,7 +167,7 @@ modelo del dogma central con el fin de lograr las transformaciones moleculares
 de transcripci\'on y traducci\'on. Por lo tanto, los plegamientos o estructuras
 secundarias que forman, determinan en gran medida la actividad celular.
 
-La existencia del termino \textit{estructura secundaria}, nos hace suponer que
+La existencia del t\'ermino \textit{estructura secundaria}, nos hace suponer que
 existe tambi\'en una \textit{estructura primaria}. De hecho, ya vimos la
 estructura primaria de \ac{RNA} cuando dijimos que el \ac{RNA}, se suele
 representar como una secuencia de nucle\'otidos. Efectivamente, a esta secuencia
@@ -200,7 +200,7 @@ definici\'on supone la ausencia de \textit{pseudo-knots}. Un
 $(i',j')$ con $i < i' < j < j'$. Esta suposici\'on se debe principalmente a que
 de otra manera, los algoritmos que veremos mas adelante para la predicci\'on de
 estructura secundaria, pasan de tener complejidad polinomial a ser
-NP-completos\cite{Lyngso00}. Sin embargo, esta suposici\'on esta justificada
+NP-completos\cite{Lyngso00}. Sin embargo, esta suposici\'on est\'a justificada
 en que la ocurrencia de \textit{pseudo-knots} es poco frecuente en la
 naturaleza y en que adem\'as pueden ser considerados en an\'alisis
 posteriores\cite{Zuker84}.
@@ -210,11 +210,11 @@ virus}
 
 La importancia de la estructura secundaria en este trabajo radica,
 fundamentalmente, en su participaci\'on en la s\'intesis de prote\'inas del
-virus y en consecuencia, en su atenuaci\'on. Para los virus \ac{RNA}, se puede
-decir que la estructura secundaria del \ac{IRES}, determina la ``afinidad'' o
-``atracci\'on'' con los ribosomas. Luego, esto incide fuertemente en el proceso
-de traducci\'on de las prote\'inas que causan la enfermedad, o que est\'an
-involucradas en el proceso de replicaci\'on del virus. 
+virus y en consecuencia, en su atenuaci\'on. Para diferentes virus \ac{RNA}, se
+puede decir que la estructura secundaria del \ac{IRES}, determina la
+``afinidad'' o ``atracci\'on'' con los ribosomas. Luego, esto incide fuertemente
+en el proceso de traducci\'on de las prote\'inas que causan la enfermedad, o que
+est\'an involucradas en el proceso de replicaci\'on del virus. 
 
 Una estructura secundaria con menor afinidad (que la estructura secundaria del
 virus), le permitir\'ia al sistema inmune generar los anticuerpos necesarios
@@ -223,14 +223,19 @@ para protegerse del virus antes de que se produzca la enfermedad.
 \section{Los virus \ac{RNA}}
 \label{virus}
 Un virus \ac{RNA} es esencialmente, aquel que tiene el \ac{RNA} como su
-material gen\'etico. Como ya se menciono en la secci\'on~\ref{motivacion}, una
-de las caracter\'isticas de este tipo de virus, es su alta frecuencia de
-mutaciones. Esto se debe, principalmente, a la alta tasa de error en su \ac{RNA}
+material gen\'etico. Adem\'as los virus suelen clasificarse seg\'un la
+``Clasificaci\'on de Baltimore'' que los agrupa en diferentes clases (clase I a
+clase VII) seg\'un el tipo de genoma. En particular, en este trabajo se
+contemplan los virus \ac{RNA} clase IV tambi\'en llamados \ac{(+)ssRNA virus}
+
+Como ya se menciono en la secci\'on~\ref{motivacion}, una de las
+caracter\'isticas de este tipo de virus, es su alta frecuencia de mutaciones.
+Esto se debe, principalmente, a la alta tasa de error en su \ac{RNA}
 polimerasa\footnote{A diferencia de la \ac{DNA} polimerasa que posee la
 capacidad de detectar y corregir errores.} (involucrada en el proceso de
 replicaci\'on del virus), estimada entre $1\times10^{-3}$ a $1\times10^{-5}$
 errores por nucle\'otido por ciclo de replicaci\'on\cite{Vignuzzi08}. Debido a
-que los virus de \ac{RNA} suelen tener menos de 10,000 nucle\'otidos,  esto se
+que los virus de \ac{RNA} suelen tener menos de 10,000 nucle\'otidos, esto se
 traduce en 0.1 a 10 mutaciones por genoma replicado.
 
 Si retomamos lo dicho en la secci\'on~\ref{estructura} sobre la ``afinidad''
@@ -242,8 +247,8 @@ consecuencia, pierda su atenuaci\'on.
 
 \subsubsection{Poliovirus}
 
-El poliovirus es un virus \ac{RNA} de aproximadamente 7,500 nucle\'otidos de
-longitud, miembro del g\'enero \textit{Enterovirus} de la familia
+El poliovirus es un \ac{(+)ssRNA virus} de aproximadamente 7,500 nucle\'otidos
+de longitud, miembro del g\'enero \textit{Enterovirus} de la familia
 \textit{Picornaviridae} y causante de la poliomielitis. El poliovirus puede
 atacar el sistema nervioso y destruir las c\'elulas nerviosas encargadas del
 control de los m\'usculos. Como consecuencia, los m\'usculos afectados dejan de
@@ -270,11 +275,11 @@ probabilidad de revertir a la virulencia. El 90\% de los casos registrados de
 restante, es causado por Sabin 1\cite{Philip92}. Esto se atribuye
 principalmente, a la cantidad de bases de nucle\'otidos en que difieren, cada
 serotipo con respecto a su correspondiente virus atenuado. Mientras que la
-atenuaci\'on en Sabin 2 y Sabin 3, esta dada por el impacto de 2
+atenuaci\'on en Sabin 2 y Sabin 3, est\'a dada por el impacto de 2
 o a lo sumo 3 mutaciones, la atenuaci\'on en Sabin 1 es mas compleja y esto
 justificar\'ia su menor probabilidad de revertir a la virulencia\cite{Philip92}.
 
-Mas all\'a de estas diferencias, los tres virus atenuados, Sabin 1, Sabin 2 y
+M\'as all\'a de estas diferencias, los tres virus atenuados, Sabin 1, Sabin 2 y
 Sabin 3, presentan mutaciones en la 5'-\ac{UTR} que contribuyen a la
 atenuaci\'on. Adem\'as, de los aproximadamente 740 nucle\'otidos de la
 5'-\ac{UTR}, los primeros 620 se conservan en todos los poliovirus, mientras que
