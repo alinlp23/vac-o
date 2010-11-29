@@ -1,2 +1,208 @@
-\chapter{Predicci\'on directa e inversa de estructura secundaria}
+\chapter{Integraci\'on de librer\'ias externas}
 \label{librerias}
+\epigraph{In theory, there is no difference between theory and practice. But, in
+practice, there is.}%
+{Jan L. A. van de Snepscheut}
+
+A continuaci\'on veremos los detalles de implementaci\'on m\'as relevantes de
+las interfaces propuestas en la secci\'on~\ref{diseno-libRNA} y en particular
+para los algoritmos de predicci\'on inversa de la estructura secundaria de
+\ac{RNA}.
+
+\section{Implementar vs. Integrar}
+
+Ante el requerimiento de contar con algoritmos para realizar la comparaci\'on y
+predicci\'on (directa e inversa) de la estructura secundaria de \ac{RNA},
+debimos evaluar y decidir, entre implementar completamente los algoritmos o
+integrar/adaptar los algoritmos existentes.
+
+En este sentido, las interfaces propuestas en la secci\'on~\ref{diseno-libRNA}
+no descartan ninguna de las dos posibilidades, sino simplemente especifican los
+``servicios'' que deben ofrecer al sistema las eventuales implementaciones
+(propias o ajenas).
+
+Por otro lado, implementar este tipo de algoritmos requiere de un profundo
+conocimiento del dominio, en este caso de qu\'imica molecular, que se desviaba
+de los objetivos del software y del trabajo en general. Adem\'as, debido a la
+complejidad de los mismos, se requieren validaciones emp\'iricas para demostrar
+la fidelidad de los resultados lo cual exced\'ia el alcance de este trabajo.
+
+Finalmente se opto por integrar al sistema los siguientes algoritmos para
+implementar las respectivas interfaces:
+\begin{itemize}
+ \item \textbf{IFold:} RNAfold\cite{Hofacker94}.
+ \item \textbf{IFoldInverse:} RNAinverse\cite{Hofacker94},
+INFO-RNA\cite{Busch07}.
+ \item \textbf{IStructureCmp:} RNAforester\cite{Hochsmann05}
+\end{itemize}
+
+N\'otese que no incluimos la interfaz \textbf{ISequenceCmp} debido a que la
+comparaci\'on entre secuencias de \ac{RNA} es significativamente mas simple y
+para este caso, se opto por realizar una implementaci\'on propia utilizando una
+matriz de costos como se propuso en la secci\'on~\ref{formalizacion-prop}.
+
+\section{Integraci\'on}
+
+La integraci\'on de los programas RNAfold y RNAforester, no presentaron mayores
+dificultades ya que en ambos casos, la implementaci\'on consiste simplemente 
+en ejecutar el programa y luego leer el resultado. Los dos programas
+realizan c\'alculos complejos y costosos computacionalmente pero
+deterministicos. Por otro lado, los programas que realizan la predicci\'on
+inversa de la estructura secundaria de \ac{RNA} o \textit{inverse folding}
+(INFO-RNA y RNAinverse) presentan algunas complicaciones principalmente debido a
+su no determinismo y que veremos a continuaci\'on.
+
+\subsection{Predicci\'on inversa (\textit{inverse folding})}
+
+Recordando lo dicho en la secci\'on~\ref{inverse}, el objetivo de los programas
+(INFO-RNA y RNAinverse) que realizan el \textit{inverse folding} es encontrar
+secuencias de \ac{RNA} que tengan la estructura secundaria de \ac{RNA} dada por
+el usuario. El problema surge cuando se los quiere usar de manera sistem\'atica,
+como es nuestro caso. Es decir, lo que pretendemos al usar estos programas es
+tener la capacidad de analizar sistem\'aticamente, la mayor cantidad posible de
+secuencias de \ac{RNA} que tengan una estructura secundaria de \ac{RNA}
+determinada para luego evaluar cuales de esas secuencias contribuyen de mejor
+manera a la atenuaci\'on del virus.
+
+\subsubsection{Caracterizaci\'on de los algoritmos para la predicci\'on inversa}
+
+M\'as all\'a de los diferentes par\'ametros que aceptan cada uno de estos
+programas, comparten dos par\'ametros fundamentales. Por un lado, la estructura
+secundaria de \ac{RNA} sobre la que se quiere hacer la predicci\'on inversa y
+por otro, una secuencia de \ac{RNA} ``incompleta'' (algunas bases indefinidas)
+que se usa como secuencia de inicio en el algoritmo de b\'usqueda. 
+
+La secuencia ``incompleta'' que se da como par\'ametro, cumple adem\'as el rol
+de especificar las restricciones que se deben satisfacer durante la b\'usqueda
+(qu\'e bases de nucle\'otidos \textit{deben} estar presentes en determinadas
+posiciones). Esto por un lado restringe el espacio de b\'usqueda, pero por otro
+lado se podr\'ian estar especificando restricciones que no se pueden satisfacer
+para la estructura secundaria de \ac{RNA} dada. En nuestro caso de uso,
+\ac{vac-o} comienza su ejecuci\'on con una secuencia de \ac{RNA} (el genoma del
+virus atenuado) que efectivamente tiene la estructura secundaria de \ac{RNA} que
+se quiere conservar. Por lo tanto, esta misma secuencia se puede usar para
+generar distintas secuencias ``incompletas'' con la garant\'ia de que todas
+especifiquen restricciones satisfacibles.
+
+El no determinismo est\'a dado por el hecho de que para una misma estructura
+secundaria de \ac{RNA} y una misma secuencia (incompleta) de inicio, en
+sucesivas ejecuciones de los programas, se pueden encontrar distintas secuencias
+de \ac{RNA} aunque eventualmente tambi\'en repetidas. Por otro lado, modificar
+la secuencia (incompleta) de inicio, podr\'ia aunque no necesariamente, implicar
+que se encuentren nuevas secuencias.
+
+Con todo lo dicho, deber\'ian quedar claras las complicaciones que presentan
+estos programas para ser ejecutados de manera sistem\'atica. Pero para dejarlo
+del todo claro, podemos formalizarlo de la siguiente manera.
+
+Recordemos que una secuencia de \ac{RNA} se representa como una palabra sobre el
+alfabeto $\Sigma = \{A,U,G,C\}$ y una secuencia de \ac{RNA} ``incompleta'' como
+una palabra sobre el alfabeto $\Sigma \cup \{N\}$ donde las $N$ representan las
+bases indefinidas. Adem\'as, si $s$ es una secuencia de \ac{RNA} (completa o
+incompleta) de longitud $n$, $s_{i}$ sera la posici\'on o base $i$-esima de la
+secuencia $s$ con $0 \leq i < n$.
+
+Luego, si definimos:
+\begin{itemize}
+ \item $\mathcal{S}$ el conjunto de secuencias de \ac{RNA} de longitud $n$.
+ \item $\mathcal{E}$ el conjunto de estructuras secundarias de \ac{RNA} sobre
+secuencias de longitud $n$. 
+ \item $\mathcal{I}(e) \subseteq \mathcal{S}$ el conjunto de secuencias de
+\ac{RNA} que tienen como estructura secundaria a $e \in \mathcal{E}$.
+ \item $\mathcal{R}$ el conjunto de secuencias de \ac{RNA} incompletas de
+longitud $n$.
+\end{itemize}
+
+podemos caracterizar a los algoritmos para la predicci\'on inversa de la
+estructura secundaria de \ac{RNA} como $inverse: \mathcal{E} \times \mathcal{R}
+\rightarrow \mathcal{S}$ tal que para $e \in \mathcal{E}$ y $r \in
+\mathcal{R}$, si $inverse(e,r) = s$ entonces se satisfacen:
+\begin{itemize}
+ \item $s \in \mathcal{I}(e)$
+ \item $\{\forall i : 0 \leq i < n \land r_{i} \neq N : s_{i} = r_{i}\}$ 
+\end{itemize}
+
+El problema es b\'asicamente que no conocemos la cardinalidad de
+$\mathcal{I}(e)$ y que adem\'as, si pensamos a las sucesivas ejecuciones de
+$inverse(e,r)$ como una forma de enumerar el conjunto $\mathcal{I}(e)$, el orden
+en que se enumeran las secuencias ser\'ia aleatorio y permitir\'ia repeticiones
+(no deterministico).
+
+\subsubsection{Propuesta para sistematizar la predicci\'on inversa}
+
+Vistas las complicaciones para lograr analizar sistem\'aticamente todas, o al
+menos un gran numero de secuencias que tengan una estructura secundaria de
+\ac{RNA} determinada, veremos de que manera integramos al sistema los algoritmos
+mencionados.
+
+La idea consiste b\'asicamente en ``recordar'' las secuencias encontradas en
+ejecuciones anteriores y en sistematizar la forma de generar secuencias
+incompletas. Tener ``memoria'' sobre las secuencias encontradas es fundamental
+para no volver a evaluar la misma secuencia. Por otro lado, sistematizar la
+generaci\'on de secuencias incompletas tiende a restringir el espacio de
+b\'usqueda desde diferentes ``frentes'' con el objetivo de alcanzar a cubrir la
+mayor cantidad del espacio de b\'usqueda posible.
+
+Para generar secuencias incompletas se propuso recorrer iterativamente todas
+las formas de seleccionar $k$ posiciones de $n$, donde $n$ es la longitud de la
+secuencia completa y $k$ es un par\'ametro determinado por la extensi\'on. Es
+decir que tendremos $n \choose k$ secuencias incompletas distintas. Sin
+embargo, aun no tenemos forma de determinar cuando se deber\'ia pasar a la
+siguiente secuencia de inicio ya que el hecho de que el algoritmo de
+predicci\'on inversa, devuelva una secuencia que ya hab\'ia sido encontrada
+previamente, no implica que en sucesivas ejecuciones y sin cambiar la secuencia
+de inicio, se encuentren nuevas secuencias. Luego, se propuso delegar esta
+responsabilidad a la extensi\'on y que sea esta quien determine el n\'umero $m$
+de intentos que se realizan sobre cada secuencia de inicio hasta encontrar una
+secuencia nueva.
+
+A continuaci\'on presentamos el pseudo c\'odigo de la propuesta asumiendo las
+siguientes variables:
+\begin{itemize}
+ \item $e \in \mathcal{E}$: la estructura secundaria de \ac{RNA} sobre la que se
+realiza la predicci\'on inversa.
+ \item $i \in \mathcal{I}(e)$: la secuencia de \ac{RNA} a la que se le desean
+buscar variantes que conserven la estructura secundaria $e$.
+ \item $n \in \mathbb{N}$: la longitud de la secuencia $i$.
+ \item $r \in \mathcal{R}$: la secuencia incompleta de inicio.
+ \item $k \in \mathbb{N}$: el n\'umero de posiciones indefinidas para generar
+secuencias incompletas.
+ \item $m \in \mathbb{N}$: el n\'umero de intentos por cada secuencia incompleta
+de inicio.
+ \item $f \subseteq \mathcal{I}(e)$: el conjunto de secuencias encontradas.
+\end{itemize}
+
+y los siguientes procedimientos auxiliares:
+\begin{itemize}
+ \item $inverse(e,r)$: algoritmo externo como se caracterizo anteriormente.
+ \item $begin(i,n,k)$: devuelve la primera de las $n \choose k$ secuencias
+incompletas a partir de la secuencia $i$.
+ \item $next(r)$: devuelve la siguiente secuencia incompleta, para alg\'un orden
+de las $n \choose k$ secuencias incompletas a partir de la secuencia $i$.
+\end{itemize}
+
+
+\begin{algorithm}
+ \caption{Inicializaci\'on}
+\begin{algorithmic}[1]
+\STATE $f \leftarrow \emptyset$ 
+\STATE $r \leftarrow begin(i,n,k)$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+ \caption{Predicci\'on inversa integrada}
+ \begin{algorithmic}[1]
+ \STATE $j \leftarrow m$
+ \REPEAT
+ \STATE $j \leftarrow j-1$
+ \STATE $s \leftarrow inverse(e,r)$
+ \IF{$s \in f$ \textbf{and} $j = 0$}
+ \STATE $r \leftarrow next(r)$
+ \STATE $j \leftarrow m$
+ \ENDIF
+ \UNTIL{$s \notin f$}
+ \STATE $f \leftarrow f \cup \{s\}$
+ \RETURN{s}
+ \end{algorithmic}
+\end{algorithm}

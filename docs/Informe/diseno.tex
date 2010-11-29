@@ -86,12 +86,12 @@ Dise\~no de Software'' que contiene una descripci\'on detallada de todos los
 componentes de la arquitectura presentada. Al mismo tiempo, profundizar sobre
 estos componentes, nos permitir\'a introducir los principales patrones de
 dise\~no que se utilizaron de forma an\'aloga en otras partes del sistema.
-Entre otros, se destacan ``Iterator'', ``Observer'', ``Template Method'' y
-``Visitor''. Para una descripci\'on de estos y otros patrones del dise\~no
-orientado a objetos, ver \cite{Gamma95}.
+Entre otros, se destacan \textit{Iterator}, \textit{Observer}, \textit{Template
+Method} y \textit{Visitor}. Para una descripci\'on de estos y otros patrones
+del dise\~no orientado a objetos, ver \cite{Gamma95}.
 
 \section{Librer\'ias externas}
-
+\label{diseno-libRNA}
 Como vimos en la secciones~\ref{folding} y \ref{inverse}, existen diversas
 implementaciones que resuelven el problema de la predicci\'on (directa e
 inversa) de estructura secundaria de \ac{RNA} y lo mismo ocurre para el caso de
@@ -122,8 +122,8 @@ En esto podemos ver la idea del principio de dise\~no \ac{DIP}. Haciendo que el
 sistema dependa de estas interfaces en lugar de sus respectivas
 implementaciones conseguimos abstraer los detalles de cada librer\'ia externa y
 logramos un software mas vers\'atil. En el capitulo~\ref{librerias} veremos
-algunos detalles sobre las implementaciones de estas interfaces en las que
-intervienen los patrones de dise\~no ``Iterator'' y ``Visitor''.
+algunos detalles sobre las implementaciones de estas interfaces y en particular
+de \textbf{IFoldInverse}.
 
 \section{Motor combinatorio}
 
@@ -197,13 +197,13 @@ Figura~\ref{motor} se puede ver el diagrama de secuencia del motor combinatorio.
 \end{figure}
 
 El principal patr\'on de dise\~no que utilizamos en este componente es el que
-se denomina ``Observer'' y que sirve fundamentalmente para lograr la
+se denomina \textit{Observer} y que sirve fundamentalmente para lograr la
 comunicaci\'on entre diferentes objetos sin que se produzca acoplamiento. La
 idea es establecer una relaci\'on entre un emisor y uno, o varios receptores
 sin necesidad de generar una dependencia entre el objeto emisor y el objeto
-receptor. Adem\'as para permitir el uso del patr\'on ``Observer'' entre
-diferentes tipos de objetos, se propuso el patr\'on de dise\~no ``Template
-Method''.
+receptor. Adem\'as para permitir el uso del patr\'on \textit{Observer} entre
+diferentes tipos de objetos, se propuso el patr\'on de dise\~no \textit{Template
+Method}.
 
 En nuestro caso, \textbf{INeighborhood} notifica a \textbf{IStrategy} por cada
 soluci\'on que se genera mientras se explora el vecindario de la soluci\'on
