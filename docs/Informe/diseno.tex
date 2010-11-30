@@ -29,13 +29,6 @@ Por ``responsabilidades'' se entiende fundamentalmente lo siguiente:
 Como ya mencionamos anteriormente, uno de los requerimientos del software fue
 que se respetaran los principios del dise\~no orientado a objetos resumidos en
 el acr\'onimo \textbf{SOLID}\cite{Martin00}.
-\begin{itemize}
-  \item \ac{SRP}
-  \item \ac{OCP}
-  \item \ac{LSP}
-  \item \ac{ISP}
-  \item \ac{DIP}
-\end{itemize}
 
 En particular se puso especial atenci\'on en respetar los principios \ac{SRP}, 
 \ac{OCP} y \ac{DIP} debido a que repercuten directamente en que el sistema sea
@@ -47,8 +40,9 @@ la etapa de ``verificaci\'on''.
 \section{Arquitectura}
 
 A continuaci\'on veremos los principales componentes del sistema y siguiendo la
-metodolog\'ia adoptada, sus respectivas responsabilidades. En la
-Figura~\ref{arquitectura} se puede ver el diagrama UML correspondiente. 
+metodolog\'ia adoptada, sus respectivas responsabilidades. En las 
+Figuras~\ref{arquitectura} y \ref{flujo} se pueden ver los diagramas UML
+de la arquitectura y de flujo respectivamente.
 
 \begin{figure} 
   \centering
@@ -78,6 +72,13 @@ funcionalidades para la manipulaci\'on de secuencias y estructuras de \ac{RNA}
 (``folding'' directo e inverso y comparaci\'on estructural, entre otras)
 utilizando librer\'ias externas.
   \end{itemize}
+
+\begin{figure} 
+  \centering
+  \includegraphics[scale=0.5]{flow.png}
+  \caption{Diagrama de flujo de vac-o.}
+\label{flujo}
+\end{figure}
 
 En las siguientes secciones profundizaremos sobre los componentes ``libRNA'' y
 ``CombinatoryEngine'' por ser probablemente los mas importantes en cuanto a sus
@@ -126,7 +127,7 @@ algunos detalles sobre las implementaciones de estas interfaces y en particular
 de \textbf{IFoldInverse}.
 
 \section{Motor combinatorio}
-
+\label{diseno-motor}
 El componente ``CombinatoryEngine'' contiene todo lo referente al recorrido del
 espacio de b\'usqueda por lo que es claramente, uno de los componentes
 principales de \ac{vac-o}. Esto es fundamentalmente, las regiones

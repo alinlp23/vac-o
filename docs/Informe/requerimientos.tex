@@ -18,8 +18,8 @@ resumir los requerimientos funcionales de \ac{vac-o} de la siguiente manera:
 revertantes y un conjunto de restricciones sobre partes de la secuencias del
 virus atenuado.
  \item \textbf{Objetivo:} Satisfaciendo las restricciones impuestas, maximizar
-la cantidad de mutaciones necesarias para convertir el virus atenuado en alguna
-secuencia pat\'ogena o revertante.
+la cantidad de mutaciones necesarias para que el virus atenuado se convierta en
+una secuencia pat\'ogena o revertante.
  \item \textbf{Salida:} Una o varias secuencias, candidatas a ``mejorar'' el
 virus atenuado.
 \end{itemize}
@@ -28,6 +28,14 @@ Desde el punto de vista del dise\~no, el sistema deb\'ia ser altamente modular,
 de forma que sea apto para encontrar secuencias gen\'omicas para diferentes
 tipos de organismos. En este sentido, se debieron seguir los principios de
 dise\~no conocidos por el acr\'onimo \textbf{SOLID}\cite{Martin00}.
+
+\begin{itemize}
+  \item \ac{SRP}
+  \item \ac{OCP}
+  \item \ac{LSP}
+  \item \ac{ISP}
+  \item \ac{DIP}
+\end{itemize}
 
 \section{Extensiones}
 
@@ -49,14 +57,26 @@ secuencias candidatas y de determinar la estrategia de b\'usqueda.
 
 Como ya mencionamos anteriormente, el problema se puede ver como un problema de
 ``optimizaci\'on combinatoria basado en restricciones''. Luego, un ingrediente
-que no podemos dejar de mencionar son precisamente, las restricciones o
-``regiones combinatorias''. Fundamentalmente, representan las componentes
-variables de cada soluci\'on y definen en gran medida el espacio de b\'usqueda.
+que no podemos dejar de mencionar son precisamente, las restricciones. 
 
-En este contexto nos referimos a las ``variantes'' de una regi\'on como los
-posibles valores (secuencias de \ac{RNA}) que satisfacen la restricci\'on
-impuesta. Luego podemos definir a una regi\'on combinatoria de la siguiente
-manera.
+Como vimos en la secci\'on~\ref{bio-esencial}, sobre una secuencia de \ac{RNA}
+se distinguen dos tipos de regiones, \ac{ORF} y \ac{UTR}. Estas regiones de la
+secuencia o eventualmente ciertas partes de inter\'es, tienen diferentes
+propiedades o funciones biol\'ogicas (la estructura secundaria de \ac{RNA} o
+los amino\'acidos que codifican) que permiten considerar a la secuencia de
+\ac{RNA} como un virus atenuado (reducen la virulencia del pat\'ogeno
+manteni\'endolo viable).
+
+Sobre las diferentes partes de inter\'es (para la atenuaci\'on del virus)
+sobre una secuencia de \ac{RNA}, que llamaremos ``regiones combinatorias'', se
+aplicar\'an restricciones que tiendan a mantener las propiedades o funciones
+biol\'ogicas que garantizan la atenuaci\'on del virus. 
+
+En este contexto nos referimos a las ``variantes'' de una regi\'on combinatoria
+como los posibles valores ((sub)secuencias de \ac{RNA}) que satisfacen la
+restricci\'on impuesta por la regi\'on combinatoria. Luego, podemos definir a
+una regi\'on combinatoria de la siguiente manera.
+
 \begin{definition}
 \label{region}
 Dada una secuencia de \ac{RNA} $S$ de longitud $n$, una regi\'on combinatoria
@@ -72,13 +92,26 @@ local a la regi\'on que determina la bondad de una variante determinada.
 
 Si suponemos $N \ge 1$ y $R_{1}, \dots, R_{N}$ regiones combinatorias.
 Entonces tendremos que el n\'umero de posibles secuencias que \ac{vac-o}
-``deber\'ia'' evaluar, sera igual al producto cartesiano $\mathcal{V}_{1} \times
-\dots \times \mathcal{V}_{N}$ con  $\mathcal{V}_{1}, \dots, \mathcal{V}_{N}$
-variantes de cada regi\'on combinatoria respectivamente.
+``deber\'ia'' evaluar, sera igual al cardinal del producto cartesiano
+$\mathcal{V}_{1} \times \dots \times \mathcal{V}_{N}$ con  $\mathcal{V}_{1},
+\dots, \mathcal{V}_{N}$ variantes de cada regi\'on combinatoria respectivamente.
 
-Inicialmente, se contemplaron dos tipos de regiones combinatorias aunque se debe
-tener en cuenta la posibilidad de que en el futuro se agreguen mas. Estos tipos
-de regiones combinatorias o restricciones son:
+Con el objetivo de que las secuencias evaluadas cumplan con un m\'inimo criterio
+de ``calidad'' y al mismo tiempo restringir el n\'umero de posibilidades, solo
+ser\'an tenidas en cuenta aquellas combinaciones de las variantes a cada
+regi\'on combinatoria tal que el producto de sus respectivas evaluaciones
+locales ($eval$) sea mayor o igual a un ``umbral'' determinado por la
+extensi\'on. Es decir, ser\'an tenidas en cuenta las combinaciones de variantes:
+\begin{center}
+$(v_{1},\dots, v_{N}) \in \mathcal{V}_{1} \times \dots \times \mathcal{V}_{N}$
+tal que $\prod_{i=1}^{N} eval(v_{i}) \ge umbral$ 
+\end{center}
+
+
+
+Para el caso testigo de la \ac{OPV}, se contemplaron dos tipos de regiones
+combinatorias aunque se debe tener en cuenta la posibilidad de que en el futuro
+se agreguen mas. Estos tipos de regiones combinatorias o restricciones son:
 \begin{itemize}
  \item Conservaci\'on de la estructura secundaria de \ac{RNA}.
  \item Conservaci\'on del c\'odigo gen\'etico.
@@ -106,10 +139,13 @@ soluciones.
 \section{Control de calidad}
 
 Cada secuencia encontrada por \ac{vac-o} durante el recorrido del espacio
-de b\'usqueda, debe ser sometida a un ``control de calidad''. B\'asicamente
-se pretende simular las mutaciones acumuladas que se producen en las sucesivas
-replicaciones del virus en la naturaleza y sobre cada secuencia mutante,
-verificar determinadas propiedades que brinden mayor seguridad sobre la
+de b\'usqueda, debe ser sometida a un ``control de calidad'' complementario al
+requerimiento sobre la calidad de las variantes a cada regi\'on combinatoria
+que mencionamos anteriormente ($\prod_{i=1}^{N} eval(v_{i}) \ge umbral$).
+
+B\'asicamente se pretende simular las mutaciones acumuladas que se producen en
+las sucesivas replicaciones del virus en la naturaleza y sobre cada secuencia
+mutante, verificar determinadas propiedades que brinden mayor seguridad sobre la
 atenuaci\'on del virus.
 
 An\'alogamente a las regiones combinatorias, definimos las regiones de
@@ -117,36 +153,49 @@ validaci\'on de la siguiente manera.
 
 \begin{definition}
 Dada una secuencia de \ac{RNA} $S$ de longitud $n$, una regi\'on de validaci\'on
-sobre $S$ sera una 4-upla $(inicio, fin, prueba, criterio)$ tal que:
+sobre $S$ sera una 5-upla $(inicio, fin, prueba, criterio, prof)$ tal que:
 \begin{itemize}
  \item $0 \le inicio < fin \le n$
  \item $prueba$ determina la forma en que se producen las mutaciones.
  \item $criterio$ determina la propiedad que deben cumplir todas las secuencias
 mutantes generadas.
+ \item $prof>0$ determina la profundidad con que se realiza el control de
+validaci\'on (ciclos de replicaci\'on que se simulan).
 \end{itemize}
 \end{definition}
 
 Se puede pensar al control de calidad como la generaci\'on de un \'arbol de
-secuencias. La ra\'iz del \'arbol sera la secuencia candidata y los nodos del
-\'arbol ser\'an las secuencias mutantes generadas. Luego, diremos que una
-secuencia candidata pasa el control de calidad sobre una regi\'on de
-validaci\'on, cuando sea posible generar todos los nodos del \'arbol para una
-profundidad dada. Por ultimo, solo ser\'an consideradas aquellas secuencias
-candidatas que pasen el control de calidad sobre todas las regiones de
+secuencias. La ra\'iz del \'arbol ser\'a la secuencia candidata y los nodos del
+\'arbol ser\'an las secuencias mutantes generadas mediante la forma seleccionada
+en la variable $prueba$ y que cumplan con la propiedad determinada por la
+variable $criterio$. Si una secuencia mutante no cumple con esa propiedad, no se
+genera ese nodo del \'arbol, se corta en ese punto el control de calidad y la
+secuencia candidata no pasa el control de calidad sobre esa regi\'on de
 validaci\'on.
 
-Para las formas de producir mutaciones acumuladas se contemplaron dos
-alternativas:
-\begin{itemize}
- \item Mutaciones sistem\'aticas.
- \item Mutaciones aleatorias.
-\end{itemize}
+Diremos que una secuencia pasa el control de calidad sobre una regi\'on de
+validaci\'on, cuando sea posible generar todos los nodos del \'arbol hasta
+alcanzar la profundidad $prof$. Luego, solo ser\'an consideradas aquellas
+secuencias candidatas que pasen el control de calidad sobre todas las regiones
+de validaci\'on.
 
-Por otro lado, las propiedades que se contemplaron como criterio de
-verificaci\'on son:
+Para las formas de producir mutaciones acumuladas se contemplaron, ``mutaciones
+sistem\'aticas'' y ``mutaciones aleatorias''. Por otro lado, las propiedades
+que se contemplaron como criterio de verificaci\'on son, ``similitud
+estructural'' y ``disimilitud estructural''.
+
+Por similitud y disimilitud estructural nos referimos a la comparaci\'on entre
+la estructura secundaria de \ac{RNA} de cada secuencia mutante y una estructura
+secundaria de \ac{RNA} dada por la extensi\'on. 
+
+Si suponemos $\mathcal{E}$ el conjunto de estructuras secundarias sobre
+secuencias de longitud $n$ y una funci\'on $StructureCompare : \mathcal{E}
+\times \mathcal{E} \rightarrow (-\infty, 1)$ tal que dadas $e_{1},e_{2} \in
+\mathcal{E}$ calcula la similitud entre ellas, siendo 1 el valor de similitud
+m\'axima ($e_{1} = e_{2}$). Entonces, para $s \in (-\infty, 1)$ tenemos que:
 \begin{itemize}
- \item Similitud estructural.
- \item Disimilitud estructural.
+ \item Similitud estructural: $StructureCompare(e_{1}, e_{2}) \ge s$
+ \item Disimilitud estructural: $StructureCompare(e_{1}, e_{2}) \le s$
 \end{itemize}
 
 De todas formas, se deb\'ia contemplar la posibilidad de que en el
