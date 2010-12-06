@@ -12,6 +12,7 @@
 \author{Santiago Videla}
 \title{Especificaci\'on de Requerimientos de Software}
 \pagestyle{headings}
+\date{24 de septiembre de 2010}
 \begin{document}
 \maketitle
 \pagebreak
@@ -21,10 +22,18 @@
 \section{Introducci\'on}
   \subsection{Prop\'osito}
   \paragraph{}
-  El prop\'osito de este documento es la especificaci\'on de requerimientos de software en el marco de la tesis de grado de la carrera Lic. en Cs. de la Computaci\'on de la FaMAF - UNC, \textbf{``Dise\~no de vacunas atenuadas con menor probabilidad de sufrir reversi\'on a la virulencia''}. Los requerimientos del software son provistos por integrantes de FuDePAN en su car\'acter de autores intelectuales de la soluci\'on que se pretende implementar y colaboradores de dicha tesis.
+  El prop\'osito de este documento es la especificaci\'on de requerimientos de
+software en el marco de la tesis de grado de la carrera Lic. en Cs. de la
+Computaci\'on de la FaMAF - UNC, \textbf{``Dise\~no de vacunas atenuadas con
+menor probabilidad de sufrir reversi\'on a la virulencia''}. Los requerimientos
+del software son provistos por integrantes de FuDePAN en su car\'acter de
+autores intelectuales de la soluci\'on que se pretende implementar y
+colaboradores de dicha tesis.
 
   \paragraph{}
-  A continuaci\'on se enumeran las personas involucradas en el desarrollo de la tesis y que por lo tanto, representan la principal audiencia del presente documento.
+  A continuaci\'on se enumeran las personas involucradas en el desarrollo de la
+tesis y que por lo tanto, representan la principal audiencia del presente
+documento.
   \begin{itemize}
   \item Dra. Laura Alonso Alemany: Directora de tesis, FaMAF
   \item Daniel Gutson: Colaborador de tesis, FuDePAN
@@ -32,35 +41,70 @@
   \end{itemize}  
  
   \subsection{Alcance}
-  El producto que se especifica en este documento se denomina \textbf{``vac-o''} y su principal objetivo es encontrar secuencias gen\'omicas de pat\'ogenos que mantengan funcionalidad como vacunas con una probabilidad m\'inima de sufrir reversi\'on a la virulencia. El producto final debe proveer al usuario, la capacidad de hacer uso del software mediante extensiones o \textit{plugins} que implementen las caracter\'isticas particulares para cada pat\'ogeno. 
+  El producto que se especifica en este documento se denomina \textbf{``vac-o''}
+y su principal objetivo es encontrar secuencias gen\'omicas de pat\'ogenos que
+mantengan funcionalidad como vacunas con una probabilidad m\'inima de sufrir
+reversi\'on a la virulencia. El producto final debe proveer al usuario, la
+capacidad de hacer uso del software mediante extensiones o \textit{plugins} que
+implementen las caracter\'isticas particulares para cada pat\'ogeno. 
   
-  La principal responsabilidad de vac-o es la de proveer a las extensiones, un motor combinatorio de secuencias gen\'omicas utilizando diferentes estrategias computacionales que conduzcan a la optimizaci\'on de los c\'alculos. Por otro lado, las extensiones son responsables de evaluar las secuencias generadas asignando un puntaje a cada una con el fin de que vac-o genere el listado de secuencias resultante.
+  La principal responsabilidad de vac-o es la de proveer a las extensiones, un
+motor combinatorio de secuencias gen\'omicas utilizando diferentes estrategias
+computacionales que conduzcan a la optimizaci\'on de los c\'alculos. Por otro
+lado, las extensiones son responsables de evaluar las secuencias generadas
+asignando un puntaje a cada una con el fin de que vac-o genere el listado de
+secuencias resultante.
 
-  En su versi\'on inicial, vac-o incluye una extensi\'on para la vacuna Sabin contra la poliomielitis que podr\'ia ser tomada como gu\'ia para futuras extensiones.
+  En su versi\'on inicial, vac-o incluye una extensi\'on para la vacuna Sabin
+contra la poliomielitis que podr\'ia ser tomada como gu\'ia para futuras
+extensiones.
 
   \subsection{Descripci\'on general del documento}
-  La estructura de este documento sigue las recomendaciones de la ``Gu\'ia para la especifiaci\'on de requerimientos de la IEEE'' (IEEE Std 830-1998).
+  La estructura de este documento sigue las recomendaciones de la ``Gu\'ia para
+la especificaci\'on de requerimientos de la IEEE'' (IEEE Std 830-1998).
 
-  En la secci\'on \ref{section-desc-gral} se presenta una descripci\'on general de vac-o, sus principales funcionalidades, interfaces y perfiles de usuarios.
+  En la secci\'on \ref{section-desc-gral} se presenta una descripci\'on general
+de vac-o, sus principales funcionalidades, interfaces y perfiles de usuarios.
   
-  En la secci\'on \ref{section-req} se detallan los requerimientos funcionales espec\'ificos de vac-o y los principales atributos que debe cumplir el software.
+  En la secci\'on \ref{section-req} se detallan los requerimientos funcionales
+espec\'ificos de vac-o y los principales atributos que debe cumplir el software.
 
 \section{Descripci\'on General}
   \label{section-desc-gral}
   \subsection{Perspectiva del Producto}   
-    Al momento de la confecci\'on de este documento, no existen productos de software que brinden las funcionalidades que se pretenden implementar. En este sentido, vac-o representa una innovaci\'on en el \'area de las bioinformaticas, cuyo principal objetivo es la optimizaci\'on de vacunas basadas en virus atenuados.
+    Al momento de la confecci\'on de este documento, no existen productos de
+software que brinden las funcionalidades que se pretenden implementar. En este
+sentido, vac-o representa una innovaci\'on en el \'area de la bioinform\'atica,
+cuyo principal objetivo es la optimizaci\'on de vacunas basadas en virus
+atenuados.
     
-    Uno de los problemas de estas vacunas es su potencialidad de revertir a la virulencia. En sucesivas replicaciones, los virus atenuados pueden acumular mutaciones que les devuelvan el car\'acter patog\'enico y de esa manera podr\'ian producir enfermedad en el vacunado o sus contactos.
+    Uno de los problemas de estas vacunas es su potencialidad de revertir a la
+virulencia. En sucesivas replicaciones, los virus atenuados pueden acumular
+mutaciones que les devuelvan el car\'acter patog\'enico y de esa manera
+podr\'ian producir enfermedad en el vacunado o sus contactos.
     
-    Para lograr su objetivo, vac-o debe ser capaz de encontrar las variantes del virus con menor probabilidad de revertir a la patogenia. Partiendo de la secuencia gen\'omica que se encuentra en la cepa vacunal, se deben buscar las modificaciones de esta secuencia que cumplan las siguientes propiedades:
+    Para lograr su objetivo, vac-o debe ser capaz de encontrar las variantes del
+virus con menor probabilidad de revertir a la patogenia. Partiendo de la
+secuencia gen\'omica que se encuentra en la cepa vacunal, se deben buscar las
+modificaciones de esta secuencia que cumplan las siguientes propiedades:
     \begin{itemize}
-      \item Que originen una respuesta inmune protectora contra el virus salvaje.
-      \item Que tengan muy baja probabilidad de mutar hasta convertirse en un virus pat\'ogeno.
+      \item Que originen una respuesta inmune protectora contra el virus
+salvaje.
+      \item Que tengan muy baja probabilidad de mutar hasta convertirse en un
+virus pat\'ogeno.
     \end{itemize}
     
-    Entre todas las secuencias encontradas, vac-o debe construir una lista o \textit{ranking} de secuencias con sus respectivos puntajes. Para lograr esto, se deber\'a implementar una extensi\'on que brinde la informaci\'on y las caracter\'isticas propias del virus. En particular, cada extensi\'on debe especificar las regiones combinatorias de inter\'es y ser capaz de asignar un puntaje a cada secuencia compar\'andola con la secuencia original. 
+    Entre todas las secuencias encontradas, vac-o debe construir una lista o
+\textit{ranking} de secuencias con sus respectivos puntajes. Para lograr esto,
+se deber\'a implementar una extensi\'on que brinde la informaci\'on y las
+caracter\'isticas propias del virus. En particular, cada extensi\'on debe
+especificar las regiones combinatorias de inter\'es y ser capaz de asignar un
+puntaje a cada secuencia compar\'andola con la secuencia original. 
 
-    En la figura~\ref{fig:1} se presenta el flujo de trabajo y funcionamiento general de vac-o. Notar que este esquema es puramente conceptual y no hace ninguna referencia a los detalles de implementaci\'on. La intenci\'on es clarificar al lector los diferentes ``actores'' y sus responsabilidades.
+    En la Figura~\ref{fig:1} se presenta el flujo de trabajo y funcionamiento
+general de vac-o. Notar que este esquema es puramente conceptual y no hace
+ninguna referencia a los detalles de implementaci\'on. La intenci\'on es
+clarificar al lector los diferentes ``actores'' y sus responsabilidades.
     \begin{figure}
 	    \centering
 	    \includegraphics[scale=0.65]{seq-diagram.png}
@@ -72,22 +116,34 @@
     No se registran requerimientos.
 
     \subsubsection{Interfaces de Usuario}
-    La interfaz con el usuario final consiste de dos formularios y un listado con las secuencias resultantes. Inicialmente, el usuario de vac-o deber\'a indicar la ubicaci\'on o \textit{path} de la extensi\'on que desea usar. El siguiente paso, sera completar un formulario con los datos requeridos por la extensi\'on elegida. Finalmente, se da comienzo a la ejecuci\'on y se recibe como resultado, la lista de secuencias con sus respectivos puntajes.
+    La interfaz con el usuario final consiste de dos formularios y un listado
+con las secuencias resultantes. Inicialmente, el usuario de vac-o deber\'a
+indicar la ubicaci\'on o \textit{path} de la extensi\'on que desea usar. El
+siguiente paso, ser\'a completar un formulario con los datos requeridos por la
+extensi\'on elegida. Finalmente, se da comienzo a la ejecuci\'on y se recibe
+como resultado, la lista de secuencias con sus respectivos puntajes.
 
     \subsubsection{Interfaces de Hardware}
     No se registran requerimientos.
 
     \subsubsection{Interfaces de Software}
     \begin{itemize}
-      \item BioPP: Se debe utilizar la librer\'ia BioPP para realizar el \textit{folding} de secuencias gen\'omicas, predicci\'on de la estructura secundaria y c\'alculo de distancias.
-      \item Boost.Python: Se debe utilizar Boost.Python para brindar a los desarrolladores de extensiones, la posibilidad de hacerlo utilizando el lenguaje de programaci\'on Python.      
+      \item BioPP: Se debe utilizar la librer\'ia BioPP para realizar el
+\textit{folding} de secuencias gen\'omicas, predicci\'on de la estructura
+secundaria y c\'alculo de distancias.
+      \item Boost.Python: Se debe utilizar Boost.Python para brindar a los
+desarrolladores de extensiones, la posibilidad de hacerlo utilizando el lenguaje
+de programaci\'on Python.      
     \end{itemize}
 
     \subsubsection{Interfaces de Comunicaciones}
     No se registran requerimientos.
 
     \subsubsection{Restricciones de Memoria}
-    No se registran restricciones de memoria para la ejecuci\'on del software. No obstante, se debe tener en cuenta que dada la naturaleza y la complejidad del problema, el tiempo de calculo estar\'a directamente relacionado con la memoria disponible.
+    No se registran restricciones de memoria para la ejecuci\'on del software.
+No obstante, se debe tener en cuenta que dada la naturaleza y la complejidad del
+problema, el tiempo de c\'alculo estar\'a directamente relacionado con la
+memoria disponible.
 
     \subsubsection{Operaciones}
     No se registran requerimientos.
@@ -98,46 +154,78 @@
   \subsection{Funciones del Producto}
   
   \subsubsection{Configuraci\'on inicial}
-  Inicialmente, vac-o presenta al usuario final una pantalla con un formulario donde el usuario debe indicar la ubicaci\'on de la extensi\'on que desea usar. A continuaci\'on, vac-o carga la extensi\'on en memoria y presenta al usuario otro formulario con los campos requeridos por la extensi\'on cargada.
-  Una vez que los datos son validados, vac-o configura la extensi\'on con los valores enviados por el usuario y queda listo para comenzar la ejecuci\'on cuando el usuario lo indique.
+  Inicialmente, vac-o presenta al usuario final una pantalla con un formulario
+donde el usuario debe indicar la ubicaci\'on de la extensi\'on que desea usar. A
+continuaci\'on, vac-o carga la extensi\'on en memoria y presenta al usuario otro
+formulario con los campos requeridos por la extensi\'on cargada.
+  Una vez que los datos son validados, vac-o configura la extensi\'on con los
+valores enviados por el usuario y queda listo para comenzar la ejecuci\'on
+cuando el usuario lo indique.
 
   \subsubsection{Configuraci\'on de vac-o}
-  Antes de dar comienzo a la generaci\'on de secuencias gen\'omicas, vac-o debe solicitar a la extensi\'on cargada los siguientes valores:
+  Antes de dar comienzo a la generaci\'on de secuencias gen\'omicas, vac-o debe
+solicitar a la extensi\'on cargada los siguientes valores:
   \begin{itemize}
-    \item Secuencia inicial: La secuencia gen\'omica que se encuentra en la cepa vacunal y se desea mejorar.
-    \item Regiones combinatorias: Las regiones de la secuencia inicial que resultan de inter\'es, indicando sus posiciones de inicio y fin, y que tipo de regiones son cada una (restricciones en base a c\'odigo gen\'etico, o en base a estructura secundaria).
-    \item Estrategias de b\'usqueda: La estrategia que se debe utilizar para la generaci\'on o b\'usqueda de nuevas secuencias.
+    \item Secuencia inicial: La secuencia gen\'omica que se encuentra en la cepa
+vacunal y se desea mejorar.
+    \item Regiones combinatorias: Las regiones de la secuencia inicial que
+resultan de inter\'es, indicando sus posiciones de inicio y fin, y qu\'e tipo de
+regiones son cada una (restricciones en base a c\'odigo gen\'etico, o en base a
+estructura secundaria).
+    \item Estrategias de b\'usqueda: La estrategia que se debe utilizar para la
+generaci\'on o b\'usqueda de nuevas secuencias.
   \end{itemize}
   
   \subsubsection{Generaci\'on de secuencias}
-  Luego de las configuraciones b\'asicas, vac-o esta en condiciones de generar nuevas secuencias gen\'omicas que cumplan las restricciones que hallan sido impuestas. Para esto, se deben calcular las posibles ``mutaciones'' de cada regi\'on combinatoria (teniendo en cuenta el tipo de regi\'on y sus posibles intersecciones) y de acuerdo a la estrategia de b\'usqueda, construir nuevas secuencias que ser\'an evaluadas posteriormente por la extensi\'on. Dado que el espacio de b\'usqueda podr\'ia ser eventualmente muy grande, el criterio de parada para la generaci\'on de secuencias tambi\'en debe ser provisto por la extensi\'on.
+  Luego de las configuraciones b\'asicas, vac-o esta en condiciones de generar
+nuevas secuencias gen\'omicas que cumplan las restricciones que hayan sido
+impuestas. Para esto, se deben calcular las posibles ``mutaciones'' de cada
+regi\'on combinatoria (teniendo en cuenta el tipo de regi\'on y sus posibles
+intersecciones) y de acuerdo a la estrategia de b\'usqueda, construir nuevas
+secuencias que ser\'an evaluadas posteriormente por la extensi\'on. Dado que el
+espacio de b\'usqueda podr\'ia ser eventualmente muy grande, el criterio de
+parada para la generaci\'on de secuencias tambi\'en debe ser provisto por la
+extensi\'on.
 
-  Notar que esta funcionalidad es el ``coraz\'on'' de vac-o y es donde se encuentra la mayor complejidad del problema a resolver. 
+  Notar que esta funcionalidad es el ``coraz\'on'' de vac-o y es donde se
+encuentra la mayor complejidad del problema a resolver. 
 
-  Supongamos $N \geqslant 1$ y $R_{1}, \cdots, R_{N}$ regiones combinatorias. Luego, tendremos: \\
+  Supongamos $N \geqslant 1$ y $R_{1}, \cdots, R_{N}$ regiones combinatorias.
+Luego, tendremos: \\
   \begin{center}    
     $M_{1\cdot1},..., M_{1\cdot j_{1}}$ mutaciones de $R_{1}$\\ 
     $M_{2\cdot1},..., M_{2\cdot j_{2}}$ mutaciones de $R_{2}$\\
     $\cdots$ \\
     $M_{N\cdot1},..., M_{N\cdot j_{N}}$ mutaciones de $R_{N}$   
   \end{center}
-  con $j_{1}, \cdots, j_{N} \geqslant 1$. Es decir, que el n\'umero de posibles secuencias que vac-o ``deber\'ia'' evaluar sera igual al producto $j_{1} \times j_{2} \times \cdots \times j_{N}$. 
+  con $j_{1}, \cdots, j_{N} \geqslant 1$. Es decir, que el n\'umero de posibles
+secuencias que vac-o ``deber\'ia'' evaluar sera igual al producto $j_{1} \times
+j_{2} \times \cdots \times j_{N}$. 
 
-  Haciendo uso de diferentes estrategias de b\'usqueda, combinadas con las funciones de evaluaci\'on provistas por la extensi\'on, vac-o intentara optimizar esta generaci\'on de secuencias.
+  Haciendo uso de diferentes estrategias de b\'usqueda, combinadas con las
+funciones de evaluaci\'on provistas por la extensi\'on, vac-o intentara
+optimizar esta generaci\'on de secuencias.
 
   \subsubsection{Evaluaci\'on de secuencias}
-  De acuerdo a los puntajes asignados por la extensi\'on a cada una de las secuencias generadas, vac-o debe construir un listado o \textit{ranking} de secuencias que sera dado al usuario como resultado final de la ejecuci\'on.
+  De acuerdo a los puntajes asignados por la extensi\'on a cada una de las
+secuencias generadas, vac-o debe construir un listado o \textit{ranking} de
+secuencias que ser\'a dado al usuario como resultado final de la ejecuci\'on.
 
   \subsection{Caracter\'isticas de Usuarios}
   Se identifican 3 tipos de usuarios de vac-o:
   \begin{itemize}
     \item Final: que solo interact\'ua a trav\'es de la interfaz gr\'afica.
-    \item Extensionista: que posee los conocimientos de programaci\'on suficientes como para implementar extensiones de vac-o. A los fines de ampliar los potenciales usuarios dentro de esta categor\'ia, es que se ofrece la posibilidad de desarrollar extensiones usando el lenguaje Python.
-    \item Contribuidor: que contribuye al c\'odigo fuente de vac-o realizando mejoras o desarrollando nuevas funcionalidades.
+    \item Extensionista: que posee los conocimientos de programaci\'on
+suficientes como para implementar extensiones de vac-o. A los fines de ampliar
+los potenciales usuarios dentro de esta categor\'ia, es que se ofrece la
+posibilidad de desarrollar extensiones usando el lenguaje Python.
+    \item Contribuidor: que contribuye al c\'odigo fuente de vac-o realizando
+mejoras o desarrollando nuevas funcionalidades.
   \end{itemize}
 
   \subsection{Restricciones}
-  El producto debe ser desarrollado utilizando el lenguaje de programaci\'on C++ y bajo la licencia de software GPLv3.
+  El producto debe ser desarrollado utilizando el lenguaje de programaci\'on C++
+y bajo la licencia de software GPLv3.
   
   \subsection{Suposiciones y Dependencias}
     \begin{itemize}
@@ -145,8 +233,11 @@
     \end{itemize}
   
   \subsection{Trabajo Futuro}
-  Probablemente una de las principales mejoras a la primer versi\'on de vac-o, sera realizar las modificaciones necesarias para permitir la ejecuci\'on del software en paralelo y de esta manera reducir los tiempos de c\'alculo. 
-  Por otro lado, se deber\'a profundizar en el desarrollo de extensiones para diferentes tipos de vacunas y virus.
+  Probablemente una de las principales mejoras a la primer versi\'on de vac-o,
+ser\'a realizar las modificaciones necesarias para permitir la ejecuci\'on del
+software en paralelo y de esta manera reducir los tiempos de c\'alculo. 
+  Por otro lado, se deber\'a profundizar en el desarrollo de extensiones para
+diferentes tipos de vacunas y virus.
   
 
 \section{Requerimientos}
@@ -154,94 +245,161 @@
   \subsection{Funciones del Sistema}
 
   \subsubsection{Configuraci\'on inicial}
-  El objetivo de esta funci\'on es la carga en memoria de la extensi\'on que se desea utilizar para ejecutar vac-o.
+  El objetivo de esta funci\'on es la carga en memoria de la extensi\'on que se
+desea utilizar para ejecutar vac-o.
   \begin{enumerate}
     \item \textbf{Carga de la extensi\'on:}
-    El sistema recibe la ubicaci\'on del archivo \textit{.so} y lo carga en memoria. Si la carga es exitosa, se devuelven los par\'ametros requeridos por la extensi\'on (\textit{[(nombre, tipo, validaciones, defecto)]}) para su posterior configuraci\'on. En caso de que la carga de la extensi\'on fracase, se devuelve un mensaje de error.
+    El sistema recibe la ubicaci\'on del archivo \textit{.so} y lo carga en
+memoria. Si la carga es exitosa, se devuelven los par\'ametros requeridos por la
+extensi\'on (\textit{[(nombre, tipo, validaciones, defecto)]}) para su posterior
+configuraci\'on. En caso de que la carga de la extensi\'on fracase, se devuelve
+un mensaje de error.
     
     \item \textbf{Validaci\'on de valores:}
-    La interfaz de usuario es responsable de la validaci\'on de los datos ingresados por el usuario para la configuraci\'on de la extensi\'on. Para esto, se deber\'an usar los diferentes \textit{criterios de validaci\'on} para cada par\'ametro y solo cuando la validaci\'on sea exitosa, los valores son enviados al sistema. Caso contrario, se debe presentar un mensaje de error al usuario.
+    La interfaz de usuario es responsable de la validaci\'on de los datos
+ingresados por el usuario para la configuraci\'on de la extensi\'on. Para esto,
+se deber\'an usar los diferentes \textit{criterios de validaci\'on} para cada
+par\'ametro y solo cuando la validaci\'on sea exitosa, los valores son enviados
+al sistema. Caso contrario, se debe presentar un mensaje de error al usuario.
     
     \item \textbf{Configuraci\'on de la extensi\'on:}
-    El sistema recibe de la interfaz de usuario, la lista de par\'ametros requeridos por la extensi\'on (\textit{[(nombre, valor)]}) y se asignan los valores en la extensi\'on. Finalmente, se devuelve un mensaje de \'exito indicando que vac-o esta listo para comenzar la ejecuci\'on.
+    El sistema recibe de la interfaz de usuario, la lista de par\'ametros
+requeridos por la extensi\'on (\textit{[(nombre, valor)]}) y se asignan los
+valores en la extensi\'on. Finalmente, se devuelve un mensaje de \'exito
+indicando que vac-o est\'a listo para comenzar la ejecuci\'on.
 
     \item \textbf{Tama\~no del ranking:}
-    El sistema recibe de la interfaz de usuario, el tama\~no del ranking de secuencias que dar\'a como resultado de la ejecuci\'on.
+    El sistema recibe de la interfaz de usuario, el tama\~no del ranking de
+secuencias que dar\'a como resultado de la ejecuci\'on.
   \end{enumerate}
 
   \subsubsection{Configuraci\'on de vac-o}
-  El objetivo de esta funci\'on es solicitar a la extensi\'on cargada en memoria, la informaci\'on necesaria para comenzar la ejecuci\'on del motor combinatorio.
+  El objetivo de esta funci\'on es solicitar a la extensi\'on cargada en
+memoria, la informaci\'on necesaria para comenzar la ejecuci\'on del motor
+combinatorio.
   \begin{enumerate}
     \item \textbf{Secuencia inicial:}
-    El sistema solicita a la extensi\'on cargada en memoria, la secuencia de ARN que se desea optimizar. La extensi\'on debe devolver la secuencia y el sistema la almacena en memoria. 
+    El sistema solicita a la extensi\'on cargada en memoria, la secuencia de ARN
+que se desea optimizar. La extensi\'on debe devolver la secuencia y el sistema
+la almacena en memoria. 
     
     \item \textbf{Regiones combinatorias:}
-    El sistema solicita a la extensi\'on cargada en memoria, las regiones combinatorias de inter\'es para la optimizaci\'on. La extensi\'on debe devolver las regiones (\textit{[(inicio, fin, tipo, evaluador)]}) y el sistema inicializa cada regi\'on en memoria. Para cada regi\'on, el par\'ametro \textit{tipo} debe ser uno de los siguientes:
+    El sistema solicita a la extensi\'on cargada en memoria, las regiones
+combinatorias de inter\'es para la optimizaci\'on. La extensi\'on debe devolver
+las regiones (\textit{[(inicio, fin, tipo, evaluador)]}) y el sistema inicializa
+cada regi\'on en memoria. Para cada regi\'on, el par\'ametro \textit{tipo} debe
+ser uno de los siguientes:
     \begin{itemize}
-      \item Estructura secundaria (SS): Las posibles mutaciones de la regi\'on deben conservar la estructura secundaria.
-      \item C\'odigo gen\'etico (GC): Las posibles mutaciones de la regi\'on deben resultar silentes en t\'erminos de expresi\'on aminoc\'idica.
-      \item Personalizada (CU): La extensi\'on debe proporcionar la implementaci\'on de la regi\'on combinatoria.
+      \item Estructura secundaria (SS): Las posibles mutaciones de la regi\'on
+deben conservar la estructura secundaria.
+      \item C\'odigo gen\'etico (GC): Las posibles mutaciones de la regi\'on
+deben resultar silentes en t\'erminos de expresi\'on aminoc\'idica.
+      \item Personalizada (CU): La extensi\'on debe proporcionar la
+implementaci\'on de la regi\'on combinatoria.
     \end{itemize}
 
-    Adem\'as, se debe considerar la posibilidad de que en el futuro se necesiten nuevos tipos de regiones combinatorias.
+    Adem\'as, se debe considerar la posibilidad de que en el futuro se necesiten
+nuevos tipos de regiones combinatorias.
 
-    El par\'ametro \textit{evaluador} debe ser una funci\'on $f: Secuencia \rightarrow (0,1)$ que sera utilizada por el sistema para determinar la ``bondad'' de las diferentes mutaciones de cada regi\'on.
+    El par\'ametro \textit{evaluador} debe ser una funci\'on $f: Secuencia
+\rightarrow (0,1)$ que ser\'a utilizada por el sistema para determinar la
+``bondad'' de las diferentes mutaciones de cada regi\'on.
 
     \item \textbf{Estrategia de b\'usqueda:}
-    El sistema solicita a la extensi\'on un \textit{umbral} de ``bondad'' y debe implementar diferentes estrategias de optimizaci\'on, asegurando que se cumpla lo siguiente:
+    El sistema solicita a la extensi\'on un \textit{umbral} de ``bondad'' y debe
+implementar diferentes estrategias de optimizaci\'on, asegurando que se cumpla
+lo siguiente:
 
-    Sea $n$ el numero de regiones combinatorias, $s_{i}$ la secuencia seleccionada de la regi\'on $i$ y $f_{i}: Secuencia \rightarrow (0,1)$ la funci\'on de evaluaci\'on de la regi\'on $i$, con $i=1, ..., n$.
+    Sea $n$ el numero de regiones combinatorias, $s_{i}$ la secuencia
+seleccionada de la regi\'on $i$ y $f_{i}: Secuencia \rightarrow (0,1)$ la
+funci\'on de evaluaci\'on de la regi\'on $i$, con $i=1, ..., n$.
     \begin{center}
     $\prod_{i=1}^{n} f_{i}(s_{i}) \ge umbral$
     \end{center}
 
     \item \textbf{Regiones de validaci\'on:}
-    El sistema solicita a la extensi\'on cargada en memoria, las regiones sobre las que se debe hacer el ``control de calidad''. La extensi\'on debe devolver las regiones (\textit{[(inicio, fin, prueba, criterio)]}) y el sistema inicializa cada regi\'on en memoria. Para cada regi\'on, el par\'ametro \textit{prueba}, debe ser uno de los siguientes:
+    El sistema solicita a la extensi\'on cargada en memoria, las regiones sobre
+las que se debe hacer el ``control de calidad''. La extensi\'on debe devolver
+las regiones (\textit{[(inicio, fin, prueba, criterio)]}) y el sistema
+inicializa cada regi\'on en memoria. Para cada regi\'on, el par\'ametro
+\textit{prueba}, debe ser uno de los siguientes:
       \begin{itemize}
-        \item Mutaciones sistem\'aticas (ALL): Se calculan todas las posibles mutaciones.
+        \item Mutaciones sistem\'aticas (ALL): Se calculan todas las posibles
+mutaciones.
 	\item Mutaciones al azar (RAND): Se calculan $N$ mutaciones al azar.
-	\item Mutaciones personalizadas (CU): La extensi\'on debe proporcionar la implementaci\'on.
+	\item Mutaciones personalizadas (CU): La extensi\'on debe proporcionar
+la implementaci\'on.
       \end{itemize}    
     El par\'ametro \textit{criterio} debe ser uno de los siguientes:
       \begin{itemize}
-        \item Comparaci\'on estructural (SS): Las mutaciones deben conservar la estructura secundaria.
-	\item Conteo y comparaci\'on de nucle\'otidos (NU): La cantidad de nuecle\'otidos apareados o desapareados debe ser menor o mayor que un valor determinado.
+        \item Comparaci\'on estructural (SS): Las mutaciones deben conservar la
+estructura secundaria.
+	\item Conteo y comparaci\'on de nucle\'otidos (NU): La cantidad de
+nuecle\'otidos apareados o desapareados debe ser menor o mayor que un valor
+determinado.
       \end{itemize}
     
-    Adem\'as la extensi\'on debe especificar la profundidad $M$ con la que se desea realizar el ``control de calidad''.    
+    Adem\'as la extensi\'on debe especificar la profundidad $M$ con la que se
+desea realizar el ``control de calidad''.    
   \end{enumerate}
 
   \subsubsection{Generaci\'on de secuencias}
-  El objetivo de esta funci\'on es la construcci\'on de nuevas secuencias gen\'omicas que cumplan con las restricciones impuestas.
+  El objetivo de esta funci\'on es la construcci\'on de nuevas secuencias
+gen\'omicas que cumplan con las restricciones impuestas.
   \begin{enumerate}
     \item \textbf{Generar mutaciones de regi\'on combinatoria:}
-    Para cada regi\'on combinatoria, el sistema debe ser capaz de generar todas las posibles mutaciones que cumplan con las restricciones impuestas por el tipo de regi\'on y considerando las posibles intersecciones con las dem\'as regiones. Adem\'as, debe ser posible el uso de diferentes librer\'ias externas a ser determinadas por la extensi\'on.
+    Para cada regi\'on combinatoria, el sistema debe ser capaz de generar todas
+las posibles mutaciones que cumplan con las restricciones impuestas por el tipo
+de regi\'on y considerando las posibles intersecciones con las dem\'as regiones.
+Adem\'as, debe ser posible el uso de diferentes librer\'ias externas a ser
+determinadas por la extensi\'on.
     
     \item \textbf{Generar secuencias:}
-    A partir de las mutaciones de cada regi\'on combinatoria, se deben construir nuevas secuencia gen\'omicas, reemplazando en la secuencia inicial, cada regi\'on por su mutaci\'on.
+    A partir de las mutaciones de cada regi\'on combinatoria, se deben construir
+nuevas secuencia gen\'omicas, reemplazando en la secuencia inicial, cada
+regi\'on por su mutaci\'on.
 
-    Esta funcionalidad representa el coraz\'on del sistema y consiste en la construcci\'on de un \'arbol de subsecuencias derivadas de cada una de las regiones combinatorias, donde cada hoja del \'arbol determina una nueva secuencia gen\'omica. Luego, el sistema debe ser capaz de generar y recorrer el \'arbol basandose en la informaci\'on brindada por la extensi\'on.
+    Esta funcionalidad representa el coraz\'on del sistema y consiste en la
+construcci\'on de un \'arbol de subsecuencias derivadas de cada una de las
+regiones combinatorias, donde cada hoja del \'arbol determina una nueva
+secuencia gen\'omica. Luego, el sistema debe ser capaz de generar y recorrer el
+\'arbol bas\'andose en la informaci\'on brindada por la extensi\'on.
 
-    El criterio de terminaci\'on en la generaci\'on de secuencias (recorrido del \'arbol) debe ser provisto por la extensi\'on.
+    El criterio de terminaci\'on en la generaci\'on de secuencias (recorrido del
+\'arbol) debe ser provisto por la extensi\'on.
 
     \item \textbf{Validar secuencias:}
-    Cada secuencia generada por el sistema debe ser sometida al ``control de calidad'' y solo aquellas que lo pasen exitosamente ser\'an consideradas para una posterior evaluaci\'on.    
+    Cada secuencia generada por el sistema debe ser sometida al ``control de
+calidad'' y solo aquellas que lo pasen exitosamente ser\'an consideradas para
+una posterior evaluaci\'on.    
 
-    El procedimiento consiste en generar y recorrer un \'arbol de mutaciones acumuladas por cada ``region de validaci\'on'', que tendr\'a a lo sumo, profundidad $M$ (dado por la extensi\'on). 
+    El procedimiento consiste en generar y recorrer un \'arbol de mutaciones
+acumuladas por cada ``regi\'on de validaci\'on'', que tendr\'a a lo sumo,
+profundidad $M$ (dado por la extensi\'on). 
 
-    Diremos que una regi\'on pasa el ``control de calidad'' cuando sea posible generar el \'arbol completo. Es decir, cuando todos los nodos (mutaciones) del \'arbol, pasen el criterio de prueba especificado. Si alguna regi\'on no pasa el ``control de calidad'', entonces la secuencia se descarta.
+    Diremos que una regi\'on pasa el ``control de calidad'' cuando sea posible
+generar el \'arbol completo. Es decir, cuando todos los nodos (mutaciones) del
+\'arbol, pasen el criterio de prueba especificado. Si alguna regi\'on no pasa el
+``control de calidad'', entonces la secuencia se descarta.
 
-    Tanto el procedimiento para generar las mutaciones en cada nivel del \'arbol, como el criterio de prueba al que se somete cada mutaci\'on, est\'an determinados por la ``regi\'on de validaci\'on''.
+    Tanto el procedimiento para generar las mutaciones en cada nivel del
+\'arbol, como el criterio de prueba al que se somete cada mutaci\'on, est\'an
+determinados por la ``regi\'on de validaci\'on''.
   \end{enumerate}
 
   \subsubsection{Evaluaci\'on de secuencias}
-  El objetivo de esta funci\'on es la evaluaci\'on y posterior construcci\'on de un \textit{ranking} de secuencias gen\'omicas.
+  El objetivo de esta funci\'on es la evaluaci\'on y posterior construcci\'on de
+un \textit{ranking} de secuencias gen\'omicas.
   \begin{enumerate}    
     \item \textbf{Asignar puntaje a una secuencia:}
-    El sistema solicita a la extensi\'on cargada en memoria, un puntaje para una secuencia dada. La extensi\'on debe evaluar la secuencia recibida compar\'andola con la secuencia inicial y devolver un puntaje.
+    El sistema solicita a la extensi\'on cargada en memoria, un puntaje para una
+secuencia dada. La extensi\'on debe evaluar la secuencia recibida compar\'andola
+con la secuencia inicial y devolver un puntaje.
     
     \item \textbf{Construir \textit{ranking} de secuencias:}
-    El sistema debe construir un \textit{ranking} de secuencias bas\'andose en los puntajes asignados por la extensi\'on. Este listado de secuencias es adem\'as, la salida final de la ejecuci\'on.
+    El sistema debe construir un \textit{ranking} de secuencias bas\'andose en
+los puntajes asignados por la extensi\'on. Este listado de secuencias es
+adem\'as, la salida final de la ejecuci\'on.
   \end{enumerate}
 
   \subsection{Restricciones de Rendimiento}
@@ -252,7 +410,9 @@
 
   \subsection{Restricciones de Dise\~no}
     \subsubsection{Cumplimiento de Est\'andares}
-    El producto debe cumplir con los siguientes principios de dise\~no de la programaci\'on orientada a objetos. Los primeros 5, son tambi\'en conocidos por el acr\'onimo ``\textbf{SOLID}''.
+    El producto debe cumplir con los siguientes principios de dise\~no de la
+programaci\'on orientada a objetos. Los primeros 5, son tambi\'en conocidos por
+el acr\'onimo ``\textbf{SOLID}''.
     \begin{itemize}
       \item \textbf{S}ingle responsibility principle (SRP)
       \item \textbf{O}pen/closed principle (OCP)
@@ -262,10 +422,12 @@
       \item Law of Demeter (LoD)
     \end{itemize}
 
-    Adem\'as el producto debe cumplir con el estandar ANSI C++ y el ``coding style'' provisto por FuDePAN.
+    Adem\'as el producto debe cumplir con el estandar ANSI C++ y el ``coding
+style'' provisto por FuDePAN.
 
   \subsection{Atributos del Software}
-    Se requiere que el c\'odigo del producto tenga un 80\% de cobertura con pruebas automatizadas.
+    Se requiere que el c\'odigo del producto tenga un 80\% de cobertura con
+pruebas automatizadas.
 
 \pagebreak
 
