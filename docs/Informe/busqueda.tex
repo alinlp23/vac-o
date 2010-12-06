@@ -107,8 +107,9 @@ b\'usqueda local.
 Como ya mencionamos en la secci\'on~\ref{diseno-motor}, dada la definici\'on
 del problema que presentamos en la secci\'on~\ref{formalizacion-prop}, el
 objetivo fue capturar la estructura general de los algoritmos de
-b\'usqueda local que suelen denominarse de ``mejoramiento iterativo''. A
-continuaci\'on presentamos el pseudo c\'odigo para este tipo de algoritmos
+b\'usqueda local que suelen denominarse de ``mejoramiento iterativo''.
+
+A continuaci\'on presentamos el pseudo c\'odigo para este tipo de algoritmos
 asumiendo lo siguiente:
 
 \begin{itemize}
@@ -145,6 +146,20 @@ relacionado con el n\'umero total de iteraciones y con el n\'umero de
 iteraciones que pasaron desde la mejor soluci\'on encontrada. Ambos
 par\'ametros, provistos por la extensi\'on.
 
+Se puede trazar una analog\'ia entre este tipo de algoritmos y buscar el
+m\'aximo de una funci\'on. El algoritmo empieza en alg\'un punto de la
+funci\'on, que en nuestro caso ser\'a el virus atenuado que se pretende
+optimizar y luego en cada iteraci\'on, el algoritmo debe ``moverse'' de la
+soluci\'on actual a la siguiente con el objetivo de maximizar la funci\'on de
+evaluaci\'on.
+\begin{figure}
+ \centering
+ \includegraphics[scale=.75]{hillclimbing.png}
+ \caption{B\'usqueda local por mejoramiento iterativo}
+ \label{hillclimbing}
+\end{figure}
+
+
 \subsection{El vecindario}
 
 Como vimos anteriormente, el concepto de ``vecindario'' de una soluci\'on es
@@ -164,9 +179,10 @@ Para implementar esta interfaz, se propuso una variante de un tipo de
 vecindarios que se conoce usualmente como \textbf{k-opt}, en donde dos
 soluciones son vecinas si difieren en a lo sumo $k$ componentes de la
 soluci\'on. Recordemos que en nuestro caso, las componentes de la soluci\'on son
-esencialmente, las regiones combinatorias y que est\'an representadas por la
-interfaz \textbf{ICombinatoryRegion}. Luego, la definici\'on de vecindario que
-se propuso fue la siguiente:
+esencialmente, las regiones combinatorias representadas por la interfaz
+\textbf{ICombinatoryRegion} y cuya principal responsabilidad es la de generar
+las variantes de la regi\'on combinatoria que satisfacen las restricciones
+impuestas. Luego, la definici\'on de vecindario que se propuso fue la siguiente:
 
 \begin{definition}
  Para $\mathcal{S}$ el espacio de soluciones, $N$ regiones combinatorias y
