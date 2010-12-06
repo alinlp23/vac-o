@@ -87,23 +87,17 @@ attenuated virus vaccines}''. Lauring et al.
 \section{Propuesta}
 \subsection{Formalizaci\'on del problema}
 \begin{frame}
-Sea $N$ la longitud de la secuencia de RNA del virus atenuado, y para $k
-\in \mathbb{N}$ sea $\mathcal{S}_{k}$ el conjunto de secuencias de RNA de
-longitud $k$. Entonces definimos:
 
 \begin{itemize} 
- \item \textbf{Espacio de soluciones:} $\mathcal{S}_{N}$
+ \item \textbf{Espacio de soluciones:} $\mathcal{S}$ secuencias de RNA de igual
+longitud que el genoma del virus. 
 
- \item \textbf{Componentes variables de una soluci\'on:} $s_{1},s_{2}, \dots,
-s_{n}$ tal que $s_{i} \in \mathcal{S}_{N_{i}}$ con $1 \le i \le n$ y $0 < N_{i}
-\le N$.
-
- \item \textbf{Restricciones sobre las componentes:} Conservaci\'on de la
-estructura secundaria o de la secuencia aminoac\'idica con respecto al virus
+ \item \textbf{Restricciones sobre partes de las soluciones:} Conservaci\'on de
+la estructura secundaria o de la secuencia aminoac\'idica con respecto al virus
 atenuado.
 
- \item \textbf{Funci\'on ``objetivo'' o de evaluaci\'on:} $f: \mathcal{S}_{N}
-\rightarrow \mathbb{R}$ tal que $f(s)$ calcula la bondad de cada soluci\'on, en
+ \item \textbf{Funci\'on de evaluaci\'on:} $f: \mathcal{S} \rightarrow
+\mathbb{R}$ tal que $f(s)$ calcula la bondad de cada soluci\'on, en
 nuestro caso, como la distancia en n\'umero de mutaciones necesarias para
 llegar de $s$ a alguna secuencia pat\'ogena o revertante.
 \end{itemize}
@@ -111,20 +105,42 @@ llegar de $s$ a alguna secuencia pat\'ogena o revertante.
 
 \subsection{Optimizaci\'on combinatoria}
 \begin{frame}
-El problema de optimizaci\'on consiste en, iterativamente modificar el genoma
-del virus atenuado asignado valores a las componentes $s_{1},s_{2}, \dots,
-s_{n}$ asegurando que:
+El problema de optimizaci\'on consiste en, iterativamente modificar partes
+del genoma del virus atenuado (IRES, regi\'on codificante, otras) asegurando
+que:
   \begin{itemize}
-   \item los valores asignados satisfacen las restricciones impuestas sobre cada
-componente.
-   \item las secuencias que resultan de asignar valores a cada componente,
-tiendan a maximizar la funci\'on $f$.
+   \item las (sub)secuencias asignadas satisfacen las restricciones impuestas:
+    \begin{itemize}
+     \item Conservaci\'on de estructura secundaria: \textit{folding} inverso
+(RNAinverse, INFO-RNA)
+     \item Conservaci\'on de la secuencia aminoac\'idica: posibles codones para
+un mismo amino\'acido.
+    \end{itemize}
+   \item las secuencias que resultan de cada asignaci\'on tiendan a maximizar la
+funci\'on $f$.
   \end{itemize}
- \begin{figure}
-  \includegraphics[scale=.5]{hillclimbing.png}
- \end{figure}
 \end{frame}
 
+\subsection{Grado de avance}
+\begin{frame}
+ Actualmente est\'a implementada una primer versi\'on del software que permite:
+  \begin{itemize}
+   \item Definir las restricciones de conservar la estructura secundaria o la
+secuencia aminoac\'idica sobre partes del genoma del virus atenuado.
+   \item Simulaci\'on de mutaciones acumuladas sobre cada secuencia candidata
+y validaci\'on de propiedades sobre las secuencias mutantes (similitud o
+disimilitud estructural).
+   \item Generaci\'on de un \texit{ranking} de secuencias candidatas ordenadas
+seg\'un la funci\'on de evaluaci\'on.
+   \item Definir los programas auxiliares para manipular estructuras
+secundarias:
+    \begin{itemize}
+     \item \textit{Folding} directo: RNAfold, mfold
+     \item \textit{Folding} inverso: RNAinverse, INFO-RNA
+     \item Comparaci\'on estructural: RNAforester
+    \end{itemize}
+  \end{itemize}
+\end{frame}
 
 \section{Aportes y trabajo futuro}
 \subsection{Aportes}
@@ -139,8 +155,7 @@ tiendan a maximizar la funci\'on $f$.
 \subsection{Trabajo futuro}
 \begin{frame}
 Queda pendiente tener en cuenta:
-  \begin{itemize}
-   \item Rango de temperaturas.
+  \begin{itemize}   
    \item Recombinantes con virus hom\'ologos.
    \item Otros tipos de virus RNA.
    \item Ensayos con datos reales.
