@@ -56,12 +56,12 @@ vecindario puede ser el siguiente:
 \\\\
   Sea $S$ el conjunto de todas las soluciones (secuencias de ARN que
 satisfacen las restricciones impuestas), definimos para $0<i$, $N(i) \subseteq S
-\times S$ tal que, el par $(s,s') \in S\times S$, pertenece a $N(i)$ si y solo
-si, ocurre lo siguiente:
+\times S$ tal que, el par $(s,s') \in S\times S$, pertenece a $N(i)$ si ocurre
+lo siguiente:
 \begin{enumerate}
  \item $s'$ difiere de $s$ en a los sumo una regi\'on
- \item Si $s'$ difiere de $s$ en la regi\'on $k$, entonces se necesitaron a lo
-sumo $i$ pasos para llegar de $s_{k}$ a $s'_{k}$
+ \item Si $s'$ difiere de $s$ en la regi\'on $k$, entonces se generaron a lo
+sumo $i$ variantes para llegar de $s_{k}$ a $s'_{k}$
  \item Sean $k_{i}$ las regiones de $s'$, entonces se cumple $\prod_{i}
 score(k_{i}) \ge cutoff$
 \end{enumerate}
@@ -151,10 +151,7 @@ mutaciones de una secuencia:
     \end{itemize}
 y dos propiedades a verificar sobre cada mutaci\'on:
     \begin{itemize}
-     \item Comparaci\'on estructural con una estructura secundaria dada
-(\textit{SSValidator}).
-     \item Conteo y comparaci\'on de nucle\'otidos apareados o desapareados
-(\textit{NUValidator}).
+     \item Similitud y Disimilitud estructural (\textit{SSValidator}).
     \end{itemize}
 
   \subsubsection{LibRNA}
