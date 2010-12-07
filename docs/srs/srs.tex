@@ -179,7 +179,7 @@ generaci\'on o b\'usqueda de nuevas secuencias.
   \subsubsection{Generaci\'on de secuencias}
   Luego de las configuraciones b\'asicas, vac-o esta en condiciones de generar
 nuevas secuencias gen\'omicas que cumplan las restricciones que hayan sido
-impuestas. Para esto, se deben calcular las posibles ``mutaciones'' de cada
+impuestas. Para esto, se deben calcular las posibles ``variantes'' de cada
 regi\'on combinatoria (teniendo en cuenta el tipo de regi\'on y sus posibles
 intersecciones) y de acuerdo a la estrategia de b\'usqueda, construir nuevas
 secuencias que ser\'an evaluadas posteriormente por la extensi\'on. Dado que el
@@ -290,9 +290,9 @@ las regiones (\textit{[(inicio, fin, tipo, evaluador)]}) y el sistema inicializa
 cada regi\'on en memoria. Para cada regi\'on, el par\'ametro \textit{tipo} debe
 ser uno de los siguientes:
     \begin{itemize}
-      \item Estructura secundaria (SS): Las posibles mutaciones de la regi\'on
+      \item Estructura secundaria (SS): Las posibles variantes de la regi\'on
 deben conservar la estructura secundaria.
-      \item C\'odigo gen\'etico (GC): Las posibles mutaciones de la regi\'on
+      \item C\'odigo gen\'etico (GC): Las posibles variantes de la regi\'on
 deben resultar silentes en t\'erminos de expresi\'on aminoc\'idica.
       \item Personalizada (CU): La extensi\'on debe proporcionar la
 implementaci\'on de la regi\'on combinatoria.
@@ -302,8 +302,8 @@ implementaci\'on de la regi\'on combinatoria.
 nuevos tipos de regiones combinatorias.
 
     El par\'ametro \textit{evaluador} debe ser una funci\'on $f: Secuencia
-\rightarrow (0,1)$ que ser\'a utilizada por el sistema para determinar la
-``bondad'' de las diferentes mutaciones de cada regi\'on.
+\rightarrow (0,1)$ que ser\'a utilizada por el sistema para determinar
+localmente la ``bondad'' de las diferentes variantes de cada regi\'on.
 
     \item \textbf{Estrategia de b\'usqueda:}
     El sistema solicita a la extensi\'on un \textit{umbral} de ``bondad'' y debe
@@ -332,11 +332,12 @@ la implementaci\'on.
       \end{itemize}    
     El par\'ametro \textit{criterio} debe ser uno de los siguientes:
       \begin{itemize}
-        \item Comparaci\'on estructural (SS): Las mutaciones deben conservar la
-estructura secundaria.
-	\item Conteo y comparaci\'on de nucle\'otidos (NU): La cantidad de
-nuecle\'otidos apareados o desapareados debe ser menor o mayor que un valor
-determinado.
+        \item Similitud estructural (SS): La estructura secundaria de las
+mutaciones debe tener un porcentaje de similitud mayor o igual que un valor
+dado.
+	\item Disimilitud estructural (DS): La estructura secundaria de las
+mutaciones debe tener un porcentaje de similitud menor o igual que un valor
+dado.
       \end{itemize}
     
     Adem\'as la extensi\'on debe especificar la profundidad $M$ con la que se
@@ -347,23 +348,23 @@ desea realizar el ``control de calidad''.
   El objetivo de esta funci\'on es la construcci\'on de nuevas secuencias
 gen\'omicas que cumplan con las restricciones impuestas.
   \begin{enumerate}
-    \item \textbf{Generar mutaciones de regi\'on combinatoria:}
-    Para cada regi\'on combinatoria, el sistema debe ser capaz de generar todas
-las posibles mutaciones que cumplan con las restricciones impuestas por el tipo
+    \item \textbf{Generar variantes de regi\'on combinatoria:}
+    Para cada regi\'on combinatoria, el sistema debe ser capaz de generar las
+posibles variantes que cumplan con las restricciones impuestas por el tipo
 de regi\'on y considerando las posibles intersecciones con las dem\'as regiones.
 Adem\'as, debe ser posible el uso de diferentes librer\'ias externas a ser
 determinadas por la extensi\'on.
     
     \item \textbf{Generar secuencias:}
-    A partir de las mutaciones de cada regi\'on combinatoria, se deben construir
+    A partir de las variantes de cada regi\'on combinatoria, se deben construir
 nuevas secuencia gen\'omicas, reemplazando en la secuencia inicial, cada
-regi\'on por su mutaci\'on.
+regi\'on por su variante.
 
     Esta funcionalidad representa el coraz\'on del sistema y consiste en la
-construcci\'on de un \'arbol de subsecuencias derivadas de cada una de las
-regiones combinatorias, donde cada hoja del \'arbol determina una nueva
-secuencia gen\'omica. Luego, el sistema debe ser capaz de generar y recorrer el
-\'arbol bas\'andose en la informaci\'on brindada por la extensi\'on.
+construcci\'on de un \'arbol de (sub)secuencias derivadas de cada una de las
+regiones combinatorias, donde cada hoja del \'arbol determinar\'a una nueva
+secuencia gen\'omica completa. Luego, el sistema debe ser capaz de generar y
+recorrer el \'arbol bas\'andose en la informaci\'on brindada por la extensi\'on.
 
     El criterio de terminaci\'on en la generaci\'on de secuencias (recorrido del
 \'arbol) debe ser provisto por la extensi\'on.
@@ -378,7 +379,7 @@ acumuladas por cada ``regi\'on de validaci\'on'', que tendr\'a a lo sumo,
 profundidad $M$ (dado por la extensi\'on). 
 
     Diremos que una regi\'on pasa el ``control de calidad'' cuando sea posible
-generar el \'arbol completo. Es decir, cuando todos los nodos (mutaciones) del
+generar el \'arbol completo. Es decir, cuando todos los nodos (mutantes) del
 \'arbol, pasen el criterio de prueba especificado. Si alguna regi\'on no pasa el
 ``control de calidad'', entonces la secuencia se descarta.
 
@@ -394,7 +395,7 @@ un \textit{ranking} de secuencias gen\'omicas.
     \item \textbf{Asignar puntaje a una secuencia:}
     El sistema solicita a la extensi\'on cargada en memoria, un puntaje para una
 secuencia dada. La extensi\'on debe evaluar la secuencia recibida compar\'andola
-con la secuencia inicial y devolver un puntaje.
+con la secuencia pat\'ogena y devolver un puntaje.
     
     \item \textbf{Construir \textit{ranking} de secuencias:}
     El sistema debe construir un \textit{ranking} de secuencias bas\'andose en
