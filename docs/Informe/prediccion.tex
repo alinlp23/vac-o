@@ -13,7 +13,7 @@ para los algoritmos de predicci\'on inversa de la estructura secundaria de
 
 Ante el requerimiento de contar con algoritmos para realizar la comparaci\'on y
 predicci\'on (directa e inversa) de la estructura secundaria de \ac{RNA},
-debimos evaluar y decidir, entre implementar completamente los algoritmos o
+debimos evaluar y decidir entre implementar completamente los algoritmos o
 integrar/adaptar los algoritmos existentes.
 
 En este sentido, las interfaces propuestas en la secci\'on~\ref{diseno-libRNA}
@@ -27,7 +27,7 @@ de los objetivos del software y del trabajo en general. Adem\'as, debido a la
 complejidad de los mismos, se requieren validaciones emp\'iricas para demostrar
 la fidelidad de los resultados lo cual exced\'ia el alcance de este trabajo.
 
-Finalmente se opto por integrar al sistema los siguientes algoritmos para
+Finalmente se opt\'o por integrar al sistema los siguientes algoritmos para
 implementar las respectivas interfaces:
 \begin{itemize}
  \item \textbf{IFold:} RNAfold\cite{Hofacker94}.
@@ -37,17 +37,17 @@ INFO-RNA\cite{Busch07}.
 \end{itemize}
 
 N\'otese que no incluimos la interfaz \textbf{ISequenceCmp} debido a que la
-comparaci\'on entre secuencias de \ac{RNA} es significativamente mas simple y
-para este caso, se opto por realizar una implementaci\'on propia utilizando una
-matriz de costos como se propuso en la secci\'on~\ref{formalizacion-prop}.
+comparaci\'on entre secuencias de \ac{RNA} es significativamente m\'as simple y
+para este caso, se opt\'o por realizar una implementaci\'on propia utilizando
+una matriz de costos como se propuso en la secci\'on~\ref{formalizacion-prop}.
 
 \section{Integraci\'on}
 
-La integraci\'on de los programas RNAfold y RNAforester, no presentaron mayores
-dificultades ya que en ambos casos, la implementaci\'on consiste simplemente 
+La integraci\'on de los programas RNAfold y RNAforester no presentaron mayores
+dificultades ya que en ambos casos la implementaci\'on consiste simplemente 
 en ejecutar el programa y luego leer el resultado. Los dos programas
 realizan c\'alculos complejos y costosos computacionalmente pero
-deterministicos. Por otro lado, los programas que realizan la predicci\'on
+determin\'isticos. Por otro lado, los programas que realizan la predicci\'on
 inversa de la estructura secundaria de \ac{RNA} o \textit{inverse folding}
 (INFO-RNA y RNAinverse) presentan algunas complicaciones principalmente debido a
 su no determinismo y que veremos a continuaci\'on.
@@ -57,20 +57,25 @@ su no determinismo y que veremos a continuaci\'on.
 Recordando lo dicho en la secci\'on~\ref{inverse}, el objetivo de los programas
 (INFO-RNA y RNAinverse) que realizan el \textit{inverse folding} es encontrar
 secuencias de \ac{RNA} que tengan la estructura secundaria de \ac{RNA} dada por
-el usuario. El problema surge cuando se los quiere usar de manera sistem\'atica,
-como es nuestro caso. Es decir, lo que pretendemos al usar estos programas es
-tener la capacidad de analizar sistem\'aticamente, la mayor cantidad posible de
-secuencias de \ac{RNA} que tengan una estructura secundaria de \ac{RNA}
-determinada para luego evaluar cuales de esas secuencias contribuyen de mejor
-manera a la atenuaci\'on del virus.
+el usuario. El problema surge cuando se los quiere usar para explorar de forma
+sistem\'atica, y posiblemente exhaustiva, el espacio de todas las posibles
+secuencias de \ac{RNA} que tengan la estructura secundaria dada, como es nuestro
+caso. Es decir, lo que pretendemos al usar estos programas es tener la capacidad
+de analizar sistem\'aticamente la mayor cantidad posible de secuencias de
+\ac{RNA} que tengan una estructura secundaria de \ac{RNA} determinada para luego
+evaluar cu\'ales de esas secuencias contribuyen de mejor manera a la
+atenuaci\'on del virus.
 
 \subsubsection{Caracterizaci\'on de los algoritmos para la predicci\'on inversa}
 
 M\'as all\'a de los diferentes par\'ametros que aceptan cada uno de estos
-programas, comparten dos par\'ametros fundamentales. Por un lado, la estructura
-secundaria de \ac{RNA} sobre la que se quiere hacer la predicci\'on inversa y
-por otro, una secuencia de \ac{RNA} ``incompleta'' (algunas bases indefinidas)
-que se usa como secuencia de inicio en el algoritmo de b\'usqueda. 
+programas, ambos requieren dos par\'ametros fundamentales. Por un lado, la
+estructura secundaria de \ac{RNA} sobre la que se quiere hacer la predicci\'on
+inversa y por otro, una secuencia de \ac{RNA} ``incompleta'' (algunas bases
+indefinidas) que se usa como secuencia de inicio en el algoritmo de b\'usqueda.
+Por lo tanto, no se realiza una b\'usqueda exhaustiva en todas las posibles
+secuencias de \ac{RNA}, sino que solamente se busca una secuencia que cumpla
+con los requisitos y que est\'e en la proximidad de esta secuencia de inicio.
 
 La secuencia ``incompleta'' que se da como par\'ametro, cumple adem\'as el rol
 de especificar las restricciones que se deben satisfacer durante la b\'usqueda
@@ -88,7 +93,7 @@ El no determinismo est\'a dado por el hecho de que para una misma estructura
 secundaria de \ac{RNA} y una misma secuencia (incompleta) de inicio, en
 sucesivas ejecuciones de los programas, se pueden encontrar distintas secuencias
 de \ac{RNA} aunque eventualmente tambi\'en repetidas. Por otro lado, modificar
-la secuencia (incompleta) de inicio, podr\'ia aunque no necesariamente, implicar
+la secuencia (incompleta) de inicio, podr\'ia aunque no necesariamente implicar
 que se encuentren nuevas secuencias.
 
 Con todo lo dicho, deber\'ian quedar claras las complicaciones que presentan
@@ -117,23 +122,24 @@ podemos caracterizar a los algoritmos para la predicci\'on inversa de la
 estructura secundaria de \ac{RNA} como $inverse: \mathcal{E} \times \mathcal{R}
 \rightarrow \mathcal{S}$ tal que para $e \in \mathcal{E}$ y $r \in
 \mathcal{R}$, si $inverse(e,r) = s$ entonces se satisfacen:
+
 \begin{itemize}
- \item $s \in \mathcal{I}(e)$
- \item $\{\forall i : 0 \leq i < n \land r_{i} \neq N : s_{i} = r_{i}\}$ 
+  \item $s \in \mathcal{I}(e)$
+  \item $\{\forall i : 0 \leq i < n \land r_{i} \neq N : s_{i} = r_{i}\}$ 
 \end{itemize}
 
 El problema es b\'asicamente que no conocemos la cardinalidad de
 $\mathcal{I}(e)$ y que adem\'as, si pensamos a las sucesivas ejecuciones de
 $inverse(e,r)$ como una forma de enumerar el conjunto $\mathcal{I}(e)$, el orden
 en que se enumeran las secuencias ser\'ia aleatorio y permitir\'ia repeticiones
-(no deterministico).
+(no determin\'istico).
 
 \subsubsection{Propuesta para sistematizar la predicci\'on inversa}
 
 Vistas las complicaciones para lograr analizar sistem\'aticamente todas, o al
-menos un gran numero de secuencias que tengan una estructura secundaria de
-\ac{RNA} determinada, veremos de que manera integramos al sistema los algoritmos
-mencionados.
+menos un gran n\'umero de secuencias que tengan una estructura secundaria de
+\ac{RNA} determinada, veremos de qu\'e manera integramos al sistema los
+algoritmos mencionados.
 
 La idea consiste b\'asicamente en ``recordar'' las secuencias encontradas en
 ejecuciones anteriores y en sistematizar la forma de generar secuencias
@@ -147,9 +153,9 @@ Para generar secuencias incompletas se propuso recorrer iterativamente todas
 las formas de seleccionar $k$ posiciones de $n$, donde $n$ es la longitud de la
 secuencia completa y $k$ es un par\'ametro determinado por la extensi\'on. Es
 decir que tendremos $n \choose k$ secuencias incompletas distintas. Sin
-embargo, aun no tenemos forma de determinar cuando se deber\'ia pasar a la
+embargo, a\'un no tenemos forma de determinar cu\'ando se deber\'ia pasar a la
 siguiente secuencia de inicio ya que el hecho de que el algoritmo de
-predicci\'on inversa, devuelva una secuencia que ya hab\'ia sido encontrada
+predicci\'on inversa devuelva una secuencia que ya hab\'ia sido encontrada
 previamente, no implica que en sucesivas ejecuciones y sin cambiar la secuencia
 de inicio, se encuentren nuevas secuencias. Luego, se propuso delegar esta
 responsabilidad a la extensi\'on y que sea esta quien determine el n\'umero $m$
@@ -180,7 +186,6 @@ incompletas a partir de la secuencia $i$.
  \item $next(r)$: devuelve la siguiente secuencia incompleta, para alg\'un orden
 de las $n \choose k$ secuencias incompletas a partir de la secuencia $i$.
 \end{itemize}
-
 
 \begin{algorithm}
  \caption{Inicializaci\'on}
