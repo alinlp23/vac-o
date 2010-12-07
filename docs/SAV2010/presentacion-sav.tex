@@ -7,6 +7,8 @@
 \usepackage[spanish]{babel}
 \usepackage[utf8x]{inputenc}
 \usepackage{default}
+\titlegraphic{\vspace{-3mm}\includegraphics[width=2.5cm,height=1.2cm]{logos.png}
+}
 \title[Trabajo especial de la Licenciatura en Cs. de la Computaci\'on]
 {Dise\~no de vacunas atenuadas con menor probabilidad de sufrir reversi\'on a
 la virulencia}
@@ -14,18 +16,14 @@ la virulencia}
 \and L.Alonso i Alemany\inst{1} \and D.Rabinovich\inst{2,3} \and
 D.Gutson\inst{3}}
 \institute{
-  \inst{1}Facultad de Matem\'atica, Astronom\'ia y F\'isica - Universidad
-Nacional de C\'ordoba.
+  \inst{1}Fa.M.A.F. - U.N.C.
   \and
-  \inst{2}Centro Nacional de Referencia para el SIDA. Facultad de Medicina -
-Universidad Nacional de Buenos Aires.
+  \inst{2}C.N.R.S - Fac.Med. - U.B.A.
   \and
-  \inst{3}Fundaci\'on para el Desarrollo de la Programaci\'on en \'Acidos
-Nucleicos.
+  \inst{3}Fu.De.PAN.
 }
-
 \date[RCASAV 2010] % (optional, should be abbreviation of conference name)
-{XXX Reuni\'on Cient\'ifica Anual de la Sociedad Argentina de Virolog\'ia, 2010}
+{XXX Reuni\'on Cient\'ifica Anual de la SAV 2010}
 
 \AtBeginSubsection[]
 {
@@ -33,10 +31,9 @@ Nucleicos.
     \tableofcontents[currentsection, currentsubsection]
   \end{frame}
 }
-
 \begin{document}
 \begin{frame}
-  \titlepage
+  \titlepage  
 \end{frame}
 
 \section{Motivaci\'on}
@@ -56,7 +53,7 @@ estructura secundaria de RNA.
 \subsection{Objetivo}
 \begin{frame}
 Desarrollar un software que sirva como soporte para el dise\~no de vacunas
-atenuadas m\'as seguras:
+atenuadas m\'as seguras y aplicable a cualquier virus (+)ssRNA:
 \begin{itemize}
  \item \textbf{Entrada:} Genoma del virus atenuado, genomas de los pat\'ogenos
 o revertantes y un conjunto de restricciones (propiedades de inter\'es para la
@@ -75,13 +72,19 @@ Algunos antecedentes en el dise\~no racional de vacunas atenuadas:
  \begin{itemize}
   \item Fidelidad en la replicaci\'on modificando la RNA polimerasa.
 ``\textit{Engineering attenuated virus vaccines by controlling replication
-fidelity}''. Vignuzzi et al. 
+fidelity}''. Vignuzzi et al.
   \item (De)-Optimizaci\'on de codones y pares de codones.
 ``\textit{Virus Attenuation by Genome-Scale Changes in Codon Pair Bias}''.
 Coleman et al.
   \item Otras aproximaciones. ``\textit{Rationalizing the development of live
 attenuated virus vaccines}''. Lauring et al.
  \end{itemize}
+\pause
+\begin{block}{Nuestra propuesta}
+ Proponemos un enfoque complementario a los anteriores y que eventualmente
+podr\'ian combinarse.
+\end{block}
+
 \end{frame}
 
 \section{Propuesta}
@@ -91,32 +94,30 @@ attenuated virus vaccines}''. Lauring et al.
 \begin{itemize} 
  \item \textbf{Espacio de soluciones:} $\mathcal{S}$ secuencias de RNA de igual
 longitud que el genoma del virus. 
-
+\pause
  \item \textbf{Restricciones sobre partes de las soluciones:} Conservaci\'on de
 la estructura secundaria o de la secuencia aminoac\'idica con respecto al virus
 atenuado.
-
+\pause
  \item \textbf{Funci\'on de evaluaci\'on:} $f: \mathcal{S} \rightarrow
 \mathbb{R}$ tal que $f(s)$ calcula la bondad de cada soluci\'on, en
-nuestro caso, como la distancia en n\'umero de mutaciones necesarias para
-llegar de $s$ a alguna secuencia pat\'ogena o revertante.
+nuestro caso, como la \textbf{distancia en n\'umero de mutaciones} necesarias
+para llegar de $s$ a alguna secuencia pat\'ogena o revertante.
 \end{itemize}
 \end{frame}
 
 \subsection{Optimizaci\'on combinatoria}
 \begin{frame}
-El problema de optimizaci\'on consiste en, iterativamente modificar partes
+El problema de optimizaci\'on consiste en iterativamente modificar partes
 del genoma del virus atenuado (IRES, regi\'on codificante, otras) asegurando
 que:
   \begin{itemize}
    \item las (sub)secuencias asignadas satisfacen las restricciones impuestas:
     \begin{itemize}
-     \item Conservaci\'on de estructura secundaria: \textit{folding} inverso
-(RNAinverse, INFO-RNA)
-     \item Conservaci\'on de la secuencia aminoac\'idica: posibles codones para
-un mismo amino\'acido.
+     \item Conservaci\'on de estructura secundaria
+     \item Conservaci\'on de la secuencia aminoac\'idica
     \end{itemize}
-   \item las secuencias que resultan de cada asignaci\'on tiendan a maximizar la
+   \item las secuencias que resultan de cada asignaci\'on tienden a maximizar la
 funci\'on $f$.
   \end{itemize}
 \end{frame}
