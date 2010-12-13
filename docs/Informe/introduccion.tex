@@ -7,9 +7,10 @@ El objetivo de este trabajo es el dise\~no y desarrollo de un software que
 sirva como soporte para el dise\~no de vacunas atenuadas. En este sentido, la
 propuesta es encontrar un conjunto de secuencias de \ac{RNA} que conserven las
 propiedades que le otorgan la atenuaci\'on a la vacuna y que al mismo tiempo,
-tiendan a maximizar el numero de mutaciones necesarias para alcanzar secuencias
-semejantes a las pat\'ogenas o revertantes\footnote{Para el lector ajeno a la
-biolog\'ia, qu\'e producen la enfermedad que la vacuna debiera prevenir.}. 
+tiendan a maximizar el n\'umero de mutaciones necesarias para alcanzar
+secuencias semejantes a las pat\'ogenas o revertantes\footnote{Para el lector
+ajeno a la biolog\'ia, que producen la enfermedad que la vacuna debiera
+prevenir.}. 
 
 En los cap\'itulos~\ref{biologia} y \ref{bioinformatica} se introducen los
 conceptos biol\'ogicos b\'asicos y algunos de los problemas caracter\'isticos
@@ -33,7 +34,7 @@ diferentes enfermedades como el autismo.
 
 Aun as\'i, su uso est\'a ampliamente aceptado en la mayor\'ia de los pa\'ises
 del mundo siendo, las campa\~nas masivas de vacunaci\'on, una de las principales
-pol\'iticas publicas de salud. 
+pol\'iticas p\'ublicas de salud. 
 
 No es el objetivo de este trabajo, profundizar en este tema ni tampoco llegar
 a una conclusi\'on apresurada sobre la bondad de las vacunas, sino simplemente
@@ -44,7 +45,7 @@ masivo de vacunas seg\'un lo crea conveniente.
 \subsubsection{Un cacho de historia}
 
 El origen de las vacunas se remonta al a\~no 1796 durante la epidemia del virus
-de la viruela en Europa. El medico rural, Edward Jenner, observo que las
+de la viruela en Europa. El m\'edico rural, Edward Jenner, observ\'o que las
 mujeres que orde\~naban las vacas, eventualmente contra\'ian una especie de
 ``viruela vacuna'' por el contacto con las ubres y que luego la viruela com\'un
 no les produc\'ia ning\'un efecto. Efectivamente, el virus Vaccinia que se uso
@@ -54,11 +55,6 @@ hoy se conocen como vacunas vivas o atenuadas.
 
 \section{Motivaci\'on}
 \label{motivacion}
-Siendo brutalmente honesto, lo que motiv\'o este trabajo fue la necesidad
-imperiosa de terminar la Licenciatura. Aunque a medida que me fui
-interiorizando en el tema, la problem\'atica que se describe a continuaci\'on lo
-podr\'ia haber motivado perfectamente.
-
 Dejando de lado la discusi\'on planteada anteriormente, el objetivo b\'asico de
 una vacuna es estimular el sistema inmune sin producir la enfermedad en
 cuesti\'on. En este sentido, las vacunas atenuadas presentan algunas ventajas
@@ -87,7 +83,7 @@ poliomielitis.
 
 A ra\'iz de una campa\~na impulsada por la \ac{WHO} en 1988 y utilizando la
 \ac{OPV}, hacia finales de 2002, se hab\'ia logrado interrumpir la
-transimisi\'on end\'emica del poliovirus en 209, de los 216 pa\'ises del
+transimisi\'on end\'emica del poliovirus en 209 de los 216 pa\'ises del
 mundo\cite{Aylward04}. 
 
 Sin embargo, la alta inestabilidad gen\'etica de esta vacuna dio lugar a
@@ -149,19 +145,18 @@ deseamos maximizar, estar\'a dada por el n\'umero de mutaciones necesario para
 alcanzar una secuencia revertante.
 
 En este sentido, la principal innovaci\'on que presenta este trabajo, es la
-utilizaci\'on de diferentes algoritmos para la predicci\'on de estructura
+utilizaci\'on de diferentes algoritmos para la predicci\'on de la estructura
 secundaria de \ac{RNA}, con el fin de determinar secuencias que conserven parte
 de la estructura secundaria del virus atenuado y en consecuencia, mantengan la
 atenuaci\'on y las propiedades como vacuna.
 
-Para guiar el desarrollo del trabajo se tomo como caso testigo la vacuna
+Para guiar el desarrollo del trabajo se tom\'o como caso testigo la vacuna
 \ac{OPV}. Esto nos permiti\'o establecer una serie de requerimientos b\'asicos,
 que esperamos sean de utilidad para otras vacunas.
 
 Desde el punto de vista de la implementaci\'on, se puso especial atenci\'on en
 utilizar diferentes principios y patrones de \ac{OOP} con
 el fin de lograr un software que sea altamente modular y que permita ser
-extendido en el futuro con nuevas funcionalidades.
-
-El c\'odigo fuente fue liberado bajo licencia \ac{GPLv3} y puede ser accedido a
-trav\'es del repositorio \ac{SVN}\footnote{\url{http://vac-o.googlecode.com}}
+extendido en el futuro con nuevas funcionalidades. El c\'odigo fuente fue
+liberado bajo licencia \ac{GPLv3} y puede ser accedido a trav\'es del
+repositorio \ac{SVN}\footnote{\url{http://vac-o.googlecode.com}}

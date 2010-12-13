@@ -23,12 +23,12 @@ recopilados por los bi\'ologos y la necesidad de herramientas para
 interpretarlos, dio origen a lo que hoy conocemos como
 \textit{bioinform\'atica}.
 
-La bioinform\'atica fue precedida por lo que se llam\'o, \textit{biolog\'ia
+La bioinform\'atica fue precedida por lo que se llam\'o \textit{biolog\'ia
 computacional}. Aunque no hay una definici\'on precisa para ninguno de
-los dos t\'erminos, la biolog\'ia computacional se caracterizo por enfocarse
-en los aspectos te\'oricos/formales de las Ciencias de la Computaci\'on,
+los dos t\'erminos, la biolog\'ia computacional se caracteriz\'o por enfocarse
+en los aspectos te\'oricos/formales de la Ciencia de la Computaci\'on,
 mientras que la bioinform\'atica supo estar m\'as relacionada con el
-procesamiento de grandes vol\'umenes de datos, usualmente, almacenados en la
+procesamiento de grandes vol\'umenes de datos, usualmente almacenados en la
 Internet. Actualmente, se suele hacer referencia a ambos t\'erminos de manera
 indiferente.
 
@@ -38,11 +38,11 @@ A continuaci\'on presentamos algunos de los problemas o temas de investigaci\'on
 abordados por la bioinform\'atica.
 
 \begin{itemize}
- \item \textbf{An\'alisis de secuencias de \ac{DNA} o \ac{RNA}}.
- \item \textbf{Dise\~no de secuencias de \ac{DNA} o \ac{RNA}}.
- \item \textbf{Predicci\'on de interacci\'on entre prote\'inas}.
- \item \textbf{An\'alisis de mutaciones en el c\'ancer}.
- \item \textbf{Biolog\'ia evolutiva computacional}.
+ \item An\'alisis de secuencias de \ac{DNA} o \ac{RNA}.
+ \item Dise\~no de secuencias de \ac{DNA} o \ac{RNA}.
+ \item Predicci\'on de interacci\'on entre prote\'inas.
+ \item An\'alisis de mutaciones en el c\'ancer.
+ \item Biolog\'ia evolutiva computacional.
 \end{itemize}
 
 \section{Predicci\'on de estructura secundaria}
@@ -63,7 +63,7 @@ brevemente las diferentes aproximaciones a cada uno de ellos.
 
 Por lo mencionado en la secciones~\ref{estructura} y \ref{virus}, predecir la
 estructura secundaria de una secuencia de \ac{RNA} y conocer las posibles
-secuencias que conservan una estructura secundaria determinada, es de gran
+secuencias que conservan una estructura secundaria determinada es de gran
 importancia en este trabajo.
 
 \subsection{Predicci\'on directa (\textit{folding})}
@@ -83,10 +83,10 @@ comparar secuencias y estructuras con el fin de obtener una estructura por
 Si bien la ``predicci\'on comparativa'' presenta un incremento en la fidelidad
 de los resultados obtenidos con respecto a la ``predicci\'on por \ac{mfe}''
 \cite{Gardner04}, este tipo de algoritmos requieren la existencia de un conjunto
-de secuencias relacionadas entre si (hom\'ologas) y esto no siempre es posible.
-En particular para este trabajo nos interesa poder realizar predicciones de la
-estructura secundaria a partir de una sola secuencia, por lo que la
-``predicci\'on comparativa'' fue descartada.
+de secuencias relacionadas entre s\'i (hom\'ologas) y esto no siempre es
+posible. En particular para este trabajo nos interesa poder realizar
+predicciones de la estructura secundaria a partir de una sola secuencia, por lo
+que la ``predicci\'on comparativa'' fue descartada.
 
 Entre las implementaciones de la ``predicci\'on por \ac{mfe}'', se destacan
 \textbf{RNAfold}\cite{Hofacker94} y \textbf{Mfold}\cite{Zuker81}. Ambas
@@ -98,14 +98,14 @@ esta complejidad polinomial, es necesario suponer la ausencia de
 \textit{pseudo-knots}. De lo contrario, est\'a demostrado que el problema es
 NP-completo\cite{Lyngso00}.
 
-A continuaci\'on, se puede ver un ejemplo de una predicci\'on realizada con
+A continuaci\'on se puede ver un ejemplo de una predicci\'on realizada con
 \textbf{RNAfold}.
 
 \begin{verbatim}
 sancho@mulata:~$ RNAfold
 
 Input string (upper or lower case); @ to quit
-....,....1....,....2....,....3....,....4....,....5....,....6....,....7....,....8
+....,....1....,....2....,....3....,....4....,....5....,....6....,.
 AAAGGCAACGGCCAU
 length = 15
 AAAGGCAACGGCCAU
@@ -142,7 +142,7 @@ tiendan a minimizar el numero de predicciones realizadas sobre la secuencia
 completa.
 
 En general, las diferentes implementaciones tienen como par\'ametros de
-entrada, la estructura secundaria y opcionalmente, una secuencia de \ac{RNA}
+entrada la estructura secundaria y opcionalmente, una secuencia de \ac{RNA}
 incompleta (algunas bases indefinidas, generalmente representadas con la
 letra N). Se distinguen dos pasos o etapas principales, que marcan las
 diferencias entre una y otra implementaci\'on:
@@ -176,9 +176,9 @@ A continuaci\'on, mostramos un ejemplo de una predicci\'on inversa usando
 \begin{verbatim}
 sancho@mulata:~$ RNAinverse 
 
-Input structure & start string (lower case letters for const positions)
-    @ to quit, and 0 for random start string
-....,....1....,....2....,....3....,....4....,....5....,....6....,....7....,....8
+Input structure & start string (lower case letters for const 
+positions) @ to quit, and 0 for random start string
+....,....1....,....2....,....3....,....4....,....5....,....6....,.
 ...(((....)))..
 aaaNNNNNNNNNNNu
 length = 15

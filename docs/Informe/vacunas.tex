@@ -8,13 +8,13 @@ Una vacuna atenuada es aquella que es creada reduciendo la virulencia de un
 pat\'ogeno pero aun as\'i, manteni\'endolo viable (``vivo''). Antes de
 adentrarnos en los detalles de lo que plantea este trabajo como metodolog\'ia
 para racionalizar el dise\~no de vacunas atenuadas, veremos brevemente algunos
-antecedentes y cual fue, y sigue siendo, la metodolog\'ia cl\'asica para la
+antecedentes y cu\'al fue, y sigue siendo, la metodolog\'ia cl\'asica para la
 producci\'on de este tipo de vacunas.
 
 \section{Dise\~no cl\'asico}
 
 La metodolog\'ia para la producci\'on de vacunas atenuadas ha sido
-hist\'oricamente, el pasaje del virus a trav\'es de cultivos de c\'elulas
+hist\'oricamente el pasaje del virus a trav\'es de cultivos de c\'elulas
 distintas a las c\'elulas hu\'esped. De esta manera, el virus tiende a
 ``evolucionar'' para adaptarse al nuevo hu\'esped y ser capaz de reproducirse.
 
@@ -24,16 +24,17 @@ capacidad de reproducirse en el hu\'esped original. Luego, son precisamente
 estas mutaciones las que le confieren la atenuaci\'on y dan lugar a la vacuna
 atenuada.
 
-La principal desventaja en este proceso, es que las mutaciones que se producen
-son totalmente impredecibles y aun cuando estas mutaciones derivan en un virus
-atenuado, este podr\'ia revertir muy f\'acilmente a la virulencia dependiendo de
-la naturaleza de las mutaciones que generan la atenuaci\'on\cite{Badgett02}.
+La principal desventaja en este proceso es que las mutaciones que se producen
+son totalmente impredecibles y a\'un cuando estas mutaciones derivan en un
+virus atenuado, \'este podr\'ia revertir muy f\'acilmente a la virulencia
+dependiendo de la naturaleza de las mutaciones que generan la
+atenuaci\'on\cite{Badgett02}.
 Adem\'as, como vimos en la secci\'on~\ref{virus}, la alta frecuencia de
 mutaciones que poseen los virus \ac{RNA} aumenta la probabilidad de reversi\'on
 a la virulencia. De hecho, esto es lo que ocurre con muchas vacunas atenuadas y
 en particular, con la \ac{OPV}.
 
-A pesar de este peligro de reversi\'on a la virulencia, esta sigue siendo la
+A pesar de este peligro de reversi\'on a la virulencia, \'esta sigue siendo la
 principal metodolog\'ia para la producci\'on de vacunas atenuadas. Esto se debe,
 fundamentalmente, a la falta de conocimiento sobre el significado o incidencia
 de las mutaciones en la atenuaci\'on de un determinado virus. Sin embargo, los
@@ -84,7 +85,7 @@ Sin embargo, experimentalmente se pudo comprobar que algunos codones son m\'as
 frecuentes que otros (\textit{codon bias}). Similarmente, pero de manera
 independiente, se comprob\'o que determinados pares de codones son m\'as
 frecuentes que otros (\textit{codon pair bias}). Aunque todav\'ia no est\'a
-claro a que se debe esta ``parcialidad'' en el uso de codones o pares de
+claro a qu\'e se debe esta ``parcialidad'' en el uso de codones o pares de
 codones, se supone que afectar\'ia el proceso de s\'intesis de prote\'inas
 (traducci\'on). 
 
@@ -105,18 +106,18 @@ probabilidad de revertir a la virulencia.
 
 En pocas palabras, la propuesta consiste en encontrar un conjunto de secuencias
 de \ac{RNA} que conserven las propiedades que le otorgan la atenuaci\'on al
-virus y que al mismo tiempo, tiendan a maximizar el numero de mutaciones
+virus y que, al mismo tiempo, tiendan a maximizar el n\'umero de mutaciones
 necesarias para alcanzar secuencias semejantes a las pat\'ogenas o revertantes.
 
 Esto tiene algunos puntos en com\'un con la ``(de-)optimizaci\'on de codones''
 que presentamos anteriormente. En particular, ambas aproximaciones comparten la
 idea de sistematizar el dise\~no de forma tal que pueda ser usado para
 diferentes virus. Esto implica fundamentalmente, plasmar la metodolog\'ia en la
-implementaci\'on de un software que a partir de una serie de datos provistos por
-el usuario, devuelva como resultado una o varias secuencias de nucle\'otidos que
-representen posibles atenuaciones del virus.
+implementaci\'on de un software que, a partir de una serie de datos provistos
+por el usuario, devuelva como resultado una o varias secuencias de nucle\'otidos
+que representen posibles atenuaciones del virus.
 
-De una forma mas abstracta, podemos pensar en un software para el dise\~no de
+De una forma m\'as abstracta, podemos pensar en un software para el dise\~no de
 secuencias de nucle\'otidos basado en restricciones. Fundamentalmente, lo que se
 busca es ``generar'' secuencias que satisfagan determinadas propiedades o
 restricciones. En particular, aquellas que tiendan a reducir la virulencia del
@@ -166,15 +167,15 @@ Repasando lo dicho en la secci\'on~\ref{propuesta}, este tipo de problemas
 consiste en asignar valores a un conjunto finito de variables (componentes de
 una soluci\'on) que satisfagan determinadas restricciones. En nuestro caso,
 estas restricciones ser\'an propiedades biol\'ogicas sobre partes de una
-secuencia de \ac{RNA} y los posibles valores a asignar ser\'an (sub)secuencias
+secuencia de \ac{RNA}, y los posibles valores a asignar ser\'an (sub)secuencias
 de \ac{RNA} que satisfagan las propiedades requeridas.
 
 Sobre diferentes partes de la secuencia de \ac{RNA} se podr\'ian requerir
 diferentes propiedades biol\'ogicas (restricciones). Luego, ser\'an estas
 propiedades las que determinen los posibles valores sobre cada parte
 ``variable'' de la secuencia. Finalmente, las combinaciones de los posibles
-valores para cada parte de la secuencia, formaran las potenciales soluciones del
-problema.
+valores para cada parte de la secuencia, formar\'an las potenciales soluciones
+del problema.
 
 \subsubsection{Definici\'on del problema}
 
@@ -217,12 +218,12 @@ como vimos en las secciones~\ref{folding} y \ref{inverse}.
 
 Con el problema planteado de esta manera y debido a la inviabilidad de realizar
 una b\'usqueda exhaustiva, se pueden utilizar diferentes algoritmos de
-b\'usqueda local para que partiendo de una secuencia de \ac{RNA} inicial, en
+b\'usqueda local para que, partiendo de una secuencia de \ac{RNA} inicial, en
 este caso el virus atenuado, recorrer el espacio de b\'usqueda $\mathcal{S}_{N}$
 teniendo como objetivo, maximizar la funci\'on de evaluaci\'on $f$.
 
 En este contexto, la definici\'on de la funci\'on de evaluaci\'on $f:
-\mathcal{S}_{N} \rightarrow \mathbb{R}$ sera crucial para encontrar buenas
+\mathcal{S}_{N} \rightarrow \mathbb{R}$ ser\'a crucial para encontrar buenas
 soluciones. En principio se podr\'ia pensar que la imagen de la funci\'on, sea
 $\mathbb{N}$ en lugar de $\mathbb{R}$. De hecho, este es el caso si la funci\'on
 calcula la distancia de \textit{Hamming} est\'andar. Esto es, sumar 1 por cada

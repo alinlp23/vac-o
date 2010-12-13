@@ -5,7 +5,7 @@ supposed to be looking for someone, but I just can't remember! Can't
 remember...}%
 {Dory - Finding Nemo}
 
-Finalmente, nos quedan por describir los detalles mas relevantes que se
+Finalmente, nos quedan por describir los detalles m\'as relevantes que se
 tuvieron en cuenta para implementar el motor combinatorio de \ac{vac-o} y las
 interfaces propuestas en la secci\'on~\ref{diseno-motor}. Antes de eso, haremos
 un breve repaso por los diferentes paradigmas de b\'usqueda que nos permita
@@ -17,8 +17,8 @@ La idea fundamental de los algoritmos de b\'usqueda es generar y evaluar
 iterativamente soluciones candidatas para un problema determinado. En el caso de
 los ``problemas de decisi\'on'', la evaluaci\'on consiste en decidir si la
 soluci\'on candidata es una soluci\'on del problema, mientras que para los
-``problemas de optimizaci\'on'', la evaluaci\'on consiste t\'ipicamente,
-en determinar el valor de la funci\'on objetivo para cada soluci\'on candidata.
+``problemas de optimizaci\'on'', la evaluaci\'on consiste t\'ipicamente en
+determinar el valor de la funci\'on objetivo para cada soluci\'on candidata.
 
 Generalmente, la evaluaci\'on de las soluciones candidatas depende del problema
 y suele ser relativamente f\'acil de implementar\footnote{No es el caso de los
@@ -83,8 +83,8 @@ necesariamente as\'i. Por un lado, una de las propiedades de los algoritmos
 sistem\'aticos es la de poder determinar con certeza la existencia o no de una
 soluci\'on. En nuestro caso, esto no es relevante ya que el mismo virus atenuado
 que se quiere optimizar representa una soluci\'on al problema, por lo que la
-existencia de una soluci\'on no esta en duda. Adem\'as, los algoritmos
-sistem\'aticos y constructivos, ponen especial atenci\'on al camino que se
+existencia de una soluci\'on no est\'a en duda. Adem\'as, los algoritmos
+sistem\'aticos y constructivos ponen especial atenci\'on al camino que se
 recorre para llegar a una soluci\'on y esto tampoco es de inter\'es en un
 problema de optimizaci\'on como el nuestro.
 
@@ -97,7 +97,7 @@ naturalmente un buen punto de inicio por haber demostrado previamente su
 efectividad en la pr\'actica.
 
 Por \'ultimo, una de las propiedades deseables en la resoluci\'on de un
-problema de optimizaci\'on, es que la calidad de las soluciones est\'e
+problema de optimizaci\'on es que la calidad de las soluciones est\'e
 directamente relacionada con el tiempo de ejecuci\'on del algoritmo y esto es
 generalmente una propiedad que se da naturalmente en los algoritmos de
 b\'usqueda local.
@@ -179,7 +179,7 @@ Para implementar esta interfaz, se propuso una variante de un tipo de
 vecindarios que se conoce usualmente como \textbf{k-opt}, en donde dos
 soluciones son vecinas si difieren en a lo sumo $k$ componentes de la
 soluci\'on. Recordemos que en nuestro caso, las componentes de la soluci\'on son
-esencialmente, las regiones combinatorias representadas por la interfaz
+esencialmente las regiones combinatorias representadas por la interfaz
 \textbf{ICombinatoryRegion} y cuya principal responsabilidad es la de generar
 las variantes de la regi\'on combinatoria que satisfacen las restricciones
 impuestas. Luego, la definici\'on de vecindario que se propuso fue la siguiente:
@@ -200,9 +200,9 @@ en la soluci\'on $s'$, entonces $\prod_{i=1}^{N} eval(v_{i}) \ge umbral$.
 
 Algunas alternativas inmediatas que surgen a esta definici\'on son:
 \begin{itemize}
- \item Permitir que la soluciones vecinas difieran en mas de una regi\'on
+ \item Permitir que la soluciones vecinas difieran en m\'as de una regi\'on
 combinatoria.
- \item Hacer que el n\'umero $m$ de variantes generadas para cada regi\'on, sea
+ \item Hacer que el n\'umero $m$ de variantes generadas para cada regi\'on sea
 variable en el tiempo de forma tal de expandir el vecindario a medida que avanza
 la b\'usqueda.
 \end{itemize}
@@ -246,9 +246,12 @@ seleccionada.
 
 Esta estrategia marca una diferencia importante con las anteriores como es la
 posibilidad de seleccionar soluciones que \textbf{no} mejoran la soluci\'on
-actual, pero que eventualmente podr\'ian conducir a mejores soluciones. Por un
-lado, para seleccionar una soluci\'on peor que la actual, se debe tener en
-cuenta la diferencia entre sus respectivas evaluaciones, a mayor diferencia,
+actual, pero que eventualmente podr\'ian conducir a mejores soluciones. Esto es
+fundamentalmente para ``escapar'' de los m\'aximos locales que podr\'ian existir
+en el espacio de soluciones. 
+
+Por un lado, para seleccionar una soluci\'on peor que la actual, se debe tener
+en cuenta la diferencia entre sus respectivas evaluaciones, a mayor diferencia,
 menor deber\'ia ser la probabilidad de seleccionarla. Adem\'as, se supone que a
 medida que avanza la b\'usqueda, la calidad de las soluciones deber\'ia
 incrementarse, por lo tanto, la probabilidad de seleccionar una soluci\'on peor
