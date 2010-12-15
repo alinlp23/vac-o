@@ -31,6 +31,49 @@ siguientes:
 Quedaron fuera del alcance, las etapas ``Instalaci\'on'' y por supuesto,
 ``Mantenimiento''.
 
+\subsection{Consideraciones del modelo}
+
+Para implementar el modelo de cascada se tuvieron en cuenta algunas
+consideraciones con respecto al contexto en el que se desarroll\'o el software
+y que veremos a continuaci\'on. 
+
+Por un lado, todas las etapas que enumeramos m\'as arriba deb\'ian ser llevadas
+a cabo por la misma persona. Esto es significativamente distinto a contar con
+grupos de personas o equipos independientes para cada etapa y en donde la
+documentaci\'on generada en cada fase es fundamental para la comunicaci\'on
+entre los distintos equipos. En este sentido, usamos un modelo de cascada con
+``solapamiento'', tambi\'en conocido como \textit{Sashimi}\cite{Mcconnell96},
+que permite empezar una etapa sin haber terminado por completo la anterior.
+Debido a que en este modelo es m\'as natural la continuidad del personal entre
+las distintas etapas, no es necesario generar tanta documentaci\'on como en el
+modelo de cascada ``puro'' y esto agiliz\'o el proceso de desarrollo.
+
+Por otro lado, el rol de ``cliente'' en el proceso de desarrollo fue cubierto
+por miembros de \ac{FuDePAN} que garantizaron el conocimiento del dominio de
+manera tal de poder realizar la ``Especificaci\'on de requerimientos'' pero al
+mismo tiempo, contaban con los conocimientos t\'ecnicos de dise\~no y
+programaci\'on orientada a objetos como para supervisar el desarrollo en estos
+aspectos. En este sentido, se tomaron algunos elementos de la variante al modelo
+de cascada ``puro'' que se conoce como \textit{Staged
+Delivery}\cite{Mcconnell96} o ``implementaci\'on incremental'' que nos
+permitieron realizar revisiones peri\'odicas con miembros de \ac{FuDePAN}
+durante las etapas de ``Dise\~no'' e ``Implementaci\'on''.
+
+En la Figura~\ref{modelos} se pueden ver el modelo de cascada ``puro'' y las
+variantes descriptas anteriormente y que adoptamos para este trabajo.
+
+\begin{figure}
+ \centering
+  \includegraphics[scale=0.6]{modelos}
+  \caption{Modelos de desarrollo}
+  \label{modelos}
+\end{figure}
+
+
+Por \'ultimo, con el fin de validar los requerimientos del software que se
+consideraban m\'as importantes, durante la etapa de ``Dise\~no'', se
+implement\'o un prototipo utilizando el lenguaje de programaci\'on Python.
+
 \section{Ecosistema}
 
 El ``ecosistema'' de herramientas que se utilizaron para llevar adelante el
