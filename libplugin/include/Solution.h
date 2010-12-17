@@ -24,7 +24,7 @@
  */
 
 #ifndef _SOLUTION_H
-#define	_SOLUTION_H
+#define _SOLUTION_H
 
 #include "ISolution.h"
 #include "ICombinatoryRegion.h"
@@ -52,5 +52,5 @@ public:
 };
 
 
-#endif	/* _SOLUTION_H */
+#endif  /* _SOLUTION_H */
 

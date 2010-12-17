@@ -32,7 +32,7 @@ IPlugin* PluginAdmin::load(const Path& file) throw(PluginException)
     IPlugin* plg;
 
     handle = dlopen(file.c_str(), RTLD_LAZY);
-    
+
     bool success(handle != NULL);
     if (success)
     {
@@ -47,7 +47,7 @@ IPlugin* PluginAdmin::load(const Path& file) throw(PluginException)
          * Corrigendum 1) workaround; see the Rationale for the
          * POSIX specification of dlsym()
          */
-        *(void **) (&create_plugin) = dlsym(handle, "create_plugin");
+        *(void**)(&create_plugin) = dlsym(handle, "create_plugin");
 
         if (create_plugin == NULL)
         {
@@ -60,7 +60,7 @@ IPlugin* PluginAdmin::load(const Path& file) throw(PluginException)
     }
     else
         throw  PluginException(dlerror());
-    
+
     return plg;
 }
 

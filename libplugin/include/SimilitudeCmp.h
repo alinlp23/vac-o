@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   SimilitudeCmp.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 11, 2010, 7:54 PM 
+ * Created on November 11, 2010, 7:54 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,11 +20,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _SIMILITUDECMP_H
-#define	_SIMILITUDECMP_H
+#define _SIMILITUDECMP_H
 
 enum SimilitudePolicy
 {
@@ -35,7 +35,7 @@ template<SimilitudePolicy p>
 struct SimilitudeCmp
 {
     static inline bool cmp(Similitude s1, Similitude s2)
-    {        
+    {
         return s1 <= s2;
     }
 };
@@ -44,10 +44,10 @@ template<>
 struct SimilitudeCmp<MaxSimilitude>
 {
     static inline bool cmp(Similitude s1, Similitude s2)
-    {        
+    {
         return s1 >= s2;
     }
 };
 
-#endif	/* _SIMILITUDECMP_H */
+#endif  /* _SIMILITUDECMP_H */
 

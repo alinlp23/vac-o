@@ -32,18 +32,18 @@ inline void initialize_mutation_matrix(MutationMatrix& matrix)
     for (size_t i = 0; i < MATRIX_SIZE; ++i)
     {
         for (size_t j = 0; j < MATRIX_SIZE; ++j)
-            matrix[i][j] = i==j ? 0.f : 1.f/3.f;
+            matrix[i][j] = i == j ? 0.f : 1.f / 3.f;
     }
 }
 
 RandomMutator::RandomMutator(NMutations mutations, NMutations mutants) :
-        sequence(), mutations(mutations), mutants(mutants), counter(0), matrix(), rnd(0.f,1.f)
+    sequence(), mutations(mutations), mutants(mutants), counter(0), matrix(), rnd(0.f, 1.f)
 {
-    initialize_mutation_matrix(matrix);    
+    initialize_mutation_matrix(matrix);
 }
 
 RandomMutator::RandomMutator(NMutations mutations, NMutations mutants, const IMutationMatrixProvider* provider) :
-sequence(), mutations(mutations), mutants(mutants), counter(0), matrix(), rnd(0,1)
+    sequence(), mutations(mutations), mutants(mutants), counter(0), matrix(), rnd(0, 1)
 {
     initialize_mutation_matrix(matrix);
     provider->get_mutation_matrix(matrix);
@@ -53,18 +53,19 @@ bool RandomMutator::next(NucSequence& seq)
 {
     ++counter;
     bool more(counter <= mutants);
-    
-    if(more)
-    {        
+
+    if (more)
+    {
         seq = sequence;
         NMutations i = 0;
-        const size_t length = sequence.length()-1;
-        while (i<mutations)
+        const size_t length = sequence.length() - 1;
+        while (i < mutations)
         {
-            const SeqIndex pos = SeqIndex(rnd.get()*length);
+            const SeqIndex pos = SeqIndex(rnd.get() * length);
             float prob;
 
-            do{
+            do
+            {
                 /*
                  * This is useful to disable mutation between some bases.
                  * To disable i->j mutations, set matrix[i][j] = 0.f
@@ -74,7 +75,8 @@ bool RandomMutator::next(NucSequence& seq)
                  * random generator it's also 0.
                 */
                 prob = rnd.get();
-            } while(prob == 0.f);
+            }
+            while (prob == 0.f);
 
             Nucleotide b = Nucleotide(0);
             float acc = matrix[seq[pos]][b];
@@ -86,7 +88,7 @@ bool RandomMutator::next(NucSequence& seq)
             seq[pos] = b;
 
             ++i;
-         }
+        }
     }
     return more;
 }

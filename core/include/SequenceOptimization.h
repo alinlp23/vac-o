@@ -24,7 +24,7 @@
  */
 
 #ifndef _ISEQUENCEOPTIMIZATION_H
-#define	_ISEQUENCEOPTIMIZATION_H
+#define _ISEQUENCEOPTIMIZATION_H
 
 #include <biopp/biopp.h>
 
@@ -42,10 +42,10 @@ struct SequenceOptimizationCmp
      * @param opt2 another sequence optimization
      * @return If the first it's greater than the second.
      */
-    bool operator() (const SequenceOptimization*,
-                     const SequenceOptimization*) const;
+    bool operator()(const SequenceOptimization*,
+                    const SequenceOptimization*) const;
 };
 
 
-#endif	/* _ISEQUENCEOPTIMIZATION_H */
+#endif  /* _ISEQUENCEOPTIMIZATION_H */
 

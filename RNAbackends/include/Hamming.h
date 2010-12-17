@@ -24,7 +24,7 @@
  */
 
 #ifndef _HAMMING_H
-#define	_HAMMING_H
+#define _HAMMING_H
 
 #include "ISequenceCmp.h"
 
@@ -32,7 +32,7 @@ class IDistanceMatrixProvider
 {
 public:
     virtual void get_distance_matrix(DistanceMatrix& m) const = 0;
-    virtual ~IDistanceMatrixProvider(){}
+    virtual ~IDistanceMatrixProvider() {}
 };
 
 /**
@@ -40,7 +40,7 @@ public:
  */
 class Hamming : public ISequenceCmp
 {
-    DistanceMatrix matrix;    
+    DistanceMatrix matrix;
     virtual Distance compare(const NucSequence&,
                              const NucSequence&) const throw(RNABackendException);
 public:
@@ -50,5 +50,5 @@ public:
 };
 
 
-#endif	/* _HAMMING_H */
+#endif  /* _HAMMING_H */
 

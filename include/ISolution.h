@@ -24,7 +24,7 @@
  */
 
 #ifndef _ISOLUTION_H
-#define	_ISOLUTION_H
+#define _ISOLUTION_H
 
 #include <biopp/biopp.h>
 #include "types.h"
@@ -44,7 +44,7 @@ public:
      * @param seq the new complete sequence
      * @param op the local optimization for the region being updated.
      */
-    virtual void update_solution(RegionIdx, const NucSequence&, const LocalOptimization&) THROW((PluginException))= 0;
+    virtual void update_solution(RegionIdx, const NucSequence&, const LocalOptimization&) THROW((PluginException)) = 0;
 
     /**
      * Gets the complete sequence of this solution
@@ -70,5 +70,5 @@ public:
 
 
 
-#endif	/* _ISOLUTION_H */
+#endif  /* _ISOLUTION_H */
 

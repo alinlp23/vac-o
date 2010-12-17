@@ -24,7 +24,7 @@
  */
 
 #ifndef _PLUGINADMIN_H
-#define	_PLUGINADMIN_H
+#define _PLUGINADMIN_H
 
 #include "types.h"
 #include "exceptions.h"
@@ -40,5 +40,5 @@ public:
 
 
 
-#endif	/* _PLUGINADMIN_H */
+#endif  /* _PLUGINADMIN_H */
 

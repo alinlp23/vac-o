@@ -26,8 +26,8 @@ public:
     void fake_explore(const ISolution* const s)
     {
         bool done(false);
-        size_t i=0;
-        while (i<4 && !done)
+        size_t i = 0;
+        while (i < 4 && !done)
         {
             neighbor = new SolutionMock;
             done = nei.SubjectNotify(neighbor);
@@ -43,28 +43,28 @@ TEST_F(SimulatedAnnealingTest, RunAllIterations)
     strategy->set_scorer(&scorer);
 
     EXPECT_CALL(scorer, evaluate(_))
-            .WillOnce(Return(5))//init
-            .WillOnce(Return(6))//iteration 1
-            .WillOnce(Return(4))
-            .WillOnce(Return(7))
-            .WillOnce(Return(5))
-            .WillOnce(Return(8))//iteration 2
-            .WillOnce(Return(6))
-            .WillOnce(Return(7))
-            .WillOnce(Return(9))
-            .WillOnce(Return(9))//iteration 3
-            .WillOnce(Return(6))
-            .WillOnce(Return(10))
-            .WillOnce(Return(8));
+    .WillOnce(Return(5))//init
+    .WillOnce(Return(6))//iteration 1
+    .WillOnce(Return(4))
+    .WillOnce(Return(7))
+    .WillOnce(Return(5))
+    .WillOnce(Return(8))//iteration 2
+    .WillOnce(Return(6))
+    .WillOnce(Return(7))
+    .WillOnce(Return(9))
+    .WillOnce(Return(9))//iteration 3
+    .WillOnce(Return(6))
+    .WillOnce(Return(10))
+    .WillOnce(Return(8));
 
     EXPECT_CALL(nei, explore(_))
-            .Times(AtMost(3))
-            .WillRepeatedly(Invoke(this, &SimulatedAnnealingTest::fake_explore));
-    
-    EXPECT_CALL(observer, update(_,_))
-            .Times(AtMost(3))
-            .WillRepeatedly(Return());
-    
+    .Times(AtMost(3))
+    .WillRepeatedly(Invoke(this, &SimulatedAnnealingTest::fake_explore));
+
+    EXPECT_CALL(observer, update(_, _))
+    .Times(AtMost(3))
+    .WillRepeatedly(Return());
+
     strategy->run(initial, &observer);
     delete strategy;
 }
@@ -77,11 +77,11 @@ TEST_F(SimulatedAnnealingTest, NoNeighbors)
     strategy->set_scorer(&scorer);
 
     EXPECT_CALL(scorer, evaluate(_))
-            .WillOnce(Return(5));
+    .WillOnce(Return(5));
 
     EXPECT_CALL(nei, explore(_))
-            .Times(3)
-            .WillRepeatedly(Return());
+    .Times(3)
+    .WillRepeatedly(Return());
 
     strategy->run(initial, &observer);
     delete strategy;
@@ -94,19 +94,19 @@ TEST_F(SimulatedAnnealingTest, LowTemp)
     strategy->set_scorer(&scorer);
 
     EXPECT_CALL(scorer, evaluate(_))
-            .WillOnce(Return(5))
-            .WillOnce(Return(6))
-            .WillOnce(Return(7))
-            .WillOnce(Return(3))
-            .WillOnce(Return(4));
+    .WillOnce(Return(5))
+    .WillOnce(Return(6))
+    .WillOnce(Return(7))
+    .WillOnce(Return(3))
+    .WillOnce(Return(4));
 
-    EXPECT_CALL(observer, update(_,_))
-            .Times(AtMost(1))
-            .WillRepeatedly(Return());
+    EXPECT_CALL(observer, update(_, _))
+    .Times(AtMost(1))
+    .WillRepeatedly(Return());
 
     EXPECT_CALL(nei, explore(_))
-            .Times(1)
-            .WillRepeatedly(Invoke(this, &SimulatedAnnealingTest::fake_explore));
+    .Times(1)
+    .WillRepeatedly(Invoke(this, &SimulatedAnnealingTest::fake_explore));
 
     strategy->run(initial, &observer);
     delete strategy;

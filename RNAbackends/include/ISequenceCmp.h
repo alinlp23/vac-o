@@ -24,7 +24,7 @@
  */
 
 #ifndef _ISEQUENCECMP_H
-#define	_ISEQUENCECMP_H
+#define _ISEQUENCECMP_H
 
 #include <biopp/biopp.h>
 
@@ -49,5 +49,5 @@ public:
     virtual ~ISequenceCmp() {}
 };
 
-#endif	/* _ISEQUENCECMP_H */
+#endif  /* _ISEQUENCECMP_H */
 

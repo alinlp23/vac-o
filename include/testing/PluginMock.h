@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   PluginMock.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 13, 2010, 11:00 AM 
+ * Created on November 13, 2010, 11:00 AM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,11 +20,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _PLUGINMOCK_H
-#define	_PLUGINMOCK_H
+#define _PLUGINMOCK_H
 
 #include <gmock/gmock.h>
 #include "IPlugin.h"
@@ -39,18 +39,18 @@ public:
     PluginMock()
     {
         ON_CALL(*this, get_initial_solution())
-                .WillByDefault(Return(&init_solution));
+        .WillByDefault(Return(&init_solution));
     }
     MOCK_CONST_METHOD1(get_parameters, void(ParamsCt& params));
     MOCK_METHOD0(configure, void());
-    MOCK_CONST_METHOD0(get_initial_solution, const ISolution*());
-    MOCK_CONST_METHOD0(get_neighborhood, INeighborhood*());
-    MOCK_CONST_METHOD0(get_strategy, IStrategy*());
+    MOCK_CONST_METHOD0(get_initial_solution, const ISolution * ());
+    MOCK_CONST_METHOD0(get_neighborhood, INeighborhood * ());
+    MOCK_CONST_METHOD0(get_strategy, IStrategy * ());
     MOCK_CONST_METHOD1(get_qa_regions, void(QARegionsCt& qaregions));
     MOCK_METHOD1(evaluate_solution, Score(const ISolution*));
     MOCK_CONST_METHOD0(get_ranking_size, RankingSize());
     MOCK_METHOD0(unload, void());
 };
 
-#endif	/* _PLUGINMOCK_H */
+#endif  /* _PLUGINMOCK_H */
 

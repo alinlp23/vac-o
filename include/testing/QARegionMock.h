@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   QARegionMock.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 13, 2010, 4:36 PM 
+ * Created on November 13, 2010, 4:36 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,11 +20,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _QAREGIONMOCK_H
-#define	_QAREGIONMOCK_H
+#define _QAREGIONMOCK_H
 
 #include <gmock/gmock.h>
 #include "IQARegion.h"
@@ -35,5 +35,5 @@ public:
     MOCK_CONST_METHOD1(validate, bool(const NucSequence& sequence));
 };
 
-#endif	/* _QAREGIONMOCK_H */
+#endif  /* _QAREGIONMOCK_H */
 

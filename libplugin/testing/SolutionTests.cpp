@@ -58,12 +58,12 @@ TEST_F(SolutionTest, UpdateSolution)
     string scseq = "AUUUUGCCCUUU";
     NucSequence cseq = scseq;
     s->update_solution(0, cseq, op);
-    
+
     NucSequence seq;
     s->get_sequence(seq);
-    for (size_t i=0; i<4; ++i)
+    for (size_t i = 0; i < 4; ++i)
     {
-        EXPECT_EQ(seq[1+i], delta[i]);
+        EXPECT_EQ(seq[1 + i], delta[i]);
     }
     Score score = s->compute_local_score(1);
     EXPECT_EQ(score, .3f);

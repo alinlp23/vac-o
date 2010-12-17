@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   MutationMatrixProviderMock.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 16, 2010, 3:57 PM 
+ * Created on November 16, 2010, 3:57 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,11 +20,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _MUTATIONMATRIXPROVIDERMOCK_H
-#define	_MUTATIONMATRIXPROVIDERMOCK_H
+#define _MUTATIONMATRIXPROVIDERMOCK_H
 
 #include <gmock/gmock.h>
 #include "RandomMutator.h"
@@ -36,5 +36,5 @@ public:
 };
 
 
-#endif	/* _MUTATIONMATRIXPROVIDERMOCK_H */
+#endif  /* _MUTATIONMATRIXPROVIDERMOCK_H */
 

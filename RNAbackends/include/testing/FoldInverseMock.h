@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   FoldInverseMock.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 15, 2010, 8:52 PM 
+ * Created on November 15, 2010, 8:52 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,11 +20,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _FOLDINVERSEMOCK_H
-#define	_FOLDINVERSEMOCK_H
+#define _FOLDINVERSEMOCK_H
 
 #include <gmock/gmock.h>
 #include "IFoldInverse.h"
@@ -38,5 +38,5 @@ public:
 };
 
 
-#endif	/* _FOLDINVERSEMOCK_H */
+#endif  /* _FOLDINVERSEMOCK_H */
 

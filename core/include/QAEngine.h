@@ -24,7 +24,7 @@
  */
 
 #ifndef _QAENGINE_H
-#define	_QAENGINE_H
+#define _QAENGINE_H
 
 #include <biopp/biopp.h>
 #include "types.h"
@@ -37,7 +37,7 @@
 class IPlugin;
 
 class QAEngine : public IObserver<SequenceOptimization>, public ISubject<SequenceOptimization>
-{    
+{
     QARegionsCt regions;
     /**
      * Implements the IObserver<NucSequence> interface.
@@ -53,11 +53,11 @@ class QAEngine : public IObserver<SequenceOptimization>, public ISubject<Sequenc
     bool validate(const NucSequence&) const;
 public:
     /**
-     * Constructor will ask the plugin for needed data.     
+     * Constructor will ask the plugin for needed data.
      * @param regions the QA regions
      */
     QAEngine(const QARegionsCt&);
 };
 
-#endif	/* _QAENGINE_H */
+#endif  /* _QAENGINE_H */
 

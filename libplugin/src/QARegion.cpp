@@ -32,26 +32,26 @@ using std::cout;
 using std::endl;
 
 QARegion::QARegion(SeqIndex s, SeqIndex e, Depth d, IQAMutator* m, const IQAValidator* v) :
-        start(s), end(e), depth(d), mutator(m), validator(v)
+    start(s), end(e), depth(d), mutator(m), validator(v)
 {}
 
 bool QARegion::validate(const NucSequence& seq) const
-{    
+{
     Depth d = 0;
     queue<NucSequence> mutants;
 
     //Extract the region from the complete sequence
     NucSequence region;
     string str_r;
-    for (SeqIndex i=start; i<end; ++i)
+    for (SeqIndex i = start; i < end; ++i)
         str_r += to_str(seq[i]);
     region = str_r;
-    
+
     insert_into(mutants, region);
     bool pass = validator->validate(seq);
 
-    while (pass && d<depth && !mutants.empty())
-    {   
+    while (pass && d < depth && !mutants.empty())
+    {
         pass = validate_level(seq, mutants);
         ++d;
     }
@@ -82,12 +82,12 @@ bool QARegion::validate_mutants(const NucSequence& seq, const NucSequence& regio
     while (pass && mutator->next(mutant))
     {
         //restore the complete sequence in order to validate it.
-        for (SeqIndex i=0; i<mutant.length(); ++i)
-            complete_mutant[start+i] = mutant[i];
+        for (SeqIndex i = 0; i < mutant.length(); ++i)
+            complete_mutant[start + i] = mutant[i];
 
         pass = validator->validate(complete_mutant);
         if (pass)
             insert_into(mutants, mutant);
-    }    
+    }
     return pass;
 }

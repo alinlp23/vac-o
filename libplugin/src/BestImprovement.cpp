@@ -26,12 +26,12 @@
 #include "BestImprovement.h"
 
 BestImprovement::BestImprovement(const INeighborhood* ne, Iteration max, Iteration max_idle):
-        Strategy(ne,max, max_idle), selected() {}
+    Strategy(ne, max, max_idle), selected() {}
 
 bool BestImprovement::select_neighbor()
 {
     selected = 0;
-    return selected_neighbor!=NULL && selected_neighbor != current_solution;
+    return selected_neighbor != NULL && selected_neighbor != current_solution;
 }
 
 bool BestImprovement::update(const ISolution* neighbor)
@@ -41,7 +41,7 @@ bool BestImprovement::update(const ISolution* neighbor)
     {
         if (selected != 0)
             delete selected_neighbor;
-        
+
         selected_neighbor = neighbor;
         selected_neighbor_score = ns;
         selected = ns;

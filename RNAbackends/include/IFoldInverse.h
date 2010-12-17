@@ -24,7 +24,7 @@
  */
 
 #ifndef _IFOLDINVERSE_H
-#define	_IFOLDINVERSE_H
+#define _IFOLDINVERSE_H
 
 #include <biopp/biopp.h>
 #include "rna_backends_exceptions.h"
@@ -57,5 +57,5 @@ public:
     virtual ~IFoldInverse() {}
 };
 
-#endif	/* _IFOLDINVERSE_H */
+#endif  /* _IFOLDINVERSE_H */
 

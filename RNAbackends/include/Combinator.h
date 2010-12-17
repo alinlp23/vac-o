@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   Combinator.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on October 21, 2010, 9:37 AM 
+ * Created on October 21, 2010, 9:37 AM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,11 +20,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _COMBINATOR_H
-#define	_COMBINATOR_H
+#define _COMBINATOR_H
 
 #include <vector>
 #include <list>
@@ -73,7 +73,7 @@ private:
     typedef typename C::const_iterator ConstIterator;
     C elements;
     Combination combination;
-    
+
     size_t k;
 
     ConstIterator end;
@@ -83,7 +83,7 @@ private:
     /**
      * Sets the elements being combined.
      */
-    void move();    
+    void move();
 };
 
 typedef Combinator<std::list<SeqIndex> > SeqIndexesCombinator;
@@ -95,7 +95,7 @@ typedef Combinator<std::list<SeqIndex> >::Combination SeqIndexesCombination;
 
 template<class C>
 Combinator<C>::Combinator(const C& e, size_t n) throw(CombinatorException) :
-        elements(e), combination(n), k(n), end(), start(), kit()
+    elements(e), combination(n), k(n), end(), start(), kit()
 {
     if (e.size() < n)
         throw CombinatorException();
@@ -105,13 +105,13 @@ Combinator<C>::Combinator(const C& e, size_t n) throw(CombinatorException) :
 
 template<class C>
 Combinator<C>::Combinator(size_t range, size_t n) throw(CombinatorException) :
-        elements(range), combination(n), k(n), end(), start(), kit()
+    elements(range), combination(n), k(n), end(), start(), kit()
 {
     if (range < n)
         throw CombinatorException();
 
     C range_ct;
-    for(size_t i=0; i<range; ++i)
+    for (size_t i = 0; i < range; ++i)
     {
         insert_into(range_ct, i);
     }
@@ -139,15 +139,15 @@ void Combinator<C>::begin()
 template<class C>
 void Combinator<C>::move()
 {
-    if (k==0)
+    if (k == 0)
         kit = end;
     else
     {
         ConstIterator it = start;
-        for(size_t i = 0; i<k; ++i)
+        for (size_t i = 0; i < k; ++i)
         {
             combination[i] = *it;
-            if (i == k-1)
+            if (i == k - 1)
                 kit = it;
             ++it;
         }
@@ -159,17 +159,17 @@ bool Combinator<C>::next(Combination& comb)
 {
     bool more(true);
 
-    if(kit != end)
+    if (kit != end)
     {
         comb = combination;
         ++kit;
-        if(kit == end && k>1)
+        if (kit == end && k > 1)
         {
             ++start;
             move();
         }
         else
-            combination[k-1] = *kit;
+            combination[k - 1] = *kit;
     }
     else
     {
@@ -182,5 +182,5 @@ bool Combinator<C>::next(Combination& comb)
     return more;
 }
 
-#endif	/* _COMBINATOR_H */
+#endif  /* _COMBINATOR_H */
 

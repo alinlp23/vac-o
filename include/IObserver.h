@@ -24,7 +24,7 @@
  */
 
 #ifndef _IOBSERVER_H
-#define	_IOBSERVER_H
+#define _IOBSERVER_H
 
 /**
  * Interface for observers
@@ -58,5 +58,5 @@ public:
     virtual bool update(const Subject* s) = 0;
 };
 
-#endif	/* _IOBSERVER_H */
+#endif  /* _IOBSERVER_H */
 

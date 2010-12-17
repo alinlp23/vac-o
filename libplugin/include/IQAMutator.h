@@ -24,7 +24,7 @@
  */
 
 #ifndef _IQAMUTATOR_H
-#define	_IQAMUTATOR_H
+#define _IQAMUTATOR_H
 
 #include <biopp/biopp.h>
 
@@ -50,5 +50,5 @@ public:
     virtual ~IQAMutator() {}
 };
 
-#endif	/* _IQAMUTATOR_H */
+#endif  /* _IQAMUTATOR_H */
 

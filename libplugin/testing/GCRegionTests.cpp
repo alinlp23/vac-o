@@ -22,12 +22,12 @@ protected:
         string str1 = "CCCTTT";
         string str2 = "AAA";
         string str3 = "GGG";
-        base = str1+str2+str3;
-        
+        base = str1 + str2 + str3;
+
         total_expected = 1;
         update_total_expected(str2);
         update_total_expected(str3);
-        NucSequence seq2 = str2+str3;
+        NucSequence seq2 = str2 + str3;
         seq2.translate(aminoacids);
         start = 6;
         end = 12;
@@ -48,13 +48,13 @@ TEST_F(GCRegionTest, GenerateDetla)
     NucSequence delta;
 
     igcregion->set_base_sequence(base);
-    for (size_t j=0; j<total_expected; ++j)
+    for (size_t j = 0; j < total_expected; ++j)
     {
         igcregion->generate(seq, delta);
 
-        for (size_t i=0; i<delta.length(); ++i)
+        for (size_t i = 0; i < delta.length(); ++i)
         {
-            EXPECT_EQ(seq[start+i], delta[i]);
+            EXPECT_EQ(seq[start + i], delta[i]);
         }
     }
 }
@@ -68,14 +68,14 @@ TEST_F(GCRegionTest, DetlaConserveAmino)
     NucSequence delta;
 
     igcregion->set_base_sequence(base);
-    for (size_t j=0; j<total_expected; ++j)
+    for (size_t j = 0; j < total_expected; ++j)
     {
         igcregion->generate(seq, delta);
 
         AminoSequence as;
         delta.translate(as);
         EXPECT_EQ(as.size(), aminoacids.size());
-        for (size_t i=0; i<as.size(); ++i)
+        for (size_t i = 0; i < as.size(); ++i)
         {
             EXPECT_EQ(as[i], aminoacids[i]);
         }
@@ -92,16 +92,16 @@ TEST_F(GCRegionTest, ConserveOutOfRegion)
 
     igcregion->set_base_sequence(base);
 
-    for (size_t j=0; j<total_expected; ++j)
+    for (size_t j = 0; j < total_expected; ++j)
     {
         igcregion->generate(seq, delta);
 
-        for (size_t i=0; i<start; ++i)
+        for (size_t i = 0; i < start; ++i)
         {
             EXPECT_EQ(seq[i], base[i]);
         }
 
-        for (size_t i=end; i<seq.length(); ++i)
+        for (size_t i = end; i < seq.length(); ++i)
         {
             EXPECT_EQ(seq[i], base[i]);
         }
@@ -118,13 +118,13 @@ TEST_F(GCRegionTest, DontRepeatBaseRegion)
 
     igcregion->set_base_sequence(base);
 
-    for (size_t j=0; j<total_expected; ++j)
+    for (size_t j = 0; j < total_expected; ++j)
     {
         igcregion->generate(seq, delta);
 
         string str_seq;
         string str_base;
-        for (size_t i=start; i<end; ++i)
+        for (size_t i = start; i < end; ++i)
         {
             str_seq += to_str(seq[i]);
             str_base += to_str(base[i]);

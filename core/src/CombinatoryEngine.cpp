@@ -31,7 +31,7 @@ using std::cout;
 using std::endl;
 
 CombinatoryEngine::CombinatoryEngine(IPlugin* const plg) :
-        plg(plg), strategy(plg->get_strategy()), ssadapter()
+    plg(plg), strategy(plg->get_strategy()), ssadapter()
 {
     ssadapter = new PluginScoreAdapter(plg);
     strategy->set_scorer(ssadapter);
@@ -46,7 +46,7 @@ void CombinatoryEngine::run_forest()
 void CombinatoryEngine::update(const ISolution* const solution, Score score)
 {
     NucSequence sequence;
-    solution->get_sequence(sequence);    
+    solution->get_sequence(sequence);
     notify(new SequenceOptimization(sequence, score));
 }
 

@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   AllMutator.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 9, 2010, 4:06 PM 
+ * Created on November 9, 2010, 4:06 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,11 +20,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _ALLMUTATOR_H
-#define	_ALLMUTATOR_H
+#define _ALLMUTATOR_H
 
 #include "types.h"
 #include "IQAMutator.h"
@@ -32,7 +32,7 @@
 
 /**
  * Adapts SequenceMutator to IQAMutator
- * 
+ *
  * Iterates over all possible mutations, from the
  * 'mutations' simultaneos mutations down to
  * every single mutation.
@@ -41,7 +41,7 @@ class AllMutator : public IQAMutator
 {
     SequenceMutator mutator;
     const NMutations mutations;
-    
+
     virtual bool next(NucSequence&);
     virtual void set_base_sequence(const NucSequence&);
 public:
@@ -54,5 +54,5 @@ public:
 };
 
 
-#endif	/* _ALLMUTATOR_H */
+#endif  /* _ALLMUTATOR_H */
 

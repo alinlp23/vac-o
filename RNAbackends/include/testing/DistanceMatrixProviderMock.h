@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   DistanceMatrixProviderMock.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 21, 2010, 5:18 PM 
+ * Created on November 21, 2010, 5:18 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,11 +20,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _DISTANCEMATRIXPROVIDERMOCK_H
-#define	_DISTANCEMATRIXPROVIDERMOCK_H
+#define _DISTANCEMATRIXPROVIDERMOCK_H
 
 #include <gmock/gmock.h>
 #include "Hamming.h"
@@ -35,5 +35,5 @@ public:
     MOCK_CONST_METHOD1(get_distance_matrix, void(DistanceMatrix& m));
 };
 
-#endif	/* _DISTANCEMATRIXPROVIDERMOCK_H */
+#endif  /* _DISTANCEMATRIXPROVIDERMOCK_H */
 

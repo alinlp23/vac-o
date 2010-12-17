@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   INFORNA.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on October 25, 2010, 1:36 PM 
+ * Created on October 25, 2010, 1:36 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,29 +20,29 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _INFORNA_H
-#define	_INFORNA_H
+#define _INFORNA_H
 
 #include "RNAStartInverse.h"
 #include "RNABackendProxy.h"
 
 class INFORNA : public RNAStartInverse
-{    
+{
     static const FilePath OUT;
     static const FileLineNo LINE_NO;
 
     size_t read_sequence(FileLine&, size_t, string&) const throw(RNABackendException);
     size_t read_hamming_distance(FileLine&, size_t, Distance&) const throw(RNABackendException);
     size_t read_structure_distance(FileLine&, size_t, Similitude&) const throw(RNABackendException);
-    
+
     virtual void execute(string&, Distance&, Similitude&) throw(RNABackendException);
     virtual void query_start(IStartProvider*) throw(RNABackendException);
 public:
     INFORNA(const SecStructure&, Similitude, Distance, CombinationAttempts);
 };
 
-#endif	/* _INFORNA_H */
+#endif  /* _INFORNA_H */
 

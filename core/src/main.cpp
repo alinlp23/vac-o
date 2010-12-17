@@ -57,7 +57,7 @@ void ask_for_parameters(ParamsCt& params)
         while (!it.end())
         {
             (*it)->get_name(param_name);
-            cout << "Enter value for "+param_name+": " << endl;
+            cout << "Enter value for " + param_name + ": " << endl;
             cin >> aux;
             valid = (*it)->set_value(aux);
             if (valid)

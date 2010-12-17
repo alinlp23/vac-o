@@ -34,7 +34,7 @@ using std::endl;
 class DevStartProvider : public IStartProvider
 {
     NucSequence base;
-    virtual void get_complete_start(IFoldInverse* const){}
+    virtual void get_complete_start(IFoldInverse* const) {}
     virtual void get_partial_start(IFoldInverse* const backend)
     {
         backend->set_start(base);
@@ -87,7 +87,7 @@ class DevPlugin : public IPlugin
     virtual const ISolution* get_initial_solution() const;
     virtual INeighborhood* get_neighborhood() const;
     virtual IStrategy* get_strategy() const;
-    virtual void get_qa_regions(QARegionsCt& qaregions) const;    
+    virtual void get_qa_regions(QARegionsCt& qaregions) const;
     virtual Score evaluate_solution(const ISolution*);
     virtual RankingSize get_ranking_size() const;
     virtual void unload();
@@ -101,16 +101,16 @@ public:
  * Constructor
  */
 DevPlugin::DevPlugin() :
-        vacc_sequence("CGCAGGGACTGCAGGTACCCCGCAGGCGCAGATAGAGAC"),
-        wt_sequence("CCGCCGCACUUAUCCCUGACGAAUUCUACCAGUCGCGAU"),        
-        wt_struct("....((((((.......((.....))....))).))).."),
-        vacc_struct(".((.(((((.....)).))).))................"),
-        ires(".((.(((((.....)).))).))."),
-        min_distance(0), cutoff(1), attempts(2), min_distance_param(), cutoff_param(),
-        fold_backend(), inverse_backend(), struct_cmp_backend(), seq_cmp_backend(),
-        wt_cache(), ssregion(), gcregion(),regions(), rnd_ss(), neighborhood(), strategy()
-{    
-    init_params();    
+    vacc_sequence("CGCAGGGACTGCAGGTACCCCGCAGGCGCAGATAGAGAC"),
+    wt_sequence("CCGCCGCACUUAUCCCUGACGAAUUCUACCAGUCGCGAU"),
+    wt_struct("....((((((.......((.....))....))).))).."),
+    vacc_struct(".((.(((((.....)).))).))................"),
+    ires(".((.(((((.....)).))).))."),
+    min_distance(0), cutoff(1), attempts(2), min_distance_param(), cutoff_param(),
+    fold_backend(), inverse_backend(), struct_cmp_backend(), seq_cmp_backend(),
+    wt_cache(), ssregion(), gcregion(), regions(), rnd_ss(), neighborhood(), strategy()
+{
+    init_params();
 
 }
 
@@ -155,7 +155,7 @@ Score DevPlugin::evaluate_solution(const ISolution* solution)
     NucSequence seq;
     solution->get_sequence(seq);
     s = Score(seq_cmp_backend->compare(seq, wt_sequence));
-    
+
     return s;
 }
 
@@ -196,7 +196,7 @@ void DevPlugin::init_backends()
     fold_backend = new RNAFold;
     inverse_backend = new INFORNA(ires, 2, 20, 100);
     struct_cmp_backend = new RNAForester;
-    seq_cmp_backend = new Hamming;    
+    seq_cmp_backend = new Hamming;
 }
 
 void DevPlugin::init_comb_regions()
@@ -208,10 +208,10 @@ void DevPlugin::init_comb_regions()
     IFoldInverse* wt_inverse = new RNAinverse(wt_struct, 0, 25, 10);
     wt_inverse->query_start(devprovider);
     NucSequence tmp;
-    for (size_t i=0; i<5; ++i)
+    for (size_t i = 0; i < 5; ++i)
     {
         wt_inverse->fold_inverse(tmp);
-        insert_into(wt_cache, tmp);        
+        insert_into(wt_cache, tmp);
     }
     delete devprovider;
     delete wt_inverse;
@@ -221,15 +221,15 @@ void DevPlugin::init_comb_regions()
                             seq_cmp_backend);
 
     insert_into(regions, ssregion);
-    
-    AminoSequence aminoacids;    
+
+    AminoSequence aminoacids;
     string s;
-    for (size_t i=33; i< 39; ++i)
+    for (size_t i = 33; i < 39; ++i)
     {
         s += to_str(wt_sequence[i]);
     }
-    
-    NucSequence seq = s;    
+
+    NucSequence seq = s;
     seq.translate(aminoacids);
     gcregion = new GCRegion(33, 39, aminoacids);
 

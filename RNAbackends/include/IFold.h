@@ -24,7 +24,7 @@
  */
 
 #ifndef _IFOLD_H
-#define	_IFOLD_H
+#define _IFOLD_H
 
 #include <biopp/biopp.h>
 #include "rna_backends_types.h"
@@ -48,5 +48,5 @@ public:
     virtual ~IFold() {}
 };
 
-#endif	/* _IFOLD_H */
+#endif  /* _IFOLD_H */
 

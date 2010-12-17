@@ -21,7 +21,7 @@ TEST(SecStructureTest, Create)
 TEST(SecStructureTest, Pair)
 {
     SecStructure s1("((..(...)..))");
-    s1.pair(2,10);
+    s1.pair(2, 10);
     EXPECT_EQ(s1.to_str(), "(((.(...).)))");
     s1.pair(0, 9);
     EXPECT_EQ(s1.to_str(), "(((.(...)))).");

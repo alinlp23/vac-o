@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   StrategyMock.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 13, 2010, 11:14 AM 
+ * Created on November 13, 2010, 11:14 AM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,11 +20,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _STRATEGYMOCK_H
-#define	_STRATEGYMOCK_H
+#define _STRATEGYMOCK_H
 
 #include <gmock/gmock.h>
 #include "IStrategy.h"
@@ -47,7 +47,7 @@ public:
 };
 
 class StrategyMock : public IStrategy
-{    
+{
 public:
     void assign_scorer(const ISolutionScorer* s)
     {
@@ -64,5 +64,5 @@ public:
 };
 
 
-#endif	/* _STRATEGYMOCK_H */
+#endif  /* _STRATEGYMOCK_H */
 

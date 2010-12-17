@@ -24,7 +24,7 @@
  */
 
 #ifndef _ISUBJECT_H
-#define	_ISUBJECT_H
+#define _ISUBJECT_H
 
 #include <list>
 #include <mili/mili.h>
@@ -41,7 +41,7 @@ class ISubject
 
     ObserversCt observers;
 public:
-    ISubject():observers(NULL)
+    ISubject(): observers(NULL)
     {}
     virtual ~ISubject() {}
 
@@ -59,10 +59,10 @@ class ISingleSubject
     typedef ISingleObserver<Subject> Observer;
     Observer* observer;
 public:
-    ISingleSubject():observer(NULL)
+    ISingleSubject(): observer(NULL)
     {}
-    
-    virtual ~ISingleSubject(){}
+
+    virtual ~ISingleSubject() {}
 
     virtual void set(Observer*);
     virtual void unset();
@@ -74,5 +74,5 @@ public:
  */
 #include "Subject.h"
 
-#endif	/* _ISUBJECT_H */
+#endif  /* _ISUBJECT_H */
 

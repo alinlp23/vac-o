@@ -30,17 +30,17 @@ protected:
         update_total_expected(str2);
         update_total_expected(str3);
 
-        string str = str1+str2+str3;
+        string str = str1 + str2 + str3;
         NucSequence seq = str;
-        seq.translate(aminoacids);        
+        seq.translate(aminoacids);
     }
-    AminoSequence aminoacids;    
+    AminoSequence aminoacids;
     size_t total_expected;
 
     void triplets_to_seq(TripletsProductor::TripletsProduct& triplets, NucSequence& seq)
     {
         string str_seq;
-        for(size_t i=0; i<triplets.size(); ++i)
+        for (size_t i = 0; i < triplets.size(); ++i)
         {
             str_seq += triplets[i].to_string();
         }
@@ -52,7 +52,7 @@ protected:
         AminoSequence seq_aminos;
         seq.translate(seq_aminos);
         EXPECT_EQ(aminoacids.size(), seq_aminos.size());
-        for(size_t i = 0; i<aminoacids.size(); ++i)
+        for (size_t i = 0; i < aminoacids.size(); ++i)
         {
             EXPECT_EQ(aminoacids[i], seq_aminos[i]);
         }
@@ -65,7 +65,7 @@ TEST_F(TripletsProductorTest, CountTriplets)
     TripletsProductor::TripletsProduct p;
 
     size_t total = 0;
-    while(productor.next(p))
+    while (productor.next(p))
         ++total;
 
     EXPECT_EQ(total_expected, total);
@@ -75,13 +75,13 @@ TEST_F(TripletsProductorTest, CheckAllTriplets)
 {
     TripletsProductor productor(aminoacids);
     TripletsProductor::TripletsProduct p;
-    
-    while(productor.next(p))
+
+    while (productor.next(p))
     {
         NucSequence seq;
         triplets_to_seq(p, seq);
         check_aminoacids(seq);
-    }    
+    }
 }
 
 TEST_F(TripletsProductorTest, EmptyAminoSequence)

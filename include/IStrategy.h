@@ -24,7 +24,7 @@
  */
 
 #ifndef _ISTRATEGY_H
-#define	_ISTRATEGY_H
+#define _ISTRATEGY_H
 
 #include "types.h"
 #include "ISubject.h"
@@ -73,5 +73,5 @@ public:
 };
 
 
-#endif	/* _ISTRATEGY_H */
+#endif  /* _ISTRATEGY_H */
 

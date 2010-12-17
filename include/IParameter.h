@@ -24,7 +24,7 @@
  */
 
 #ifndef _IPARAMETER_H
-#define	_IPARAMETER_H
+#define _IPARAMETER_H
 
 #include <list>
 #include <string>
@@ -56,5 +56,5 @@ public:
  */
 typedef list<IParameter*> ParamsCt;
 
-#endif	/* _IPARAMETER_H */
+#endif  /* _IPARAMETER_H */
 

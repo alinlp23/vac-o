@@ -34,20 +34,20 @@ public:
 };
 
 TEST_F(QARegionTest, AllMutantsPass)
-{        
+{
     EXPECT_CALL(mutator, set_base_sequence(_))
-            .Times(1)
-            .WillOnce(Return());
+    .Times(1)
+    .WillOnce(Return());
 
     EXPECT_CALL(mutator, next(_))
-            .Times(4)
-            .WillOnce(DoAll(Invoke(this, &QARegionTest::fake_mutant), Return(true)))
-            .WillOnce(DoAll(Invoke(this, &QARegionTest::fake_mutant), Return(true)))
-            .WillOnce(DoAll(Invoke(this, &QARegionTest::fake_mutant), Return(true)))
-            .WillOnce(Return(false));
+    .Times(4)
+    .WillOnce(DoAll(Invoke(this, &QARegionTest::fake_mutant), Return(true)))
+    .WillOnce(DoAll(Invoke(this, &QARegionTest::fake_mutant), Return(true)))
+    .WillOnce(DoAll(Invoke(this, &QARegionTest::fake_mutant), Return(true)))
+    .WillOnce(Return(false));
 
     EXPECT_CALL(validator, validate(_))
-            .WillRepeatedly(Return(true));
+    .WillRepeatedly(Return(true));
 
     IQARegion* region = new QARegion(start, end, 1, &mutator, &validator);
     EXPECT_TRUE(region->validate(sequence));
@@ -58,17 +58,17 @@ TEST_F(QARegionTest, AllMutantsPass)
 TEST_F(QARegionTest, StopAsSoonAsFail)
 {
     EXPECT_CALL(mutator, set_base_sequence(_))
-            .Times(1)
-            .WillOnce(Return());
+    .Times(1)
+    .WillOnce(Return());
 
     EXPECT_CALL(mutator, next(_))
-            .Times(2)            
-            .WillRepeatedly(DoAll(Invoke(this, &QARegionTest::fake_mutant), Return(true)));
+    .Times(2)
+    .WillRepeatedly(DoAll(Invoke(this, &QARegionTest::fake_mutant), Return(true)));
 
     EXPECT_CALL(validator, validate(_))
-            .WillOnce(Return(true))
-            .WillOnce(Return(true))
-            .WillOnce(Return(false));
+    .WillOnce(Return(true))
+    .WillOnce(Return(true))
+    .WillOnce(Return(false));
 
     IQARegion* region = new QARegion(start, end, 2, &mutator, &validator);
     EXPECT_FALSE(region->validate(sequence));
@@ -79,25 +79,25 @@ TEST_F(QARegionTest, StopAsSoonAsFail)
 TEST_F(QARegionTest, AllMutantsPassInDepth)
 {
     EXPECT_CALL(mutator, set_base_sequence(_))
-            .Times(4)
-            .WillRepeatedly(Return());
+    .Times(4)
+    .WillRepeatedly(Return());
 
-    EXPECT_CALL(mutator, next(_))            
-            .WillOnce(DoAll(Invoke(this, &QARegionTest::fake_mutant), Return(true)))
-            .WillOnce(DoAll(Invoke(this, &QARegionTest::fake_mutant), Return(true)))
-            .WillOnce(DoAll(Invoke(this, &QARegionTest::fake_mutant), Return(true)))
-            .WillOnce(Return(false)) // ends level 1
-            .WillOnce(DoAll(Invoke(this, &QARegionTest::fake_mutant), Return(true)))
-            .WillOnce(Return(false))
-            .WillOnce(DoAll(Invoke(this, &QARegionTest::fake_mutant), Return(true)))
-            .WillOnce(Return(false))
-            .WillOnce(DoAll(Invoke(this, &QARegionTest::fake_mutant), Return(true)))
-            .WillOnce(Return(false)) // ends level 2
-            .WillRepeatedly(Return(true));
+    EXPECT_CALL(mutator, next(_))
+    .WillOnce(DoAll(Invoke(this, &QARegionTest::fake_mutant), Return(true)))
+    .WillOnce(DoAll(Invoke(this, &QARegionTest::fake_mutant), Return(true)))
+    .WillOnce(DoAll(Invoke(this, &QARegionTest::fake_mutant), Return(true)))
+    .WillOnce(Return(false)) // ends level 1
+    .WillOnce(DoAll(Invoke(this, &QARegionTest::fake_mutant), Return(true)))
+    .WillOnce(Return(false))
+    .WillOnce(DoAll(Invoke(this, &QARegionTest::fake_mutant), Return(true)))
+    .WillOnce(Return(false))
+    .WillOnce(DoAll(Invoke(this, &QARegionTest::fake_mutant), Return(true)))
+    .WillOnce(Return(false)) // ends level 2
+    .WillRepeatedly(Return(true));
 
     EXPECT_CALL(validator, validate(_))
-            .Times(7)
-            .WillRepeatedly(Return(true));
+    .Times(7)
+    .WillRepeatedly(Return(true));
 
     IQARegion* region = new QARegion(start, end, 2, &mutator, &validator);
     EXPECT_TRUE(region->validate(sequence));
@@ -108,20 +108,20 @@ TEST_F(QARegionTest, AllMutantsPassInDepth)
 TEST_F(QARegionTest, StopAsSoonAsFailInDepth)
 {
     EXPECT_CALL(mutator, set_base_sequence(_))
-            .Times(2)
-            .WillRepeatedly(Return());
+    .Times(2)
+    .WillRepeatedly(Return());
 
     EXPECT_CALL(mutator, next(_))
-            .WillOnce(DoAll(Invoke(this, &QARegionTest::fake_mutant), Return(true)))
-            .WillOnce(DoAll(Invoke(this, &QARegionTest::fake_mutant), Return(true)))
-            .WillOnce(Return(false))
-            .WillRepeatedly(DoAll(Invoke(this, &QARegionTest::fake_mutant), Return(true)));
+    .WillOnce(DoAll(Invoke(this, &QARegionTest::fake_mutant), Return(true)))
+    .WillOnce(DoAll(Invoke(this, &QARegionTest::fake_mutant), Return(true)))
+    .WillOnce(Return(false))
+    .WillRepeatedly(DoAll(Invoke(this, &QARegionTest::fake_mutant), Return(true)));
 
     EXPECT_CALL(validator, validate(_))
-            .WillOnce(Return(true))
-            .WillOnce(Return(true))
-            .WillOnce(Return(true))
-            .WillOnce(Return(false)); //first mutant in level 2 will stop validation
+    .WillOnce(Return(true))
+    .WillOnce(Return(true))
+    .WillOnce(Return(true))
+    .WillOnce(Return(false)); //first mutant in level 2 will stop validation
 
     IQARegion* region = new QARegion(start, end, 2, &mutator, &validator);
     EXPECT_FALSE(region->validate(sequence));

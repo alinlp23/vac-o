@@ -24,7 +24,7 @@
  */
 
 #ifndef _IPLUGIN_H
-#define	_IPLUGIN_H
+#define _IPLUGIN_H
 #include <list>
 #include "types.h"
 #include "INeighborhood.h"
@@ -66,7 +66,7 @@ public:
      * Gets the QA regions to be used by the QA engine.
      * @param qaregions list of IQARegion to write to.
      */
-    virtual void get_qa_regions(QARegionsCt& qaregions) const = 0;    
+    virtual void get_qa_regions(QARegionsCt& qaregions) const = 0;
     /**
      * Evaluate a given solution.
      * @param solution the solution to evaluate
@@ -86,5 +86,5 @@ public:
     virtual ~IPlugin() {}
 };
 
-#endif	/* _IPLUGIN_H */
+#endif  /* _IPLUGIN_H */
 

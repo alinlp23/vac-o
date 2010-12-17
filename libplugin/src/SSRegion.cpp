@@ -35,31 +35,31 @@ SSRegion::SSRegion(SeqIndex s, SeqIndex e, const SecStructure& wt,
                    Distance dis, const NucSequencesCt& wt_cache, bool circ, const IFold* const fb,
                    IFoldInverse* const fib, const IStructureCmp* const str_cmp,
                    const ISequenceCmp* const seq_cmp) :
-        CombinatoryRegion(s, e),
-        wt_structure(wt), vaccine_structure(vaccine), max_mutations(nm),
-        max_similitude(simi), min_distance(dis), wildtype_cache(wt_cache), circ(circ),
-        fold_backend(fb), inverse_backend(fib), struct_cmp_backend(str_cmp),
-        seq_cmp_backend(seq_cmp)
+    CombinatoryRegion(s, e),
+    wt_structure(wt), vaccine_structure(vaccine), max_mutations(nm),
+    max_similitude(simi), min_distance(dis), wildtype_cache(wt_cache), circ(circ),
+    fold_backend(fb), inverse_backend(fib), struct_cmp_backend(str_cmp),
+    seq_cmp_backend(seq_cmp)
 {}
 
 Score SSRegion::evaluate(const NucSequence& delta) const
 {
     Score s;
-    
+
     CAutonomousIterator<NucSequencesCt> it(wildtype_cache);
-    Distance min_hd = end-start;
+    Distance min_hd = end - start;
     while (!it.end())
     {
         string tmp;
-        for (size_t idx = start; idx<end; ++idx)        
+        for (size_t idx = start; idx < end; ++idx)
             tmp += to_str((*it)[idx]);
-        
+
         NucSequence partial = tmp;
 
         minimize(min_hd, seq_cmp_backend->compare(delta, partial));
         ++it;
     }
-    s = min_hd / Score(end-start);    
+    s = min_hd / Score(end - start);
     return s;
 }
 
@@ -70,9 +70,9 @@ Score SSRegion::generate(NucSequence& sequence, NucSequence& delta)
     {
         inverse_backend->fold_inverse(delta);
         sequence = base_sequence;
-        for (size_t idx=0; idx<delta.length(); ++idx)        
-            sequence[start+idx] = delta[idx];
-        
+        for (size_t idx = 0; idx < delta.length(); ++idx)
+            sequence[start + idx] = delta[idx];
+
         pass = cache_compare(sequence) && structure_compare(sequence);
     }
     while (!pass);
@@ -89,9 +89,9 @@ void SSRegion::set_base_sequence(const NucSequence& sequence)
 void SSRegion::get_partial_start(IFoldInverse* const backend)
 {
     string tmp;
-    for (size_t idx = start; idx<end; ++idx)    
+    for (size_t idx = start; idx < end; ++idx)
         tmp += to_str(base_sequence[idx]);
-    
+
     NucSequence partial = tmp;
     backend->set_start(partial);
 }
@@ -106,7 +106,7 @@ bool SSRegion::cache_compare(const NucSequence& seq)
     CAutonomousIterator<NucSequencesCt> it(wildtype_cache);
     bool pass(true);
     while (!it.end() && pass)
-    {        
+    {
         pass = min_distance < seq_cmp_backend->compare(seq, *it);
         ++it;
     }
@@ -123,7 +123,7 @@ bool SSRegion::structure_compare(const NucSequence& seq)
     while (mutator.next(mutated) && pass)
     {
         fold_backend->fold(mutated, mutated_struct, circ);
-        
+
         if (mutated_struct.pair_length() > 0)
             pass = max_similitude > struct_cmp_backend->compare(wt_structure, mutated_struct);
     }

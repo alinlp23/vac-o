@@ -29,7 +29,7 @@
 using std::cout;
 using std::endl;
 QAEngine::QAEngine(const QARegionsCt& regions):
-        regions(regions)
+    regions(regions)
 {}
 
 void QAEngine::update(const SequenceOptimization* candidate)

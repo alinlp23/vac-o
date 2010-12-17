@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   SSValidator.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 10, 2010, 4:26 PM 
+ * Created on November 10, 2010, 4:26 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,11 +20,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _SSVALIDATOR_H
-#define	_SSVALIDATOR_H
+#define _SSVALIDATOR_H
 
 #include "rna_backends_types.h"
 #include "IFold.h"
@@ -55,7 +55,7 @@ public:
      * @param fb fold backend
      * @param strb Structure compare backend
      * @param structure Target secondary structure
-     * @param simil Target similitude     
+     * @param simil Target similitude
      */
     SSValidator(const IFold*, const IStructureCmp*, const SecStructure&, Similitude, bool);
 };
@@ -64,9 +64,9 @@ public:
 
 template<SimilitudePolicy policy>
 SSValidator<policy>::SSValidator(const IFold* fb, const IStructureCmp* strb,
-        const SecStructure& str, Similitude simil, bool circ) :
-        fold_backend(fb), struct_cmp_backend(strb), target_structure(str),
-        similitude(simil), circ(circ)
+                                 const SecStructure& str, Similitude simil, bool circ) :
+    fold_backend(fb), struct_cmp_backend(strb), target_structure(str),
+    similitude(simil), circ(circ)
 {}
 
 template<SimilitudePolicy policy>
@@ -84,5 +84,5 @@ bool SSValidator<policy>::validate(const NucSequence& seq) const
     return pass;
 }
 
-#endif	/* _SSVALIDATOR_H */
+#endif  /* _SSVALIDATOR_H */
 

@@ -38,7 +38,7 @@ const FilePath INFORNA::OUT = "inverse.out";
 const FileLineNo INFORNA::LINE_NO = 13;
 
 INFORNA::INFORNA(const SecStructure& structure, Similitude sd, Distance hd, CombinationAttempts ca) :
-        RNAStartInverse(structure, sd, hd, ca)
+    RNAStartInverse(structure, sd, hd, ca)
 {}
 
 void INFORNA::query_start(IStartProvider* provider) throw(RNABackendException)
@@ -78,7 +78,7 @@ void INFORNA::execute(string& seq, Distance& hd, Similitude& sd) throw(RNABacken
      * MFE:    GUAGCUUUAUGCCGC    0  (-1.70)   d= 1
      * number of mismatches: 0
      *
-     */    
+     */
     //sequence found
     const size_t hd_offset = read_sequence(aux, 4, seq);
     //hamming distance from the start used
@@ -93,9 +93,9 @@ size_t INFORNA::read_sequence(FileLine& line, size_t offset, string& seq) const 
     {
         const size_t from = ensure_found(line.find_first_not_of(" ", offset));
         const size_t to = ensure_found(line.find_first_of(" ", from));
-        read_value(line, from, to-from, seq);
+        read_value(line, from, to - from, seq);
 
-        for (size_t i=0; i<seq.size(); ++i)
+        for (size_t i = 0; i < seq.size(); ++i)
             seq[i] = tolower(seq[i]);
 
         return to;
@@ -112,7 +112,7 @@ size_t INFORNA::read_hamming_distance(FileLine& line, size_t offset, Distance& h
     {
         const size_t from = ensure_found(line.find_first_not_of(" ", offset));
         const size_t to = ensure_found(line.find_first_of(" ", from));
-        read_value(line, from, to-from, hd);
+        read_value(line, from, to - from, hd);
         return to;
     }
     catch (const StringNotFound& e)
@@ -127,7 +127,7 @@ size_t INFORNA::read_structure_distance(FileLine& line, size_t offset, Similitud
     {
         const size_t from = ensure_found(line.find_first_of("d", offset)) + 3;
         const size_t to = line.size();
-        read_value(line, from, to-from, sd);
+        read_value(line, from, to - from, sd);
         return to;
     }
     catch (const StringNotFound& e)

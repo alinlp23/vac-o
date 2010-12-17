@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   RNAStartInverse.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on October 25, 2010, 12:25 PM 
+ * Created on October 25, 2010, 12:25 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,11 +20,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _RNASTARTINVERSE_H
-#define	_RNASTARTINVERSE_H
+#define _RNASTARTINVERSE_H
 
 #include <string>
 #include "IFoldInverse.h"
@@ -69,11 +69,11 @@ protected:
      */
     virtual void execute(string&, Distance&, Similitude&) throw(RNABackendException) = 0;
 public:
-    RNAStartInverse(const SecStructure&, Similitude, Distance, CombinationAttempts);    
+    RNAStartInverse(const SecStructure&, Similitude, Distance, CombinationAttempts);
 
     ~RNAStartInverse();
 };
 
 
-#endif	/* _RNASTARTINVERSE_H */
+#endif  /* _RNASTARTINVERSE_H */
 

@@ -24,7 +24,7 @@
  */
 
 #ifndef _COMBINATORYENGINE_H
-#define	_COMBINATORYENGINE_H
+#define _COMBINATORYENGINE_H
 
 #include <biopp/biopp.h>
 #include "types.h"
@@ -68,7 +68,7 @@ public:
      * Constructor
      * @param plg the loaded plugin
      */
-    CombinatoryEngine(IPlugin* const);    
+    CombinatoryEngine(IPlugin* const);
 
     /**
      * Run the engine until plg->done() || strategy->done().
@@ -79,5 +79,5 @@ public:
     ~CombinatoryEngine();
 };
 
-#endif	/* _COMBINATORYENGINE_H */
+#endif  /* _COMBINATORYENGINE_H */
 

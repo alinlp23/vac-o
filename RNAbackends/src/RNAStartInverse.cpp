@@ -27,9 +27,9 @@
 #include "RNAStartInverse.h"
 
 RNAStartInverse::RNAStartInverse(const SecStructure& structure, Similitude sd, Distance hd, CombinationAttempts ca) :
-        rstart(), found(), combination_attempts(ca), combinator(new SeqIndexesCombinator(structure.size(), hd)),
-        positions(), start(), structure(structure), max_structure_distance(sd), max_sequence_distance(hd)
-        
+    rstart(), found(), combination_attempts(ca), combinator(new SeqIndexesCombinator(structure.size(), hd)),
+    positions(), start(), structure(structure), max_structure_distance(sd), max_sequence_distance(hd)
+
 {}
 
 RNAStartInverse::~RNAStartInverse()
@@ -47,7 +47,7 @@ void RNAStartInverse::fold_inverse(NucSequence& sequence) throw(RNABackendExcept
     bool c;
     do
     {
-        --i;        
+        --i;
         do
         {
             execute(seq, hd, sd);
@@ -59,7 +59,7 @@ void RNAStartInverse::fold_inverse(NucSequence& sequence) throw(RNABackendExcept
         //we move to the next combination, change the 'start' and re-start the
         //number of attempts.
         c = contains(found, seq);
-        if (c && i==0)
+        if (c && i == 0)
         {
             combinator->next(positions);
             change_start();
@@ -77,13 +77,13 @@ void RNAStartInverse::set_start(const NucSequence& sequence)
 {
     if (sequence.length() < max_sequence_distance)
         throw RNABackendException("Start sequence must have at least 'max_sequence_distance' length");
-    
+
     //clear any previous start and found set.
     start.clear();
     found.clear();
     //Sets the start in lowercase. We need this to avoid that RNAinverse
     //make changes everywhere.
-    for (size_t i=0; i<sequence.length(); ++i)
+    for (size_t i = 0; i < sequence.length(); ++i)
     {
         start += tolower(to_str(sequence[i])[0]);
     }
@@ -104,7 +104,7 @@ void RNAStartInverse::change_start()
     //Gets the original start
     start = rstart;
     CAutonomousIterator<SeqIndexesCombination> it(positions);
-    while(!it.end())
+    while (!it.end())
     {
         //This let to search for possible changes in each position.
         start[*it] = WILDCARD;

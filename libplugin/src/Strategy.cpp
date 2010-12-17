@@ -26,9 +26,9 @@
 #include "Strategy.h"
 
 Strategy::Strategy(const INeighborhood* ne, Iteration max, Iteration max_idle):
-        neighborhood(ne), scorer(), max_iterations(max), max_idle_iterations(max_idle),
-        current_iteration(0), best_iteration(0), current_solution(), selected_neighbor(),
-        selected_neighbor_score(), current_score()
+    neighborhood(ne), scorer(), max_iterations(max), max_idle_iterations(max_idle),
+    current_iteration(0), best_iteration(0), current_solution(), selected_neighbor(),
+    selected_neighbor_score(), current_score()
 {}
 
 void Strategy::set_scorer(const ISolutionScorer* s)
@@ -41,7 +41,7 @@ void Strategy::run(const ISolution* init, ISolutionObserver* obs)
     current_solution = init;
     current_score = scorer->evaluate(current_solution);
     while (!done())
-    {        
+    {
         ++current_iteration;
         neighborhood->explore(current_solution);
 

@@ -24,7 +24,7 @@
  */
 
 #ifndef _SEQUENCEMUTATOR_H
-#define	_SEQUENCEMUTATOR_H
+#define _SEQUENCEMUTATOR_H
 
 #include "exceptions.h"
 #include "types.h"
@@ -41,7 +41,7 @@ class SequenceMutator
     const size_t seq_length;
     NMutations mutations;
     const NMutations rmutations;
-    
+
     SeqIndexesCombinator* const combinator;
     SeqIndexesCombination positions;
 
@@ -92,9 +92,9 @@ public:
      * @param seq the sequence.
      */
     void begin(const NucSequence&) throw(PluginException);
-    
-    ~SequenceMutator();    
+
+    ~SequenceMutator();
 };
 
-#endif	/* _SEQUENCEMUTATOR_H */
+#endif  /* _SEQUENCEMUTATOR_H */
 

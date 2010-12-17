@@ -46,8 +46,8 @@ TEST_F(HammingTest, CompareWithCustomMatrix)
 {
     DistanceMatrixProviderMock matrix_provider;
     EXPECT_CALL(matrix_provider, get_distance_matrix(_))
-            .Times(1)
-            .WillOnce(Invoke(this, &HammingTest::fake_provider));
+    .Times(1)
+    .WillOnce(Invoke(this, &HammingTest::fake_provider));
 
     ISequenceCmp* hamming = new Hamming(&matrix_provider);
     EXPECT_EQ(hamming->compare(seq1, seq2), 2.2f);

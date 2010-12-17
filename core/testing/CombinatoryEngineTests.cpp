@@ -35,33 +35,33 @@ public:
 };
 
 TEST_F(CombinatoryEngineTest, RunForest)
-{            
+{
     EXPECT_CALL(strategy, set_scorer(_))
-            .Times(1);
+    .Times(1);
 
     EXPECT_CALL(plg, get_strategy())
-            .Times(1)
-            .WillOnce(Return(&strategy));
+    .Times(1)
+    .WillOnce(Return(&strategy));
 
     CombinatoryEngine engine(&plg);
     ObserverMock<SequenceOptimization> obs;
     engine.attach(&obs);
-    
+
     EXPECT_CALL(strategy, run(_, &engine))
-            .Times(1)
-            .WillOnce(DoAll(Invoke(this, &CombinatoryEngineTest::fake_strategy_runner), Return()));
+    .Times(1)
+    .WillOnce(DoAll(Invoke(this, &CombinatoryEngineTest::fake_strategy_runner), Return()));
 
     EXPECT_CALL(plg, get_initial_solution())
-            .Times(1);
+    .Times(1);
 
     EXPECT_CALL(plg, evaluate_solution(_))
-            .Times(1)
-            .WillOnce(Return(10));
+    .Times(1)
+    .WillOnce(Return(10));
 
     EXPECT_CALL(obs, update(_))
-            .Times(1)
-            .WillOnce(DoAll(Invoke(this, &CombinatoryEngineTest::fake_observer_update), Return()));
-    
+    .Times(1)
+    .WillOnce(DoAll(Invoke(this, &CombinatoryEngineTest::fake_observer_update), Return()));
+
     engine.run_forest();
 }
 

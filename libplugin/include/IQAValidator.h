@@ -24,7 +24,7 @@
  */
 
 #ifndef _IQAVALIDATOR_H
-#define	_IQAVALIDATOR_H
+#define _IQAVALIDATOR_H
 
 #include <biopp/biopp.h>
 
@@ -44,5 +44,5 @@ public:
     virtual ~IQAValidator() {}
 };
 
-#endif	/* _IQAVALIDATOR_H */
+#endif  /* _IQAVALIDATOR_H */
 
