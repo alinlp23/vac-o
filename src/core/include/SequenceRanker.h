@@ -24,7 +24,7 @@
  */
 
 #ifndef _RANKER_H
-#define	_RANKER_H
+#define _RANKER_H
 
 #include <mili/mili.h>
 
@@ -34,8 +34,8 @@
 class IPlugin;
 
 class SequenceRanker : public IObserver<SequenceOptimization>,
-        public Ranker<const SequenceOptimization*, AddAfterEqual, SequenceOptimizationCmp,
-        DisposalDeletePolicy<const SequenceOptimization*> >
+    public Ranker < const SequenceOptimization*, AddAfterEqual, SequenceOptimizationCmp,
+    DisposalDeletePolicy<const SequenceOptimization*> >
 {
     /**
      * Implements the IObserver<SequenceOptimization> interface.
@@ -46,5 +46,5 @@ public:
     SequenceRanker(RankingSize);
 };
 
-#endif	/* _RANKER_H */
+#endif  /* _RANKER_H */
 

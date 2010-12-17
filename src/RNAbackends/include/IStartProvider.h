@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   IStartProvider.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on October 25, 2010, 5:40 PM 
+ * Created on October 25, 2010, 5:40 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,11 +20,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _ISTARTPROVIDER_H
-#define	_ISTARTPROVIDER_H
+#define _ISTARTPROVIDER_H
 
 class IFoldInverse;
 
@@ -45,9 +45,9 @@ public:
      */
     virtual void get_complete_start(IFoldInverse* const) = 0;
 
-    virtual ~IStartProvider(){}
+    virtual ~IStartProvider() {}
 };
 
 
-#endif	/* _ISTARTPROVIDER_H */
+#endif  /* _ISTARTPROVIDER_H */
 

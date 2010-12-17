@@ -24,7 +24,7 @@
  */
 
 #ifndef _STRATEGY_H
-#define	_STRATEGY_H
+#define _STRATEGY_H
 
 #include "IStrategy.h"
 #include "INeighborhood.h"
@@ -57,9 +57,9 @@ protected:
 
     virtual bool select_neighbor() = 0;
 public:
-    Strategy(const INeighborhood*, Iteration, Iteration);    
+    Strategy(const INeighborhood*, Iteration, Iteration);
 };
 
 
-#endif	/* _STRATEGY_H */
+#endif  /* _STRATEGY_H */
 

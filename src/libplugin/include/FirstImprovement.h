@@ -24,7 +24,7 @@
  */
 
 #ifndef _FIRSTIMPROVEMENT_H
-#define	_FIRSTIMPROVEMENT_H
+#define _FIRSTIMPROVEMENT_H
 
 #include "Strategy.h"
 
@@ -36,5 +36,5 @@ public:
     FirstImprovement(const INeighborhood*, Iteration, Iteration);
 };
 
-#endif	/* _FIRSTIMPROVEMENT_H */
+#endif  /* _FIRSTIMPROVEMENT_H */
 

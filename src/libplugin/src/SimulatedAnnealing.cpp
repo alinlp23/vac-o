@@ -27,9 +27,9 @@
 #include <cmath>
 #include <iostream>
 SimulatedAnnealing::SimulatedAnnealing(const INeighborhood* ne, Iteration max, \
-        Iteration max_idle, Iteration temp_up, Cooling c, Temperature t, Temperature cut):
-        Strategy(ne,max, max_idle), temp_update(temp_up), temp_iter(), cooling(c), 
-        temperature(t), cutoff(cut), rnd(0.f,1.f){}
+                                       Iteration max_idle, Iteration temp_up, Cooling c, Temperature t, Temperature cut):
+    Strategy(ne, max, max_idle), temp_update(temp_up), temp_iter(), cooling(c),
+    temperature(t), cutoff(cut), rnd(0.f, 1.f) {}
 
 bool SimulatedAnnealing::select_neighbor()
 {
@@ -37,7 +37,7 @@ bool SimulatedAnnealing::select_neighbor()
     if (!neighbors.empty())
     {
         const size_t neighbors_size = neighbors.size();
-        const size_t idx = size_t(rnd.get()*(neighbors_size-1));
+        const size_t idx = size_t(rnd.get() * (neighbors_size - 1));
         // Random neighbor
         const ISolution* nei = neighbors[idx].first;
         const Score nei_score = neighbors[idx].second;
@@ -47,7 +47,7 @@ bool SimulatedAnnealing::select_neighbor()
         accept = nei_score >= current_score;
         if (!accept)
         {
-            const float acceptance_prob = exp((nei_score-current_score)/temperature);
+            const float acceptance_prob = exp((nei_score - current_score) / temperature);
             const float r = rnd.get();
             accept = r < acceptance_prob;
         }
@@ -56,9 +56,9 @@ bool SimulatedAnnealing::select_neighbor()
         {
             selected_neighbor = nei;
             selected_neighbor_score = nei_score;
-            for (size_t i=0; i<neighbors_size; ++i)
+            for (size_t i = 0; i < neighbors_size; ++i)
             {
-                if (i!=idx)
+                if (i != idx)
                 {
                     delete neighbors[i].first;
                 }
@@ -72,7 +72,7 @@ bool SimulatedAnnealing::select_neighbor()
         {
             temperature *= cooling;
             temp_iter = 0;
-        }        
+        }
     }
     return accept;
 }
@@ -81,7 +81,7 @@ bool SimulatedAnnealing::update(const ISolution* neighbor)
 {
     Score ns = scorer->evaluate(neighbor);
     ScoredSolution ss(neighbor, ns);
-    insert_into(neighbors, ss);    
+    insert_into(neighbors, ss);
 
     return false;
 }
@@ -90,11 +90,11 @@ void SimulatedAnnealing::clean_up()
 {
     Strategy::clean_up();
     const size_t neighbors_size = neighbors.size();
-    for (size_t i=0; i<neighbors_size; ++i)
+    for (size_t i = 0; i < neighbors_size; ++i)
     {
         delete neighbors[i].first;
     }
-    neighbors.clear();    
+    neighbors.clear();
 }
 
 bool SimulatedAnnealing::done()

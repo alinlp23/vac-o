@@ -24,7 +24,7 @@
  */
 
 #ifndef _NEIGHBORHOOD_H
-#define	_NEIGHBORHOOD_H
+#define _NEIGHBORHOOD_H
 
 #include "INeighborhood.h"
 #include "ICombinatoryRegion.h"
@@ -39,5 +39,5 @@ public:
     Neighborhood(const CombinatoryRegionsCt&, CutOff, Attempts);
 };
 
-#endif	/* _NEIGHBORHOOD_H */
+#endif  /* _NEIGHBORHOOD_H */
 

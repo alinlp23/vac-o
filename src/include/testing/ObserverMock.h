@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   ObserverMock.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 13, 2010, 3:56 PM 
+ * Created on November 13, 2010, 3:56 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,11 +20,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _OBSERVERMOCK_H
-#define	_OBSERVERMOCK_H
+#define _OBSERVERMOCK_H
 
 #include <gmock/gmock.h>
 #include "IObserver.h"
@@ -38,5 +38,5 @@ public:
 
 
 
-#endif	/* _OBSERVERMOCK_H */
+#endif  /* _OBSERVERMOCK_H */
 

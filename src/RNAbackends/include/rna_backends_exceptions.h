@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   rna_backends_exceptions.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on October 27, 2010, 6:42 PM 
+ * Created on October 27, 2010, 6:42 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,11 +20,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _RNA_BACKENDS_EXCEPTIONS_H
-#define	_RNA_BACKENDS_EXCEPTIONS_H
+#define _RNA_BACKENDS_EXCEPTIONS_H
 
 #include <mili/mili.h>
 #ifndef NO_THROW_SPEC
@@ -33,7 +33,7 @@
 #       define THROW(x)
 #endif
 
-class RNABackendExceptionRoot{};
+class RNABackendExceptionRoot {};
 
 DEFINE_SPECIFIC_EXCEPTION_TEXT(RNABackendException, RNABackendExceptionRoot, "RNABackend");
 
@@ -41,5 +41,5 @@ DEFINE_SPECIFIC_EXCEPTION_TEXT(InvalidStructureException, RNABackendExceptionRoo
 
 DEFINE_SPECIFIC_EXCEPTION_TEXT(CombinatorException, RNABackendExceptionRoot, "Out of range");
 
-#endif	/* _RNA_BACKENDS_EXCEPTIONS_H */
+#endif  /* _RNA_BACKENDS_EXCEPTIONS_H */
 

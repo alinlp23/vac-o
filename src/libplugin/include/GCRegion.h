@@ -24,7 +24,7 @@
  */
 
 #ifndef _GCREGION_H
-#define	_GCREGION_H
+#define _GCREGION_H
 
 #include "CombinatoryRegion.h"
 #include "TripletsProductor.h"
@@ -32,16 +32,16 @@
 class GCRegion : public CombinatoryRegion
 {
     const AminoSequence target_aminoacids;
-    TripletsProductor* const productor;    
+    TripletsProductor* const productor;
     string rbase;
     virtual Score evaluate(const NucSequence&) const;
     virtual Score generate(NucSequence&, NucSequence&);
     virtual void set_base_sequence(const NucSequence&);
 public:
-    GCRegion(SeqIndex, SeqIndex, const AminoSequence&);    
+    GCRegion(SeqIndex, SeqIndex, const AminoSequence&);
 
     ~GCRegion();
 };
 
-#endif	/* _GCREGION_H */
+#endif  /* _GCREGION_H */
 

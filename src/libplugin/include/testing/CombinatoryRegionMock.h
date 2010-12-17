@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   CombinatoryRegionMock.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 19, 2010, 5:03 PM 
+ * Created on November 19, 2010, 5:03 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,11 +20,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _COMBINATORYREGIONMOCK_H
-#define	_COMBINATORYREGIONMOCK_H
+#define _COMBINATORYREGIONMOCK_H
 
 #include <gmock/gmock.h>
 #include "CombinatoryRegion.h"
@@ -32,7 +32,7 @@
 class CombinatoryRegionMock : public CombinatoryRegion
 {
 public:
-    CombinatoryRegionMock() : CombinatoryRegion(0,0){}
+    CombinatoryRegionMock() : CombinatoryRegion(0, 0) {}
     MOCK_CONST_METHOD1(evaluate, Score(const NucSequence&));
     MOCK_METHOD2(generate, Score(NucSequence&, NucSequence&));
     MOCK_METHOD1(set_base_sequence, void(const NucSequence&));
@@ -44,5 +44,5 @@ public:
     }
 };
 
-#endif	/* _COMBINATORYREGIONMOCK_H */
+#endif  /* _COMBINATORYREGIONMOCK_H */
 

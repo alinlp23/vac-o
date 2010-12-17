@@ -18,16 +18,16 @@ protected:
     }
 public:
     void fake_provider(IFoldInverse* const inv)
-    {        
+    {
         string str = "GCACGCGTATGCCGC";
         s = str;
         inv->set_start(s);
     }
 
     void fake_bad1_provider(IFoldInverse* const inv)
-    {     
+    {
         string str = "GCAA"; //<5
-        s = str;        
+        s = str;
         EXPECT_THROW(inv->set_start(s), RNABackendException);
     }
     void fake_bad2_provider(IFoldInverse* const inv)
@@ -45,13 +45,13 @@ public:
 };
 
 TEST_F(RNAinverseTest, FoldInverse)
-{    
+{
     IFoldInverse* inverse = new RNAinverse(str, 4, 5, 10);
 
     StartProviderMock provider;
     EXPECT_CALL(provider, get_partial_start(inverse))
-            .Times(1)
-            .WillOnce(Invoke(this, &RNAinverseTest::fake_provider));
+    .Times(1)
+    .WillOnce(Invoke(this, &RNAinverseTest::fake_provider));
 
 
     inverse->query_start(&provider);
@@ -61,9 +61,9 @@ TEST_F(RNAinverseTest, FoldInverse)
 
     NucSequence seq;
     inverse->fold_inverse(seq);
-    for (size_t i=0; i<str.size();++i)
+    for (size_t i = 0; i < str.size(); ++i)
     {
-        EXPECT_EQ(seq[i],expected[i]);
+        EXPECT_EQ(seq[i], expected[i]);
     }
 
     delete inverse;
@@ -75,8 +75,8 @@ TEST_F(RNAinverseTest, BadStart1)
 
     StartProviderMock provider;
     EXPECT_CALL(provider, get_partial_start(inverse))
-            .Times(1)
-            .WillOnce(Invoke(this, &RNAinverseTest::fake_bad1_provider));
+    .Times(1)
+    .WillOnce(Invoke(this, &RNAinverseTest::fake_bad1_provider));
 
 
     EXPECT_THROW(inverse->query_start(&provider), RNABackendException);
@@ -90,8 +90,8 @@ TEST_F(RNAinverseTest, BadStart2)
 
     StartProviderMock provider;
     EXPECT_CALL(provider, get_partial_start(inverse))
-            .Times(1)
-            .WillOnce(Invoke(this, &RNAinverseTest::fake_bad2_provider));
+    .Times(1)
+    .WillOnce(Invoke(this, &RNAinverseTest::fake_bad2_provider));
 
 
     EXPECT_THROW(inverse->query_start(&provider), RNABackendException);
@@ -105,8 +105,8 @@ TEST_F(RNAinverseTest, BadStart3)
 
     StartProviderMock provider;
     EXPECT_CALL(provider, get_partial_start(inverse))
-            .Times(1)
-            .WillOnce(Invoke(this, &RNAinverseTest::fake_bad3_provider));
+    .Times(1)
+    .WillOnce(Invoke(this, &RNAinverseTest::fake_bad3_provider));
 
 
     EXPECT_THROW(inverse->query_start(&provider), RNABackendException);

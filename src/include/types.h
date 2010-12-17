@@ -24,7 +24,7 @@
  */
 
 #ifndef _TYPES_H
-#define	_TYPES_H
+#define _TYPES_H
 
 #include <string>
 #include <list>
@@ -95,5 +95,5 @@ typedef unsigned int RegionIdx;
  */
 typedef unsigned int Attempts;
 
-#endif	/* _TYPES_H */
+#endif  /* _TYPES_H */
 

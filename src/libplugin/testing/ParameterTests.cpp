@@ -46,7 +46,7 @@ TEST_F(ParameterTest, GetName)
 }
 
 TEST_F(ParameterTest, SetValue)
-{ 
+{
     EXPECT_TRUE(float_param->set_value("6.5"));
     EXPECT_EQ(fp, 6.5f);
 
@@ -58,7 +58,7 @@ TEST_F(ParameterTest, SetValue)
 }
 
 TEST_F(ParameterTest, SetBadValue)
-{    
+{
     EXPECT_FALSE(float_param->set_value("NaN"));
     EXPECT_EQ(fp, 0);
 

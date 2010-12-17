@@ -24,7 +24,7 @@
  */
 
 #ifndef _ICOMBINATORYREGION_H
-#define	_ICOMBINATORYREGION_H
+#define _ICOMBINATORYREGION_H
 
 #include <mili/mili.h>
 #include <biopp/biopp.h>
@@ -69,5 +69,5 @@ public:
  */
 typedef vector<ICombinatoryRegion*> CombinatoryRegionsCt;
 
-#endif	/* _ICOMBINATORYREGION_H */
+#endif  /* _ICOMBINATORYREGION_H */
 

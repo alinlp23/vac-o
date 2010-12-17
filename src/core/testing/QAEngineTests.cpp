@@ -22,7 +22,7 @@ protected:
         Score score = 5;
         opt = new SequenceOptimization(seq, score);
     }
-    
+
     QARegionMock r1;
     QARegionMock r2;
     QARegionsCt regions;
@@ -37,15 +37,15 @@ TEST_F(QAEngineTest, ValidationPass)
     QAEngine engine(regions);
 
     EXPECT_CALL(r1, validate(_))
-            .Times(1)
-            .WillOnce(Return(true));
+    .Times(1)
+    .WillOnce(Return(true));
 
     EXPECT_CALL(r2, validate(_))
-            .Times(1)
-            .WillOnce(Return(true));
+    .Times(1)
+    .WillOnce(Return(true));
 
     EXPECT_CALL(obs, update(_))
-            .Times(1);
+    .Times(1);
 
     engine.attach(&obs);
     subject.SubjectAttach(&engine);
@@ -60,19 +60,19 @@ TEST_F(QAEngineTest, ValidationFail)
     QAEngine engine(regions);
 
     EXPECT_CALL(r1, validate(_))
-            .Times(1)
-            .WillOnce(Return(true));
+    .Times(1)
+    .WillOnce(Return(true));
 
     EXPECT_CALL(r2, validate(_))
-            .Times(1)
-            .WillOnce(Return(false));
+    .Times(1)
+    .WillOnce(Return(false));
 
     EXPECT_CALL(obs, update(_))
-            .Times(0);
+    .Times(0);
 
     engine.attach(&obs);
     subject.SubjectAttach(&engine);
-    subject.SubjectNotify(opt);        
+    subject.SubjectNotify(opt);
 }
 
 TEST_F(QAEngineTest, StopValidationAsSoonAsFail)
@@ -81,13 +81,13 @@ TEST_F(QAEngineTest, StopValidationAsSoonAsFail)
     QAEngine engine(regions);
 
     EXPECT_CALL(r1, validate(_))
-            .Times(1)
-            .WillOnce(Return(false));
+    .Times(1)
+    .WillOnce(Return(false));
 
     EXPECT_CALL(r2, validate(_))
-            .Times(0);  
+    .Times(0);
 
     engine.attach(&obs);
     subject.SubjectAttach(&engine);
-    subject.SubjectNotify(opt);    
+    subject.SubjectNotify(opt);
 }

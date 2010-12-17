@@ -24,9 +24,9 @@ protected:
         while (!eof)
         {
             string m;
-            getline(mutations_expected, m);            
+            getline(mutations_expected, m);
             eof = mutations_expected.eof();
-            if(!eof)
+            if (!eof)
                 insert_into(expected, m);
         }
     }
@@ -36,7 +36,7 @@ protected:
 
     void seq_to_str(NucSequence& sequence, string& str_seq)
     {
-        for(size_t i=0; i<sequence.length(); ++i)
+        for (size_t i = 0; i < sequence.length(); ++i)
         {
             str_seq += to_str(sequence[i]);
         }
@@ -46,7 +46,7 @@ protected:
         NucSequence mutated;
 
         CAutonomousIterator<list<string> > it(expected);
-        while(mutator.next(mutated))
+        while (mutator.next(mutated))
         {
             string str_seq;
             seq_to_str(mutated, str_seq);
@@ -83,7 +83,7 @@ TEST_F(SequenceMutatorTest, TooMuchMutations)
 
 TEST_F(SequenceMutatorTest, FromEmptySeq)
 {
-    EXPECT_THROW(SequenceMutator mutator(empty, 2), CombinatorException);    
+    EXPECT_THROW(SequenceMutator mutator(empty, 2), CombinatorException);
 }
 
 TEST_F(SequenceMutatorTest, ZeroMutations)

@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   TripletsProductor.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on October 29, 2010, 12:06 PM 
+ * Created on October 29, 2010, 12:06 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,11 +20,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _TRIPLETSPRODUCTOR_H
-#define	_TRIPLETSPRODUCTOR_H
+#define _TRIPLETSPRODUCTOR_H
 
 #include <vector>
 #include <biopp/biopp.h>
@@ -50,5 +50,5 @@ private:
     void move(size_t i);
 };
 
-#endif	/* _TRIPLETSPRODUCTOR_H */
+#endif  /* _TRIPLETSPRODUCTOR_H */
 

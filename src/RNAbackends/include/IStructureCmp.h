@@ -24,7 +24,7 @@
  */
 
 #ifndef _ISTRUCTURECMP_H
-#define	_ISTRUCTURECMP_H
+#define _ISTRUCTURECMP_H
 
 #include <biopp/biopp.h>
 #include "rna_backends_types.h"
@@ -48,5 +48,5 @@ public:
     virtual ~IStructureCmp() {}
 };
 
-#endif	/* _ISTRUCTURECMP_H */
+#endif  /* _ISTRUCTURECMP_H */
 

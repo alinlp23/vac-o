@@ -50,8 +50,8 @@ TEST_F(INFORNATest, FoldInverse)
 
     StartProviderMock provider;
     EXPECT_CALL(provider, get_partial_start(inverse))
-            .Times(1)
-            .WillOnce(Invoke(this, &INFORNATest::fake_provider));
+    .Times(1)
+    .WillOnce(Invoke(this, &INFORNATest::fake_provider));
 
 
     inverse->query_start(&provider);
@@ -61,9 +61,9 @@ TEST_F(INFORNATest, FoldInverse)
 
     NucSequence seq;
     inverse->fold_inverse(seq);
-    for (size_t i=0; i<str.size();++i)
+    for (size_t i = 0; i < str.size(); ++i)
     {
-        EXPECT_EQ(seq[i],expected[i]);
+        EXPECT_EQ(seq[i], expected[i]);
     }
 
     delete inverse;
@@ -75,8 +75,8 @@ TEST_F(INFORNATest, BadStart1)
 
     StartProviderMock provider;
     EXPECT_CALL(provider, get_partial_start(inverse))
-            .Times(1)
-            .WillOnce(Invoke(this, &INFORNATest::fake_bad1_provider));
+    .Times(1)
+    .WillOnce(Invoke(this, &INFORNATest::fake_bad1_provider));
 
 
     EXPECT_THROW(inverse->query_start(&provider), RNABackendException);
@@ -90,8 +90,8 @@ TEST_F(INFORNATest, BadStart2)
 
     StartProviderMock provider;
     EXPECT_CALL(provider, get_partial_start(inverse))
-            .Times(1)
-            .WillOnce(Invoke(this, &INFORNATest::fake_bad2_provider));
+    .Times(1)
+    .WillOnce(Invoke(this, &INFORNATest::fake_bad2_provider));
 
 
     EXPECT_THROW(inverse->query_start(&provider), RNABackendException);
@@ -105,8 +105,8 @@ TEST_F(INFORNATest, BadStart3)
 
     StartProviderMock provider;
     EXPECT_CALL(provider, get_partial_start(inverse))
-            .Times(1)
-            .WillOnce(Invoke(this, &INFORNATest::fake_bad3_provider));
+    .Times(1)
+    .WillOnce(Invoke(this, &INFORNATest::fake_bad3_provider));
 
 
     EXPECT_THROW(inverse->query_start(&provider), RNABackendException);

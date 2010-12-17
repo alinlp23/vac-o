@@ -24,7 +24,7 @@
  */
 
 #ifndef _RNAFORESTER_H
-#define	_RNAFORESTER_H
+#define _RNAFORESTER_H
 
 #include "IStructureCmp.h"
 #include "RNABackendProxy.h"
@@ -34,11 +34,11 @@
 class RNAForester : public IStructureCmp
 {
     static const FilePath IN;
-    static const FilePath OUT;    
+    static const FilePath OUT;
     static const FileLineNo LINE_NO;
     virtual Similitude compare(const SecStructure&,
                                const SecStructure&) const throw(RNABackendException);
 };
 
-#endif	/* _RNAFORESTER_H */
+#endif  /* _RNAFORESTER_H */
 

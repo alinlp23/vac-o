@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   NeighborhoodMock.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 19, 2010, 9:48 PM 
+ * Created on November 19, 2010, 9:48 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,23 +20,29 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _NEIGHBORHOODMOCK_H
-#define	_NEIGHBORHOODMOCK_H
+#define _NEIGHBORHOODMOCK_H
 
 #include <gmock/gmock.h>
 #include "INeighborhood.h"
 
 class NeighborhoodMock : public INeighborhood
 {
-public:   
-    MOCK_CONST_METHOD1(explore, void(const ISolution* const));    
-    void SubjectSet(ISingleObserver<ISolution>* o){ ISingleSubject<ISolution>::set(o); }
-    bool SubjectNotify(const ISolution* s){ return ISingleSubject<ISolution>::notify(s); }
+public:
+    MOCK_CONST_METHOD1(explore, void(const ISolution* const));
+    void SubjectSet(ISingleObserver<ISolution>* o)
+    {
+        ISingleSubject<ISolution>::set(o);
+    }
+    bool SubjectNotify(const ISolution* s)
+    {
+        return ISingleSubject<ISolution>::notify(s);
+    }
 };
 
 
-#endif	/* _NEIGHBORHOODMOCK_H */
+#endif  /* _NEIGHBORHOODMOCK_H */
 

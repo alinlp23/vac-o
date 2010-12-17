@@ -20,7 +20,7 @@ protected:
     FoldInverseMock inverse_backend;
     SequenceCmpMock seq_cmp_backend;
     StructureCmpMock str_cmp_backend;
-    
+
     SecStructure wt;
     SecStructure va;
     NucSequence base;
@@ -38,11 +38,11 @@ protected:
         base = b;
         start = 1;
         end = 5;
-        partial = b.substr(start, end-start);
+        partial = b.substr(start, end - start);
 
         string str = "CTAC";
         inverse = str;
-    }    
+    }
 public:
     void fake_query_partial_start(IStartProvider* provider)
     {
@@ -55,12 +55,12 @@ public:
     }
 
     void fake_fold_inverse(NucSequence& delta)
-    {        
+    {
         delta = inverse;
     }
 
     void fill_cache()
-    {                        
+    {
         string str = "GGGGGGG";
         NucSequence s1 = str;
         insert_into(wt_cache, s1);
@@ -76,7 +76,7 @@ public:
 
     void check_partial_start(const NucSequence& seq)
     {
-        for (size_t i=0; i<seq.length(); ++i)
+        for (size_t i = 0; i < seq.length(); ++i)
         {
             EXPECT_EQ(seq[i], partial[i]);
         }
@@ -84,7 +84,7 @@ public:
 
     void check_complete_start(const NucSequence& seq)
     {
-        for (size_t i=0; i<seq.length(); ++i)
+        for (size_t i = 0; i < seq.length(); ++i)
         {
             EXPECT_EQ(seq[i], base[i]);
         }
@@ -100,15 +100,15 @@ public:
 TEST_F(SSRegionTest, SetBaseSequencePartial)
 {
     SSRegion ssregion(start, end, wt, va, 0, 0.8f, 10, wt_cache, false,
-            &fold_backend, &inverse_backend, &str_cmp_backend, &seq_cmp_backend);
+                      &fold_backend, &inverse_backend, &str_cmp_backend, &seq_cmp_backend);
 
     EXPECT_CALL(inverse_backend, query_start(&ssregion))
-            .Times(1)
-            .WillOnce(DoAll(Invoke(this, &SSRegionTest::fake_query_partial_start), Return()));
+    .Times(1)
+    .WillOnce(DoAll(Invoke(this, &SSRegionTest::fake_query_partial_start), Return()));
 
     EXPECT_CALL(inverse_backend, set_start(_))
-            .Times(1)
-            .WillOnce(DoAll(Invoke(this, &SSRegionTest::check_partial_start), Return()));
+    .Times(1)
+    .WillOnce(DoAll(Invoke(this, &SSRegionTest::check_partial_start), Return()));
 
     ICombinatoryRegion* issregion = &ssregion;
     issregion->set_base_sequence(base);
@@ -117,15 +117,15 @@ TEST_F(SSRegionTest, SetBaseSequencePartial)
 TEST_F(SSRegionTest, SetBaseSequenceComplete)
 {
     SSRegion ssregion(start, end, wt, va, 0, 0.8f, 10, wt_cache, false,
-            &fold_backend, &inverse_backend, &str_cmp_backend, &seq_cmp_backend);
+                      &fold_backend, &inverse_backend, &str_cmp_backend, &seq_cmp_backend);
 
     EXPECT_CALL(inverse_backend, query_start(&ssregion))
-            .Times(1)
-            .WillOnce(DoAll(Invoke(this, &SSRegionTest::fake_query_complete_start), Return()));
+    .Times(1)
+    .WillOnce(DoAll(Invoke(this, &SSRegionTest::fake_query_complete_start), Return()));
 
     EXPECT_CALL(inverse_backend, set_start(_))
-            .Times(1)
-            .WillOnce(DoAll(Invoke(this, &SSRegionTest::check_complete_start), Return()));
+    .Times(1)
+    .WillOnce(DoAll(Invoke(this, &SSRegionTest::check_complete_start), Return()));
 
     ICombinatoryRegion* issregion = &ssregion;
     issregion->set_base_sequence(base);
@@ -134,34 +134,34 @@ TEST_F(SSRegionTest, SetBaseSequenceComplete)
 TEST_F(SSRegionTest, GenerateWithEmptyCacheZeroMutations)
 {
     SSRegion ssregion(start, end, wt, va, 0, 0.8f, 10, wt_cache, false,
-            &fold_backend, &inverse_backend, &str_cmp_backend, &seq_cmp_backend);
+                      &fold_backend, &inverse_backend, &str_cmp_backend, &seq_cmp_backend);
 
     EXPECT_CALL(inverse_backend, query_start(_))
-            .Times(1);
-    
+    .Times(1);
+
     NucSequence seq;
     NucSequence delta;
     ICombinatoryRegion* issregion = &ssregion;
     issregion->set_base_sequence(base);
 
     EXPECT_CALL(inverse_backend, fold_inverse(_))
-            .Times(1)
-            .WillOnce(DoAll(Invoke(this, &SSRegionTest::fake_fold_inverse), Return()));
-   
-    Score score = issregion->generate(seq, delta);
-    EXPECT_EQ(score, 1);       
+    .Times(1)
+    .WillOnce(DoAll(Invoke(this, &SSRegionTest::fake_fold_inverse), Return()));
 
-    for (size_t i=0; i<start; ++i)
+    Score score = issregion->generate(seq, delta);
+    EXPECT_EQ(score, 1);
+
+    for (size_t i = 0; i < start; ++i)
     {
         EXPECT_EQ(seq[i], base[i]);
     }
 
-    for (size_t i=0; i<inverse.length(); ++i)
+    for (size_t i = 0; i < inverse.length(); ++i)
     {
-        EXPECT_EQ(seq[start+i], inverse[i]);
+        EXPECT_EQ(seq[start + i], inverse[i]);
     }
 
-    for (size_t i=end; i<seq.length(); ++i)
+    for (size_t i = end; i < seq.length(); ++i)
     {
         EXPECT_EQ(seq[i], base[i]);
     }
@@ -173,30 +173,30 @@ TEST_F(SSRegionTest, CheckMutations)
     const size_t times = 210; // 7*3^1 + 21*3^2
 
     SSRegion ssregion(start, end, wt, va, mutations, .8f, 10, wt_cache, false,
-            &fold_backend, &inverse_backend, &str_cmp_backend, &seq_cmp_backend);
+                      &fold_backend, &inverse_backend, &str_cmp_backend, &seq_cmp_backend);
 
     EXPECT_CALL(inverse_backend, query_start(_))
-            .Times(1);
+    .Times(1);
 
     NucSequence seq;
     NucSequence delta;
     ICombinatoryRegion* issregion = &ssregion;
-    issregion->set_base_sequence(base); 
+    issregion->set_base_sequence(base);
 
-    EXPECT_CALL(str_cmp_backend, compare(_,_))
-            .Times(times)
-            .WillRepeatedly(Return(.5f));
+    EXPECT_CALL(str_cmp_backend, compare(_, _))
+    .Times(times)
+    .WillRepeatedly(Return(.5f));
 
-    EXPECT_CALL(fold_backend, fold(_,_,false))
-            .Times(times)
-            .WillRepeatedly(Invoke(this, &SSRegionTest::fake_fold));
+    EXPECT_CALL(fold_backend, fold(_, _, false))
+    .Times(times)
+    .WillRepeatedly(Invoke(this, &SSRegionTest::fake_fold));
 
     EXPECT_CALL(inverse_backend, fold_inverse(_))
-            .Times(1)
-            .WillOnce(DoAll(Invoke(this, &SSRegionTest::fake_fold_inverse), Return()));
+    .Times(1)
+    .WillOnce(DoAll(Invoke(this, &SSRegionTest::fake_fold_inverse), Return()));
 
     Score score = issregion->generate(seq, delta);
-    EXPECT_EQ(score, 1);    
+    EXPECT_EQ(score, 1);
 }
 
 TEST_F(SSRegionTest, CheckMutationsStopAsSoonAsFail)
@@ -205,29 +205,29 @@ TEST_F(SSRegionTest, CheckMutationsStopAsSoonAsFail)
     const size_t times = 212; //7*3^1 + 21*3^2 + 2
 
     SSRegion ssregion(start, end, wt, va, mutations, .8f, 10, wt_cache, true,
-            &fold_backend, &inverse_backend, &str_cmp_backend, &seq_cmp_backend);
+                      &fold_backend, &inverse_backend, &str_cmp_backend, &seq_cmp_backend);
 
     EXPECT_CALL(inverse_backend, query_start(_))
-            .Times(1);
+    .Times(1);
 
     NucSequence seq;
     NucSequence delta;
     ICombinatoryRegion* issregion = &ssregion;
-    issregion->set_base_sequence(base);    
+    issregion->set_base_sequence(base);
 
-    EXPECT_CALL(str_cmp_backend, compare(_,_))
-            .Times(times)
-            .WillOnce(Return(.5f))
-            .WillOnce(Return(.9f)) // stop
-            .WillRepeatedly(Return(.5f)); //210 times
+    EXPECT_CALL(str_cmp_backend, compare(_, _))
+    .Times(times)
+    .WillOnce(Return(.5f))
+    .WillOnce(Return(.9f)) // stop
+    .WillRepeatedly(Return(.5f)); //210 times
 
-    EXPECT_CALL(fold_backend, fold(_,_,true))
-            .Times(times)
-            .WillRepeatedly(Invoke(this, &SSRegionTest::fake_fold));
+    EXPECT_CALL(fold_backend, fold(_, _, true))
+    .Times(times)
+    .WillRepeatedly(Invoke(this, &SSRegionTest::fake_fold));
 
     EXPECT_CALL(inverse_backend, fold_inverse(_))
-            .Times(2)
-            .WillRepeatedly(DoAll(Invoke(this, &SSRegionTest::fake_fold_inverse), Return()));
+    .Times(2)
+    .WillRepeatedly(DoAll(Invoke(this, &SSRegionTest::fake_fold_inverse), Return()));
 
     Score score = issregion->generate(seq, delta);
     EXPECT_EQ(score, 1);
@@ -237,40 +237,40 @@ TEST_F(SSRegionTest, CheckCache)
 {
     fill_cache();
     SSRegion ssregion(start, end, wt, va, 0, .8f, 4, wt_cache, false,
-            &fold_backend, &inverse_backend, &str_cmp_backend, &seq_cmp_backend);
+                      &fold_backend, &inverse_backend, &str_cmp_backend, &seq_cmp_backend);
 
     EXPECT_CALL(inverse_backend, query_start(_))
-            .Times(1);
+    .Times(1);
 
     NucSequence seq;
     NucSequence delta;
     ICombinatoryRegion* issregion = &ssregion;
     issregion->set_base_sequence(base);
 
-    EXPECT_CALL(seq_cmp_backend, compare(_,_))
-            .WillOnce(Return(7))
-            .WillOnce(Return(5))
-            .WillOnce(Return(6)) // 3 times to check cache
-            .WillOnce(Return(4))
-            .WillOnce(Return(4))
-            .WillOnce(Return(3)); // 3 times to evaluate local score
+    EXPECT_CALL(seq_cmp_backend, compare(_, _))
+    .WillOnce(Return(7))
+    .WillOnce(Return(5))
+    .WillOnce(Return(6)) // 3 times to check cache
+    .WillOnce(Return(4))
+    .WillOnce(Return(4))
+    .WillOnce(Return(3)); // 3 times to evaluate local score
 
     EXPECT_CALL(inverse_backend, fold_inverse(_))
-            .Times(1)
-            .WillOnce(DoAll(Invoke(this, &SSRegionTest::fake_fold_inverse), Return()));
+    .Times(1)
+    .WillOnce(DoAll(Invoke(this, &SSRegionTest::fake_fold_inverse), Return()));
 
     Score score = issregion->generate(seq, delta);
-    EXPECT_EQ(score, 3./4.);
+    EXPECT_EQ(score, 3. / 4.);
 }
 
 TEST_F(SSRegionTest, CheckCacheStopAsSoonAsFail)
 {
     fill_cache();
     SSRegion ssregion(start, end, wt, va, 0, .8f, 4, wt_cache, false,
-            &fold_backend, &inverse_backend, &str_cmp_backend, &seq_cmp_backend);
+                      &fold_backend, &inverse_backend, &str_cmp_backend, &seq_cmp_backend);
 
     EXPECT_CALL(inverse_backend, query_start(_))
-            .Times(1);
+    .Times(1);
 
     NucSequence seq;
     NucSequence delta;
@@ -279,25 +279,25 @@ TEST_F(SSRegionTest, CheckCacheStopAsSoonAsFail)
 
     InSequence order;
     EXPECT_CALL(inverse_backend, fold_inverse(_))
-            .Times(1)
-            .WillOnce(DoAll(Invoke(this, &SSRegionTest::fake_fold_inverse), Return()));
+    .Times(1)
+    .WillOnce(DoAll(Invoke(this, &SSRegionTest::fake_fold_inverse), Return()));
 
-    EXPECT_CALL(seq_cmp_backend, compare(_,_))            
-            .WillOnce(Return(7))
-            .WillOnce(Return(4));
-    
+    EXPECT_CALL(seq_cmp_backend, compare(_, _))
+    .WillOnce(Return(7))
+    .WillOnce(Return(4));
+
     EXPECT_CALL(inverse_backend, fold_inverse(_))
-            .Times(1)            
-            .WillOnce(DoAll(Invoke(this, &SSRegionTest::fake_fold_inverse), Return()));
+    .Times(1)
+    .WillOnce(DoAll(Invoke(this, &SSRegionTest::fake_fold_inverse), Return()));
 
-    EXPECT_CALL(seq_cmp_backend, compare(_,_))            
-            .WillOnce(Return(7))
-            .WillOnce(Return(5))
-            .WillOnce(Return(6))
-            .WillOnce(Return(4))
-            .WillOnce(Return(4))
-            .WillOnce(Return(3));    
+    EXPECT_CALL(seq_cmp_backend, compare(_, _))
+    .WillOnce(Return(7))
+    .WillOnce(Return(5))
+    .WillOnce(Return(6))
+    .WillOnce(Return(4))
+    .WillOnce(Return(4))
+    .WillOnce(Return(3));
 
     Score score = issregion->generate(seq, delta);
-    EXPECT_EQ(score, 3./4.);
+    EXPECT_EQ(score, 3. / 4.);
 }

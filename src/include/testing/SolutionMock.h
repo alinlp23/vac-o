@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   SolutionMock.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 13, 2010, 11:12 AM 
+ * Created on November 13, 2010, 11:12 AM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,11 +20,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _SOLUTIONMOCK_H
-#define	_SOLUTIONMOCK_H
+#define _SOLUTIONMOCK_H
 
 #include <gmock/gmock.h>
 #include "ISolution.h"
@@ -35,9 +35,9 @@ public:
     MOCK_METHOD3(update_solution, void(RegionIdx, const NucSequence&, const LocalOptimization&));
     MOCK_CONST_METHOD1(get_sequence, void(NucSequence&));
     MOCK_CONST_METHOD1(compute_local_score, Score(RegionIdx));
-    MOCK_CONST_METHOD0(clone, ISolution*());
+    MOCK_CONST_METHOD0(clone, ISolution * ());
 };
 
 
-#endif	/* _SOLUTIONMOCK_H */
+#endif  /* _SOLUTIONMOCK_H */
 

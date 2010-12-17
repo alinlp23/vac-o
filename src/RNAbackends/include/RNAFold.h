@@ -24,7 +24,7 @@
  */
 
 #ifndef _RNAFOLD_H
-#define	_RNAFOLD_H
+#define _RNAFOLD_H
 
 #include "IFold.h"
 #include "RNABackendProxy.h"
@@ -34,11 +34,11 @@
 class RNAFold : public IFold
 {
     static const FilePath IN;
-    static const FilePath OUT;    
-    static const FileLineNo LINE_NO;    
+    static const FilePath OUT;
+    static const FileLineNo LINE_NO;
     size_t read_free_energy(FileLine&, size_t, Fe&) const throw(RNABackendException);
     virtual Fe fold(const NucSequence&, SecStructure&, bool circ) const throw(RNABackendException);
 };
 
-#endif	/* _RNAFOLD_H */
+#endif  /* _RNAFOLD_H */
 

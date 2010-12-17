@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   QAMutatorMock.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 16, 2010, 6:22 PM 
+ * Created on November 16, 2010, 6:22 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,11 +20,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _QAMUTATORMOCK_H
-#define	_QAMUTATORMOCK_H
+#define _QAMUTATORMOCK_H
 
 #include <gmock/gmock.h>
 #include "IQAMutator.h"
@@ -38,5 +38,5 @@ public:
 
 
 
-#endif	/* _QAMUTATORMOCK_H */
+#endif  /* _QAMUTATORMOCK_H */
 

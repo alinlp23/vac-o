@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   SimulatedAnnealing.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 22, 2010, 5:28 PM 
+ * Created on November 22, 2010, 5:28 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,11 +20,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _SIMULATEDANNEALING_H
-#define	_SIMULATEDANNEALING_H
+#define _SIMULATEDANNEALING_H
 
 #include "Strategy.h"
 #include <utility>
@@ -36,7 +36,7 @@ class SimulatedAnnealing : public Strategy
     virtual void clean_up();
     virtual bool select_neighbor();
     virtual bool done();
-    virtual bool update(const ISolution*);  
+    virtual bool update(const ISolution*);
 
     typedef float Temperature;
     typedef float Cooling;
@@ -53,5 +53,5 @@ public:
     SimulatedAnnealing(const INeighborhood*, Iteration, Iteration, Iteration, Cooling, Temperature, Temperature);
 };
 
-#endif	/* _SIMULATEDANNEALING_H */
+#endif  /* _SIMULATEDANNEALING_H */
 

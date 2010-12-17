@@ -24,7 +24,7 @@
  */
 
 #ifndef _RNAINVERSE_H
-#define	_RNAINVERSE_H
+#define _RNAINVERSE_H
 
 #include "RNAStartInverse.h"
 #include "RNABackendProxy.h"
@@ -37,12 +37,12 @@ class RNAinverse : public RNAStartInverse
 
     size_t read_hamming_distance(FileLine&, size_t, Distance&) const throw(RNABackendException);
     size_t read_structure_distance(FileLine&, size_t, Similitude&) const throw(RNABackendException);
-    
+
     virtual void execute(string&, Distance&, Similitude&) throw(RNABackendException);
     virtual void query_start(IStartProvider*) throw(RNABackendException);
 public:
     RNAinverse(const SecStructure&, Similitude, Distance, CombinationAttempts);
 };
 
-#endif	/* _RNAINVERSE_H */
+#endif  /* _RNAINVERSE_H */
 

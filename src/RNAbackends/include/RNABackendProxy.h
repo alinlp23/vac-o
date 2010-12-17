@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   RNABackendProxy.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on October 26, 2010, 4:31 PM 
+ * Created on October 26, 2010, 4:31 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,11 +20,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _RNABACKENDPROXY_H
-#define	_RNABACKENDPROXY_H
+#define _RNABACKENDPROXY_H
 #include <cstdlib>
 #include <fstream>
 #include <string>
@@ -43,7 +43,7 @@ inline void exec(const Command& cmd) throw(RNABackendException)
 {
     const int status = system(cmd.c_str());
     if (status != SUCCESS_EXEC)
-        throw RNABackendException("An error ocurred trying to execute: "+cmd);
+        throw RNABackendException("An error ocurred trying to execute: " + cmd);
 }
 
 /**
@@ -97,5 +97,5 @@ inline void read_value(const FileLine& line, T& t) throw(RNABackendException)
 }
 
 
-#endif	/* _RNABACKENDPROXY_H */
+#endif  /* _RNABACKENDPROXY_H */
 

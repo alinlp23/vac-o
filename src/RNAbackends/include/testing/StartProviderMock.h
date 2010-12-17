@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   StartProviderMock.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 21, 2010, 7:07 PM 
+ * Created on November 21, 2010, 7:07 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,11 +20,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _STARTPROVIDERMOCK_H
-#define	_STARTPROVIDERMOCK_H
+#define _STARTPROVIDERMOCK_H
 
 #include <gmock/gmock.h>
 #include "IStartProvider.h"
@@ -37,5 +37,5 @@ public:
 };
 
 
-#endif	/* _STARTPROVIDERMOCK_H */
+#endif  /* _STARTPROVIDERMOCK_H */
 

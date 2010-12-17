@@ -20,7 +20,7 @@ protected:
         seq2 = str_seq;
         score = 5;
         opt2 = new SequenceOptimization(seq2, score);
-    }   
+    }
     SubjectMock<SequenceOptimization> subject;
     NucSequence seq1;
     NucSequence seq2;
@@ -32,7 +32,7 @@ TEST_F(SequenceRankerTest, InsertOptimization)
 {
     SequenceRanker ranker(2);
     subject.SubjectAttach(&ranker);
-    
+
     EXPECT_EQ(ranker.size(), 0);
     subject.SubjectNotify(opt1);
     EXPECT_EQ(ranker.size(), 1);
@@ -53,7 +53,7 @@ TEST_F(SequenceRankerTest, KeepBetterOptimizations)
     CAutonomousIterator<SequenceRanker> it(ranker);
     while (!it.end())
     {
-        EXPECT_TRUE((*it)==opt2);
+        EXPECT_TRUE((*it) == opt2);
         ++it;
     }
 }

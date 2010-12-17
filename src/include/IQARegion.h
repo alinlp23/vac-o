@@ -24,7 +24,7 @@
  */
 
 #ifndef _IQAREGION_H
-#define	_IQAREGION_H
+#define _IQAREGION_H
 
 #include <biopp/biopp.h>
 #include <list>
@@ -51,5 +51,5 @@ public:
  */
 typedef list<IQARegion*> QARegionsCt;
 
-#endif	/* _IQAREGION_H */
+#endif  /* _IQAREGION_H */
 

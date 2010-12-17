@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   FoldMock.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 15, 2010, 8:51 PM 
+ * Created on November 15, 2010, 8:51 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,11 +20,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _FOLDMOCK_H
-#define	_FOLDMOCK_H
+#define _FOLDMOCK_H
 
 #include <gmock/gmock.h>
 #include "IFold.h"
@@ -35,5 +35,5 @@ public:
     MOCK_CONST_METHOD3(fold, Fe(const NucSequence&, SecStructure&, bool));
 };
 
-#endif	/* _FOLDMOCK_H */
+#endif  /* _FOLDMOCK_H */
 

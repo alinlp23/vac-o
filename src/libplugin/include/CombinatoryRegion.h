@@ -24,7 +24,7 @@
  */
 
 #ifndef _COMBINATORYREGION_H
-#define	_COMBINATORYREGION_H
+#define _COMBINATORYREGION_H
 
 #include <list>
 #include <biopp/biopp.h>
@@ -49,9 +49,9 @@ protected:
     SeqIndex start;
     SeqIndex end;
     ConstraintsCt constraints;
-    NucSequence base_sequence;    
+    NucSequence base_sequence;
 };
 
 
-#endif	/* _COMBINATORYREGION_H */
+#endif  /* _COMBINATORYREGION_H */
 

@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   StructureCmpMock.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 15, 2010, 8:52 PM 
+ * Created on November 15, 2010, 8:52 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,11 +20,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _STRUCTURECMPMOCK_H
-#define	_STRUCTURECMPMOCK_H
+#define _STRUCTURECMPMOCK_H
 
 #include <gmock/gmock.h>
 #include "IStructureCmp.h"
@@ -35,5 +35,5 @@ public:
     MOCK_CONST_METHOD2(compare, Similitude(const SecStructure&, const SecStructure&));
 };
 
-#endif	/* _STRUCTURECMPMOCK_H */
+#endif  /* _STRUCTURECMPMOCK_H */
 

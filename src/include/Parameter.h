@@ -24,7 +24,7 @@
  */
 
 #ifndef _PARAMETER_H
-#define	_PARAMETER_H
+#define _PARAMETER_H
 
 #include <mili/mili.h>
 #include "IParameter.h"
@@ -50,7 +50,7 @@ public:
  */
 template<class Type>
 Parameter<Type>::Parameter(const string& name, Type& value) :
-        name(name), value(value)
+    name(name), value(value)
 {}
 
 template<class Type>
@@ -65,5 +65,5 @@ bool Parameter<Type>::set_value(const string& value)
     return from_string(value, this->value);
 }
 
-#endif	/* _PARAMETER_H */
+#endif  /* _PARAMETER_H */
 

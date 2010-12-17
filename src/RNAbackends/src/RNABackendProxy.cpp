@@ -28,8 +28,9 @@
 void write(const FilePath& file, FileLinesCt& lines) throw(RNABackendException)
 {
     std::ofstream out;
-    out.exceptions (std::ifstream::eofbit | std::ifstream::failbit | std::ifstream::badbit);
-    try{
+    out.exceptions(std::ifstream::eofbit | std::ifstream::failbit | std::ifstream::badbit);
+    try
+    {
         out.open(file.c_str());
         CAutonomousIterator<FileLinesCt> it(lines);
         while (!it.end())
@@ -40,14 +41,14 @@ void write(const FilePath& file, FileLinesCt& lines) throw(RNABackendException)
     }
     catch (const std::ifstream::failure& e)
     {
-        throw RNABackendException("An error ocurred trying to write "+file);
-    }    
+        throw RNABackendException("An error ocurred trying to write " + file);
+    }
 }
 
 void write(const FilePath& file, FileLine& line) throw(RNABackendException)
 {
     std::ofstream out;
-    out.exceptions (std::ifstream::eofbit | std::ifstream::failbit | std::ifstream::badbit);
+    out.exceptions(std::ifstream::eofbit | std::ifstream::failbit | std::ifstream::badbit);
     try
     {
         out.open(file.c_str());
@@ -55,21 +56,21 @@ void write(const FilePath& file, FileLine& line) throw(RNABackendException)
     }
     catch (const std::ifstream::failure& e)
     {
-        throw RNABackendException("An error ocurred trying to write "+file);
-    }    
+        throw RNABackendException("An error ocurred trying to write " + file);
+    }
 }
 
 void read_line(const FilePath& file, FileLineNo lineno, FileLine& line) throw(RNABackendException)
 {
     std::ifstream in;
-    in.exceptions (std::ifstream::eofbit | std::ifstream::failbit | std::ifstream::badbit);
+    in.exceptions(std::ifstream::eofbit | std::ifstream::failbit | std::ifstream::badbit);
     try
     {
         in.open(file.c_str());
         if (lineno > 0)
         {
             string aux;
-            for (size_t i=0; i<lineno; ++i)
+            for (size_t i = 0; i < lineno; ++i)
             {
                 getline(in, aux);
             }
@@ -78,6 +79,6 @@ void read_line(const FilePath& file, FileLineNo lineno, FileLine& line) throw(RN
     }
     catch (const std::ifstream::failure& e)
     {
-        throw RNABackendException("An error ocurred trying to read "+file);
-    }    
+        throw RNABackendException("An error ocurred trying to read " + file);
+    }
 }

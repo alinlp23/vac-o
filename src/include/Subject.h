@@ -24,7 +24,7 @@
  */
 
 #ifndef _SUBJECT_H
-#define	_SUBJECT_H
+#define _SUBJECT_H
 
 template<class Subject>
 void ISubject<Subject>::attach(Observer* o)
@@ -74,5 +74,5 @@ bool ISingleSubject<Subject>::notify(const Subject* s) const
     return status;
 }
 
-#endif	/* _SUBJECT_H */
+#endif  /* _SUBJECT_H */
 

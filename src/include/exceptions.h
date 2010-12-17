@@ -24,7 +24,7 @@
  */
 
 #ifndef _EXCEPTIONS_H
-#define	_EXCEPTIONS_H
+#define _EXCEPTIONS_H
 
 #include <mili/mili.h>
 #ifndef NO_THROW_SPEC
@@ -33,9 +33,9 @@
 #       define THROW(x)
 #endif
 
-class VACOException{};
+class VACOException {};
 
 DEFINE_SPECIFIC_EXCEPTION_TEXT(PluginException, VACOException, "Plugin");
 
-#endif	/* _EXCEPTIONS_H */
+#endif  /* _EXCEPTIONS_H */
 

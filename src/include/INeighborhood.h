@@ -24,7 +24,7 @@
  */
 
 #ifndef _INEIGHBORHOOD_H
-#define	_INEIGHBORHOOD_H
+#define _INEIGHBORHOOD_H
 
 #include "ISubject.h"
 #include "ISolution.h"
@@ -43,8 +43,8 @@ public:
      */
     virtual void explore(const ISolution* const) const = 0;
 
-    virtual ~INeighborhood(){}
+    virtual ~INeighborhood() {}
 };
 
-#endif	/* _INEIGHBORHOOD_H */
+#endif  /* _INEIGHBORHOOD_H */
 

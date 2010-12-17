@@ -24,7 +24,7 @@
  */
 
 #ifndef _LIBPLUGIN_H
-#define	_LIBPLUGIN_H
+#define _LIBPLUGIN_H
 #include <mili/mili.h>
 #include "IPlugin.h"
 
@@ -55,5 +55,5 @@
 #include "BestImprovement.h"
 #include "SimulatedAnnealing.h"
 
-#endif	/* _LIBPLUGIN_H */
+#endif  /* _LIBPLUGIN_H */
 

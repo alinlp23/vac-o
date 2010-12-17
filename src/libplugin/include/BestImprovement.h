@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   BestImprovement.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 22, 2010, 12:31 PM 
+ * Created on November 22, 2010, 12:31 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,11 +20,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _BESTIMPROVEMENT_H
-#define	_BESTIMPROVEMENT_H
+#define _BESTIMPROVEMENT_H
 
 #include "Strategy.h"
 
@@ -32,10 +32,10 @@ class BestImprovement : public Strategy
 {
     virtual bool select_neighbor();
     virtual bool update(const ISolution*);
-    Score selected;    
+    Score selected;
 public:
     BestImprovement(const INeighborhood*, Iteration, Iteration);
 };
 
-#endif	/* _BESTIMPROVEMENT_H */
+#endif  /* _BESTIMPROVEMENT_H */
 

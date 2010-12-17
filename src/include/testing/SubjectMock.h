@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   SubjectMock.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 13, 2010, 4:41 PM 
+ * Created on November 13, 2010, 4:41 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,11 +20,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _SUBJECTMOCK_H
-#define	_SUBJECTMOCK_H
+#define _SUBJECTMOCK_H
 
 #include <gmock/gmock.h>
 #include "ISubject.h"
@@ -37,10 +37,19 @@ public:
     MOCK_METHOD0_T(detach, void(IObserver<Subject>*));
     MOCK_CONST_METHOD1_T(notify, void(const Subject*));
 
-    void SubjectAttach(IObserver<Subject>* o){ ISubject<Subject>::attach(o); }
-    void SubjectDetach(IObserver<Subject>* o) throw(ElementNotFound) { ISubject<Subject>::detach(o); }
-    void SubjectNotify(const Subject* s) const { ISubject<Subject>::notify(s); };
+    void SubjectAttach(IObserver<Subject>* o)
+    {
+        ISubject<Subject>::attach(o);
+    }
+    void SubjectDetach(IObserver<Subject>* o) throw(ElementNotFound)
+    {
+        ISubject<Subject>::detach(o);
+    }
+    void SubjectNotify(const Subject* s) const
+    {
+        ISubject<Subject>::notify(s);
+    };
 };
 
-#endif	/* _SUBJECTMOCK_H */
+#endif  /* _SUBJECTMOCK_H */
 

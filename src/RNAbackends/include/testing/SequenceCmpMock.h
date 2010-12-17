@@ -1,8 +1,8 @@
-/* 
+/*
  * File:   SequenceCmpMock.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 15, 2010, 8:52 PM 
+ * Created on November 15, 2010, 8:52 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -20,11 +20,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with vac-o.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #ifndef _SEQUENCECMPMOCK_H
-#define	_SEQUENCECMPMOCK_H
+#define _SEQUENCECMPMOCK_H
 
 #include <gmock/gmock.h>
 #include "ISequenceCmp.h"
@@ -35,5 +35,5 @@ public:
     MOCK_CONST_METHOD2(compare, Distance(const NucSequence&, const NucSequence&));
 };
 
-#endif	/* _SEQUENCECMPMOCK_H */
+#endif  /* _SEQUENCECMPMOCK_H */
 

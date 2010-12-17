@@ -24,7 +24,7 @@
  */
 
 #ifndef _SSREGION_H
-#define	_SSREGION_H
+#define _SSREGION_H
 
 #include "CombinatoryRegion.h"
 #include "IStartProvider.h"
@@ -67,8 +67,8 @@ public:
              NMutations, Similitude, Distance, const NucSequencesCt&, bool,
              const IFold* const, IFoldInverse* const, const IStructureCmp* const,
              const ISequenceCmp* const);
-    
+
 };
 
-#endif	/* _SSREGION_H */
+#endif  /* _SSREGION_H */
 
