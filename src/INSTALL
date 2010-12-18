@@ -1,0 +1,109 @@
+Vienna RNA Package (RNAinverse, RNAfold, RNAforester)
+=====================================================
+
+Download the latest version from: http://www.tbi.univie.ac.at/~ivo/RNA/
+
+Note: RNAforester included on Vienna RNA Package 1.8.4 needs a tweak.
+After extracting sources, go to /ViennaRNA-1.8.4/RNAforester/src/rnafuncs.cpp 
+and add <stdio.h> to the included headers.
+
+Now, you are ready to go. Read INSTALL from Vienna RNA Package or just:
+
+$ ./configure --without-perl --with-forester
+$ make
+$ sudo make install
+
+INFO-RNA
+========
+
+Download the latest version from: http://www.bioinf.uni-freiburg.de/Software/index.html
+
+Note: INFO-RNA-2.1 also needs a tweak. After extracting sources, go to 
+/INFO-RNA-2.1/basics.h and add <cstdio> to the included headers.
+
+Now you are ready to go. But before compile, modify the Makefile to set the VIENNA
+variable to the correct path. If you use the defaults for Vienna RNA Package, then:
+
+    VIENNA = /usr/local
+    
+And compile:
+
+$ make
+
+Finally, copy the INFO-RNA executable to /usr/local/bin or somewhere else included 
+in your system PATH.
+
+vac-o
+=====
+
+First, compile&install:
+- biopp: http://biopp.googlecode.com
+- mili: http://mili.googlecode.com
+
+If you don't have installed cmake, install it now.
+
+$ sudo apt-get install cmake
+
+Then, go to where you downloaded vac-o sources and run:
+
+$ cmake CMakeLists.txt
+$ make
+
+Testing
+-------
+If you want to run the tests, compile&install:
+
+- google-test: http://googletest.googlecode.com
+- google-mock: http://googlemock.googlecode.com
+
+Then re-run cmake (interactive mode) to re-generate Makefile:
+
+$ cmake -i CMakeLists.txt
+Would you like to see advanced options? [No]: No
+Please wait while cmake processes CMakeLists.txt files....
+
+Variable Name: BIOPP
+Description: Path to a library.
+Current Value: /usr/local/lib/libbiopp.so
+New Value (Enter to keep current value): 
+
+Variable Name: CMAKE_BUILD_TYPE
+Description: Choose the type of build, options are: None(CMAKE_CXX_FLAGS or CMAKE_C_FLAGS used) Debug Release RelWithDebInfo MinSizeRel.
+Current Value: 
+New Value (Enter to keep current value): 
+
+Variable Name: CMAKE_INSTALL_PREFIX
+Description: Install path prefix, prepended onto install directories.
+Current Value: /usr/local
+New Value (Enter to keep current value): 
+
+Variable Name: COMPILE_TESTS
+Description: Compile tests
+Current Value: OFF
+New Value (Enter to keep current value):
+....
+....
+....
+
+You should change the COMPILE_TESTS variable from OFF to ON.
+Then run:
+
+$ make
+
+And now you can run the tests for each package.
+
+$ ./core/testing/core_tests
+$ ./libplugin/testing/libplugin_tests
+$ ./RNAbackends/testing/backends_tests
+
+After running tests, you may want to checkout the coverage. In that case,
+go to ./sub-package/profiling and run coverage_report.sh:
+
+$ cd ./core/profiling
+$ ./coverage_report.sh
+
+Now, open the report on your favorite browser:
+
+$ google-chrome ./coverage/index.html
+
+
