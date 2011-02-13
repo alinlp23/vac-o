@@ -26,7 +26,7 @@ algoritmos para la predicci\'on inversa de estructura secundaria de \ac{RNA},
 donde vimos que la evaluaci\'on consiste en realizar la predicci\'on directa y
 esto es $\mathcal{O}(N^{3})$.}. Luego, lo que diferencia fundamentalmente a los
 distintos algoritmos de b\'usqueda es la forma en que las soluciones candidatas
-son generadas. Los paradigmas de b\'usqueda mas comunes son:
+son generadas. Los paradigmas de b\'usqueda m\'as comunes son:
 \begin{itemize}
  \item Perturbativa vs. Constructiva
  \item Local vs. Sistem\'atica
@@ -38,13 +38,13 @@ constructiva.
 
 \subsection{Perturbativa vs. Constructiva}
 
-Como ya vimos en secciones anteriores, las soluciones candidatas de un problema
-de optimizaci\'on, est\'an compuestas por las \textit{componentes de la
-soluci\'on}. Luego, se puede modificar una soluci\'on candidata para obtener
-una nueva soluci\'on, cambiando una o varias de sus componentes. Esto puede ser
-visto como una \textit{perturbaci\'on} sobre las soluciones candidatas y por eso
-se denomina a los algoritmos de b\'usqueda que utilizan esta forma de generar
-soluciones candidatas, \textit{algoritmos de b\'usqueda perturbativa}.
+Las soluciones candidatas de un problema de optimizaci\'on, est\'an compuestas
+por las \textit{componentes de la soluci\'on}. Luego, se puede modificar una
+soluci\'on candidata para obtener una nueva soluci\'on, cambiando una o varias
+de sus componentes. Esto puede ser visto como una \textit{perturbaci\'on} sobre
+las soluciones candidatas y por eso se denomina a los algoritmos de b\'usqueda
+que utilizan esta forma de generar soluciones candidatas, \textit{algoritmos de
+b\'usqueda perturbativa}.
 
 Usualmente en estos algoritmos, la b\'usqueda se realiza sobre el espacio de
 soluciones candidatas del problema, pero eventualmente podr\'ia ser \'util
@@ -67,7 +67,7 @@ los algoritmos de b\'usqueda sistem\'atica se denomina \textit{completitud}.
 
 Por otro lado, los algoritmos de b\'usqueda local empiezan la b\'usqueda en
 alg\'un punto del espacio de b\'usqueda y sucesivamente se mueven de la
-soluci\'on actual a una soluci\'on ``vecina'' donde cada movimiento esta
+soluci\'on actual a una soluci\'on ``vecina'' donde cada movimiento est\'a
 determinado solamente por la informaci\'on que brindan la soluci\'on actual y
 sus ``vecinos''. Estos algoritmos son t\'ipicamente \textit{incompletos} en el
 sentido de que no hay garant\'ia de encontrar una soluci\'on \'optima ni tampoco
@@ -162,12 +162,11 @@ evaluaci\'on.
 
 \subsection{El vecindario}
 
-Como vimos anteriormente, el concepto de ``vecindario'' de una soluci\'on es
-crucial para determinar los posibles movimientos de una soluci\'on a la
-siguiente. Esto puede ser visto b\'asicamente como una relaci\'on entre
-soluciones, y si decimos que $\mathcal{S}$ es el espacio de soluciones, entonces
-un vecindario ser\'a una relaci\'on $\mathcal{N} \subseteq \mathcal{S} \times
-\mathcal{S}$.
+El concepto de ``vecindario'' de una soluci\'on es crucial para determinar los
+posibles movimientos de una soluci\'on a la siguiente. Esto puede ser visto
+b\'asicamente como una relaci\'on entre soluciones, y si decimos que
+$\mathcal{S}$ es el espacio de soluciones, entonces un vecindario ser\'a una
+relaci\'on $\mathcal{N} \subseteq \mathcal{S} \times \mathcal{S}$.
 
 La interfaz propuesta en la secci\'on~\ref{diseno-motor} para representar esta
 relaci\'on entre soluciones fue \textbf{INeighborhood} y cuya principal

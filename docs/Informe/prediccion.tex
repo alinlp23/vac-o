@@ -87,13 +87,13 @@ para la estructura secundaria de \ac{RNA} dada. En nuestro caso de uso,
 virus atenuado) que efectivamente tiene la estructura secundaria de \ac{RNA} que
 se quiere conservar. Por lo tanto, esta misma secuencia se puede usar para
 generar distintas secuencias ``incompletas'' con la garant\'ia de que todas
-especifiquen restricciones satisfacibles.
+especifiquen restricciones satisfactibles.
 
 El no determinismo est\'a dado por el hecho de que para una misma estructura
 secundaria de \ac{RNA} y una misma secuencia (incompleta) de inicio, en
-sucesivas ejecuciones de los programas, se pueden encontrar distintas secuencias
+sucesivas ejecuciones de los programas se pueden encontrar distintas secuencias
 de \ac{RNA} aunque eventualmente tambi\'en repetidas. Por otro lado, modificar
-la secuencia (incompleta) de inicio, podr\'ia aunque no necesariamente implicar
+la secuencia (incompleta) de inicio podr\'ia aunque no necesariamente implicar
 que se encuentren nuevas secuencias.
 
 Con todo lo dicho, deber\'ian quedar claras las complicaciones que presentan
@@ -104,7 +104,7 @@ Recordemos que una secuencia de \ac{RNA} se representa como una palabra sobre el
 alfabeto $\Sigma = \{A,U,G,C\}$ y una secuencia de \ac{RNA} ``incompleta'' como
 una palabra sobre el alfabeto $\Sigma \cup \{N\}$ donde las $N$ representan las
 bases indefinidas. Adem\'as, si $s$ es una secuencia de \ac{RNA} (completa o
-incompleta) de longitud $n$, $s_{i}$ sera la posici\'on o base $i$-esima de la
+incompleta) de longitud $n$, $s_{i}$ ser\'a la posici\'on o base $i$-esima de la
 secuencia $s$ con $0 \leq i < n$.
 
 Luego, si definimos:
@@ -158,9 +158,9 @@ siguiente secuencia de inicio ya que el hecho de que el algoritmo de
 predicci\'on inversa devuelva una secuencia que ya hab\'ia sido encontrada
 previamente, no implica que en sucesivas ejecuciones y sin cambiar la secuencia
 de inicio, se encuentren nuevas secuencias. Luego, se propuso delegar esta
-responsabilidad a la extensi\'on y que sea esta quien determine el n\'umero $m$
-de intentos que se realizan sobre cada secuencia de inicio hasta encontrar una
-secuencia nueva.
+responsabilidad a la extensi\'on y que sea \'esta quien determine el n\'umero
+$m$ de intentos que se realizan sobre cada secuencia de inicio hasta encontrar
+una secuencia nueva.
 
 A continuaci\'on presentamos el pseudo c\'odigo de la propuesta asumiendo las
 siguientes variables:
@@ -180,7 +180,7 @@ de inicio.
 
 y los siguientes procedimientos auxiliares:
 \begin{itemize}
- \item $inverse(e,r)$: algoritmo externo como se caracterizo anteriormente.
+ \item $inverse(e,r)$: algoritmo externo como se caracteriz\'o anteriormente.
  \item $begin(i,n,k)$: devuelve la primera de las $n \choose k$ secuencias
 incompletas a partir de la secuencia $i$.
  \item $next(r)$: devuelve la siguiente secuencia incompleta, para alg\'un orden

@@ -7,20 +7,19 @@ level.}%
 
 Por tratarse de una disciplina relativamente nueva, nos permitimos una breve
 introducci\'on, definici\'on y repaso de los principales problemas abordados
-por la misma profundizando en aquellos problemas que est\'an directamente
-relacionados con este trabajo. En particular, la predicci\'on de estructura
-secundaria.
+por la bioinform\'atica profundizando en aquellos problemas que est\'an
+directamente relacionados con este trabajo.
 
 \section{Bio*}
 
-La biolog\'ia depende en gran parte de la qu\'imica para poder avanzar y esto
-dio lugar a lo que se conoce como \textit{bioqu\'imica}. An\'alogamente, la
-necesidad de explicar fen\'omenos biol\'ogicos a nivel at\'omico, dio lugar a la
-\textit{biof\'isica}. La \textit{biomatem\'atica} por su parte, se enfoca en el
-modelado de procesos biol\'ogicos utilizando t\'ecnicas matem\'aticas que
-permitan simular y predecir su comportamiento. La enorme cantidad de datos
-recopilados por los bi\'ologos y la necesidad de herramientas para
-interpretarlos, dio origen a lo que hoy conocemos como
+La biolog\'ia siempre dependi\'o en gran parte de la qu\'imica para poder
+avanzar y esto di\'o lugar a lo que se conoce como \textit{bioqu\'imica}.
+An\'alogamente, la necesidad de explicar fen\'omenos biol\'ogicos a nivel
+at\'omico, di\'o lugar a la \textit{biof\'isica}. La \textit{biomatem\'atica}
+por su parte, se enfoca en el modelado de procesos biol\'ogicos utilizando
+t\'ecnicas matem\'aticas que permitan simular y predecir su comportamiento. La
+enorme cantidad de datos recopilados por los bi\'ologos y la necesidad de
+herramientas para interpretarlos, di\'o origen a lo que hoy conocemos como
 \textit{bioinform\'atica}.
 
 La bioinform\'atica fue precedida por lo que se llam\'o \textit{biolog\'ia
@@ -29,8 +28,7 @@ los dos t\'erminos, la biolog\'ia computacional se caracteriz\'o por enfocarse
 en los aspectos te\'oricos/formales de la Ciencia de la Computaci\'on,
 mientras que la bioinform\'atica supo estar m\'as relacionada con el
 procesamiento de grandes vol\'umenes de datos, usualmente almacenados en la
-Internet. Actualmente, se suele hacer referencia a ambos t\'erminos de manera
-indiferente.
+Internet. Actualmente, se utilizan ambos t\'erminos de manera indiferente.
 
 \subsubsection{Problemas cl\'asicos}
 
@@ -47,24 +45,22 @@ abordados por la bioinform\'atica.
 
 \section{Predicci\'on de estructura secundaria}
 
-Uno de los problemas que omitimos mencionar anteriormente y que describiremos
+Uno de los problemas que omitimos mencionar anteriormente, y que describiremos
 con mayor detalle, es el que se conoce como ``predicci\'on de estructura
-secundaria''. 
-
-Este problema consiste en, dada una estructura primaria o secuencia de \ac{RNA},
-determinar la estructura secundaria correspondiente. Adem\'as, diferentes
-secuencias de \ac{RNA} pueden tener la misma estructura secundaria, por lo que
-tambi\'en nos interesa determinar para una estructura secundaria dada, las
-secuencias de \ac{RNA} que conservan esa estructura. 
-
-En ingl\'es, se suele denominar a estos dos problemas \textit{folding} e
-\textit{inverse folding} respectivamente. A continuaci\'on describimos
-brevemente las diferentes aproximaciones a cada uno de ellos.
-
+secundaria''. Este problema consiste en, dada una estructura primaria o
+secuencia de \ac{RNA}, determinar la estructura secundaria correspondiente.
+Adem\'as, diferentes secuencias de \ac{RNA} pueden tener la misma estructura
+secundaria, por lo que tambi\'en nos interesa determinar para una estructura
+secundaria dada, las secuencias de \ac{RNA} que conservan esa estructura.
+ 
 Por lo mencionado en la secciones~\ref{estructura} y \ref{virus}, predecir la
 estructura secundaria de una secuencia de \ac{RNA} y conocer las posibles
 secuencias que conservan una estructura secundaria determinada es de gran
 importancia en este trabajo.
+
+En ingl\'es, se suele denominar a estos dos problemas \textit{folding} e
+\textit{inverse folding} respectivamente. A continuaci\'on describimos
+brevemente las diferentes aproximaciones a cada uno de ellos.
 
 \subsection{Predicci\'on directa (\textit{folding})}
 \label{folding}
@@ -113,16 +109,16 @@ AAAGGCAACGGCCAU
  minimum free energy =  -4.40 kcal/mol
 \end{verbatim}
 
-El resultado obtenido es precisamente, la energ\'ia libre y la estructura
-secundaria representada con par\'entesis y puntos. Donde los pares de
+El resultado obtenido es, precisamente, la energ\'ia libre y la estructura
+secundaria representada con par\'entesis y puntos, donde los pares de
 par\'entesis indican las bases ``apareadas'' o ``unidas'' y los puntos, las
 bases libres.
 
 \subsection{Predicci\'on inversa (\textit{inverse folding})}
 \label{inverse}
-Como ya mencionamos, este problema consiste en determinar las secuencias de
-\ac{RNA} que tienen una estructura secundaria determinada y es fundamental
-para el dise\~no racional de secuencias de \ac{RNA}.
+Este problema consiste en determinar las secuencias de \ac{RNA} que tienen una
+estructura secundaria determinada y es fundamental para el dise\~no racional de
+secuencias de \ac{RNA}.
 
 Las principales implementaciones que abordan este problema, lo plantean como un
 \ac{CSP} y utilizan variantes de b\'usqueda local estoc\'astica para
@@ -138,7 +134,7 @@ Si bien la complejidad de este problema no est\'a determinada, a diferencia de
 otros \ac{CSP}, la evaluaci\'on de las posibles soluciones es muy costosa ya que
 implica la ``predicci\'on \ac{mfe}'' sobre cada secuencia candidata
 ($\mathcal{O}(N^{3})$). Luego, se deben utilizar diferentes t\'ecnicas que
-tiendan a minimizar el numero de predicciones realizadas sobre la secuencia
+tiendan a minimizar el n\'umero de predicciones realizadas sobre la secuencia
 completa.
 
 En general, las diferentes implementaciones tienen como par\'ametros de
@@ -162,7 +158,7 @@ Entre estas implementaciones, se destacan \textbf{RNAinverse}\cite{Hofacker94},
 formas de generar la secuencia inicial e implementando algoritmos de b\'usqueda
 local estoc\'astica mas complejos.
 
-Notar que las tres implementaciones dependen de la generaci\'on de n\'umeros
+N\'otese que las tres implementaciones dependen de la generaci\'on de n\'umeros
 \textit{pseudo aleatorios} y ya que la ``semilla'' utilizada es variable (salvo
 \textbf{RNA-SSD} que permite fijar la semilla), se debe tener en cuenta el no
 determinismo. Es decir, en sucesivas ejecuciones del algoritmo y utilizando los
@@ -185,7 +181,7 @@ length = 15
 aaaUAGUCAGCUACu    3 0
 \end{verbatim}
 
-N\'otese que la secuencia obtenida, conserva las bases que ya estaban definidas
-en la secuencia incompleta que se dio como par\'ametro y que adem\'as, es
+N\'otese que la secuencia obtenida conserva las bases que ya estaban definidas
+en la secuencia incompleta, que se dio como par\'ametro y que adem\'as, es
 distinta a la secuencia sobre la que se hizo la predicci\'on directa
 anteriormente.

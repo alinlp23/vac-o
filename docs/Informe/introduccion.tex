@@ -8,8 +8,8 @@ sirva como soporte para el dise\~no de vacunas atenuadas. En este sentido, la
 propuesta es encontrar un conjunto de secuencias de \ac{RNA} que conserven las
 propiedades que le otorgan la atenuaci\'on a la vacuna y que al mismo tiempo,
 tiendan a maximizar el n\'umero de mutaciones necesarias para alcanzar
-secuencias semejantes a las pat\'ogenas o revertantes\footnote{Para el lector
-ajeno a la biolog\'ia, que producen la enfermedad que la vacuna debiera
+secuencias semejantes a las pat\'ogenas o revertantes\footnote{(Para el lector
+ajeno a la biolog\'ia) que producen la enfermedad que la vacuna debiera
 prevenir.}. 
 
 En los cap\'itulos~\ref{biologia} y \ref{bioinformatica} se introducen los
@@ -24,17 +24,17 @@ t\'ecnicos y m\'as relevantes sobre el desarrollo del software.
 \section{Sobre las vacunas}
 \label{vacunas}
 Existen diferentes posiciones sobre la efectividad de las vacunas en la
-prevenci\'on de las enfermedades. Por un lado, la \textit{versi\'on oficial}
+prevenci\'on de enfermedades. Por un lado, la \textit{versi\'on oficial}
 sostiene que representan la principal herramienta para combatir enfermedades y
-epidemias. Pero al mismo tiempo, hay quienes aseguran que las vacunas son en
+epidemias. Pero al mismo tiempo, hay quienes aseguran que las vacunas son, en
 muchos casos, las causantes de las enfermedades que intentan prevenir. Se
 cuestionan adem\'as, sus ingredientes t\'oxicos (aluminio, mercurio,
 cloroformo), en algunos casos cancer\'igenos o supuestamente relacionados con
 diferentes enfermedades como el autismo.
 
 Aun as\'i, su uso est\'a ampliamente aceptado en la mayor\'ia de los pa\'ises
-del mundo siendo, las campa\~nas masivas de vacunaci\'on, una de las principales
-pol\'iticas p\'ublicas de salud. 
+del mundo, siendo las campa\~nas masivas de vacunaci\'on, una de las
+principales pol\'iticas p\'ublicas de salud. 
 
 No es el objetivo de este trabajo, profundizar en este tema ni tampoco llegar
 a una conclusi\'on apresurada sobre la bondad de las vacunas, sino simplemente
@@ -46,12 +46,12 @@ masivo de vacunas seg\'un lo crea conveniente.
 
 El origen de las vacunas se remonta al a\~no 1796 durante la epidemia del virus
 de la viruela en Europa. El m\'edico rural, Edward Jenner, observ\'o que las
-mujeres que orde\~naban las vacas, eventualmente contra\'ian una especie de
-``viruela vacuna'' por el contacto con las ubres y que luego la viruela com\'un
-no les produc\'ia ning\'un efecto. Efectivamente, el virus Vaccinia que se uso
-como vacuna contra la viruela com\'un, es un virus muy emparentado pero que no
-produc\'ia efectos de consideraci\'on en las personas y que dio origen a lo que
-hoy se conocen como vacunas vivas o atenuadas.
+mujeres que orde\~naban las vacas eventualmente contra\'ian una especie de
+``viruela vacuna'' por el contacto con las ubres, y que luego la viruela com\'un
+no les produc\'ia ning\'un efecto. Efectivamente, el virus Vaccinia que se us\'o
+como vacuna contra la viruela com\'un, result\'o ser un virus muy emparentado
+pero que no produc\'ia efectos de consideraci\'on en las personas y que di\'o
+origen a lo que hoy se conocen como vacunas vivas o atenuadas.
 
 \section{Motivaci\'on}
 \label{motivacion}
@@ -66,11 +66,11 @@ frente a las denominadas vacunas inactivas.
  \item F\'aciles de aplicar.
 \end{itemize}
 
-Sin embargo, este tipo de vacunas tambi\'en presentan una importante desventaja,
-como es la probabilidad de revertir a la virulencia y que da origen a este
+Sin embargo, este tipo de vacunas tambi\'en presenta una importante desventaja,
+como la probabilidad de revertir a la virulencia, lo que da origen a este
 trabajo.
 
-En sucesivas replicaciones, el virus atenuado puede acumular mutaciones en su
+En sucesivas replicaciones, un virus atenuado puede acumular mutaciones en su
 secuencia de \ac{RNA} que le devuelvan su car\'acter patog\'enico, produciendo
 la enfermedad que se deseaba prevenir. A diferencia de los virus \ac{DNA}, los
 virus \ac{RNA} poseen una alta frecuencia de mutaciones estimada en 0.1 a 10
@@ -82,34 +82,32 @@ tambi\'en conocida como \ac{OPV}. Esta vacuna, desarrollada por Albert Sabin en
 poliomielitis. 
 
 A ra\'iz de una campa\~na impulsada por la \ac{WHO} en 1988 y utilizando la
-\ac{OPV}, hacia finales de 2002, se hab\'ia logrado interrumpir la
+\ac{OPV}, hacia finales de 2002 se hab\'ia logrado interrumpir la
 transimisi\'on end\'emica del poliovirus en 209 de los 216 pa\'ises del
-mundo\cite{Aylward04}. 
-
-Sin embargo, la alta inestabilidad gen\'etica de esta vacuna dio lugar a
-un nuevo grupo de virus conocidos como \ac{cVDPV} que presentan propiedades
-similares a las del poliovirus salvaje, incluyendo
+mundo\cite{Aylward04}. Sin embargo, la alta inestabilidad gen\'etica de esta
+vacuna di\'o lugar a un nuevo grupo de virus conocidos como \ac{cVDPV}, que
+presentan propiedades similares a las del poliovirus salvaje, incluyendo
 neurovirulencia\footnote{Tendencia o capacidad de un microorganismo de afectar
 el sistema nervioso.} y responsables de una nueva enfermedad denominada
 \ac{VAPP}. 
 
-Diferentes estudios muestran que \ac{VAPP} ocurre a una tasa de
-aproximadamente 1 caso cada 750,000 a 1 millon de ni\~nos que reciben la
+Diferentes estudios muestran que \ac{VAPP} ocurre con una tasa de
+aproximadamente un caso cada 750,000 a 1 millon de ni\~nos que reciben la
 primer dosis de \ac{OPV}\cite{Aylward04}. M\'as a\'un, en Estados Unidos entre
-1980 y 1999, el 95\% de los casos registrados de poliomielitis paralitica,
-fueron \ac{VAPP}\cite{DeJesus07}.
+1980 y 1999, el 95\% de los casos registrados de poliomielitis paralitica fueron
+\ac{VAPP}\cite{DeJesus07}.
 
-En Argentina, el ultimo caso registrado de \ac{VAPP} se produjo en el a\~no
-2009, en la provincia de San Luis\cite{msal09}. Esto derivo en un Alerta
+En Argentina, el \'ultimo caso registrado de \ac{VAPP} se produjo en el a\~no
+2009 en la provincia de San Luis\cite{msal09}. Esto deriv\'o en un Alerta
 Epidemiol\'ogico acompa\~nado de fuertes campa\~nas de vacunaci\'on con la
 vacuna \ac{OPV}.
 
 \section{Antecedentes}
 \label{antecedentes}
 Ante estos datos, se reconoce que uno de los obst\'aculos para erradicar la
-poliomielitis, es la \ac{OPV} en si misma\cite{Chumakov08}. Luego, surge la
+poliomielitis es la \ac{OPV} en si misma\cite{Chumakov08}. Luego, surge la
 necesidad de buscar nuevas formas de dise\~nar vacunas atenuadas que est\'en
-libres de riesgos, o al menos tengan menor probabilidad de revertir a la
+libres de riesgos, o al menos, tengan menor probabilidad de revertir a la
 virulencia.
 
 Es a partir de esto y de los avances en la virolog\'ia molecular, que empieza
@@ -147,7 +145,7 @@ alcanzar una secuencia revertante.
 En este sentido, la principal innovaci\'on que presenta este trabajo, es la
 utilizaci\'on de diferentes algoritmos para la predicci\'on de la estructura
 secundaria de \ac{RNA}, con el fin de determinar secuencias que conserven parte
-de la estructura secundaria del virus atenuado y en consecuencia, mantengan la
+de la estructura secundaria del virus atenuado y, en consecuencia, mantengan la
 atenuaci\'on y las propiedades como vacuna.
 
 Para guiar el desarrollo del trabajo se tom\'o como caso testigo la vacuna

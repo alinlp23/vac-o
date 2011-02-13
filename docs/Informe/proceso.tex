@@ -5,15 +5,15 @@
 A esta altura ya hemos presentado los principales conceptos biol\'ogicos
 involucrados en este trabajo, el dise\~no de vacunas atenuadas y la
 formalizaci\'on del problema que nos propusimos resolver. En los cap\'itulos
-restantes veremos los aspectos t\'ecnicos mas relevantes sobre el desarrollo del
-software.
+restantes veremos los aspectos t\'ecnicos m\'as relevantes sobre el desarrollo
+del software.
 
 \section{Modelo de desarrollo}
 
-Para llevar adelante el desarrollo del software, se opto por el cl\'asico
+Para llevar adelante el desarrollo del software, se opt\'o por el cl\'asico
 modelo de cascada. Fundamentalmente debido a su simplicidad y a que los
 requerimientos con que deb\'ia cumplir el software estaban bien definidos desde
-el inicio. No solo a nivel funcional, sino tambi\'en en cuanto a principios del
+el inicio, no solo a nivel funcional, sino tambi\'en en cuanto a principios del
 dise\~no orientado a objetos.
 
 \subsection{Etapas de la cascada}
@@ -28,7 +28,7 @@ siguientes:
  \item Verificaci\'on.
 \end{enumerate}
 
-Quedaron fuera del alcance, las etapas ``Instalaci\'on'' y por supuesto,
+Quedaron fuera del alcance las etapas ``Instalaci\'on'' y, por supuesto,
 ``Mantenimiento''.
 
 \subsection{Consideraciones del modelo}
@@ -80,19 +80,18 @@ El ``ecosistema'' de herramientas que se utilizaron para llevar adelante el
 proceso de desarrollo son las siguientes:
 
 \begin{itemize}
- \item \textbf{Lenguaje de programaci\'on:} El software se implemento en
+ \item \textbf{Lenguaje de programaci\'on:} El software se implement\'o en
 \textbf{C++}\footnote{\url{http://cplusplus.com}}.
  \item \textbf{Lenguaje de dise\~no:} El dise\~no del software se hizo
 utilizando \textbf{UML}\footnote{\url{http://www.uml.org}}.
- \item \textbf{Control de versiones:} Se utilizo el sistema de control de
+ \item \textbf{Control de versiones:} Se utiliz\'o el sistema de control de
 versiones \ac{SVN}\footnote{\url{http://subversion.apache.org}} y puede ser
 consultado en \url{http://vac-o.googlecode.com}.
  \item \textbf{Sistema de ``construcci\'on'':} Para automatizar el
 proceso de compilaci\'on del c\'odigo fuente se
-utilizo \textbf{CMake}\footnote{\url{http://www.cmake.org}}.
+utiliz\'o \textbf{CMake}\footnote{\url{http://www.cmake.org}}.
  \item \textbf{Automatizaci\'on de pruebas:} Para realizar la verificaci\'on del
-software, se opto por implementar pruebas
-unitarias utilizando
+software, se opt\'o por implementar pruebas unitarias utilizando
 \textbf{google-test}\footnote{\url{http://googletest.googlecode.com}} y
 \textbf{google-mock}\footnote{\url{http://googlemock.googlecode.com}}. 
  \item \textbf{An\'alisis est\'atico:} Se utilizaron las herramientas

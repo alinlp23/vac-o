@@ -4,20 +4,19 @@ regarded as one of the most vital activities of a competent programmer.}%
 {Edsger W. Dijkstra}
 
 Al igual que con los requerimientos del software, la descripci\'on detallada del
-dise\~no quedo documentada en la ``Especificaci\'on de Dise\~no de Software'' y
-que se agrega como anexo. An\'alogamente al capitulo anterior, nos limitaremos
-a mencionar solo los aspectos mas relevantes del dise\~no, dejando como lectura
-adicional el documento anexo.
+dise\~no qued\'o documentada en la ``Especificaci\'on de Dise\~no de Software''
+y que se agrega como anexo. An\'alogamente al capitulo anterior, nos limitaremos
+a mencionar s\'olo los aspectos m\'as relevantes del dise\~no, dejando como
+lectura adicional el documento anexo.
 
 \section{Metodolog\'ia}
 
 La metodolog\'ia adoptada para realizar el an\'alisis y descripci\'on del
-dise\~no se denomina \ac{RDD}\cite{Wirfs03}. Esta t\'ecnica del dise\~no
-orientado a objetos, se enfoca en qu\'e responsabilidades deben ser
+dise\~no se denomina \ac{RDD}\cite{Wirfs03}. Esta t\'ecnica de dise\~no
+orientado a objetos se enfoca en qu\'e responsabilidades deben ser
 cubiertas por el sistema y en cu\'ales ser\'an los objetos responsables de
-llevarlas a cabo.
-
-Por ``responsabilidades'' se entiende fundamentalmente lo siguiente:
+llevarlas a cabo. Por ``responsabilidades'' se entiende fundamentalmente lo
+siguiente:
 \begin{itemize}
  \item Las acciones que realiza un objeto.
  \item El conocimiento o la informaci\'on que mantiene un objeto.
@@ -26,16 +25,14 @@ Por ``responsabilidades'' se entiende fundamentalmente lo siguiente:
 
 \subsubsection{Objetivos del dise\~no}
 
-Como ya mencionamos anteriormente, uno de los requerimientos del software fue
-que se respetaran los principios del dise\~no orientado a objetos resumidos en
-el acr\'onimo \textbf{SOLID}\cite{Martin00}.
-
-En particular se puso especial atenci\'on en respetar los principios \ac{SRP}, 
-\ac{OCP} y \ac{DIP} debido a que repercuten directamente en que el sistema sea
-mas simple de mantener y extender con nuevas funcionalidades. Adem\'as, el
-principio \ac{DIP} es fundamental para lograr un software que sea verificable
-mediante la automatizaci\'on de pruebas como se pudo comprobar mas adelante, en
-la etapa de ``verificaci\'on''.
+Uno de los requerimientos del software fue que se respetaran los principios del
+dise\~no orientado a objetos resumidos en el acr\'onimo
+\textbf{SOLID}\cite{Martin00}. En particular se puso especial atenci\'on en
+respetar los principios \ac{SRP}, \ac{OCP} y \ac{DIP} debido a que repercuten
+directamente en que el sistema sea m\'as simple de mantener y extender con
+nuevas funcionalidades. Adem\'as, el principio \ac{DIP} es fundamental para
+lograr un software que sea verificable mediante la automatizaci\'on de pruebas
+como se pudo comprobar m\'as adelante, en la etapa de ``verificaci\'on''.
 
 \section{Arquitectura}
 
@@ -60,12 +57,12 @@ caracter\'isticas propias de la vacuna que se desea optimizar. Brinda
 informaci\'on para la configuraci\'on inicial como as\'i tambi\'en, los
 criterios para evaluar las secuencias candidatas.
    \item \textbf{CombinatoryEngine:} Representa el motor combinatorio del
-sistema encargado de encontrar, nuevas secuencias que sean candidatas a
+sistema encargado de encontrar nuevas secuencias que sean candidatas a
 optimizar la atenuaci\'on del virus.
    \item \textbf{QAEngine:} Representa el motor de control de calidad del
-sistema encargado de decidir, si una secuencia candidata pasa el control o no.
+sistema encargado de decidir si una secuencia candidata pasa el control o no.
    \item \textbf{Ranker:} Representa el componente encargado de mantener un
-``ranking'' de secuencias que sera adem\'as, el resultado final de la
+``ranking'' de secuencias que ser\'a adem\'as el resultado final de la
 ejecuci\'on.
    \item \textbf{libRNA:} Representa el componente que provee al sistema
 funcionalidades para la manipulaci\'on de secuencias y estructuras de \ac{RNA}
@@ -81,11 +78,11 @@ utilizando librer\'ias externas.
 \end{figure}
 
 En las siguientes secciones profundizaremos sobre los componentes ``libRNA'' y
-``CombinatoryEngine'' por ser probablemente los mas importantes en cuanto a sus
-responsabilidades y dejaremos como lectura adicional la ``Especificaci\'on de
-Dise\~no de Software'' que contiene una descripci\'on detallada de todos los
+``CombinatoryEngine'' por ser probablemente los m\'as importantes en cuanto a
+sus responsabilidades y dejaremos como lectura adicional la ``Especificaci\'on
+de Dise\~no de Software'' que contiene una descripci\'on detallada de todos los
 componentes de la arquitectura presentada. Al mismo tiempo, profundizar sobre
-estos componentes, nos permitir\'a introducir los principales patrones de
+estos componentes nos permitir\'a introducir los principales patrones de
 dise\~no que se utilizaron de forma an\'aloga en otras partes del sistema.
 Entre otros, se destacan \textit{Iterator}, \textit{Observer}, \textit{Template
 Method} y \textit{Visitor}. Para una descripci\'on de estos y otros patrones
@@ -129,14 +126,14 @@ de \textbf{IFoldInverse}.
 \section{Motor combinatorio}
 \label{diseno-motor}
 El componente ``CombinatoryEngine'' contiene todo lo referente al recorrido del
-espacio de b\'usqueda por lo que es claramente, uno de los componentes
-principales de \ac{vac-o}. Esto es fundamentalmente, las regiones
+espacio de b\'usqueda por lo que es, claramente, uno de los componentes
+principales de \ac{vac-o}, esto es fundamentalmente, las regiones
 combinatorias y las diferentes estrategias de b\'usqueda.
 
 Para permitir que el software sea de utilidad para diferentes tipos de virus,
 tanto las regiones combinatorias como la estrategia de b\'usqueda utilizada
 para la optimizaci\'on, deb\'ian ser altamente configurables. Luego, el
-objetivo sobre este componente, fue capturar la estructura general de los
+objetivo sobre este componente fue capturar la estructura general de los
 algoritmos de b\'usqueda local que suelen denominarse de ``mejoramiento
 iterativo''. Algunos de estos algoritmos son:
 
@@ -153,7 +150,7 @@ presentes los conceptos de ``vecindario'' (\textit{neighborhood}) y de
 capitulo~\ref{busqueda}. Mientras tanto, la siguiente introducci\'on nos
 servir\'a para justificar las interfaces propuestas.
 
-Si el espacio de b\'usqueda es $\mathcal{S}$, entonces un ``vecindario'' sera
+Si el espacio de b\'usqueda es $\mathcal{S}$, entonces un ``vecindario'' ser\'a
 una relaci\'on $\mathcal{N} \subseteq \mathcal{S} \times \mathcal{S}$ y el
 ``movimiento'' (entre soluciones en el espacio de b\'usqueda) sera una funci\'on
 $step: \mathcal{S} \rightarrow \mathcal{D}(\mathcal{S})$. Donde $\mathcal{D}(S)$
@@ -162,7 +159,7 @@ y donde una distribuci\'on de probabilidad $D \in \mathcal{D}(S)$ es una
 funci\'on $D:S \rightarrow \mathbb{R}^{+}_{0}$ que mapea los elementos de $S$ a
 sus respectivas probabilidades.
 
-Luego, en cada iteraci\'on de la b\'usqueda, hay dos responsabilidades bien
+Luego, en cada iteraci\'on de la b\'usqueda hay dos responsabilidades bien
 diferenciadas e independientes. Por un lado, se debe explorar el ``vecindario''
 de la soluci\'on actual. Es decir, si la soluci\'on actual es $s$ y el
 ``vecindario'' es $\mathcal{N}$, debemos generar el conjunto de soluciones
@@ -200,7 +197,7 @@ Figura~\ref{motor} se puede ver el diagrama de secuencia del motor combinatorio.
 El principal patr\'on de dise\~no que utilizamos en este componente es el que
 se denomina \textit{Observer} y que sirve fundamentalmente para lograr la
 comunicaci\'on entre diferentes objetos sin que se produzca acoplamiento. La
-idea es establecer una relaci\'on entre un emisor y uno, o varios receptores
+idea es establecer una relaci\'on entre un emisor y uno o varios receptores
 sin necesidad de generar una dependencia entre el objeto emisor y el objeto
 receptor. Adem\'as para permitir el uso del patr\'on \textit{Observer} entre
 diferentes tipos de objetos, se propuso el patr\'on de dise\~no \textit{Template
@@ -210,10 +207,10 @@ En nuestro caso, \textbf{INeighborhood} notifica a \textbf{IStrategy} por cada
 soluci\'on que se genera mientras se explora el vecindario de la soluci\'on
 actual. Posteriormente, si la soluci\'on seleccionada es mejor que la soluci\'on
 actual, \textbf{IStrategy} notifica a \textbf{ICombinatoryEngine} la soluci\'on
-seleccionada y este a su vez, la notifica a otros componentes de \ac{vac-o}
+seleccionada y \'este a su vez, la notifica a otros componentes de \ac{vac-o}
 (control de calidad).
 
-Una vez mas, remarcamos que las dependencias son entre interfaces y no entre
+Una vez m\'as, remarcamos que las dependencias son entre interfaces y no entre
 implementaciones como establece el principio de dise\~no \ac{DIP}. Esto nos
 brinda la versatilidad de definir diferentes tipos de regiones combinatorias y
 estrategias de b\'usqueda sin modificar en absoluto la implementaci\'on del

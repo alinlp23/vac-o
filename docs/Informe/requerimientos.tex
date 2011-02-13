@@ -5,7 +5,7 @@
 Los requerimientos del software fueron provistos por miembros de \ac{FuDePAN} y
 quedaron documentados en la ``Especificaci\'on de Requerimientos de Software''
 que se anexa a este trabajo. A continuaci\'on haremos menci\'on a los
-requerimientos mas relevantes y que nos permitan introducir los principales
+requerimientos m\'as relevantes y que nos permitan introducir los principales
 aspectos del software.
 
 \section{Descripci\'on general}
@@ -20,7 +20,7 @@ virus atenuado.
  \item \textbf{Objetivo:} Satisfaciendo las restricciones impuestas, maximizar
 la cantidad de mutaciones necesarias para que el virus atenuado se convierta en
 una secuencia pat\'ogena o revertante.
- \item \textbf{Salida:} Una o varias secuencias, candidatas a ``mejorar'' el
+ \item \textbf{Salida:} Una o varias secuencias candidatas a ``mejorar'' el
 virus atenuado.
 \end{itemize}
 
@@ -40,8 +40,8 @@ dise\~no conocidos por el acr\'onimo \textbf{SOLID}\cite{Martin00}.
 \section{Extensiones}
 
 Uno de los principales requerimientos con que deb\'ia cumplir el software es
-que sea vers\'atil. Es decir, que permita ser configurado y extendido de una
-forma simple y sin modificar sus componentes centrales.
+que sea vers\'atil, es decir, que permita ser configurado y extendido de una
+forma simple y sin necesidad de modificar sus componentes centrales.
 
 En este sentido, se propuso desde un comienzo un software que funcionar\'ia en
 base a la informaci\'on provista por una extensi\'on o \textit{plugin}.
@@ -57,51 +57,49 @@ secuencias candidatas y de determinar la estrategia de b\'usqueda.
 
 Como ya mencionamos anteriormente, el problema se puede ver como un problema de
 ``optimizaci\'on combinatoria basado en restricciones''. Luego, un ingrediente
-que no podemos dejar de mencionar son precisamente, las restricciones. 
+que no podemos dejar de mencionar son, precisamente, las restricciones. 
 
-Como vimos en la secci\'on~\ref{bio-esencial}, sobre una secuencia de \ac{RNA}
-se distinguen dos tipos de regiones, \ac{ORF} y \ac{UTR}. Estas regiones de la
-secuencia o eventualmente ciertas partes de inter\'es, tienen diferentes
-propiedades o funciones biol\'ogicas (la estructura secundaria de \ac{RNA} o
-los amino\'acidos que codifican) que permiten considerar a la secuencia de
-\ac{RNA} como perteneciente a un virus atenuado (reducen la virulencia del
-pat\'ogeno manteni\'endolo viable o ``vivo'').
+Sobre una secuencia de \ac{RNA} se distinguen dos tipos de regiones, \ac{ORF} y
+\ac{UTR}. Estas regiones de la secuencia o eventualmente ciertas partes de
+inter\'es, tienen diferentes propiedades o funciones biol\'ogicas (la estructura
+secundaria de \ac{RNA} o los amino\'acidos que codifican) que permiten
+considerar a la secuencia de \ac{RNA} como perteneciente a un virus atenuado
+(reducen la virulencia del pat\'ogeno manteni\'endolo viable o ``vivo'').
 
 Sobre las diferentes partes de inter\'es (para la atenuaci\'on del virus)
-sobre una secuencia de \ac{RNA}, que llamaremos ``regiones combinatorias'', se
+de una secuencia de \ac{RNA}, que llamaremos ``regiones combinatorias'', se
 aplicar\'an restricciones que tiendan a mantener las propiedades o funciones
 biol\'ogicas que garantizan la atenuaci\'on del virus. 
 
 En este contexto nos referimos a las ``variantes'' de una regi\'on combinatoria
 como los posibles valores ((sub)secuencias de \ac{RNA}) que satisfacen la
-restricci\'on impuesta por la regi\'on combinatoria. Luego, podemos definir a
-una regi\'on combinatoria de la siguiente manera.
+restricci\'on impuesta por la regi\'on combinatoria. As\'i, podemos definir a
+una regi\'on combinatoria de la siguiente manera:
 
 \begin{definition}
 \label{region}
 Dada una secuencia de \ac{RNA} $S$ de longitud $n$, una regi\'on combinatoria
-sobre $S$ sera una 4-upla $(inicio, fin, tipo, eval)$ tal que:
+sobre $S$ ser\'a una 4-upla $(inicio, fin, tipo, eval)$ tal que:
 \begin{itemize}
  \item $0 \le inicio < fin \le n$
- \item $tipo$ determina la restricci\'on sobre la regi\'on y por ende, queda
+ \item $tipo$ determina la restricci\'on sobre la regi\'on y, por ende, queda
 definido un conjunto $\mathcal{V}$ de posibles variantes a la regi\'on.
  \item $eval: \mathcal{V} \rightarrow (0,1)$ es una funci\'on de evaluaci\'on
 local a la regi\'on que determina la bondad de una variante determinada.
 \end{itemize}
 \end{definition}
 
-Si suponemos $N \ge 1$ y $R_{1}, \dots, R_{N}$ regiones combinatorias.
-Entonces tendremos que el n\'umero de posibles secuencias que \ac{vac-o}
-``deber\'ia'' evaluar, sera igual al cardinal del producto cartesiano
-$\mathcal{V}_{1} \times \dots \times \mathcal{V}_{N}$ con  $\mathcal{V}_{1},
-\dots, \mathcal{V}_{N}$ variantes de cada regi\'on combinatoria respectivamente.
-
-Con el objetivo de que las secuencias evaluadas cumplan con un m\'inimo criterio
-de ``calidad'' y al mismo tiempo restringir el n\'umero de posibilidades, solo
-ser\'an tenidas en cuenta aquellas combinaciones de las variantes a cada
-regi\'on combinatoria tal que el producto de sus respectivas evaluaciones
-locales ($eval$) sea mayor o igual a un ``umbral'' determinado por la
-extensi\'on. Es decir, ser\'an tenidas en cuenta las combinaciones de variantes:
+Si suponemos $N \ge 1$ y $R_{1}, \dots, R_{N}$ regiones combinatorias, tendremos
+que el n\'umero de posibles secuencias que \ac{vac-o} ``deber\'ia'' evaluar,
+sera igual al cardinal del producto cartesiano $\mathcal{V}_{1} \times \dots
+\times \mathcal{V}_{N}$ con  $\mathcal{V}_{1}, \dots, \mathcal{V}_{N}$ variantes
+de cada regi\'on combinatoria respectivamente. Con el objetivo de que las
+secuencias evaluadas cumplan con un m\'inimo criterio de ``calidad'' y al mismo
+tiempo restringir el n\'umero de posibilidades, solo ser\'an tenidas en cuenta
+aquellas combinaciones de las variantes a cada regi\'on combinatoria tal que el
+producto de sus respectivas evaluaciones locales ($eval$) sea mayor o igual a un
+``umbral'' determinado por la extensi\'on. Es decir, ser\'an tenidas en cuenta
+las combinaciones de variantes:
 \begin{center}
 $(v_{1},\dots, v_{N}) \in \mathcal{V}_{1} \times \dots \times \mathcal{V}_{N}$
 tal que $\prod_{i=1}^{N} eval(v_{i}) \ge umbral$ 
@@ -151,7 +149,7 @@ validaci\'on de la siguiente manera.
 
 \begin{definition}
 Dada una secuencia de \ac{RNA} $S$ de longitud $n$, una regi\'on de validaci\'on
-sobre $S$ sera una 5-upla $(inicio, fin, prueba, criterio, prof)$ tal que:
+sobre $S$ ser\'a una 5-upla $(inicio, fin, prueba, criterio, prof)$ tal que:
 \begin{itemize}
  \item $0 \le inicio < fin \le n$
  \item $prueba$ determina la forma en que se producen las mutaciones.
@@ -172,7 +170,7 @@ secuencia candidata no pasa el control de calidad sobre esa regi\'on de
 validaci\'on.
 
 Diremos que una secuencia pasa el control de calidad sobre una regi\'on de
-validaci\'on, cuando sea posible generar todos los nodos del \'arbol hasta
+validaci\'on cuando sea posible generar todos los nodos del \'arbol hasta
 alcanzar la profundidad $prof$. Luego, solo ser\'an consideradas aquellas
 secuencias candidatas que pasen el control de calidad sobre todas las regiones
 de validaci\'on.
@@ -180,17 +178,16 @@ de validaci\'on.
 Para las formas de producir mutaciones acumuladas se contemplaron ``mutaciones
 sistem\'aticas'' y ``mutaciones aleatorias''. Por otro lado, las propiedades
 que se contemplaron como criterio de verificaci\'on son ``similitud
-estructural'' y ``disimilitud estructural''.
-
-Por similitud y disimilitud estructural nos referimos a la comparaci\'on entre
-la estructura secundaria de \ac{RNA} de cada secuencia mutante y una estructura
-secundaria de \ac{RNA} dada por la extensi\'on. 
+estructural'' y ``disimilitud estructural''. Por similitud y disimilitud
+estructural nos referimos a la comparaci\'on entre la estructura secundaria de
+\ac{RNA} de cada secuencia mutante y una estructura secundaria de \ac{RNA} dada
+por la extensi\'on. 
 
 Si suponemos $\mathcal{E}$ el conjunto de estructuras secundarias sobre
 secuencias de longitud $n$ y una funci\'on $StructureCompare : \mathcal{E}
 \times \mathcal{E} \rightarrow (-\infty, 1)$ tal que dadas $e_{1},e_{2} \in
 \mathcal{E}$ calcula la similitud entre ellas, siendo 1 el valor de similitud
-m\'axima ($e_{1} = e_{2}$). Entonces, para $s \in (-\infty, 1)$ tenemos que:
+m\'axima ($e_{1} = e_{2}$), entonces, para $s \in (-\infty, 1)$ tenemos que:
 \begin{itemize}
  \item Similitud estructural: $StructureCompare(e_{1}, e_{2}) \ge s$
  \item Disimilitud estructural: $StructureCompare(e_{1}, e_{2}) \le s$
@@ -203,10 +200,9 @@ verificaci\'on.
 \section{Ranking de secuencias candidatas}
 
 Finalmente, nos queda por describir el ranking de secuencias candidatas y que
-representa fundamentalmente el resultado de la ejecuci\'on de \ac{vac-o}.
-
-Esto es simplemente un listado de secuencias de \ac{RNA}, ordenadas seg\'un la
+representa fundamentalmente el resultado de la ejecuci\'on de \ac{vac-o}. Esto
+es simplemente un listado de secuencias de \ac{RNA}, ordenadas seg\'un la
 evaluaci\'on que hiciera la extensi\'on. B\'asicamente, las secuencias mejor
 evaluadas ser\'an aquellas que est\'en a mayor distancia (para alguna
-definici\'on de distancia) de la secuencia pat\'ogena o revertante y por ende,
+definici\'on de distancia) de la secuencia pat\'ogena o revertante y, por ende,
 tendr\'an menor probabilidad de sufrir reversi\'on a la virulencia.
