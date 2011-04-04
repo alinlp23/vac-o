@@ -1,0 +1,57 @@
+\chapter{Todo concluye al fin}
+\epigraph{Pase lo que pase, dirija quien dirija, todo el mundo sabe que la
+camiseta 10 de la selecci\'on ser\'a m\'ia... Para siempre.}%
+{Diego Armando Maradona}
+
+\section{Aportes}
+
+El principal aporte de este trabajo fue el an\'alisis y la formalizaci\'on del
+problema biol\'ogico y la posterior propuesta de c\'omo solucionarlo
+computacionalmente. En este sentido, se pudo implementar un software que sirve
+como una prueba de concepto aunque todav\'ia queden funcionalidades y
+consideraciones a tener cuenta antes de pensar en usarlo para el dise\~no de
+vacunas atenuadas m\'as seguras.
+
+Por otra parte, de alguna manera esto pretende ser un aporte (muy humilde por
+cierto) a la ``interdisciplina'' como forma de aplicar los conocimientos
+cient\'ificos en la resoluci\'on concreta de problemas que afectan la calidad de
+vida de las personas.
+
+Por \'ultimo, el trabajo fue presentado en la ``XXX Reuni\'on Cient\'ifica de la
+\ac{SAV}'' donde recibimos muy buenas cr\'iticas y comentarios que
+nos incentivan a seguir trabajando.
+
+\section{Trabajo futuro}
+
+Como dec\'iamos en la secci\'on anterior, queda pendiente continuar el
+desarrollo del software para tener en cuenta:
+\begin{itemize}
+ \item Rango de temperaturas: esto afecta la predicci\'on de estructura
+secundaria de \ac{RNA} y las probabilidades de mutaci\'on entre las bases de
+nucle\'otidos, por lo que es muy relevante en la probabilidad de reversi\'on a
+la virulencia.
+ \item Soporte de recombinantes: se deber\'ia contemplar la probabilidad de que
+el virus evolucione por combinaciones con virus hom\'ologos y evaluar las
+repercusiones.
+ \item Soporte para otros tipos de virus: tener en cuenta las particularidades
+de otras clases de virus de la ``Clasificaci\'on de Baltimore''.
+\end{itemize}
+
+Desde un punto de vista m\'as computacional, se deber\'ia trabajar en:
+\begin{itemize}
+ \item Paralelizaci\'on: esto es fundamental para poder ejecutar el
+software con datos reales, fundamentalmente debido al costo de realizar la
+predicci\'on directa e inversa de la estructura secundaria de \ac{RNA}.
+ \item Estrategias de b\'usqueda: se deber\'ia analizar la posibilidad de
+implementar otros algoritmos de b\'usqueda local m\'as complejos y que
+probablemente conduzcan a mejores resultados.
+\end{itemize}
+
+Tambi\'en queda pendiente la posibilidad de desarrollar extensiones usando
+lenguajes de programaci\'on m\'as ``\'agiles'' que C++, como podr\'ia ser el
+caso de Python y el desarrollo de una interfaz m\'as ``amigable'' para el
+usuario final. 
+
+Por \'ultimo, se deben realizar ensayos con datos reales que permitan
+caracterizar de mejor manera el espacio de b\'usqueda y en funci\'on de eso,
+determinar los par\'ametros que mejor se ajusten al mismo.

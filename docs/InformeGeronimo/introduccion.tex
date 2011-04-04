@@ -1,0 +1,151 @@
+\chapter{Introducci\'on}
+\epigraph{A foolish faith in authority is the worst enemy of truth.}%
+         {Albert Einstein}
+
+\section{Objetivo}
+El objetivo de este trabajo es el dise\~no y desarrollo de un software que
+sirva como soporte para el dise\~no de vacunas atenuadas. En este sentido, la
+propuesta es encontrar un conjunto de secuencias de \ac{RNA} que conserven las
+propiedades que le otorgan la atenuaci\'on a la vacuna y que al mismo tiempo,
+tiendan a maximizar el n\'umero de mutaciones necesarias para alcanzar
+secuencias semejantes a las pat\'ogenas o revertantes\footnote{(Para el lector
+ajeno a la biolog\'ia) que producen la enfermedad que la vacuna debiera
+prevenir.}. 
+
+En los cap\'itulos~\ref{biologia} y \ref{bioinformatica} se introducen los
+conceptos biol\'ogicos b\'asicos y algunos de los problemas caracter\'isticos
+de la bioinform\'atica, profundizando en aquellos que est\'an m\'as relacionados
+con este trabajo. Luego, en el cap\'itulo~\ref{diseno} se describen la
+metodolog\'ia cl\'asica para el dise\~no de vacunas atenuadas, algunos
+antecedentes del dise\~no racional y finalmente, la soluci\'on propuesta. Por
+\'ultimo, en la parte~\ref{software} se describen los detalles puramente
+t\'ecnicos y m\'as relevantes sobre el desarrollo del software.
+
+\section{Sobre las vacunas}
+\label{vacunas}
+El uso de vacunas representa una herramienta importante para combatir enfermedades y
+epidemias. Pero al mismo tiempo, no carecen de efectos indeseados, a veces causados
+por algunos de sus componentes que pueden resultar t\'oxicos (aluminio, mercurio,
+cloroformo), y seg\'un algunos autores en alg\'un caso espec\'ifico podr\'ia inducir
+enfermedades a largo plazo, o agravar la enfermedad en caso posterior a infecci\'on
+como ha ocurrido con la vacuna inactivada para el sarampi\'on.
+
+Aun as\'i, su uso est\'a ampliamente aceptado en la mayor\'ia de los pa\'ises
+del mundo, siendo las campa\~nas masivas de vacunaci\'on, una de las
+principales pol\'iticas p\'ublicas de salud.
+
+\subsubsection{Origen de las vacunas}
+
+El origen de las vacunas se remonta al a\~no 1796 durante la epidemia del virus
+de la viruela en Europa. El m\'edico rural, Edward Jenner, observ\'o que las
+mujeres que orde\~naban las vacas eventualmente contra\'ian una especie de
+``viruela vacuna'' por el contacto con las ubres, y que luego la viruela com\'un
+no les produc\'ia ning\'un efecto. Efectivamente, el virus Vaccinia que se us\'o
+como vacuna contra la viruela com\'un, result\'o ser un virus muy emparentado
+pero que no produc\'ia efectos de consideraci\'on en las personas y que di\'o
+origen a lo que hoy se conocen como vacunas vivas o atenuadas.
+
+\section{Motivaci\'on}
+\label{motivacion}
+Dejando de lado la discusi\'on planteada anteriormente, el objetivo b\'asico de
+una vacuna es estimular el sistema inmune sin producir la enfermedad en
+cuesti\'on. En este sentido, las vacunas atenuadas presentan algunas ventajas
+frente a las denominadas vacunas inactivas.
+\begin{itemize}
+ \item Proveen inmunidad a largo plazo.
+ \item Pocas dosis son suficientes para adquirir inmunidad. 
+ \item F\'aciles de aplicar.
+\end{itemize}
+
+Sin embargo, este tipo de vacunas tambi\'en presenta una importante desventaja,
+como la probabilidad de revertir a la virulencia, lo que da origen a este
+trabajo.
+
+En sucesivas replicaciones, un virus atenuado puede acumular mutaciones en su
+secuencia de \ac{RNA} que le devuelvan su car\'acter patog\'enico, produciendo
+la enfermedad que se deseaba prevenir. A diferencia de los virus \ac{DNA}, los
+virus \ac{RNA} poseen una alta frecuencia de mutaciones estimada en 0.1 a 10
+mutaciones por genoma replicado\cite{Vignuzzi08}.
+
+Un caso paradigm\'atico es el de la vacuna Sabin contra la poliomielitis,
+tambi\'en conocida como \ac{OPV}. Esta vacuna, desarrollada por Albert Sabin en
+1957, es una vacuna atenuada administrada por v\'ia oral para prevenir la
+poliomielitis. 
+
+A ra\'iz de una campa\~na impulsada por la \ac{WHO} en 1988 y utilizando la
+\ac{OPV}, hacia finales de 2002 se hab\'ia logrado interrumpir la
+transimisi\'on end\'emica del poliovirus en 209 de los 216 pa\'ises del
+mundo\cite{Aylward04}. Sin embargo, la alta inestabilidad gen\'etica de esta
+vacuna di\'o lugar a un nuevo grupo de virus conocidos como \ac{cVDPV}, que
+presentan propiedades similares a las del poliovirus salvaje, incluyendo
+neurovirulencia\footnote{Tendencia o capacidad de un microorganismo de afectar
+el sistema nervioso.} y responsables de una nueva enfermedad denominada
+\ac{VAPP}. 
+
+Diferentes estudios muestran que \ac{VAPP} ocurre con una tasa de
+aproximadamente un caso cada 750,000 a 1 millon de ni\~nos que reciben la
+primer dosis de \ac{OPV}\cite{Aylward04}. M\'as a\'un, en Estados Unidos entre
+1980 y 1999, el 95\% de los casos registrados de poliomielitis paralitica fueron
+\ac{VAPP}\cite{DeJesus07}.
+
+En Argentina, el \'ultimo caso registrado de \ac{VAPP} se produjo en el a\~no
+2009 en la provincia de San Luis\cite{msal09}. Esto deriv\'o en un Alerta
+Epidemiol\'ogico acompa\~nado de fuertes campa\~nas de vacunaci\'on con la
+vacuna \ac{OPV}.
+
+\section{Antecedentes}
+\label{antecedentes}
+Ante estos datos, se reconoce que uno de los obst\'aculos para erradicar la
+poliomielitis es la \ac{OPV} en si misma\cite{Chumakov08}. Luego, surge la
+necesidad de buscar nuevas formas de dise\~nar vacunas atenuadas que est\'en
+libres de riesgos, o al menos, tengan menor probabilidad de revertir a la
+virulencia.
+
+Es a partir de esto y de los avances en la virolog\'ia molecular, que empieza
+a tomar fuerza la idea de \textbf{racionalizar el dise\~no de vacunas
+atenuadas}, de forma tal de poder controlar y cuantificar la atenuaci\'on de las
+vacunas\cite{Lauring10}.
+
+Algunos de los m\'etodos propuestos y que analizaremos con mayor detalle m\'as
+adelante, son la deoptimizaci\'on  de codones\cite{Coleman08} y la fidelidad en
+la replicaci\'on del virus atenuado\cite{Vignuzzi08}.
+
+\section{Propuesta}
+\label{propuesta}
+En este trabajo, realizado con la colaboraci\'on de la
+\ac{FuDePAN}\footnote{\url{http://www.fudepan.org.ar}}, se propone la
+implementaci\'on de un software, que hemos dado en llamar \ac{vac-o}, para el
+dise\~no de secuencias de \ac{RNA} que optimicen las vacunas atenuadas como un
+problema de \textbf{``optimizaci\'on combinatoria basado en restricciones''}. 
+
+Este tipo de problemas consiste en asignar valores a un conjunto finito de
+variables que satisfagan determinadas condiciones o restricciones. Estas
+variables conforman las ``componentes de la soluci\'on'', y las combinaciones de
+los distintos valores que puede tomar cada componente forman las potenciales
+soluciones del problema. Luego, usando una funci\'on de evaluaci\'on sobre las
+soluciones, se debe encontrar una soluci\'on, o varias, que maximicen o
+minimicen dicha funci\'on.\cite{Hoos04}.
+
+En nuestro caso, las restricciones ser\'an propiedades sobre partes de la
+secuencia de \ac{RNA}, como la conservaci\'on de la secuencia aminoac\'idica y
+la estructura secundaria de \ac{RNA}. Las soluciones ser\'an secuencias
+completas de \ac{RNA} y la funci\'on de evaluaci\'on sobre estas soluciones, que
+deseamos maximizar, estar\'a dada por el n\'umero de mutaciones necesario para
+alcanzar una secuencia revertante.
+
+En este sentido, la principal innovaci\'on que presenta este trabajo, es la
+utilizaci\'on de diferentes algoritmos para la predicci\'on de la estructura
+secundaria de \ac{RNA}, con el fin de determinar secuencias que conserven parte
+de la estructura secundaria del virus atenuado y, en consecuencia, mantengan la
+atenuaci\'on y las propiedades como vacuna.
+
+Para guiar el desarrollo del trabajo se tom\'o como caso testigo la vacuna
+\ac{OPV}. Esto nos permiti\'o establecer una serie de requerimientos b\'asicos,
+que esperamos sean de utilidad para otras vacunas.
+
+Desde el punto de vista de la implementaci\'on, se puso especial atenci\'on en
+utilizar diferentes principios y patrones de \ac{OOP} con
+el fin de lograr un software que sea altamente modular y que permita ser
+extendido en el futuro con nuevas funcionalidades. El c\'odigo fuente fue
+liberado bajo licencia \ac{GPLv3} y puede ser accedido a trav\'es del
+repositorio \ac{SVN}\footnote{\url{http://vac-o.googlecode.com}}

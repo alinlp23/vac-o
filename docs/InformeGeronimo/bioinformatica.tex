@@ -1,0 +1,187 @@
+\chapter{Bioinform\'atica y Biolog\'ia computacional}
+\label{bioinformatica}
+\epigraph{I can't be as confident about computer science as I can about biology.
+Biology easily has 500 years of exciting problems to work on. It's at that
+level.}%
+{Donald Knuth}
+
+Por tratarse de una disciplina relativamente nueva, nos permitimos una breve
+introducci\'on, definici\'on y repaso de los principales problemas abordados
+por la bioinform\'atica profundizando en aquellos problemas que est\'an
+directamente relacionados con este trabajo.
+
+\section{Bio*}
+
+La biolog\'ia siempre dependi\'o en gran parte de la qu\'imica para poder
+avanzar y esto di\'o lugar a lo que se conoce como \textit{bioqu\'imica}.
+An\'alogamente, la necesidad de explicar fen\'omenos biol\'ogicos a nivel
+at\'omico, di\'o lugar a la \textit{biof\'isica}. La \textit{biomatem\'atica}
+por su parte, se enfoca en el modelado de procesos biol\'ogicos utilizando
+t\'ecnicas matem\'aticas que permitan simular y predecir su comportamiento. La
+enorme cantidad de datos recopilados por los bi\'ologos y la necesidad de
+herramientas para interpretarlos, di\'o origen a lo que hoy conocemos como
+\textit{bioinform\'atica}.
+
+La bioinform\'atica fue precedida por lo que se llam\'o \textit{biolog\'ia
+computacional}. Aunque no hay una definici\'on precisa para ninguno de
+los dos t\'erminos, la biolog\'ia computacional se caracteriz\'o por enfocarse
+en los aspectos te\'oricos/formales de la Ciencia de la Computaci\'on,
+mientras que la bioinform\'atica supo estar m\'as relacionada con el
+procesamiento de grandes vol\'umenes de datos, usualmente almacenados en la
+Internet. Actualmente, se utilizan ambos t\'erminos de manera indiferente.
+
+\subsubsection{Problemas cl\'asicos}
+
+A continuaci\'on presentamos algunos de los problemas o temas de investigaci\'on
+abordados por la bioinform\'atica.
+
+\begin{itemize}
+ \item An\'alisis de secuencias de \ac{DNA} o \ac{RNA}.
+ \item Dise\~no de secuencias de \ac{DNA} o \ac{RNA}.
+ \item Predicci\'on de interacci\'on entre prote\'inas.
+ \item An\'alisis de mutaciones en el c\'ancer.
+ \item Biolog\'ia evolutiva computacional.
+\end{itemize}
+
+\section{Predicci\'on de estructura secundaria}
+
+Uno de los problemas que omitimos mencionar anteriormente, y que describiremos
+con mayor detalle, es el que se conoce como ``predicci\'on de estructura
+secundaria''. Este problema consiste en, dada una estructura primaria o
+secuencia de \ac{RNA}, determinar la estructura secundaria correspondiente.
+Adem\'as, diferentes secuencias de \ac{RNA} pueden tener la misma estructura
+secundaria, por lo que tambi\'en nos interesa determinar para una estructura
+secundaria dada, las secuencias de \ac{RNA} que conservan esa estructura.
+ 
+Por lo mencionado en la secciones~\ref{estructura} y \ref{virus}, predecir la
+estructura secundaria de una secuencia de \ac{RNA} y conocer las posibles
+secuencias que conservan una estructura secundaria determinada es de gran
+importancia en este trabajo.
+
+En ingl\'es, se suele denominar a estos dos problemas \textit{folding} e
+\textit{inverse folding} respectivamente. A continuaci\'on describimos
+brevemente las diferentes aproximaciones a cada uno de ellos.
+
+\subsection{Predicci\'on directa (\textit{folding})}
+\label{folding}
+Existen esencialmente 2 tipos de algoritmos para determinar o predecir la
+estructura secundaria de una secuencia de \ac{RNA}.
+
+\begin{itemize} 
+ \item \textbf{Predicci\'on por \ac{mfe}}. Propuesto e implementado por Michael
+Zuker en 1981\cite{Zuker81}, utiliza programaci\'on din\'amica para encontrar la
+estructura secundaria que minimiza la energ\'ia libre.
+ \item \textbf{Predicci\'on comparativa}. Utiliza diferentes m\'etodos para
+comparar secuencias y estructuras con el fin de obtener una estructura por
+``consenso''\cite{Gardner04}.
+\end{itemize}
+
+Si bien la ``predicci\'on comparativa'' presenta un incremento en la fidelidad
+de los resultados obtenidos con respecto a la ``predicci\'on por \ac{mfe}''
+\cite{Gardner04}, este tipo de algoritmos requieren la existencia de un conjunto
+de secuencias relacionadas entre s\'i (hom\'ologas) y esto no siempre es
+posible. En particular para este trabajo nos interesa poder realizar
+predicciones de la estructura secundaria a partir de una sola secuencia, por lo
+que la ``predicci\'on comparativa'' fue descartada.
+
+Entre las implementaciones de la ``predicci\'on por \ac{mfe}'', se destacan
+\textbf{RNAfold}\cite{Hofacker94} y \textbf{Mfold}\cite{Zuker81}. Ambas
+implementan el algoritmo propuesto por Michael Zuker con complejidad
+$\mathcal{O}(N^{3})$ donde $N$ es la longitud de la secuencia, aunque
+\textbf{RNAfold} se presenta como una versi\'on mejorada y mas eficiente en la
+pr\'actica. Como ya mencionamos en la secci\'on~\ref{estructura}, para lograr
+esta complejidad polinomial, es necesario suponer la ausencia de
+\textit{pseudo-knots}. De lo contrario, est\'a demostrado que el problema es
+NP-completo\cite{Lyngso00}.
+
+A continuaci\'on se puede ver un ejemplo de una predicci\'on realizada con
+\textbf{RNAfold}.
+
+\begin{verbatim}
+sancho@mulata:~$ RNAfold
+
+Input string (upper or lower case); @ to quit
+....,....1....,....2....,....3....,....4....,....5....,....6....,.
+AAAGGCAACGGCCAU
+length = 15
+AAAGGCAACGGCCAU
+...(((....)))..
+ minimum free energy =  -4.40 kcal/mol
+\end{verbatim}
+
+El resultado obtenido es, precisamente, la energ\'ia libre y la estructura
+secundaria representada con par\'entesis y puntos, donde los pares de
+par\'entesis indican las bases ``apareadas'' o ``unidas'' y los puntos, las
+bases libres.
+
+\subsection{Predicci\'on inversa (\textit{inverse folding})}
+\label{inverse}
+Este problema consiste en determinar las secuencias de \ac{RNA} que tienen una
+estructura secundaria determinada y es fundamental para el dise\~no racional de
+secuencias de \ac{RNA}.
+
+Las principales implementaciones que abordan este problema, lo plantean como un
+\ac{CSP} y utilizan variantes de b\'usqueda local estoc\'astica para
+resolverlo. La funci\'on objetivo y que se desea minimizar, es la distancia
+estructural\footnote{Existen diferentes m\'etodos y algoritmos para calcular
+la distancia entre estructuras cuya descripci\'on exceden este trabajo.}
+entre la estructura \ac{mfe} de la secuencia soluci\'on\footnote{En este
+contexto, una secuencia soluci\'on es aquella cuya predicci\'on de estructura
+secundaria da como resultado la estructura buscada.} y la estructura secundaria
+dada. 
+
+Si bien la complejidad de este problema no est\'a determinada, a diferencia de
+otros \ac{CSP}, la evaluaci\'on de las posibles soluciones es muy costosa ya que
+implica la ``predicci\'on \ac{mfe}'' sobre cada secuencia candidata
+($\mathcal{O}(N^{3})$). Luego, se deben utilizar diferentes t\'ecnicas que
+tiendan a minimizar el n\'umero de predicciones realizadas sobre la secuencia
+completa.
+
+En general, las diferentes implementaciones tienen como par\'ametros de
+entrada la estructura secundaria y opcionalmente, una secuencia de \ac{RNA}
+incompleta (algunas bases indefinidas, generalmente representadas con la
+letra N). Se distinguen dos pasos o etapas principales, que marcan las
+diferencias entre una y otra implementaci\'on:
+\begin{enumerate}
+ \item \textbf{Inicializaci\'on:} determinar una secuencia inicial completando
+la secuencia dada como par\'ametro. En el caso de no recibir ninguna secuencia
+como par\'ametro, se asume una secuencias con todas las bases indefinidas.
+ \item \textbf{B\'usqueda local:} mejorar iterativamente la secuencia inicial
+hasta alcanzar una secuencia soluci\'on. Es decir, realizar cambios en la
+secuencia que tiendan a minimizar la distancia estructural con la estructura
+buscada.
+\end{enumerate}
+
+Entre estas implementaciones, se destacan \textbf{RNAinverse}\cite{Hofacker94},
+\textbf{INFO-RNA}\cite{Busch07} y \textbf{RNA-SSD}\cite{Andronescu03}. Las
+\'ultimas dos, se presentan como mejoras a la primera proponiendo diferentes
+formas de generar la secuencia inicial e implementando algoritmos de b\'usqueda
+local estoc\'astica mas complejos.
+
+N\'otese que las tres implementaciones dependen de la generaci\'on de n\'umeros
+\textit{pseudo aleatorios} y ya que la ``semilla'' utilizada es variable (salvo
+\textbf{RNA-SSD} que permite fijar la semilla), se debe tener en cuenta el no
+determinismo. Es decir, en sucesivas ejecuciones del algoritmo y utilizando los
+mismos par\'ametros, se podr\'ian obtener distintos resultados. Esto sera clave
+a la hora de sistematizar y automatizar el uso de estos algoritmos.
+
+A continuaci\'on, mostramos un ejemplo de una predicci\'on inversa usando
+\textbf{RNAinverse} sobre la estructura obtenida anteriormente con
+\textbf{RNAfold}.
+
+\begin{verbatim}
+sancho@mulata:~$ RNAinverse 
+
+Input structure & start string (lower case letters for const 
+positions) @ to quit, and 0 for random start string
+....,....1....,....2....,....3....,....4....,....5....,....6....,.
+...(((....)))..
+aaaNNNNNNNNNNNu
+length = 15
+aaaUAGUCAGCUACu    3 0
+\end{verbatim}
+
+N\'otese que la secuencia obtenida conserva las bases que ya estaban definidas
+en la secuencia incompleta, que se dio como par\'ametro y que adem\'as, es
+distinta a la secuencia sobre la que se hizo la predicci\'on directa
+anteriormente.
