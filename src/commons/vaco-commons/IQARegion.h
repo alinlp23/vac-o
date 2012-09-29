@@ -1,8 +1,8 @@
 /*
- * File:   SequenceRanker.cpp
+ * File:   IQARegion.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 10, 2010, 4:26 PM
+ * Created on September 27, 2010, 3:46 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -23,27 +23,34 @@
  *
  */
 
-#include <iostream>
-#include "vaco-core/SequenceRanker.h"
+#ifndef _IQAREGION_H
+#define _IQAREGION_H
 
-using std::cout;
-using std::endl;
+#include <list>
+#include "vaco-commons/types.h"
 
-SequenceRanker::SequenceRanker(RankingSize size) :
-    mili::Ranker < const SequenceOptimization*, mili::AddAfterEqual, SequenceOptimizationCmp,
-    mili::DisposalDeletePolicy<const SequenceOptimization*> >::Ranker(size)
-{}
+using std::list;
 
-void SequenceRanker::update(const SequenceOptimization* opt)
+/**
+ * Interface for quality assurance regions.
+ */
+class IQARegion
 {
-    NucSequence seq;
-    seq = opt->first;
-    cout << "Ranking optimization: ";
-    for (size_t i = 0; i < seq.length(); ++i)
-    {
-        //TODO
-        //cout << to_str(seq[i]);
-    }
-    cout << endl;
-    insert(opt);
-}
+public:
+    /**
+     * Validate a given ARN sequence.
+     * @param sequence the ARN sequence to validate.
+     * @return If the sequence pass the QA or not.
+     */
+    virtual bool validate(const NucSequence& sequence) const = 0;
+
+    virtual ~IQARegion() {}
+};
+
+/**
+ * Container of IQARegion
+ */
+typedef list<IQARegion*> QARegionsCt;
+
+#endif  /* _IQAREGION_H */
+

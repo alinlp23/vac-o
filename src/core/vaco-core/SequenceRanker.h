@@ -1,8 +1,8 @@
 /*
- * File:   SequenceRanker.cpp
+ * File:   Ranker.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 10, 2010, 4:26 PM
+ * Created on September 27, 2010, 4:12 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -23,27 +23,28 @@
  *
  */
 
-#include <iostream>
-#include "vaco-core/SequenceRanker.h"
+#ifndef _RANKER_H
+#define _RANKER_H
 
-using std::cout;
-using std::endl;
+#include <mili/mili.h>
 
-SequenceRanker::SequenceRanker(RankingSize size) :
-    mili::Ranker < const SequenceOptimization*, mili::AddAfterEqual, SequenceOptimizationCmp,
-    mili::DisposalDeletePolicy<const SequenceOptimization*> >::Ranker(size)
-{}
+#include "vaco-commons/IObserver.h"
+#include "vaco-core/SequenceOptimization.h"
 
-void SequenceRanker::update(const SequenceOptimization* opt)
+class IPlugin;
+
+class SequenceRanker : public IObserver<SequenceOptimization>,
+    public mili::Ranker < const SequenceOptimization*, mili::AddAfterEqual, SequenceOptimizationCmp,
+    mili::DisposalDeletePolicy<const SequenceOptimization*> >
 {
-    NucSequence seq;
-    seq = opt->first;
-    cout << "Ranking optimization: ";
-    for (size_t i = 0; i < seq.length(); ++i)
-    {
-        //TODO
-        //cout << to_str(seq[i]);
-    }
-    cout << endl;
-    insert(opt);
-}
+    /**
+     * Implements the IObserver<SequenceOptimization> interface.
+     * @param opt the sequence optimization to be ranked.
+     */
+    virtual void update(const SequenceOptimization*);
+public:
+    SequenceRanker(RankingSize);
+};
+
+#endif  /* _RANKER_H */
+

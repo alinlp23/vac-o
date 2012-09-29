@@ -1,8 +1,8 @@
 /*
- * File:   SequenceRanker.cpp
+ * File:   NeighborhoodMock.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 10, 2010, 4:26 PM
+ * Created on November 19, 2010, 9:48 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -23,27 +23,26 @@
  *
  */
 
-#include <iostream>
-#include "vaco-core/SequenceRanker.h"
+#ifndef _NEIGHBORHOODMOCK_H
+#define _NEIGHBORHOODMOCK_H
 
-using std::cout;
-using std::endl;
+#include <gmock/gmock.h>
+#include "vaco-commons/INeighborhood.h"
 
-SequenceRanker::SequenceRanker(RankingSize size) :
-    mili::Ranker < const SequenceOptimization*, mili::AddAfterEqual, SequenceOptimizationCmp,
-    mili::DisposalDeletePolicy<const SequenceOptimization*> >::Ranker(size)
-{}
-
-void SequenceRanker::update(const SequenceOptimization* opt)
+class NeighborhoodMock : public INeighborhood
 {
-    NucSequence seq;
-    seq = opt->first;
-    cout << "Ranking optimization: ";
-    for (size_t i = 0; i < seq.length(); ++i)
+public:
+    MOCK_CONST_METHOD1(explore, void(const ISolution* const));
+    void SubjectSet(ISingleObserver<ISolution>* o)
     {
-        //TODO
-        //cout << to_str(seq[i]);
+        ISingleSubject<ISolution>::set(o);
     }
-    cout << endl;
-    insert(opt);
-}
+    bool SubjectNotify(const ISolution* s)
+    {
+        return ISingleSubject<ISolution>::notify(s);
+    }
+};
+
+
+#endif  /* _NEIGHBORHOODMOCK_H */
+

@@ -1,8 +1,8 @@
 /*
- * File:   SequenceRanker.cpp
+ * File:   ISequenceOptimization.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 10, 2010, 4:26 PM
+ * Created on September 30, 2010, 4:58 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -23,27 +23,30 @@
  *
  */
 
-#include <iostream>
-#include "vaco-core/SequenceRanker.h"
+#ifndef _ISEQUENCEOPTIMIZATION_H
+#define _ISEQUENCEOPTIMIZATION_H
 
-using std::cout;
-using std::endl;
+#include <utility>
+#include <biopp/biopp.h>
 
-SequenceRanker::SequenceRanker(RankingSize size) :
-    mili::Ranker < const SequenceOptimization*, mili::AddAfterEqual, SequenceOptimizationCmp,
-    mili::DisposalDeletePolicy<const SequenceOptimization*> >::Ranker(size)
-{}
+#include "vaco-commons/types.h"
 
-void SequenceRanker::update(const SequenceOptimization* opt)
+using std::pair;
+
+typedef pair<NucSequence, Score> SequenceOptimization;
+
+struct SequenceOptimizationCmp
 {
-    NucSequence seq;
-    seq = opt->first;
-    cout << "Ranking optimization: ";
-    for (size_t i = 0; i < seq.length(); ++i)
-    {
-        //TODO
-        //cout << to_str(seq[i]);
-    }
-    cout << endl;
-    insert(opt);
-}
+    /**
+     * Compare two sequence optimizations
+     * @param opt1 a sequence optimization
+     * @param opt2 another sequence optimization
+     * @return If the first it's greater than the second.
+     */
+    bool operator()(const SequenceOptimization*,
+                    const SequenceOptimization*) const;
+};
+
+
+#endif  /* _ISEQUENCEOPTIMIZATION_H */
+

@@ -1,8 +1,8 @@
 /*
- * File:   SequenceRanker.cpp
+ * File:   QARegionMock.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 10, 2010, 4:26 PM
+ * Created on November 13, 2010, 4:36 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -23,27 +23,17 @@
  *
  */
 
-#include <iostream>
-#include "vaco-core/SequenceRanker.h"
+#ifndef _QAREGIONMOCK_H
+#define _QAREGIONMOCK_H
 
-using std::cout;
-using std::endl;
+#include <gmock/gmock.h>
+#include "vaco-commons/IQARegion.h"
 
-SequenceRanker::SequenceRanker(RankingSize size) :
-    mili::Ranker < const SequenceOptimization*, mili::AddAfterEqual, SequenceOptimizationCmp,
-    mili::DisposalDeletePolicy<const SequenceOptimization*> >::Ranker(size)
-{}
-
-void SequenceRanker::update(const SequenceOptimization* opt)
+class QARegionMock : public IQARegion
 {
-    NucSequence seq;
-    seq = opt->first;
-    cout << "Ranking optimization: ";
-    for (size_t i = 0; i < seq.length(); ++i)
-    {
-        //TODO
-        //cout << to_str(seq[i]);
-    }
-    cout << endl;
-    insert(opt);
-}
+public:
+    MOCK_CONST_METHOD1(validate, bool(const NucSequence& sequence));
+};
+
+#endif  /* _QAREGIONMOCK_H */
+

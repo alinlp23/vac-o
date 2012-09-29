@@ -23,10 +23,10 @@
  *
  */
 
-#include "CombinatoryEngine.h"
-#include "IStrategy.h"
-
 #include <iostream>
+#include "vaco-commons/IStrategy.h"
+#include "vaco-core/CombinatoryEngine.h"
+
 using std::cout;
 using std::endl;
 

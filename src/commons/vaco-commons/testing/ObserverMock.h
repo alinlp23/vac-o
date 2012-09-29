@@ -1,8 +1,8 @@
 /*
- * File:   SequenceRanker.cpp
+ * File:   ObserverMock.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 10, 2010, 4:26 PM
+ * Created on November 13, 2010, 3:56 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -23,27 +23,20 @@
  *
  */
 
-#include <iostream>
-#include "vaco-core/SequenceRanker.h"
+#ifndef _OBSERVERMOCK_H
+#define _OBSERVERMOCK_H
 
-using std::cout;
-using std::endl;
+#include <gmock/gmock.h>
+#include "vaco-commons/IObserver.h"
 
-SequenceRanker::SequenceRanker(RankingSize size) :
-    mili::Ranker < const SequenceOptimization*, mili::AddAfterEqual, SequenceOptimizationCmp,
-    mili::DisposalDeletePolicy<const SequenceOptimization*> >::Ranker(size)
-{}
-
-void SequenceRanker::update(const SequenceOptimization* opt)
+template<class Subject>
+class ObserverMock : public IObserver<Subject>
 {
-    NucSequence seq;
-    seq = opt->first;
-    cout << "Ranking optimization: ";
-    for (size_t i = 0; i < seq.length(); ++i)
-    {
-        //TODO
-        //cout << to_str(seq[i]);
-    }
-    cout << endl;
-    insert(opt);
-}
+public:
+    MOCK_METHOD1_T(update, void(const Subject*));
+};
+
+
+
+#endif  /* _OBSERVERMOCK_H */
+

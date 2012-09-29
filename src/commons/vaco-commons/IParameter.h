@@ -1,8 +1,8 @@
 /*
- * File:   SequenceRanker.cpp
+ * File:   IParameter.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 10, 2010, 4:26 PM
+ * Created on September 27, 2010, 4:53 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -23,27 +23,39 @@
  *
  */
 
-#include <iostream>
-#include "vaco-core/SequenceRanker.h"
+#ifndef _IPARAMETER_H
+#define _IPARAMETER_H
 
-using std::cout;
-using std::endl;
+#include <list>
+#include <string>
 
-SequenceRanker::SequenceRanker(RankingSize size) :
-    mili::Ranker < const SequenceOptimization*, mili::AddAfterEqual, SequenceOptimizationCmp,
-    mili::DisposalDeletePolicy<const SequenceOptimization*> >::Ranker(size)
-{}
-
-void SequenceRanker::update(const SequenceOptimization* opt)
+using std::list;
+using std::string;
+/**
+ * Interface for plugin's parameters
+ */
+class IParameter
 {
-    NucSequence seq;
-    seq = opt->first;
-    cout << "Ranking optimization: ";
-    for (size_t i = 0; i < seq.length(); ++i)
-    {
-        //TODO
-        //cout << to_str(seq[i]);
-    }
-    cout << endl;
-    insert(opt);
-}
+public:
+    /**
+     * Sets the parameter's values.
+     * @param value the value in string format.
+     * @return If it was possible to set the value or not.
+     */
+    virtual bool set_value(const string& value) = 0;
+    /**
+     * Gets the name of the parameter.
+     * @return The parameter's name.
+     */
+    virtual void get_name(string& name) const = 0;
+
+    virtual ~IParameter() {}
+};
+
+/**
+ * Container of IParameter
+ */
+typedef list<IParameter*> ParamsCt;
+
+#endif  /* _IPARAMETER_H */
+

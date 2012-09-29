@@ -49,7 +49,7 @@ Solution::Solution(const NucSequence& seq, const LocalOptimizationCt& comp) :
     sequence(seq), components(comp)
 {}
 
-void Solution::update_solution(RegionIdx r, const NucSequence& seq, const LocalOptimization& op) throw(PluginException)
+void Solution::update_solution(RegionIdx r, const NucSequence& seq, const LocalOptimization& op)
 {
     if (r < components.size() && seq.length() == sequence.length())
     {

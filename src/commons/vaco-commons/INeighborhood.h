@@ -1,8 +1,8 @@
 /*
- * File:   SequenceRanker.cpp
+ * File:   INeighborhood.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 10, 2010, 4:26 PM
+ * Created on October 9, 2010, 8:03 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -23,27 +23,28 @@
  *
  */
 
-#include <iostream>
-#include "vaco-core/SequenceRanker.h"
+#ifndef _INEIGHBORHOOD_H
+#define _INEIGHBORHOOD_H
 
-using std::cout;
-using std::endl;
+#include "vaco-commons/ISubject.h"
+#include "vaco-commons/ISolution.h"
 
-SequenceRanker::SequenceRanker(RankingSize size) :
-    mili::Ranker < const SequenceOptimization*, mili::AddAfterEqual, SequenceOptimizationCmp,
-    mili::DisposalDeletePolicy<const SequenceOptimization*> >::Ranker(size)
-{}
-
-void SequenceRanker::update(const SequenceOptimization* opt)
+/**
+ * Interface for neighborhoods implementations.
+ */
+class INeighborhood : public ISingleSubject<ISolution>
 {
-    NucSequence seq;
-    seq = opt->first;
-    cout << "Ranking optimization: ";
-    for (size_t i = 0; i < seq.length(); ++i)
-    {
-        //TODO
-        //cout << to_str(seq[i]);
-    }
-    cout << endl;
-    insert(opt);
-}
+
+public:
+    /**
+     * Explore the neighborhood of a given solution and notify the observer
+     * for each solution found.
+     * @param s a solution pointer
+     */
+    virtual void explore(const ISolution* const) const = 0;
+
+    virtual ~INeighborhood() {}
+};
+
+#endif  /* _INEIGHBORHOOD_H */
+

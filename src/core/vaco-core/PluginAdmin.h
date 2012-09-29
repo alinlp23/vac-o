@@ -1,8 +1,8 @@
 /*
- * File:   SequenceRanker.cpp
+ * File:   PluginAdmin.h
  * Author: Santiago Videla <santiago.videla at gmail.com>
  *
- * Created on November 10, 2010, 4:26 PM
+ * Created on September 27, 2010, 4:40 PM
  *
  * Copyright (C) 2010  Santiago Videla, FuDePAN
  *
@@ -23,27 +23,22 @@
  *
  */
 
-#include <iostream>
-#include "vaco-core/SequenceRanker.h"
+#ifndef _PLUGINADMIN_H
+#define _PLUGINADMIN_H
 
-using std::cout;
-using std::endl;
+#include "vaco-commons/types.h"
+#include "vaco-commons/exceptions.h"
+#include "vaco-commons/IPlugin.h"
 
-SequenceRanker::SequenceRanker(RankingSize size) :
-    mili::Ranker < const SequenceOptimization*, mili::AddAfterEqual, SequenceOptimizationCmp,
-    mili::DisposalDeletePolicy<const SequenceOptimization*> >::Ranker(size)
-{}
-
-void SequenceRanker::update(const SequenceOptimization* opt)
+class PluginAdmin
 {
-    NucSequence seq;
-    seq = opt->first;
-    cout << "Ranking optimization: ";
-    for (size_t i = 0; i < seq.length(); ++i)
-    {
-        //TODO
-        //cout << to_str(seq[i]);
-    }
-    cout << endl;
-    insert(opt);
-}
+    void* handle;
+public:
+    IPlugin* load(const Path& file) throw(PluginException);
+    void unload(IPlugin*);
+};
+
+
+
+#endif  /* _PLUGINADMIN_H */
+

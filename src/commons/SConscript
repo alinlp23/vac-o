@@ -1,0 +1,7 @@
+Import ('env')
+
+name = 'vaco-commons'
+ext_inc = env.Dir('vaco-commons')
+deps = ['mili', 'biopp', 'fideo']
+
+env.CreateHeaderOnlyLibrary(name, ext_inc, deps)
