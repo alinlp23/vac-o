@@ -19,27 +19,23 @@ protected:
 public:
     void fake_provider(IFoldInverse* const inv)
     {
-        string str = "GCACGCGTATGCCGC";
-        s = str;
+        NucSequence s("GCACGCGTATGCCGC");
         inv->set_start(s);
     }
 
     void fake_bad1_provider(IFoldInverse* const inv)
     {
-        string str = "GCAA"; //<5
-        s = str;
+        NucSequence s("GCAA"); //<5
         EXPECT_THROW(inv->set_start(s), RNABackendException);
     }
     void fake_bad2_provider(IFoldInverse* const inv)
     {
-        string str = "GCACGCGTATG"; // >=5 && <15
-        s = str;
+        NucSequence s("GCACGCGTATG"); // >=5 && <15
         inv->set_start(s);
     }
     void fake_bad3_provider(IFoldInverse* const inv)
     {
-        string str = "GCACGCGTATGCCGCAAGGCCA"; // >15
-        s = str;
+        NucSequence s("GCACGCGTATGCCGCAAGGCCA"); // >15
         inv->set_start(s);
     }
 };
@@ -56,8 +52,7 @@ TEST_F(RNAinverseTest, FoldInverse)
 
     inverse->query_start(&provider);
 
-    string e = "GTAGCTTTATGCCGC";
-    NucSequence expected = e;
+    NucSequence expected("GTAGCTTTATGCCGC");
 
     NucSequence seq;
     inverse->fold_inverse(seq);

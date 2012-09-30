@@ -5,8 +5,7 @@
 
 TEST(RNAFoldTest, Fold)
 {
-    string s = "CGCAGGGAUCG";
-    NucSequence seq = s;
+    NucSequence seq("CGCAGGGAUCG");
 
     IFold* fold = new RNAFold;
     SecStructure structure;

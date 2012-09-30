@@ -1,4 +1,4 @@
-#include <gmock/gmock.h>
+#vaco-libplugin/include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
 #include "Hamming.h"
@@ -17,12 +17,9 @@ protected:
 
     void SetUp()
     {
-        string s1 = "AAACCC";
-        seq1 = s1;
-        string s2 = "AACATC";
-        seq2 = s2;
-        string s3 = "AAC";
-        seq3 = s3;
+        seq1 = NucSequence("AAACCC");
+        seq2 = NucSequence("AACATC");
+        seq3 = NucSequence("AAC");
     }
 
 public:
