@@ -41,8 +41,7 @@ void SequenceRanker::update(const SequenceOptimization* opt)
     cout << "Ranking optimization: ";
     for (size_t i = 0; i < seq.length(); ++i)
     {
-        //TODO
-        //cout << to_str(seq[i]);
+        cout << seq[i].as_char();
     }
     cout << endl;
     insert(opt);

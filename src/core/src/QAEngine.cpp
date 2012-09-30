@@ -39,8 +39,7 @@ void QAEngine::update(const SequenceOptimization* candidate)
     cout << "QA validation for: ";
     for (size_t i = 0; i < (candidate->first).length(); ++i)
     {
-        //TODO
-        //cout << to_str((candidate->first)[i]);
+        cout << (candidate->first)[i].as_char();
     }
     cout << endl;
     if (validate(candidate->first))
