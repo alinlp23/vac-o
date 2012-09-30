@@ -24,9 +24,10 @@
  */
 
 #include <sstream>
-#include "RNABackendsConfig.h"
-#include "RNAinverse.h"
-#include "IStartProvider.h"
+#include "fideo/RNABackendsConfig.h"
+#include "vaco-rna-backends/RNAinverse.h"
+#include "vaco-rna-backends/IStartProvider.h"
+
 using std::stringstream;
 
 const FilePath RNAinverse::IN = "inverse.in";

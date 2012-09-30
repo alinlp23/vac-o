@@ -26,8 +26,8 @@
 #ifndef _RNAFORESTER_H
 #define _RNAFORESTER_H
 
-#include "IStructureCmp.h"
-#include "RNABackendProxy.h"
+#include "fideo/RNABackendProxy.h"
+#include "vaco-rna-backends/IStructureCmp.h"
 /**
  * Implementation using system call to RNAforester
  */

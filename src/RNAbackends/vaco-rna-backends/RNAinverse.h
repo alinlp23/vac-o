@@ -26,8 +26,8 @@
 #ifndef _RNAINVERSE_H
 #define _RNAINVERSE_H
 
-#include "RNAStartInverse.h"
-#include "RNABackendProxy.h"
+#include "fideo/RNABackendProxy.h"
+#include "vaco-rna-backends/RNAStartInverse.h"
 
 class RNAinverse : public RNAStartInverse
 {

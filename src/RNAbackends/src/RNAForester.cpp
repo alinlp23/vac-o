@@ -25,8 +25,8 @@
 
 #include <sstream>
 
-#include "RNAForester.h"
-#include "RNABackendsConfig.h"
+#include "fideo/RNABackendsConfig.h"
+#include "vaco-rna-backends/RNAForester.h"
 
 using std::stringstream;
 

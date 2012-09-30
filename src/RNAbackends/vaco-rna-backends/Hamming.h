@@ -26,12 +26,12 @@
 #ifndef _HAMMING_H
 #define _HAMMING_H
 
-#include "ISequenceCmp.h"
+#include "vaco-rna-backends/ISequenceCmp.h"
 
 class IDistanceMatrixProvider
 {
 public:
-    virtual void get_distance_matrix(DistanceMatrix& m) const = 0;
+    virtual void get_distance_matrix(biopp::DistanceMatrix& m) const = 0;
     virtual ~IDistanceMatrixProvider() {}
 };
 
@@ -40,7 +40,7 @@ public:
  */
 class Hamming : public ISequenceCmp
 {
-    DistanceMatrix matrix;
+    biopp::DistanceMatrix matrix;
     virtual Distance compare(const NucSequence&,
                              const NucSequence&) const throw(RNABackendException);
 public:

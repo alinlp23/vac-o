@@ -27,8 +27,8 @@
 #define _ISTRUCTURECMP_H
 
 #include <biopp/biopp.h>
-#include "rna_backends_types.h"
-#include "rna_backends_exceptions.h"
+#include "fideo/rna_backends_types.h"
+#include "fideo/rna_backends_exceptions.h"
 
 /**
  * Interface for structure's comparing services.

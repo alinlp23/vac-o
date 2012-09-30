@@ -27,9 +27,9 @@
 #include <string>
 #include <mili/mili.h>
 
-#include "INFORNA.h"
-#include "IStartProvider.h"
-#include "RNABackendsConfig.h"
+#include "fideo/RNABackendsConfig.h"
+#include "vaco-rna-backends/INFORNA.h"
+#include "vaco-rna-backends/IStartProvider.h"
 
 using std::string;
 using std::stringstream;

@@ -27,9 +27,9 @@
 #define _RNASTARTINVERSE_H
 
 #include <string>
-#include "IFoldInverse.h"
-#include "Combinator.h"
-#include "rna_backends_types.h"
+#include "fideo/rna_backends_types.h"
+#include "vaco-rna-backends/IFoldInverse.h"
+#include "vaco-rna-backends/Combinator.h"
 
 using std::string;
 /**

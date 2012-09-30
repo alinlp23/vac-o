@@ -24,7 +24,7 @@
  */
 
 #include <mili/mili.h>
-#include "RNAStartInverse.h"
+#include "vaco-rna-backends/RNAStartInverse.h"
 
 RNAStartInverse::RNAStartInverse(const SecStructure& structure, Similitude sd, Distance hd, CombinationAttempts ca) :
     rstart(), found(), combination_attempts(ca), combinator(new SeqIndexesCombinator(structure.size(), hd)),

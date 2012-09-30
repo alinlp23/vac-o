@@ -26,8 +26,8 @@
 #ifndef _RNAFOLD_H
 #define _RNAFOLD_H
 
-#include "IFold.h"
-#include "RNABackendProxy.h"
+#include "fideo/IFold.h"
+#include "fideo/RNABackendProxy.h"
 /**
  * Implementation using the Vienna Package
  */
