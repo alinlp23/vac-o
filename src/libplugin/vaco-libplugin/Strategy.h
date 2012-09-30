@@ -26,8 +26,8 @@
 #ifndef _STRATEGY_H
 #define _STRATEGY_H
 
-#include "IStrategy.h"
-#include "INeighborhood.h"
+#include "vaco-commons/IStrategy.h"
+#include "vaco-commons/INeighborhood.h"
 
 /**
  * Base class implementation for local search strategies.

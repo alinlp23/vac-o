@@ -26,8 +26,8 @@
 #ifndef _RANDOMMUTATOR_H
 #define _RANDOMMUTATOR_H
 
-#include "types.h"
-#include "IQAMutator.h"
+#include "vaco-commons/types.h"
+#include "vaco-libplugin/IQAMutator.h"
 
 typedef float MutationMatrix[MATRIX_SIZE][MATRIX_SIZE];
 

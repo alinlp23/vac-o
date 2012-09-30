@@ -23,7 +23,7 @@
  *
  */
 
-#include "SequenceMutator.h"
+#include "vaco-libplugin/SequenceMutator.h"
 
 SequenceMutator::SequenceMutator(const NucSequence& seq, NMutations max) :
     sequence(seq), mutated(seq), seq_length(seq.length()), mutations(max),

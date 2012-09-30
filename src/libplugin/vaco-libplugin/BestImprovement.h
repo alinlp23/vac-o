@@ -26,7 +26,7 @@
 #ifndef _BESTIMPROVEMENT_H
 #define _BESTIMPROVEMENT_H
 
-#include "Strategy.h"
+#include "vaco-libplugin/Strategy.h"
 
 class BestImprovement : public Strategy
 {

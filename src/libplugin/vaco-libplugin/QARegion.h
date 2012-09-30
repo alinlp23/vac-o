@@ -27,9 +27,9 @@
 #define _QAREGION_H
 
 #include <queue>
-#include "rna_backends_types.h"
-#include "types.h"
-#include "IQARegion.h"
+#include "fideo/rna_backends_types.h"
+#include "vaco-commons/types.h"
+#include "vaco-commons/IQARegion.h"
 
 using std::queue;
 

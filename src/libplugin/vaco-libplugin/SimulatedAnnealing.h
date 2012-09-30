@@ -26,10 +26,10 @@
 #ifndef _SIMULATEDANNEALING_H
 #define _SIMULATEDANNEALING_H
 
-#include "Strategy.h"
 #include <utility>
 #include <vector>
 #include <mili/mili.h>
+#include "vaco-libplugin/Strategy.h"
 
 class SimulatedAnnealing : public Strategy
 {

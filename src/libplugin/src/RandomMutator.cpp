@@ -24,8 +24,8 @@
  */
 
 #include <mili/mili.h>
-#include "rna_backends_types.h"
-#include "RandomMutator.h"
+#include "fideo/rna_backends_types.h"
+#include "vaco-libplugin/RandomMutator.h"
 
 inline void initialize_mutation_matrix(MutationMatrix& matrix)
 {

@@ -26,9 +26,9 @@
 #ifndef _ALLMUTATOR_H
 #define _ALLMUTATOR_H
 
-#include "types.h"
-#include "IQAMutator.h"
-#include "SequenceMutator.h"
+#include "vaco-commons/types.h"
+#include "vaco-libplugin/IQAMutator.h"
+#include "vaco-libplugin/SequenceMutator.h"
 
 /**
  * Adapts SequenceMutator to IQAMutator

@@ -24,7 +24,7 @@
  */
 
 #include <mili/mili.h>
-#include "CombinatoryRegion.h"
+#include "vaco-libplugin/CombinatoryRegion.h"
 
 CombinatoryRegion::CombinatoryRegion(SeqIndex start, SeqIndex end) :
     start(start), end(end), constraints(), base_sequence()

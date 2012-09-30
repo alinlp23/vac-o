@@ -23,9 +23,10 @@
  *
  */
 
-#include "SimulatedAnnealing.h"
 #include <cmath>
 #include <iostream>
+#include "vaco-libplugin/SimulatedAnnealing.h"
+
 SimulatedAnnealing::SimulatedAnnealing(const INeighborhood* ne, Iteration max, \
                                        Iteration max_idle, Iteration temp_up, Cooling c, Temperature t, Temperature cut):
     Strategy(ne, max, max_idle), temp_update(temp_up), temp_iter(), cooling(c),

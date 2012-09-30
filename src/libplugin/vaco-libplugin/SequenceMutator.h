@@ -26,10 +26,11 @@
 #ifndef _SEQUENCEMUTATOR_H
 #define _SEQUENCEMUTATOR_H
 
-#include "exceptions.h"
-#include "types.h"
+#include "fideo/rna_backends_types.h"
+#include "vaco-commons/exceptions.h"
+#include "vaco-commons/types.h"
+//TODO
 #include "Combinator.h"
-#include "rna_backends_types.h"
 /**
  * Iterator over sequence mutations.
  * From N simultaneos mutations to single mutations.

@@ -23,7 +23,7 @@
  *
  */
 
-#include "GCRegion.h"
+#include "vaco-libplugin/GCRegion.h"
 
 GCRegion::GCRegion(SeqIndex s, SeqIndex e, const AminoSequence& aminoacids) :
     CombinatoryRegion(s, e), target_aminoacids(aminoacids),

@@ -23,7 +23,7 @@
  *
  */
 
-#include "Neighborhood.h"
+#include "vaco-libplugin/Neighborhood.h"
 
 Neighborhood::Neighborhood(const CombinatoryRegionsCt& r, CutOff c, Attempts a):
     regions(r), cutoff(c), attempts(a)

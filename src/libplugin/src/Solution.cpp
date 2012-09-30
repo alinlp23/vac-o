@@ -23,7 +23,7 @@
  *
  */
 
-#include "Solution.h"
+#include "vaco-libplugin/Solution.h"
 
 Solution::Solution(const NucSequence& seq, const CombinatoryRegionsCt& regions): sequence(seq), components()
 {

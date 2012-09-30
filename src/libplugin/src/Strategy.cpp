@@ -23,7 +23,7 @@
  *
  */
 
-#include "Strategy.h"
+#include "vaco-libplugin/Strategy.h"
 
 Strategy::Strategy(const INeighborhood* ne, Iteration max, Iteration max_idle):
     neighborhood(ne), scorer(), max_iterations(max), max_idle_iterations(max_idle),

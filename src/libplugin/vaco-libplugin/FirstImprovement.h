@@ -26,7 +26,7 @@
 #ifndef _FIRSTIMPROVEMENT_H
 #define _FIRSTIMPROVEMENT_H
 
-#include "Strategy.h"
+#include "vaco-libplugin/Strategy.h"
 
 class FirstImprovement : public Strategy
 {

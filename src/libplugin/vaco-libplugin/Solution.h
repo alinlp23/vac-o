@@ -26,8 +26,8 @@
 #ifndef _SOLUTION_H
 #define _SOLUTION_H
 
-#include "ISolution.h"
-#include "ICombinatoryRegion.h"
+#include "vaco-commons/ISolution.h"
+#include "vaco-commons/ICombinatoryRegion.h"
 
 class Solution : public ISolution
 {

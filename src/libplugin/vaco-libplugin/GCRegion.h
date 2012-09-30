@@ -26,8 +26,8 @@
 #ifndef _GCREGION_H
 #define _GCREGION_H
 
-#include "CombinatoryRegion.h"
-#include "TripletsProductor.h"
+#include "vaco-commons/CombinatoryRegion.h"
+#include "vaco-libplugin/TripletsProductor.h"
 
 class GCRegion : public CombinatoryRegion
 {

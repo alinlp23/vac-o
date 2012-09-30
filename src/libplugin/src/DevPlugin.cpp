@@ -23,13 +23,14 @@
  *
  */
 
-#include "libplugin.h"
+#include "vaco-libplugin/libplugin.h"
 #include <iostream>
 using std::cout;
 using std::cin;
 using std::endl;
+//TODO
 #include "IStartProvider.h"
-#include "SSValidator.h"
+#include "vaco-libplugin/SSValidator.h"
 
 class DevStartProvider : public IStartProvider
 {

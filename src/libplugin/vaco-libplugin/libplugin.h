@@ -25,22 +25,24 @@
 
 #ifndef _LIBPLUGIN_H
 #define _LIBPLUGIN_H
+
 #include <mili/mili.h>
-#include "IPlugin.h"
+#include "vaco-commons/IPlugin.h"
 
 /*Parameters*/
-#include "Parameter.h"
+#include "vaco-commons/Parameter.h"
 
 /*Combinatory regions*/
-#include "SSRegion.h"
-#include "GCRegion.h"
+#include "vaco-libplugin/SSRegion.h"
+#include "vaco-libplugin/GCRegion.h"
 
 /*QA regions*/
-#include "AllMutator.h"
-#include "RandomMutator.h"
-#include "QARegion.h"
+#include "vaco-libplugin/AllMutator.h"
+#include "vaco-libplugin/RandomMutator.h"
+#include "vaco-libplugin/QARegion.h"
 
 /*libRNA providers*/
+//TODO
 #include "RNAFold.h"
 #include "RNAinverse.h"
 #include "INFORNA.h"
@@ -48,12 +50,12 @@
 #include "Hamming.h"
 
 /*LocalSearch*/
-#include "Solution.h"
-#include "Strategy.h"
-#include "Neighborhood.h"
-#include "FirstImprovement.h"
-#include "BestImprovement.h"
-#include "SimulatedAnnealing.h"
+#include "vaco-libplugin/Solution.h"
+#include "vaco-libplugin/Strategy.h"
+#include "vaco-libplugin/Neighborhood.h"
+#include "vaco-libplugin/FirstImprovement.h"
+#include "vaco-libplugin/BestImprovement.h"
+#include "vaco-libplugin/SimulatedAnnealing.h"
 
 #endif  /* _LIBPLUGIN_H */
 

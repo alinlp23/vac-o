@@ -23,8 +23,9 @@
  *
  */
 
-#include "FirstImprovement.h"
 #include <iostream>
+#include "vaco-libplugin/FirstImprovement.h"
+
 FirstImprovement::FirstImprovement(const INeighborhood* ne, Iteration max, Iteration max_idle):
     Strategy(ne, max, max_idle) {}
 

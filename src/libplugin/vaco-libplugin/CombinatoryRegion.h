@@ -28,7 +28,7 @@
 
 #include <list>
 #include <biopp/biopp.h>
-#include "ICombinatoryRegion.h"
+#include "vaco-commons/ICombinatoryRegion.h"
 
 using std::list;
 

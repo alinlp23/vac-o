@@ -26,11 +26,12 @@
 #ifndef _SSVALIDATOR_H
 #define _SSVALIDATOR_H
 
-#include "rna_backends_types.h"
+#include "fideo/rna_backends_types.h"
+//TODO
 #include "IFold.h"
 #include "IStructureCmp.h"
 #include "SimilitudeCmp.h"
-#include "IQAValidator.h"
+#include "vaco-libplugin/IQAValidator.h"
 
 template<SimilitudePolicy policy>
 class SSValidator : public IQAValidator

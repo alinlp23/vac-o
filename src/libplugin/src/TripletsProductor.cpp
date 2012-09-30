@@ -23,7 +23,7 @@
  *
  */
 
-#include "TripletsProductor.h"
+#include "vaco-libplugin/TripletsProductor.h"
 
 TripletsProductor::TripletsProductor(const AminoSequence& aminoacids) :
     last(aminoacids.size() - 1), more(aminoacids.size() > 0),

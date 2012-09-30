@@ -23,11 +23,11 @@
  *
  */
 
-#include "QARegion.h"
-#include "IQAMutator.h"
-#include "IQAValidator.h"
-
 #include <iostream>
+#include "vaco-libplugin/QARegion.h"
+#include "vaco-libplugin/IQAMutator.h"
+#include "vaco-libplugin/IQAValidator.h"
+
 using std::cout;
 using std::endl;
 

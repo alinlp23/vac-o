@@ -26,9 +26,10 @@
 #ifndef _SSREGION_H
 #define _SSREGION_H
 
-#include "CombinatoryRegion.h"
+#include "fideo/rna_backends_types.h"
+#include "vaco-libplugin/CombinatoryRegion.h"
+//TODO
 #include "IStartProvider.h"
-#include "rna_backends_types.h"
 
 class IFold;
 class IFoldInverse;
