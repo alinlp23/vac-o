@@ -24,12 +24,11 @@
  */
 
 #include "fideo/IFold.h"
+#include "vaco-rna-backends/IFoldInverse.h"
+#include "vaco-rna-backends/IStructureCmp.h"
+#include "vaco-rna-backends/ISequenceCmp.h"
 #include "vaco-libplugin/SSRegion.h"
 #include "vaco-libplugin/SequenceMutator.h"
-//TODO
-#include "IFoldInverse.h"
-#include "IStructureCmp.h"
-#include "ISequenceCmp.h"
 
 SSRegion::SSRegion(SeqIndex s, SeqIndex e, const SecStructure& wt,
                    const SecStructure& vaccine, NMutations nm, Similitude simi,

@@ -27,10 +27,9 @@
 #define _SEQUENCEMUTATOR_H
 
 #include "fideo/rna_backends_types.h"
+#include "vaco-rna-backends/Combinator.h"
 #include "vaco-commons/exceptions.h"
 #include "vaco-commons/types.h"
-//TODO
-#include "Combinator.h"
 /**
  * Iterator over sequence mutations.
  * From N simultaneos mutations to single mutations.

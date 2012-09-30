@@ -42,12 +42,11 @@
 #include "vaco-libplugin/QARegion.h"
 
 /*libRNA providers*/
-//TODO
-#include "RNAFold.h"
-#include "RNAinverse.h"
-#include "INFORNA.h"
-#include "RNAForester.h"
-#include "Hamming.h"
+#include "vaco-rna-backends/RNAFold.h"
+#include "vaco-rna-backends/RNAinverse.h"
+#include "vaco-rna-backends/INFORNA.h"
+#include "vaco-rna-backends/RNAForester.h"
+#include "vaco-rna-backends/Hamming.h"
 
 /*LocalSearch*/
 #include "vaco-libplugin/Solution.h"

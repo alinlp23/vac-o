@@ -27,10 +27,11 @@
 #define _SSVALIDATOR_H
 
 #include "fideo/rna_backends_types.h"
-//TODO
-#include "IFold.h"
-#include "IStructureCmp.h"
-#include "SimilitudeCmp.h"
+#include "fideo/IFold.h"
+
+#include "vaco-rna-backends/IStructureCmp.h"
+
+#include "vaco-libplugin/SimilitudeCmp.h"
 #include "vaco-libplugin/IQAValidator.h"
 
 template<SimilitudePolicy policy>
