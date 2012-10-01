@@ -33,11 +33,12 @@
 
 using std::string;
 using std::stringstream;
+using mili::ensure_found;
 
 const FilePath INFORNA::OUT = "inverse.out";
 const FileLineNo INFORNA::LINE_NO = 13;
 
-INFORNA::INFORNA(const SecStructure& structure, Similitude sd, Distance hd, CombinationAttempts ca) :
+INFORNA::INFORNA(const biopp::SecStructure& structure, Similitude sd, Distance hd, CombinationAttempts ca) :
     RNAStartInverse(structure, sd, hd, ca)
 {}
 
@@ -100,7 +101,7 @@ size_t INFORNA::read_sequence(FileLine& line, size_t offset, string& seq) const 
 
         return to;
     }
-    catch (const StringNotFound& e)
+    catch (const mili::StringNotFound& e)
     {
         throw RNABackendException("Could not read sequence");
     }
@@ -115,7 +116,7 @@ size_t INFORNA::read_hamming_distance(FileLine& line, size_t offset, Distance& h
         read_value(line, from, to - from, hd);
         return to;
     }
-    catch (const StringNotFound& e)
+    catch (const mili::StringNotFound& e)
     {
         throw RNABackendException("Could not read hamming distance");
     }
@@ -130,7 +131,7 @@ size_t INFORNA::read_structure_distance(FileLine& line, size_t offset, Similitud
         read_value(line, from, to - from, sd);
         return to;
     }
-    catch (const StringNotFound& e)
+    catch (const mili::StringNotFound& e)
     {
         sd = 0;
         return line.size();

@@ -4,6 +4,6 @@ name = 'vaco-libplugin'
 inc = env.Dir('.')
 ext_inc = env.Dir('vaco-libplugin')
 src = env.Glob('src/*.cpp')
-deps = ['vaco-core', 'gmock','gtest_main', 'gtest']
+deps = ['vaco-core', 'fideo', 'vaco-rna-backends', 'gmock','gtest_main', 'gtest']
 
 env.CreateSharedLibrary(name, inc, ext_inc, src, deps)

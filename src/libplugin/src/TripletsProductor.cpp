@@ -25,6 +25,8 @@
 
 #include "vaco-libplugin/TripletsProductor.h"
 
+using namespace biopp;
+
 TripletsProductor::TripletsProductor(const AminoSequence& aminoacids) :
     last(aminoacids.size() - 1), more(aminoacids.size() > 0),
     prod_it(aminoacids.size()), product(aminoacids.size())

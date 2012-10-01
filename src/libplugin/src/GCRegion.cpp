@@ -35,7 +35,7 @@ GCRegion::~GCRegion()
     delete productor;
 }
 
-Score GCRegion::evaluate(const NucSequence& delta) const
+Score GCRegion::evaluate(const NucSequence& /*delta*/) const
 {
     return 1.f;
 }
@@ -44,7 +44,7 @@ Score GCRegion::generate(NucSequence& sequence, NucSequence& delta)
 {
     TripletsProductor::TripletsProduct current_prod;
     string raw;
-    delta = rbase;
+    delta = NucSequence(rbase);
     const size_t ntriplets = delta.triplets_length();
     do
     {
@@ -71,6 +71,6 @@ void GCRegion::set_base_sequence(const NucSequence& seq)
     rbase.clear();
     for (size_t i = start; i < end; ++i)
     {
-        rbase += to_str(base_sequence[i]);
+        rbase += base_sequence[i].as_char();
     }
 }

@@ -27,6 +27,8 @@
 #include "fideo/rna_backends_types.h"
 #include "vaco-libplugin/RandomMutator.h"
 
+using namespace biopp;
+
 inline void initialize_mutation_matrix(MutationMatrix& matrix)
 {
     for (size_t i = 0; i < MATRIX_SIZE; ++i)
@@ -79,11 +81,12 @@ bool RandomMutator::next(NucSequence& seq)
             while (prob == 0.f);
 
             Nucleotide b = Nucleotide(0);
-            float acc = matrix[seq[pos]][b];
+            Nucleotide a = seq[pos];
+            float acc = matrix[a.value][b.value];
             while (acc < prob)
             {
-                b = Nucleotide((b + 1) % 4);
-                acc += matrix[seq[pos]][b];
+                b = Nucleotide((b.value + 1) % 4);
+                acc += matrix[a.value][b.value];
             }
             seq[pos] = b;
 

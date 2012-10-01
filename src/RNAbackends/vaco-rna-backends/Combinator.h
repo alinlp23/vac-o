@@ -29,6 +29,7 @@
 #include <vector>
 #include <list>
 #include <mili/mili.h>
+#include <biopp/biopp.h>
 #include "fideo/rna_backends_types.h"
 
 using std::vector;
@@ -87,8 +88,8 @@ private:
     void move();
 };
 
-typedef Combinator<std::list<SeqIndex> > SeqIndexesCombinator;
-typedef Combinator<std::list<SeqIndex> >::Combination SeqIndexesCombination;
+typedef Combinator<std::list<biopp::SeqIndex> > SeqIndexesCombinator;
+typedef Combinator<std::list<biopp::SeqIndex> >::Combination SeqIndexesCombination;
 
 /**
  * Implementation

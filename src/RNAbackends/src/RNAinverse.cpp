@@ -29,12 +29,13 @@
 #include "vaco-rna-backends/IStartProvider.h"
 
 using std::stringstream;
+using mili::ensure_found;
 
 const FilePath RNAinverse::IN = "inverse.in";
 const FilePath RNAinverse::OUT = "inverse.out";
 const FileLineNo RNAinverse::LINE_NO = 0;
 
-RNAinverse::RNAinverse(const SecStructure& structure, Similitude sd, Distance hd, CombinationAttempts ca) :
+RNAinverse::RNAinverse(const biopp::SecStructure& structure, Similitude sd, Distance hd, CombinationAttempts ca) :
     RNAStartInverse(structure, sd, hd, ca)
 {}
 
@@ -88,7 +89,7 @@ size_t RNAinverse::read_hamming_distance(FileLine& line, size_t offset, Distance
         read_value(line, from, to - from, hd);
         return to;
     }
-    catch (const StringNotFound& e)
+    catch (const mili::StringNotFound& e)
     {
         throw RNABackendException("Could not read hamming distance");
     }
@@ -103,7 +104,7 @@ size_t RNAinverse::read_structure_distance(FileLine& line, size_t offset, Simili
         read_value(line, from, to - from, sd);
         return to;
     }
-    catch (const StringNotFound& e)
+    catch (const mili::StringNotFound& e)
     {
         throw RNABackendException("Could not read structure distance");
     }

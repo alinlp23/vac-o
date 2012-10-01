@@ -42,8 +42,8 @@ public:
      * @param struct2 another secondary structure.
      * @return The similitude between structures.
      */
-    virtual Similitude compare(const SecStructure& struct1,
-                               const SecStructure& struct2) const THROW((RNABackendException)) = 0;
+    virtual Similitude compare(const biopp::SecStructure& struct1,
+                               const biopp::SecStructure& struct2) const THROW((RNABackendException)) = 0;
 
     virtual ~IStructureCmp() {}
 };

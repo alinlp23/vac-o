@@ -26,7 +26,7 @@
 #include <mili/mili.h>
 #include "vaco-rna-backends/RNAStartInverse.h"
 
-RNAStartInverse::RNAStartInverse(const SecStructure& structure, Similitude sd, Distance hd, CombinationAttempts ca) :
+RNAStartInverse::RNAStartInverse(const biopp::SecStructure& structure, Similitude sd, Distance hd, CombinationAttempts ca) :
     rstart(), found(), combination_attempts(ca), combinator(new SeqIndexesCombinator(structure.size(), hd)),
     positions(), start(), structure(structure), max_structure_distance(sd), max_sequence_distance(hd)
 
@@ -58,7 +58,7 @@ void RNAStartInverse::fold_inverse(NucSequence& sequence) throw(RNABackendExcept
         //of attempts for the current combination of free positions in 'start',
         //we move to the next combination, change the 'start' and re-start the
         //number of attempts.
-        c = contains(found, seq);
+        c = mili::contains(found, seq);
         if (c && i == 0)
         {
             combinator->next(positions);
@@ -70,7 +70,7 @@ void RNAStartInverse::fold_inverse(NucSequence& sequence) throw(RNABackendExcept
 
     //Adds the sequence found to the set.
     insert_into(found, seq);
-    sequence = seq;
+    sequence = NucSequence(seq);
 }
 
 void RNAStartInverse::set_start(const NucSequence& sequence)
@@ -85,7 +85,7 @@ void RNAStartInverse::set_start(const NucSequence& sequence)
     //make changes everywhere.
     for (size_t i = 0; i < sequence.length(); ++i)
     {
-        start += tolower(to_str(sequence[i])[0]);
+        start += tolower(sequence[i].as_char());
     }
     //Adds the start to the set of found sequences.
     insert_into(found, start);
@@ -103,7 +103,7 @@ void RNAStartInverse::change_start()
 {
     //Gets the original start
     start = rstart;
-    CAutonomousIterator<SeqIndexesCombination> it(positions);
+    mili::CAutonomousIterator<SeqIndexesCombination> it(positions);
     while (!it.end())
     {
         //This let to search for possible changes in each position.

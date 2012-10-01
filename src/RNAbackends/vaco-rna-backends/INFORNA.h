@@ -41,7 +41,7 @@ class INFORNA : public RNAStartInverse
     virtual void execute(string&, Distance&, Similitude&) throw(RNABackendException);
     virtual void query_start(IStartProvider*) throw(RNABackendException);
 public:
-    INFORNA(const SecStructure&, Similitude, Distance, CombinationAttempts);
+    INFORNA(const biopp::SecStructure&, Similitude, Distance, CombinationAttempts);
 };
 
 #endif  /* _INFORNA_H */

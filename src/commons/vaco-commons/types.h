@@ -34,6 +34,9 @@
 #include <biopp/biopp.h>
 
 using biopp::NucSequence;
+using biopp::AminoSequence;
+using biopp::Triplet;
+
 typedef std::list<NucSequence> NucSequencesCt;
 
 /**

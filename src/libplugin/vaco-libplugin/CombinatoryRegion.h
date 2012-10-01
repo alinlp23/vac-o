@@ -31,6 +31,7 @@
 #include "vaco-commons/ICombinatoryRegion.h"
 
 using std::list;
+using biopp::SeqIndex;
 
 class CombinatoryRegion : public ICombinatoryRegion
 {

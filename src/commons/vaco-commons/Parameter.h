@@ -62,7 +62,7 @@ void Parameter<Type>::get_name(string& name) const
 template<class Type>
 bool Parameter<Type>::set_value(const string& value)
 {
-    return from_string(value, this->value);
+    return mili::from_string(value, this->value);
 }
 
 #endif  /* _PARAMETER_H */

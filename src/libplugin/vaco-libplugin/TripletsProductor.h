@@ -28,6 +28,7 @@
 
 #include <vector>
 #include <biopp/biopp.h>
+#include "vaco-commons/types.h"
 
 using std::vector;
 
@@ -39,12 +40,12 @@ class TripletsProductor
 {
 public:
     typedef vector<Triplet> TripletsProduct;
-    TripletsProductor(const AminoSequence& aminoacids);
+    TripletsProductor(const biopp::AminoSequence& aminoacids);
     bool next(TripletsProduct& p);
 private:
     const size_t last;
     bool more;
-    vector<TripletsIterator> prod_it;
+    vector<biopp::TripletsIterator> prod_it;
     TripletsProduct product;
 
     void move(size_t i);

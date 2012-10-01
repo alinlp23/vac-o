@@ -51,7 +51,7 @@ class RandomMutator : public IQAMutator
     NMutations counter;
     MutationMatrix matrix;
 
-    Randomizer<float> rnd;
+    mili::Randomizer<float> rnd;
 
     virtual bool next(NucSequence&);
     virtual void set_base_sequence(const NucSequence&);

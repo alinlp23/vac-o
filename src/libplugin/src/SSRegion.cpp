@@ -46,17 +46,17 @@ Score SSRegion::evaluate(const NucSequence& delta) const
 {
     Score s;
 
-    CAutonomousIterator<NucSequencesCt> it(wildtype_cache);
+    mili::CAutonomousIterator<NucSequencesCt> it(wildtype_cache);
     Distance min_hd = end - start;
     while (!it.end())
     {
         string tmp;
         for (size_t idx = start; idx < end; ++idx)
-            tmp += to_str((*it)[idx]);
+            tmp += (*it)[idx].as_char();
 
-        NucSequence partial = tmp;
+        NucSequence partial(tmp);
 
-        minimize(min_hd, seq_cmp_backend->compare(delta, partial));
+        mili::minimize(min_hd, seq_cmp_backend->compare(delta, partial));
         ++it;
     }
     s = min_hd / Score(end - start);
@@ -90,9 +90,9 @@ void SSRegion::get_partial_start(IFoldInverse* const backend)
 {
     string tmp;
     for (size_t idx = start; idx < end; ++idx)
-        tmp += to_str(base_sequence[idx]);
+        tmp += base_sequence[idx].as_char();
 
-    NucSequence partial = tmp;
+    NucSequence partial(tmp);
     backend->set_start(partial);
 }
 
@@ -103,7 +103,7 @@ void SSRegion::get_complete_start(IFoldInverse* const backend)
 
 bool SSRegion::cache_compare(const NucSequence& seq)
 {
-    CAutonomousIterator<NucSequencesCt> it(wildtype_cache);
+    mili::CAutonomousIterator<NucSequencesCt> it(wildtype_cache);
     bool pass(true);
     while (!it.end() && pass)
     {
@@ -124,7 +124,7 @@ bool SSRegion::structure_compare(const NucSequence& seq)
     {
         fold_backend->fold(mutated, mutated_struct, circ);
 
-        if (mutated_struct.pair_length() > 0)
+        if (mutated_struct.pair_count() > 0)
             pass = max_similitude > struct_cmp_backend->compare(wt_structure, mutated_struct);
     }
     return pass;

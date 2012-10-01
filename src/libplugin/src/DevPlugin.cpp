@@ -24,6 +24,7 @@
  */
 
 #include "vaco-libplugin/libplugin.h"
+#include <cassert>
 #include <iostream>
 using std::cout;
 using std::cin;
@@ -103,15 +104,18 @@ public:
 DevPlugin::DevPlugin() :
     vacc_sequence("CGCAGGGACTGCAGGTACCCCGCAGGCGCAGATAGAGAC"),
     wt_sequence("CCGCCGCACUUAUCCCUGACGAAUUCUACCAGUCGCGAU"),
-    wt_struct("....((((((.......((.....))....))).))).."),
-    vacc_struct(".((.(((((.....)).))).))................"),
-    ires(".((.(((((.....)).))).))."),
     min_distance(0), cutoff(1), attempts(2), min_distance_param(), cutoff_param(),
     fold_backend(), inverse_backend(), struct_cmp_backend(), seq_cmp_backend(),
     wt_cache(), ssregion(), gcregion(), regions(), rnd_ss(), neighborhood(), strategy()
 {
+    
+    IFold* p = mili::FactoryRegistry<IFold, std::string>::new_class("UNAFold");
+    assert(p != NULL);
+    p->fold(NucSequence("....((((((.......((.....))....))).))).."), wt_struct, false);
+    p->fold(NucSequence(".((.(((((.....)).))).))................"), vacc_struct, false);
+    p->fold(NucSequence(".((.(((((.....)).))).))."), ires, false);
+    delete p;
     init_params();
-
 }
 
 void DevPlugin::configure()
@@ -226,10 +230,10 @@ void DevPlugin::init_comb_regions()
     string s;
     for (size_t i = 33; i < 39; ++i)
     {
-        s += to_str(wt_sequence[i]);
+        s += wt_sequence[i].as_char();
     }
 
-    NucSequence seq = s;
+    NucSequence seq(s);
     seq.translate(aminoacids);
     gcregion = new GCRegion(33, 39, aminoacids);
 

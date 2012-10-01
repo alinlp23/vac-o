@@ -41,7 +41,7 @@ class RNAinverse : public RNAStartInverse
     virtual void execute(string&, Distance&, Similitude&) throw(RNABackendException);
     virtual void query_start(IStartProvider*) throw(RNABackendException);
 public:
-    RNAinverse(const SecStructure&, Similitude, Distance, CombinationAttempts);
+    RNAinverse(const biopp::SecStructure&, Similitude, Distance, CombinationAttempts);
 };
 
 #endif  /* _RNAINVERSE_H */

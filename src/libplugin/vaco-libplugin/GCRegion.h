@@ -26,7 +26,8 @@
 #ifndef _GCREGION_H
 #define _GCREGION_H
 
-#include "vaco-commons/CombinatoryRegion.h"
+#include "vaco-commons/types.h"
+#include "vaco-libplugin/CombinatoryRegion.h"
 #include "vaco-libplugin/TripletsProductor.h"
 
 class GCRegion : public CombinatoryRegion
@@ -38,7 +39,7 @@ class GCRegion : public CombinatoryRegion
     virtual Score generate(NucSequence&, NucSequence&);
     virtual void set_base_sequence(const NucSequence&);
 public:
-    GCRegion(SeqIndex, SeqIndex, const AminoSequence&);
+    GCRegion(biopp::SeqIndex, biopp::SeqIndex, const AminoSequence&);
 
     ~GCRegion();
 };

@@ -30,6 +30,8 @@
 #include "vaco-rna-backends/IStartProvider.h"
 #include "vaco-libplugin/CombinatoryRegion.h"
 
+using biopp::SecStructure;
+
 class IFold;
 class IFoldInverse;
 class IStructureCmp;

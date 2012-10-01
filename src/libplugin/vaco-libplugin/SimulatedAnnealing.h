@@ -48,7 +48,7 @@ class SimulatedAnnealing : public Strategy
     Cooling cooling;
     Temperature temperature;
     Temperature cutoff;
-    Randomizer<float> rnd;
+    mili::Randomizer<float> rnd;
 public:
     SimulatedAnnealing(const INeighborhood*, Iteration, Iteration, Iteration, Cooling, Temperature, Temperature);
 };

@@ -56,7 +56,7 @@ class RNAStartInverse : public IFoldInverse
     void change_start();
 protected:
     string start;
-    const SecStructure structure;
+    const biopp::SecStructure structure;
     Similitude max_structure_distance;
     Distance max_sequence_distance;
 
@@ -69,7 +69,7 @@ protected:
      */
     virtual void execute(string&, Distance&, Similitude&) throw(RNABackendException) = 0;
 public:
-    RNAStartInverse(const SecStructure&, Similitude, Distance, CombinationAttempts);
+    RNAStartInverse(const biopp::SecStructure&, Similitude, Distance, CombinationAttempts);
 
     ~RNAStartInverse();
 };

@@ -32,6 +32,7 @@
 #include "vaco-commons/IQARegion.h"
 
 using std::queue;
+using biopp::SeqIndex;
 
 class IQAMutator;
 class IQAValidator;

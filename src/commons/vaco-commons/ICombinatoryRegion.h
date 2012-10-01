@@ -33,6 +33,7 @@
 #include "fideo/rna_backends_types.h"
 
 using std::vector;
+using biopp::SeqIndex;
 
 /**
  * Interface for combinatories regions.
