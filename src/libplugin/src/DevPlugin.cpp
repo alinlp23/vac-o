@@ -114,6 +114,7 @@ DevPlugin::DevPlugin() :
     p->fold(NucSequence("....((((((.......((.....))....))).))).."), wt_struct, false);
     p->fold(NucSequence(".((.(((((.....)).))).))................"), vacc_struct, false);
     p->fold(NucSequence(".((.(((((.....)).))).))."), ires, false);
+    //TODO: delete en main?
     delete p;
     init_params();
 }
