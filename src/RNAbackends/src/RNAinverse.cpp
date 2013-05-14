@@ -24,7 +24,7 @@
  */
 
 #include <sstream>
-#include "fideo/RNABackendsConfig.h"
+#include "fideo/FideoHelper.h"
 #include "vaco-rna-backends/RNAinverse.h"
 #include "vaco-rna-backends/IStartProvider.h"
 
@@ -34,6 +34,8 @@ using mili::ensure_found;
 const FilePath RNAinverse::IN = "inverse.in";
 const FilePath RNAinverse::OUT = "inverse.out";
 const FileLineNo RNAinverse::LINE_NO = 0;
+const std::string RNAinverse::RNAinverse_PROG = "";//TODO: ?
+
 
 RNAinverse::RNAinverse(const biopp::SecStructure& structure, Similitude sd, Distance hd, CombinationAttempts ca) :
     RNAStartInverse(structure, sd, hd, ca)
@@ -51,17 +53,17 @@ void RNAinverse::execute(string& seq, Distance& hd, Similitude& sd) throw(RNABac
     FileLinesCt lines;
     insert_into(lines, structure.to_str());
     insert_into(lines, start);
-    write(IN, lines);
+    fideo::helper::write(IN, lines);
 
     stringstream ss;
     int repeat = max_structure_distance == 0 ? -1 : 1;
     ss << RNAinverse_PROG << " -R " << repeat << " -a ATGC < " << IN << " > " << OUT;
-    const string CMD = ss.str();
+    const fideo::Command CMD = ss.str();
 
-    exec(CMD);
+    fideo::helper::runCommand(CMD);
 
     FileLine aux;
-    read_line(OUT, LINE_NO, aux);
+    fideo::helper::readLine(OUT, LINE_NO, aux);
     /* aux looks like this
      * accagggATCgcaggtaccccgcaGGcgcagAacccta   5 2   d= 2
      *
@@ -70,7 +72,7 @@ void RNAinverse::execute(string& seq, Distance& hd, Similitude& sd) throw(RNABac
      * sequence found. And 2 it's the structure distance to the target structure.
      * If max_structure_distance=0 then, this will be also equal to 0.
      */
-    read_value(aux, 0, start.size(), seq);
+    fideo::helper::readValue(aux, 0, start.size(), seq);
     for (size_t i = 0; i < start.size(); ++i)
         seq[i] = tolower(seq[i]);
 
@@ -86,7 +88,7 @@ size_t RNAinverse::read_hamming_distance(FileLine& line, size_t offset, Distance
     {
         const size_t from = ensure_found(line.find_first_not_of(" ", offset));
         const size_t to = ensure_found(line.find_first_of(" ", from));
-        read_value(line, from, to - from, hd);
+        fideo::helper::readValue(line, from, to - from, hd);
         return to;
     }
     catch (const mili::StringNotFound& e)
@@ -101,7 +103,7 @@ size_t RNAinverse::read_structure_distance(FileLine& line, size_t offset, Simili
     {
         const size_t from = ensure_found(line.find_first_not_of(" ", offset));
         const size_t to = ensure_found(line.find_first_of(" ", from), line.size());
-        read_value(line, from, to - from, sd);
+        fideo::helper::readValue(line, from, to - from, sd);
         return to;
     }
     catch (const mili::StringNotFound& e)

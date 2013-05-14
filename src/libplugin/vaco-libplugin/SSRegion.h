@@ -26,13 +26,13 @@
 #ifndef _SSREGION_H
 #define _SSREGION_H
 
-#include "fideo/rna_backends_types.h"
+#include "fideo/RnaBackendsTypes.h"
+ #include "fideo/IFold.h"
 #include "vaco-rna-backends/IStartProvider.h"
 #include "vaco-libplugin/CombinatoryRegion.h"
 
 using biopp::SecStructure;
 
-class IFold;
 class IFoldInverse;
 class IStructureCmp;
 class ISequenceCmp;
@@ -48,7 +48,7 @@ class SSRegion : public CombinatoryRegion, public IStartProvider
     const bool circ;
 
     /*libRNA backends*/
-    const IFold* const fold_backend;
+    const fideo::IFold* const fold_backend;
     IFoldInverse* const inverse_backend;
     const IStructureCmp* const struct_cmp_backend;
     const ISequenceCmp* const seq_cmp_backend;
@@ -67,7 +67,7 @@ class SSRegion : public CombinatoryRegion, public IStartProvider
 public:
     SSRegion(SeqIndex, SeqIndex, const SecStructure&, const SecStructure&,
              NMutations, Similitude, Distance, const NucSequencesCt&, bool,
-             const IFold* const, IFoldInverse* const, const IStructureCmp* const,
+             const fideo::IFold* const, IFoldInverse* const, const IStructureCmp* const,
              const ISequenceCmp* const);
 
 };

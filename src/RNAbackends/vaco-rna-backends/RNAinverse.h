@@ -26,7 +26,7 @@
 #ifndef _RNAINVERSE_H
 #define _RNAINVERSE_H
 
-#include "fideo/RNABackendProxy.h"
+#include <string>
 #include "vaco-rna-backends/RNAStartInverse.h"
 
 class RNAinverse : public RNAStartInverse
@@ -34,6 +34,7 @@ class RNAinverse : public RNAStartInverse
     static const FilePath IN;
     static const FilePath OUT;
     static const FileLineNo LINE_NO;
+    static const std::string RNAinverse_PROG;
 
     size_t read_hamming_distance(FileLine&, size_t, Distance&) const throw(RNABackendException);
     size_t read_structure_distance(FileLine&, size_t, Similitude&) const throw(RNABackendException);

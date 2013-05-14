@@ -27,18 +27,17 @@
 #define _RNAFOLD_H
 
 #include "fideo/IFold.h"
-#include "fideo/RNABackendProxy.h"
 /**
  * Implementation using the Vienna Package
  */
-class RNAFold : public IFold
+/*class RNAFold : public fideo::IFold
 {
     static const FilePath IN;
     static const FilePath OUT;
     static const FileLineNo LINE_NO;
     size_t read_free_energy(FileLine&, size_t, Fe&) const throw(RNABackendException);
     virtual Fe fold(const NucSequence&, SecStructure&, bool circ) const throw(RNABackendException);
-};
+};*/
 
 #endif  /* _RNAFOLD_H */
 

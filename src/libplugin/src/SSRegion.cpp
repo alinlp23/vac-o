@@ -23,7 +23,6 @@
  *
  */
 
-#include "fideo/IFold.h"
 #include "vaco-rna-backends/IFoldInverse.h"
 #include "vaco-rna-backends/IStructureCmp.h"
 #include "vaco-rna-backends/ISequenceCmp.h"
@@ -32,7 +31,7 @@
 
 SSRegion::SSRegion(SeqIndex s, SeqIndex e, const SecStructure& wt,
                    const SecStructure& vaccine, NMutations nm, Similitude simi,
-                   Distance dis, const NucSequencesCt& wt_cache, bool circ, const IFold* const fb,
+                   Distance dis, const NucSequencesCt& wt_cache, bool circ, const fideo::IFold* const fb,
                    IFoldInverse* const fib, const IStructureCmp* const str_cmp,
                    const ISequenceCmp* const seq_cmp) :
     CombinatoryRegion(s, e),
@@ -122,7 +121,7 @@ bool SSRegion::structure_compare(const NucSequence& seq)
 
     while (mutator.next(mutated) && pass)
     {
-        fold_backend->fold(mutated, mutated_struct, circ);
+        fold_backend->fold(mutated, circ, mutated_struct);
 
         if (mutated_struct.pair_count() > 0)
             pass = max_similitude > struct_cmp_backend->compare(wt_structure, mutated_struct);

@@ -27,6 +27,7 @@
 #define _HAMMING_H
 
 #include "vaco-rna-backends/ISequenceCmp.h"
+ #include "vaco-commons/exceptions.h"
 
 class IDistanceMatrixProvider
 {

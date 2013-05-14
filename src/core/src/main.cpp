@@ -74,7 +74,7 @@ void print_ranking(SequenceRanker& ranking)
         score = (*it)->second;
         for (size_t i = 0; i < seq.length(); ++i)
         {
-            cout << seq[i].getString();
+            cout << seq[i].as_char();
         }
         cout << " Score: " << score << endl;
         ++it;

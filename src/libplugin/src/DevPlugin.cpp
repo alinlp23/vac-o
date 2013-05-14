@@ -31,6 +31,7 @@ using std::cin;
 using std::endl;
 #include "vaco-rna-backends/IStartProvider.h"
 #include "vaco-libplugin/SSValidator.h"
+#include "vaco-commons/types.h"
 
 class DevStartProvider : public IStartProvider
 {
@@ -63,7 +64,7 @@ class DevPlugin : public IPlugin
     Parameter<CutOff>* cutoff_param;
 
     void init_backends();
-    IFold* fold_backend;
+    fideo::IFold* fold_backend;
     IFoldInverse* inverse_backend;
     IStructureCmp* struct_cmp_backend;
     ISequenceCmp* seq_cmp_backend;
@@ -109,11 +110,11 @@ DevPlugin::DevPlugin() :
     wt_cache(), ssregion(), gcregion(), regions(), rnd_ss(), neighborhood(), strategy()
 {
     
-    IFold* p = mili::FactoryRegistry<IFold, std::string>::new_class("UNAFold");
+    fideo::IFold* p = mili::FactoryRegistry<fideo::IFold, std::string>::new_class("UNAFold");
     assert(p != NULL);
-    p->fold(NucSequence("....((((((.......((.....))....))).))).."), wt_struct, false);
-    p->fold(NucSequence(".((.(((((.....)).))).))................"), vacc_struct, false);
-    p->fold(NucSequence(".((.(((((.....)).))).))."), ires, false);
+    p->fold(NucSequence("....((((((.......((.....))....))).))).."), false, wt_struct);
+    p->fold(NucSequence(".((.(((((.....)).))).))................"), false, vacc_struct);
+    p->fold(NucSequence(".((.(((((.....)).))).))."), false, ires);
     //TODO: delete en main?
     delete p;
     init_params();
@@ -198,7 +199,7 @@ void DevPlugin::init_params()
 
 void DevPlugin::init_backends()
 {
-    fold_backend = new RNAFold;
+    fold_backend = mili::FactoryRegistry<fideo::IFold, std::string>::new_class("RNAFold");
     inverse_backend = new INFORNA(ires, 2, 20, 100);
     struct_cmp_backend = new RNAForester;
     seq_cmp_backend = new Hamming;

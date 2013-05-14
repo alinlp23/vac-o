@@ -27,9 +27,9 @@
 #include <string>
 #include <mili/mili.h>
 
-#include "fideo/RNABackendsConfig.h"
 #include "vaco-rna-backends/INFORNA.h"
 #include "vaco-rna-backends/IStartProvider.h"
+#include "fideo/FideoHelper.h"
 
 using std::string;
 using std::stringstream;
@@ -37,6 +37,7 @@ using mili::ensure_found;
 
 const FilePath INFORNA::OUT = "inverse.out";
 const FileLineNo INFORNA::LINE_NO = 13;
+const string INFORNA::INFORNA_PROG = "";//TODO: ?
 
 INFORNA::INFORNA(const biopp::SecStructure& structure, Similitude sd, Distance hd, CombinationAttempts ca) :
     RNAStartInverse(structure, sd, hd, ca)
@@ -57,11 +58,11 @@ void INFORNA::execute(string& seq, Distance& hd, Similitude& sd) throw(RNABacken
        << " -c '" << start << "'"
        << " -R " << repeat << " > " << OUT;
 
-    string const CMD = ss.str();
-    exec(CMD);
+    const fideo::Command CMD  = ss.str();
+    fideo::helper::runCommand(CMD);
 
     FileLine aux;
-    read_line(OUT, LINE_NO, aux);
+    fideo::helper::readLine(OUT, LINE_NO, aux);
     /* inverse.out looks like this:
      *
      * =========================
@@ -94,7 +95,7 @@ size_t INFORNA::read_sequence(FileLine& line, size_t offset, string& seq) const 
     {
         const size_t from = ensure_found(line.find_first_not_of(" ", offset));
         const size_t to = ensure_found(line.find_first_of(" ", from));
-        read_value(line, from, to - from, seq);
+        fideo::helper::readValue(line, from, to - from, seq);
 
         for (size_t i = 0; i < seq.size(); ++i)
             seq[i] = tolower(seq[i]);
@@ -113,7 +114,7 @@ size_t INFORNA::read_hamming_distance(FileLine& line, size_t offset, Distance& h
     {
         const size_t from = ensure_found(line.find_first_not_of(" ", offset));
         const size_t to = ensure_found(line.find_first_of(" ", from));
-        read_value(line, from, to - from, hd);
+        fideo::helper::readValue(line, from, to - from, hd);
         return to;
     }
     catch (const mili::StringNotFound& e)
@@ -128,7 +129,7 @@ size_t INFORNA::read_structure_distance(FileLine& line, size_t offset, Similitud
     {
         const size_t from = ensure_found(line.find_first_of("d", offset)) + 3;
         const size_t to = line.size();
-        read_value(line, from, to - from, sd);
+        fideo::helper::readValue(line, from, to - from, sd);
         return to;
     }
     catch (const mili::StringNotFound& e)

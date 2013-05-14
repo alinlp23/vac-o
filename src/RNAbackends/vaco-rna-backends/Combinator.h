@@ -30,7 +30,8 @@
 #include <list>
 #include <mili/mili.h>
 #include <biopp/biopp.h>
-#include "fideo/rna_backends_types.h"
+#include "fideo/RnaBackendsTypes.h"
+#include "vaco-commons/exceptions.h"
 
 using std::vector;
 using std::list;

@@ -25,14 +25,15 @@
 
 #include <sstream>
 
-#include "fideo/RNABackendsConfig.h"
 #include "vaco-rna-backends/RNAForester.h"
+#include "fideo/FideoHelper.h"
 
 using std::stringstream;
 
 const FilePath RNAForester::IN = "forester.in";
 const FilePath RNAForester::OUT = "forester.out";
 const FileLineNo RNAForester::LINE_NO = 1;
+const std::string RNAForester::RNAforester_PROG = "";//TODO: ??
 
 Similitude RNAForester::compare(const biopp::SecStructure& struct1, const biopp::SecStructure& struct2) const throw(RNABackendException)
 {
@@ -40,19 +41,19 @@ Similitude RNAForester::compare(const biopp::SecStructure& struct1, const biopp:
     ss << RNAforester_PROG << " -r --score -f "
        << IN << " > " << OUT;
 
-    const Command CMD = ss.str();
+    const fideo::Command CMD = ss.str();
 
     FileLinesCt lines;
     insert_into(lines, struct1.to_str());
     insert_into(lines, struct2.to_str());
 
-    write(IN, lines);
-    exec(CMD);
+    fideo::helper::write(IN, lines);
+    fideo::helper::runCommand(CMD);
 
     FileLine aux;
-    read_line(OUT, LINE_NO, aux);
+    fideo::helper::readLine(OUT, LINE_NO, aux);
 
     Similitude s;
-    read_value(aux, s);
+    fideo::helper::readValue(aux, s);
     return s;
 }

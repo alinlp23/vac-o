@@ -26,13 +26,14 @@
 #ifndef _INFORNA_H
 #define _INFORNA_H
 
-#include "fideo/RNABackendProxy.h"
+#include <string>
 #include "vaco-rna-backends/RNAStartInverse.h"
 
 class INFORNA : public RNAStartInverse
 {
     static const FilePath OUT;
     static const FileLineNo LINE_NO;
+    static const std::string INFORNA_PROG;
 
     size_t read_sequence(FileLine&, size_t, string&) const throw(RNABackendException);
     size_t read_hamming_distance(FileLine&, size_t, Distance&) const throw(RNABackendException);

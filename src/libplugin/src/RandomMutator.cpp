@@ -24,7 +24,7 @@
  */
 
 #include <mili/mili.h>
-#include "fideo/rna_backends_types.h"
+#include "fideo/RnaBackendsTypes.h"
 #include "vaco-libplugin/RandomMutator.h"
 
 using namespace biopp;

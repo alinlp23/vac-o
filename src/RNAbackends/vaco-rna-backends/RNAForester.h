@@ -26,7 +26,7 @@
 #ifndef _RNAFORESTER_H
 #define _RNAFORESTER_H
 
-#include "fideo/RNABackendProxy.h"
+#include <string>
 #include "vaco-rna-backends/IStructureCmp.h"
 /**
  * Implementation using system call to RNAforester
@@ -36,6 +36,7 @@ class RNAForester : public IStructureCmp
     static const FilePath IN;
     static const FilePath OUT;
     static const FileLineNo LINE_NO;
+    static const std::string RNAforester_PROG;
     virtual Similitude compare(const biopp::SecStructure&,
                                const biopp::SecStructure&) const throw(RNABackendException);
 };

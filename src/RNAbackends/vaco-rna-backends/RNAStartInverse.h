@@ -27,7 +27,7 @@
 #define _RNASTARTINVERSE_H
 
 #include <string>
-#include "fideo/rna_backends_types.h"
+#include "fideo/RnaBackendsTypes.h"
 #include "vaco-rna-backends/IFoldInverse.h"
 #include "vaco-rna-backends/Combinator.h"
 

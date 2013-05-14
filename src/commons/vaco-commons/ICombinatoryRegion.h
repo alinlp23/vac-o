@@ -30,7 +30,7 @@
 #include <mili/mili.h>
 #include <biopp/biopp.h>
 #include "vaco-commons/types.h"
-#include "fideo/rna_backends_types.h"
+#include "fideo/RnaBackendsTypes.h"
 
 using std::vector;
 using biopp::SeqIndex;

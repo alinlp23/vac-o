@@ -26,7 +26,7 @@
 #ifndef _SSVALIDATOR_H
 #define _SSVALIDATOR_H
 
-#include "fideo/rna_backends_types.h"
+#include "fideo/RnaBackendsTypes.h"
 #include "fideo/IFold.h"
 
 #include "vaco-rna-backends/IStructureCmp.h"
@@ -37,7 +37,7 @@
 template<SimilitudePolicy policy>
 class SSValidator : public IQAValidator
 {
-    const IFold* const fold_backend;
+    const fideo::IFold* const fold_backend;
     const IStructureCmp* const struct_cmp_backend;
 
     const SecStructure target_structure;
@@ -59,13 +59,13 @@ public:
      * @param structure Target secondary structure
      * @param simil Target similitude
      */
-    SSValidator(const IFold*, const IStructureCmp*, const SecStructure&, Similitude, bool);
+    SSValidator(const fideo::IFold*, const IStructureCmp*, const SecStructure&, Similitude, bool);
 };
 
 //Implementation
 
 template<SimilitudePolicy policy>
-SSValidator<policy>::SSValidator(const IFold* fb, const IStructureCmp* strb,
+SSValidator<policy>::SSValidator(const fideo::IFold* fb, const IStructureCmp* strb,
                                  const SecStructure& str, Similitude simil, bool circ) :
     fold_backend(fb), struct_cmp_backend(strb), target_structure(str),
     similitude(simil), circ(circ)
@@ -75,7 +75,7 @@ template<SimilitudePolicy policy>
 bool SSValidator<policy>::validate(const NucSequence& seq) const
 {
     SecStructure seq_struct;
-    fold_backend->fold(seq, seq_struct, circ);
+    fold_backend->fold(seq, circ, seq_struct);
 
     bool pass(true);
     if (seq_struct.pair_count() > 0)

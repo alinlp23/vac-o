@@ -26,7 +26,7 @@
 #ifndef _SEQUENCEMUTATOR_H
 #define _SEQUENCEMUTATOR_H
 
-#include "fideo/rna_backends_types.h"
+#include "fideo/RnaBackendsTypes.h"
 #include "vaco-rna-backends/Combinator.h"
 #include "vaco-commons/exceptions.h"
 #include "vaco-commons/types.h"

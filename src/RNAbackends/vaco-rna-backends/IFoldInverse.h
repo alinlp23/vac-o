@@ -27,8 +27,9 @@
 #define _IFOLDINVERSE_H
 
 #include <biopp/biopp.h>
-#include "fideo/rna_backends_exceptions.h"
+#include "fideo/RnaBackendsException.h"
 #include "vaco-commons/types.h"
+#include "vaco-commons/exceptions.h"
 
 class IStartProvider;
 /**
