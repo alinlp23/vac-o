@@ -1,35 +1,36 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
-#include "testing/QAMutatorMock.h"
-#include "testing/QAValidatorMock.h"
-#include "QARegion.h"
+#include "vaco-libplugin/testing/QAMutatorMock.h"
+#include "vaco-libplugin/testing/QAValidatorMock.h"
+#include "vaco-libplugin/QARegion.h"
 
 using ::testing::Return;
 using ::testing::_;
 using ::testing::Test;
+
 
 class QARegionTest : public Test
 {
 protected:
     QAMutatorMock mutator;
     QAValidatorMock validator;
-    NucSequence sequence;
+    biopp::NucSequence sequence;
     SeqIndex start;
     SeqIndex end;
 
     void SetUp()
     {
         string seq = "GGGCCC";
-        sequence = seq;
+        sequence = biopp::NucSequence(seq);
         start = 1;
         end = 4;
     }
 public:
-    void fake_mutant(NucSequence& seq)
+    void fake_mutant(biopp::NucSequence& seq)
     {
         string str = "AAA";
-        seq = str;
+        seq = biopp::NucSequence(str);
     }
 };
 

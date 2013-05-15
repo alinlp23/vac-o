@@ -1,18 +1,19 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
-#include "testing/FoldMock.h"
-#include "testing/FoldInverseMock.h"
-#include "testing/SequenceCmpMock.h"
-#include "testing/StructureCmpMock.h"
+#include "vaco-rna-backends/testing/FoldMock.h"
+#include "vaco-rna-backends/testing/FoldInverseMock.h"
+#include "vaco-rna-backends/testing/SequenceCmpMock.h"
+#include "vaco-rna-backends/testing/StructureCmpMock.h"
 
-#include "SSRegion.h"
+#include "vaco-libplugin/SSRegion.h"
 
 using ::testing::Return;
 using ::testing::_;
 using ::testing::InSequence;
 using ::testing::Test;
-
+using namespace biopp;
+/*
 class SSRegionTest : public Test
 {
 protected:
@@ -32,16 +33,18 @@ protected:
 
     void SetUp()
     {
-        wt = "((...))";
-        va = "(.....)";
+        string wt_str("((...))");
+        string va_str("(.....)");
+        wt = SecStructure(wt_str);//TODO: implement SecStructure(std::string)
+        va = SecStructure(va_str);
         string b = "AAAAAAA";
-        base = b;
+        base = NucSequence(b);
         start = 1;
         end = 5;
         partial = b.substr(start, end - start);
 
         string str = "CTAC";
-        inverse = str;
+        inverse = NucSequence(str);
     }
 public:
     void fake_query_partial_start(IStartProvider* provider)
@@ -90,7 +93,7 @@ public:
         }
     }
 
-    Fe fake_fold(const NucSequence& seq, SecStructure& str, bool circ)
+    fideo::Fe fake_fold(const NucSequence& seq, SecStructure& str, bool circ)
     {
         str = "((...))";
         return -3.f;
@@ -301,3 +304,4 @@ TEST_F(SSRegionTest, CheckCacheStopAsSoonAsFail)
     Score score = issregion->generate(seq, delta);
     EXPECT_EQ(score, 3. / 4.);
 }
+*/

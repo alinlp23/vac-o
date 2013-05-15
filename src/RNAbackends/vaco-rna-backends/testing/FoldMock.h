@@ -27,12 +27,12 @@
 #define _FOLDMOCK_H
 
 #include <gmock/gmock.h>
-#include "IFold.h"
+#include "fideo/IFold.h"
 
-class FoldMock : public IFold
+class FoldMock : public fideo::IFold
 {
 public:
-    MOCK_CONST_METHOD3(fold, Fe(const NucSequence&, SecStructure&, bool));
+    MOCK_CONST_METHOD3(fold, fideo::Fe(const biopp::NucSequence&, bool, biopp::SecStructure&));
 };
 
 #endif  /* _FOLDMOCK_H */

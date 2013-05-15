@@ -27,13 +27,13 @@
 #define _QAMUTATORMOCK_H
 
 #include <gmock/gmock.h>
-#include "IQAMutator.h"
+#include "vaco-libplugin/IQAMutator.h"
 
 class QAMutatorMock : public IQAMutator
 {
 public:
-    MOCK_METHOD1(next, bool(NucSequence&));
-    MOCK_METHOD1(set_base_sequence, void(const NucSequence&));
+    MOCK_METHOD1(next, bool(biopp::NucSequence&));
+    MOCK_METHOD1(set_base_sequence, void(const biopp::NucSequence&));
 };
 
 

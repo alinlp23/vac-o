@@ -39,13 +39,13 @@ public:
      * @param seq the sequence to write to the mutation.
      * @return If there are more mutations pending.
      */
-    virtual bool next(NucSequence&) = 0;
+    virtual bool next(biopp::NucSequence&) = 0;
 
     /**
      * Sets the base sequence to generate mutants
      * @param seq the sequence.
      */
-    virtual void set_base_sequence(const NucSequence&) = 0;
+    virtual void set_base_sequence(const biopp::NucSequence&) = 0;
 
     virtual ~IQAMutator() {}
 };

@@ -27,7 +27,7 @@
 #define _COMBINATORYREGIONMOCK_H
 
 #include <gmock/gmock.h>
-#include "CombinatoryRegion.h"
+#include "vaco-libplugin/CombinatoryRegion.h"
 
 class CombinatoryRegionMock : public CombinatoryRegion
 {

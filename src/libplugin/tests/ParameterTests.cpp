@@ -1,7 +1,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "Parameter.h"
+#include "vaco-commons/Parameter.h"
 
 using ::testing::Test;
 

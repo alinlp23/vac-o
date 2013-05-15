@@ -1,13 +1,16 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
-#include "testing/FoldMock.h"
-#include "testing/StructureCmpMock.h"
-#include "SSValidator.h"
+#include <biopp/biopp.h>
+#include "vaco-rna-backends/testing/FoldMock.h"
+#include "vaco-rna-backends/testing/StructureCmpMock.h"
+#include "vaco-libplugin/SSValidator.h"
 
 using ::testing::Return;
 using ::testing::_;
 using ::testing::Test;
+using namespace biopp;
+using namespace fideo;
 
 class SSValidatorTest : public Test
 {
@@ -15,12 +18,12 @@ protected:
     FoldMock fold_backend;
     StructureCmpMock str_cmp_backend;
 public:
-    Fe fake_fold(const NucSequence& seq, SecStructure& str, bool circ)
+    Fe fake_fold(const NucSequence& /*seq*/,  bool /*circ*/, SecStructure& str)
     {
         str = "((...))";
         return -3.f;
     }
-    Fe fake_bad_fold(const NucSequence& seq, SecStructure& str, bool circ)
+    Fe fake_bad_fold(const NucSequence& /*seq*/, bool /*circ*/, SecStructure& str)
     {
         str = ".......";
         return 0.f;
@@ -29,7 +32,7 @@ public:
 
 TEST_F(SSValidatorTest, MinSimilitude)
 {
-    EXPECT_CALL(fold_backend, fold(_, _, false))
+    EXPECT_CALL(fold_backend, fold(_, false, _))
     .Times(2)
     .WillRepeatedly(Invoke(this, &SSValidatorTest::fake_fold));
     EXPECT_CALL(str_cmp_backend, compare(_, _))
@@ -37,7 +40,7 @@ TEST_F(SSValidatorTest, MinSimilitude)
     .WillOnce(Return(.5f))
     .WillOnce(Return(.3f));
 
-    SecStructure str(".(...).");
+    SecStructure str(std::string(".(...)."));
     IQAValidator* validator = new SSValidator<MinSimilitude>(&fold_backend, &str_cmp_backend, str, .4f, false);
     NucSequence s;
 
@@ -49,7 +52,7 @@ TEST_F(SSValidatorTest, MinSimilitude)
 
 TEST_F(SSValidatorTest, MaxSimilitude)
 {
-    EXPECT_CALL(fold_backend, fold(_, _, false))
+    EXPECT_CALL(fold_backend, fold(_, false, _))
     .Times(2)
     .WillRepeatedly(Invoke(this, &SSValidatorTest::fake_fold));
     EXPECT_CALL(str_cmp_backend, compare(_, _))
@@ -69,7 +72,7 @@ TEST_F(SSValidatorTest, MaxSimilitude)
 
 TEST_F(SSValidatorTest, BadFold)
 {
-    EXPECT_CALL(fold_backend, fold(_, _, true))
+    EXPECT_CALL(fold_backend, fold(_, true, _))
     .Times(2)
     .WillOnce(Invoke(this, &SSValidatorTest::fake_fold))
     .WillOnce(Invoke(this, &SSValidatorTest::fake_bad_fold));

@@ -5,12 +5,15 @@
 #include <list>
 #include <string>
 
-#include "SequenceMutator.h"
+#include "biopp/biopp.h"
+#include "mili/mili.h"
+#include "vaco-libplugin/SequenceMutator.h"
 
 using std::string;
 using std::list;
 using std::ifstream;
 using ::testing::Test;
+using namespace mili;
 
 class SequenceMutatorTest : public Test
 {
@@ -18,7 +21,7 @@ protected:
     void SetUp()
     {
         string str = "AAA";
-        seq = str;
+        seq = biopp::NucSequence(str);
         ifstream mutations_expected("libplugin/testing/mutations-expected.txt");
         bool eof(false);
         while (!eof)
@@ -30,20 +33,20 @@ protected:
                 insert_into(expected, m);
         }
     }
-    NucSequence seq;
-    NucSequence empty;
+    biopp::NucSequence seq;
+    biopp::NucSequence empty;
     list<string> expected;
 
-    void seq_to_str(NucSequence& sequence, string& str_seq)
+    void seq_to_str(biopp::NucSequence& sequence, string& str_seq)
     {
         for (size_t i = 0; i < sequence.length(); ++i)
         {
-            str_seq += to_str(sequence[i]);
+            str_seq += sequence[i].as_char();
         }
     }
     void check_all(SequenceMutator& mutator)
     {
-        NucSequence mutated;
+        biopp::NucSequence mutated;
 
         CAutonomousIterator<list<string> > it(expected);
         while (mutator.next(mutated))

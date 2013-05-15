@@ -28,6 +28,7 @@
 
 #include "fideo/RnaBackendsTypes.h"
 #include "fideo/IFold.h"
+#include "biopp/biopp.h"
 
 #include "vaco-rna-backends/IStructureCmp.h"
 
@@ -40,7 +41,7 @@ class SSValidator : public IQAValidator
     const fideo::IFold* const fold_backend;
     const IStructureCmp* const struct_cmp_backend;
 
-    const SecStructure target_structure;
+    const biopp::SecStructure target_structure;
     const Similitude similitude;
     const bool circ;
 
@@ -50,7 +51,7 @@ class SSValidator : public IQAValidator
      * @param seq the sequence to validate
      * @return It depends on cmp_policy if it check for maxium o minium similitude.
      */
-    virtual bool validate(const NucSequence&) const;
+    virtual bool validate(const biopp::NucSequence&) const;
 public:
     /**
      * Constructor
@@ -59,22 +60,22 @@ public:
      * @param structure Target secondary structure
      * @param simil Target similitude
      */
-    SSValidator(const fideo::IFold*, const IStructureCmp*, const SecStructure&, Similitude, bool);
+    SSValidator(const fideo::IFold*, const IStructureCmp*, const biopp::SecStructure&, Similitude, bool);
 };
 
 //Implementation
 
 template<SimilitudePolicy policy>
 SSValidator<policy>::SSValidator(const fideo::IFold* fb, const IStructureCmp* strb,
-                                 const SecStructure& str, Similitude simil, bool circ) :
+                                 const biopp::SecStructure& str, Similitude simil, bool circ) :
     fold_backend(fb), struct_cmp_backend(strb), target_structure(str),
     similitude(simil), circ(circ)
 {}
 
 template<SimilitudePolicy policy>
-bool SSValidator<policy>::validate(const NucSequence& seq) const
+bool SSValidator<policy>::validate(const biopp::NucSequence& seq) const
 {
-    SecStructure seq_struct;
+    biopp::SecStructure seq_struct;
     fold_backend->fold(seq, circ, seq_struct);
 
     bool pass(true);

@@ -27,12 +27,12 @@
 #define _STRUCTURECMPMOCK_H
 
 #include <gmock/gmock.h>
-#include "IStructureCmp.h"
+#include "vaco-rna-backends/IStructureCmp.h"
 
 class StructureCmpMock : public IStructureCmp
 {
 public:
-    MOCK_CONST_METHOD2(compare, Similitude(const SecStructure&, const SecStructure&));
+    MOCK_CONST_METHOD2(compare, Similitude(const biopp::SecStructure&, const biopp::SecStructure&));
 };
 
 #endif  /* _STRUCTURECMPMOCK_H */

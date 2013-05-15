@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
-#include "testing/MutationMatrixProviderMock.h"
-#include "RandomMutator.h"
+#include "vaco-libplugin/testing/MutationMatrixProviderMock.h"
+#include "vaco-libplugin/RandomMutator.h"
 
 using ::testing::Return;
 using ::testing::_;
@@ -33,7 +33,7 @@ TEST(RandomMutatorTest, AllMutationsWithDefaultMatrix)
 {
     IQAMutator* mutator = new RandomMutator(4, 10);
     string str = "AAAAAA";
-    NucSequence s = str;
+    NucSequence s(str);
 
     mutator->set_base_sequence(s);
     size_t i = 0;
@@ -55,7 +55,7 @@ TEST(RandomMutatorTest, AllMutationsWithCustomMatrix)
     IQAMutator* mutator = new RandomMutator(4, 10, &matrix_provider);
 
     string str = "AAAAAA";
-    NucSequence s = str;
+    NucSequence s(str);
 
     mutator->set_base_sequence(s);
     size_t i = 0;

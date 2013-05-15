@@ -51,7 +51,9 @@ void RNAinverse::query_start(IStartProvider* provider) throw(RNABackendException
 void RNAinverse::execute(string& seq, Distance& hd, Similitude& sd) throw(RNABackendException)
 {
     FileLinesCt lines;
-    insert_into(lines, structure.to_str());
+    string structure_str;
+    structure.to_str(structure_str);
+    insert_into(lines, structure_str);
     insert_into(lines, start);
     fideo::helper::write(IN, lines);
 

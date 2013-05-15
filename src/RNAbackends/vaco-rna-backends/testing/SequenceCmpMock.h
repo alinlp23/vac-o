@@ -27,7 +27,7 @@
 #define _SEQUENCECMPMOCK_H
 
 #include <gmock/gmock.h>
-#include "ISequenceCmp.h"
+#include "vaco-rna-backends/ISequenceCmp.h"
 
 class SequenceCmpMock : public ISequenceCmp
 {

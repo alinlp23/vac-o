@@ -27,16 +27,15 @@
 #define _FOLDINVERSEMOCK_H
 
 #include <gmock/gmock.h>
-#include "IFoldInverse.h"
+#include "vaco-rna-backends/IFoldInverse.h"
 
 class FoldInverseMock : public IFoldInverse
 {
 public:
-    MOCK_METHOD1(fold_inverse, void(NucSequence&));
-    MOCK_METHOD1(set_start, void(const NucSequence&));
+    MOCK_METHOD1(fold_inverse, void(biopp::NucSequence&));
+    MOCK_METHOD1(set_start, void(const biopp::NucSequence&));
     MOCK_METHOD1(query_start, void(IStartProvider*));
 };
 
 
 #endif  /* _FOLDINVERSEMOCK_H */
-

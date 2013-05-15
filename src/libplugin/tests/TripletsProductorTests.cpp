@@ -2,19 +2,19 @@
 #include <gmock/gmock.h>
 
 #include <string>
-
-#include "TripletsProductor.h"
+#include "biopp/biopp.h"
+#include "vaco-libplugin/TripletsProductor.h"
 
 using std::string;
 using ::testing::Test;
+using namespace biopp;
 
 class TripletsProductorTest : public Test
 {
     void update_total_expected(string& str)
     {
-        NucSequence seq;
+        NucSequence seq(str);
         AminoSequence aminos;
-        seq = str;
         seq.translate(aminos);
         TripletsIterator triplet_it = GeneticCode::triplets(aminos[0]);
         total_expected *= triplet_it.count();
@@ -31,7 +31,7 @@ protected:
         update_total_expected(str3);
 
         string str = str1 + str2 + str3;
-        NucSequence seq = str;
+        NucSequence seq(str);
         seq.translate(aminoacids);
     }
     AminoSequence aminoacids;
@@ -44,7 +44,7 @@ protected:
         {
             str_seq += triplets[i].to_string();
         }
-        seq = str_seq;
+        seq = NucSequence(str_seq);
     }
 
     void check_aminoacids(NucSequence& seq)

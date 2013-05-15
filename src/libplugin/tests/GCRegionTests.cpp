@@ -1,17 +1,19 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
-#include "GCRegion.h"
+#include "biopp/bio_molecular/bio_molecular.h"
+#include "vaco-libplugin/GCRegion.h"
 
 using ::testing::Test;
+using namespace biopp;
+
 
 class GCRegionTest : public Test
 {
     void update_total_expected(string& str)
     {
-        NucSequence seq;
+        NucSequence seq(str);
         AminoSequence aminos;
-        seq = str;
         seq.translate(aminos);
         TripletsIterator triplet_it = GeneticCode::triplets(aminos[0]);
         total_expected *= triplet_it.count();
@@ -22,12 +24,12 @@ protected:
         string str1 = "CCCTTT";
         string str2 = "AAA";
         string str3 = "GGG";
-        base = str1 + str2 + str3;
+        base = NucSequence(str1 + str2 + str3);
 
         total_expected = 1;
         update_total_expected(str2);
         update_total_expected(str3);
-        NucSequence seq2 = str2 + str3;
+        NucSequence seq2(str2 + str3);
         seq2.translate(aminoacids);
         start = 6;
         end = 12;
@@ -126,8 +128,8 @@ TEST_F(GCRegionTest, DontRepeatBaseRegion)
         string str_base;
         for (size_t i = start; i < end; ++i)
         {
-            str_seq += to_str(seq[i]);
-            str_base += to_str(base[i]);
+            str_seq += seq[i].as_char();
+            str_base += base[i].as_char();
         }
         EXPECT_NE(str_seq, str_base);
     }

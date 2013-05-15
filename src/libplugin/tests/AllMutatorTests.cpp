@@ -1,14 +1,14 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
-#include "AllMutator.h"
+#include "vaco-libplugin/AllMutator.h"
 
 TEST(AllMutatorTest, AllMutations)
 {
     IQAMutator* mutator = new AllMutator(5, 2);
 
     string str = "AAAAA";
-    NucSequence s = str;
+    NucSequence s(str);
     mutator->set_base_sequence(s);
 
     size_t i = 0;

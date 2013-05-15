@@ -54,7 +54,9 @@ void INFORNA::execute(string& seq, Distance& hd, Similitude& sd) throw(RNABacken
 {
     stringstream ss;
     int repeat = max_structure_distance == 0 ? -1 : 1;
-    ss << INFORNA_PROG << " '" << structure.to_str() << "'"
+    string structure_str;
+    structure.to_str(structure_str);
+    ss << INFORNA_PROG << " '" << structure_str << "'"
        << " -c '" << start << "'"
        << " -R " << repeat << " > " << OUT;
 

@@ -1,10 +1,10 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "FirstImprovement.h"
-#include "testing/NeighborhoodMock.h"
-#include "testing/SolutionMock.h"
-#include "testing/StrategyMock.h"
+#include "vaco-libplugin/FirstImprovement.h"
+#include "vaco-commons/testing/NeighborhoodMock.h"
+#include "vaco-commons/testing/SolutionMock.h"
+#include "vaco-commons/testing/StrategyMock.h"
 
 using ::testing::Test;
 

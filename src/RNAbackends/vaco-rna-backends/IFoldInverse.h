@@ -42,12 +42,12 @@ public:
      * Make the inverse folding
      * @param sequence the NucSequence to write to.
      */
-    virtual void fold_inverse(NucSequence&) THROW((RNABackendException)) = 0;
+    virtual void fold_inverse(biopp::NucSequence&) THROW((RNABackendException)) = 0;
     /**
      * Sets the start sequence for the backend.
      * @param seq the NucSequence.
      */
-    virtual void set_start(const NucSequence&) = 0;
+    virtual void set_start(const biopp::NucSequence&) = 0;
 
     /**
      * Start the chain of calls to set the start sequence using

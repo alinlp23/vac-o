@@ -27,7 +27,7 @@
 #define _MUTATIONMATRIXPROVIDERMOCK_H
 
 #include <gmock/gmock.h>
-#include "RandomMutator.h"
+#include "vaco-libplugin/RandomMutator.h"
 
 class MutationMatrixProviderMock : public IMutationMatrixProvider
 {

@@ -1,10 +1,10 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "Neighborhood.h"
-#include "testing/CombinatoryRegionMock.h"
-#include "testing/SolutionMock.h"
-#include "testing/StrategyMock.h"
+#include "vaco-libplugin/Neighborhood.h"
+#include "vaco-libplugin/testing/CombinatoryRegionMock.h"
+#include "vaco-commons/testing/SolutionMock.h"
+#include "vaco-commons/testing/StrategyMock.h"
 
 using ::testing::Test;
 using ::testing::_;
@@ -25,7 +25,7 @@ protected:
         r1.set_bounds(1, 5);
         r2.set_bounds(6, 9);
         string str = "AAAGGGCCCUUU";
-        seq = str;
+        seq = NucSequence(str);
 
         insert_into(regions, &r1);
         insert_into(regions, &r2);

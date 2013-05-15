@@ -27,12 +27,12 @@
 #define _QAVALIDATORMOCK_H
 
 #include <gmock/gmock.h>
-#include "IQAValidator.h"
+#include "vaco-libplugin/IQAValidator.h"
 
 class QAValidatorMock : public IQAValidator
 {
 public:
-    MOCK_CONST_METHOD1(validate, bool(const NucSequence&));
+    MOCK_CONST_METHOD1(validate, bool(const biopp::NucSequence&));
 };
 
 

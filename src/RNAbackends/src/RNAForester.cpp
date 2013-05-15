@@ -44,8 +44,13 @@ Similitude RNAForester::compare(const biopp::SecStructure& struct1, const biopp:
     const fideo::Command CMD = ss.str();
 
     FileLinesCt lines;
-    insert_into(lines, struct1.to_str());
-    insert_into(lines, struct2.to_str());
+    string struct1_str;
+    string struct2_str;
+    struct1.to_str(struct1_str);
+    struct2.to_str(struct2_str);
+
+    insert_into(lines, struct1_str);
+    insert_into(lines, struct2_str);
 
     fideo::helper::write(IN, lines);
     fideo::helper::runCommand(CMD);
