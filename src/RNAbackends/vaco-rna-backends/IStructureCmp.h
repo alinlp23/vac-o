@@ -30,7 +30,7 @@
 #include "fideo/RnaBackendsTypes.h"
 #include "fideo/RnaBackendsException.h"
 #include "vaco-commons/types.h"
- #include "vaco-commons/exceptions.h"
+#include "vaco-commons/exceptions.h"
 /**
  * Interface for structure's comparing services.
  */
