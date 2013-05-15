@@ -109,7 +109,7 @@ DevPlugin::DevPlugin() :
     fold_backend(), inverse_backend(), struct_cmp_backend(), seq_cmp_backend(),
     wt_cache(), ssregion(), gcregion(), regions(), rnd_ss(), neighborhood(), strategy()
 {
-    
+
     fideo::IFold* p = mili::FactoryRegistry<fideo::IFold, std::string>::new_class("UNAFold");
     assert(p != NULL);
     p->fold(NucSequence("....((((((.......((.....))....))).))).."), false, wt_struct);

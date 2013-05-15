@@ -50,7 +50,7 @@ void Neighborhood::explore(const ISolution* current) const
             NucSequence ndelta;
             Score nscore = regions[r]->generate(nseq, ndelta);
 
-            if (cscore* nscore >= cutoff)
+            if (cscore * nscore >= cutoff)
             {
                 ISolution* neighbor = current->clone();
                 LocalOptimization op(ndelta, nscore);
