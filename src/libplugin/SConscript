@@ -2,7 +2,7 @@ Import ('env')
 
 name = 'vaco-libplugin'
 inc = env.Dir('.')
-ext_inc = env.Dir('vaco-libplugin')
+ext_inc = []
 src = env.Glob('src/*.cpp')
 deps = ['vaco-core', 'fideo', 'vaco-rna-backends', 'gmock','gtest_main', 'gtest']
 
