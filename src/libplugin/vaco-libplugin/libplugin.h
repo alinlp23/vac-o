@@ -42,8 +42,6 @@
 #include "vaco-libplugin/QARegion.h"
 
 /*libRNA providers*/
-#include "vaco-rna-backends/RNAinverse.h"
-#include "vaco-rna-backends/INFORNA.h"
 #include "vaco-rna-backends/RNAForester.h"
 #include "vaco-rna-backends/Hamming.h"
 

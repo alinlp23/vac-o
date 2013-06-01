@@ -2,6 +2,8 @@
 #include <gmock/gmock.h>
 
 #include <biopp/biopp.h>
+#include "fideo/FideoStructureParser.h"
+
 #include "vaco-rna-backends/testing/FoldMock.h"
 #include "vaco-rna-backends/testing/StructureCmpMock.h"
 #include "vaco-libplugin/SSValidator.h"
@@ -18,14 +20,14 @@ protected:
     FoldMock fold_backend;
     StructureCmpMock str_cmp_backend;
 public:
-    Fe fake_fold(const NucSequence& /*seq*/,  bool /*circ*/, SecStructure& str)
+    fideo::Fe fake_fold(const NucSequence& /*seq*/,  bool /*circ*/, SecStructure& str)
     {
-        str = "((...))";
+        fideo::ViennaParser::parseStructure("((...))", str);
         return -3.f;
     }
-    Fe fake_bad_fold(const NucSequence& /*seq*/, bool /*circ*/, SecStructure& str)
+    fideo::Fe fake_bad_fold(const NucSequence& /*seq*/, bool /*circ*/, SecStructure& str)
     {
-        str = ".......";
+        fideo::ViennaParser::parseStructure(".......", str);
         return 0.f;
     }
 };
@@ -40,7 +42,9 @@ TEST_F(SSValidatorTest, MinSimilitude)
     .WillOnce(Return(.5f))
     .WillOnce(Return(.3f));
 
-    SecStructure str(std::string(".(...)."));
+    SecStructure str;
+    fideo::ViennaParser::parseStructure(".(...).", str);
+
     IQAValidator* validator = new SSValidator<MinSimilitude>(&fold_backend, &str_cmp_backend, str, .4f, false);
     NucSequence s;
 
@@ -60,7 +64,9 @@ TEST_F(SSValidatorTest, MaxSimilitude)
     .WillOnce(Return(.5f))
     .WillOnce(Return(.3f));
 
-    SecStructure str(".(...).");
+    SecStructure str;
+    fideo::ViennaParser::parseStructure(".(...).", str);
+
     IQAValidator* validator = new SSValidator<MaxSimilitude>(&fold_backend, &str_cmp_backend, str, .4f, false);
     NucSequence s;
 
@@ -80,7 +86,9 @@ TEST_F(SSValidatorTest, BadFold)
     .Times(1)
     .WillOnce(Return(.3f));
 
-    SecStructure str(".(...).");
+    SecStructure str;
+    fideo::ViennaParser::parseStructure(".(...).", str);
+
     IQAValidator* validator = new SSValidator<MaxSimilitude>(&fold_backend, &str_cmp_backend, str, .4f, true);
     NucSequence s;
 

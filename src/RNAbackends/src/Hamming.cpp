@@ -36,13 +36,13 @@ Hamming::Hamming(const IDistanceMatrixProvider* const provider) : matrix()
     provider->get_distance_matrix(matrix);
 }
 
-Distance Hamming::compare(const NucSequence& seq1, const NucSequence& seq2) const throw(RNABackendException)
+fideo::Distance Hamming::compare(const NucSequence& seq1, const NucSequence& seq2) const
 {
 
     if (seq1.length() != seq2.length())
-        throw RNABackendException("Hamming distance must be calculated over sequences of the same size");
+        throw fideo::RNABackendException("Hamming distance must be calculated over sequences of the same size");
 
-    Distance h = 0.f;
+    fideo::Distance h = 0.f;
     const size_t n_triplets = seq1.triplets_length();
     for (size_t i = 0; i < n_triplets; ++i)
     {

@@ -32,8 +32,8 @@
 class FoldMock : public fideo::IFold
 {
 public:
-    MOCK_CONST_METHOD3(fold, fideo::Fe(const biopp::NucSequence&, bool, biopp::SecStructure&));
+    MOCK_METHOD3(fold, fideo::Fe(const biopp::NucSequence&, bool, biopp::SecStructure&));
+    MOCK_METHOD4(fold, fideo::Fe(const biopp::NucSequence&, bool, biopp::SecStructure&, fideo::IMotifObserver*));
 };
 
 #endif  /* _FOLDMOCK_H */
-

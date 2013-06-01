@@ -34,7 +34,7 @@ enum SimilitudePolicy
 template<SimilitudePolicy p>
 struct SimilitudeCmp
 {
-    static inline bool cmp(Similitude s1, Similitude s2)
+    static inline bool cmp(fideo::Similitude s1, fideo::Similitude s2)
     {
         return s1 <= s2;
     }
@@ -43,7 +43,7 @@ struct SimilitudeCmp
 template<>
 struct SimilitudeCmp<MaxSimilitude>
 {
-    static inline bool cmp(Similitude s1, Similitude s2)
+    static inline bool cmp(fideo::Similitude s1, fideo::Similitude s2)
     {
         return s1 >= s2;
     }

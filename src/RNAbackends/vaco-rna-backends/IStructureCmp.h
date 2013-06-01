@@ -34,17 +34,15 @@
 /**
  * Interface for structure's comparing services.
  */
-class IStructureCmp
+struct IStructureCmp
 {
-public:
     /**
      * Compare two structures.
      * @param struct1 a secondary structure.
      * @param struct2 another secondary structure.
      * @return The similitude between structures.
      */
-    virtual Similitude compare(const biopp::SecStructure& struct1,
-                               const biopp::SecStructure& struct2) const THROW((RNABackendException)) = 0;
+    virtual fideo::Similitude compare(const biopp::SecStructure& struct1, const biopp::SecStructure& struct2) const = 0;
 
     virtual ~IStructureCmp() {}
 };

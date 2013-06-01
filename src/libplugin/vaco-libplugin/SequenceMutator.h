@@ -27,7 +27,8 @@
 #define _SEQUENCEMUTATOR_H
 
 #include "fideo/RnaBackendsTypes.h"
-#include "vaco-rna-backends/Combinator.h"
+#include "fideo/Combinator.h"
+
 #include "vaco-commons/exceptions.h"
 #include "vaco-commons/types.h"
 /**
@@ -42,8 +43,8 @@ class SequenceMutator
     NMutations mutations;
     const NMutations rmutations;
 
-    SeqIndexesCombinator* const combinator;
-    SeqIndexesCombination positions;
+    fideo::SeqIndexesCombinator* const combinator;
+    fideo::SeqIndexesCombination positions;
 
     /**
      * Set the iterator at the begining for the current
@@ -91,7 +92,7 @@ public:
      * Re-initialize the mutator using the given sequence
      * @param seq the sequence.
      */
-    void begin(const NucSequence&) throw(PluginException);
+    void begin(const NucSequence&);
 
     ~SequenceMutator();
 };

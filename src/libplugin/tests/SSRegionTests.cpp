@@ -2,7 +2,7 @@
 #include <gmock/gmock.h>
 
 #include "vaco-rna-backends/testing/FoldMock.h"
-#include "vaco-rna-backends/testing/FoldInverseMock.h"
+//#include "vaco-rna-backends/testing/FoldInverseMock.h"
 #include "vaco-rna-backends/testing/SequenceCmpMock.h"
 #include "vaco-rna-backends/testing/StructureCmpMock.h"
 

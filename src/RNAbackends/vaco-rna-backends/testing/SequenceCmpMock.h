@@ -31,8 +31,7 @@
 
 class SequenceCmpMock : public ISequenceCmp
 {
-public:
-    MOCK_CONST_METHOD2(compare, Distance(const NucSequence&, const NucSequence&));
+    MOCK_CONST_METHOD2(compare, fideo::Distance(const NucSequence&, const NucSequence&));
 };
 
 #endif  /* _SEQUENCECMPMOCK_H */

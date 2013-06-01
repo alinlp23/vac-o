@@ -81,12 +81,12 @@ TEST_F(SequenceMutatorTest, FromWrongSize)
 
 TEST_F(SequenceMutatorTest, TooMuchMutations)
 {
-    EXPECT_THROW(SequenceMutator mutator(seq, 4), CombinatorException);
+    EXPECT_THROW(SequenceMutator mutator(seq, 4), fideo::CombinatorException);
 }
 
 TEST_F(SequenceMutatorTest, FromEmptySeq)
 {
-    EXPECT_THROW(SequenceMutator mutator(empty, 2), CombinatorException);
+    EXPECT_THROW(SequenceMutator mutator(empty, 2), fideo::CombinatorException);
 }
 
 TEST_F(SequenceMutatorTest, ZeroMutations)

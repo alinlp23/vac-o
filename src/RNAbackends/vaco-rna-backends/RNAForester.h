@@ -37,8 +37,7 @@ class RNAForester : public IStructureCmp
     static const FilePath OUT;
     static const FileLineNo LINE_NO;
     static const std::string RNAforester_PROG;
-    virtual Similitude compare(const biopp::SecStructure&,
-                               const biopp::SecStructure&) const throw(RNABackendException);
+    virtual fideo::Similitude compare(const biopp::SecStructure&, const biopp::SecStructure&) const;
 };
 
 #endif  /* _RNAFORESTER_H */

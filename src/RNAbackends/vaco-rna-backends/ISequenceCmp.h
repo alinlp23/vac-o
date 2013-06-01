@@ -31,22 +31,20 @@
 #include "fideo/RnaBackendsTypes.h"
 #include "fideo/RnaBackendsException.h"
 #include "vaco-commons/types.h"
- #include "vaco-commons/exceptions.h"
+#include "vaco-commons/exceptions.h"
 
 /**
  * Interface for sequence's comparing services.
  */
-class ISequenceCmp
+struct ISequenceCmp
 {
-public:
     /**
      * Compare two sequences.
      * @param seq1 a ARN sequence
      * @param seq2 another ARN sequence
      * @return The distance between sequences.
      */
-    virtual Distance compare(const NucSequence&,
-                             const NucSequence&) const THROW((RNABackendException)) = 0;
+    virtual fideo::Distance compare(const NucSequence&, const NucSequence&) const = 0;
 
     virtual ~ISequenceCmp() {}
 };

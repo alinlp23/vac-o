@@ -23,16 +23,16 @@
  *
  */
 
-#include "vaco-rna-backends/IFoldInverse.h"
+#include "fideo/IFoldInverse.h"
 #include "vaco-rna-backends/IStructureCmp.h"
 #include "vaco-rna-backends/ISequenceCmp.h"
 #include "vaco-libplugin/SSRegion.h"
 #include "vaco-libplugin/SequenceMutator.h"
 
 SSRegion::SSRegion(SeqIndex s, SeqIndex e, const SecStructure& wt,
-                   const SecStructure& vaccine, NMutations nm, Similitude simi,
-                   Distance dis, const NucSequencesCt& wt_cache, bool circ, const fideo::IFold* const fb,
-                   IFoldInverse* const fib, const IStructureCmp* const str_cmp,
+                   const SecStructure& vaccine, NMutations nm, fideo::Similitude simi,
+                   fideo::Distance dis, const NucSequencesCt& wt_cache, bool circ, fideo::IFold* const fb,
+                   fideo::IFoldInverse* const fib, const IStructureCmp* const str_cmp,
                    const ISequenceCmp* const seq_cmp) :
     CombinatoryRegion(s, e),
     wt_structure(wt), vaccine_structure(vaccine), max_mutations(nm),
@@ -46,7 +46,7 @@ Score SSRegion::evaluate(const NucSequence& delta) const
     Score s;
 
     mili::CAutonomousIterator<NucSequencesCt> it(wildtype_cache);
-    Distance min_hd = end - start;
+    fideo::Distance min_hd = end - start;
     while (!it.end())
     {
         string tmp;
@@ -85,7 +85,7 @@ void SSRegion::set_base_sequence(const NucSequence& sequence)
     inverse_backend->query_start(this);
 }
 
-void SSRegion::get_partial_start(IFoldInverse* const backend)
+void SSRegion::get_partial_start(fideo::IFoldInverse* const backend)
 {
     string tmp;
     for (size_t idx = start; idx < end; ++idx)
@@ -95,7 +95,7 @@ void SSRegion::get_partial_start(IFoldInverse* const backend)
     backend->set_start(partial);
 }
 
-void SSRegion::get_complete_start(IFoldInverse* const backend)
+void SSRegion::get_complete_start(fideo::IFoldInverse* const backend)
 {
     backend->set_start(base_sequence);
 }

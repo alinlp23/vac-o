@@ -29,15 +29,17 @@
 using std::cout;
 using std::cin;
 using std::endl;
-#include "vaco-rna-backends/IStartProvider.h"
+#include "fideo/IFoldInverse.h"
+#include "fideo/RNAFoldInverse.h"
+#include "fideo/INFORNA.h"
 #include "vaco-libplugin/SSValidator.h"
 #include "vaco-commons/types.h"
 
-class DevStartProvider : public IStartProvider
+class DevStartProvider : public fideo::IStartProvider
 {
     NucSequence base;
-    virtual void get_complete_start(IFoldInverse* const) {}
-    virtual void get_partial_start(IFoldInverse* const backend)
+    virtual void get_complete_start(fideo::IFoldInverse* const) {}
+    virtual void get_partial_start(fideo::IFoldInverse* const backend)
     {
         backend->set_start(base);
     }
@@ -55,17 +57,17 @@ class DevPlugin : public IPlugin
     SecStructure vacc_struct;
     SecStructure ires;
 
-    Distance min_distance;
+    fideo::Distance min_distance;
     CutOff cutoff;
     Attempts attempts;
 
     void init_params();
-    Parameter<Distance>* min_distance_param;
+    Parameter<fideo::Distance>* min_distance_param;
     Parameter<CutOff>* cutoff_param;
 
     void init_backends();
     fideo::IFold* fold_backend;
-    IFoldInverse* inverse_backend;
+    fideo::IFoldInverse* inverse_backend;
     IStructureCmp* struct_cmp_backend;
     ISequenceCmp* seq_cmp_backend;
 
@@ -193,14 +195,14 @@ void DevPlugin::unload()
  */
 void DevPlugin::init_params()
 {
-    min_distance_param = new Parameter<Distance>("Min distance", min_distance);
+    min_distance_param = new Parameter<fideo::Distance>("Min distance", min_distance);
     cutoff_param = new Parameter<CutOff>("Threshold cutoff", cutoff);
 }
 
 void DevPlugin::init_backends()
 {
     fold_backend = mili::FactoryRegistry<fideo::IFold, std::string>::new_class("RNAFold");
-    inverse_backend = new INFORNA(ires, 2, 20, 100);
+    inverse_backend = new fideo::INFORNA(ires, 2, 20, 100);
     struct_cmp_backend = new RNAForester;
     seq_cmp_backend = new Hamming;
 }
@@ -210,8 +212,8 @@ void DevPlugin::init_comb_regions()
     /**
      * Fill wt_cache with sequences that fold to wt_struct
      */
-    IStartProvider* devprovider = new DevStartProvider(wt_sequence);
-    IFoldInverse* wt_inverse = new RNAinverse(wt_struct, 0, 25, 10);
+    fideo::IStartProvider* devprovider = new DevStartProvider(wt_sequence);
+    fideo::IFoldInverse* wt_inverse = new fideo::RNAinverse(wt_struct, 0, 25, 10);
     wt_inverse->query_start(devprovider);
     NucSequence tmp;
     for (size_t i = 0; i < 5; ++i)

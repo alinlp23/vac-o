@@ -29,9 +29,8 @@
 #include "vaco-rna-backends/ISequenceCmp.h"
 #include "vaco-commons/exceptions.h"
 
-class IDistanceMatrixProvider
+struct IDistanceMatrixProvider
 {
-public:
     virtual void get_distance_matrix(biopp::DistanceMatrix& m) const = 0;
     virtual ~IDistanceMatrixProvider() {}
 };
@@ -42,8 +41,7 @@ public:
 class Hamming : public ISequenceCmp
 {
     biopp::DistanceMatrix matrix;
-    virtual Distance compare(const NucSequence&,
-                             const NucSequence&) const throw(RNABackendException);
+    virtual fideo::Distance compare(const NucSequence&, const NucSequence&) const;
 public:
     Hamming(const IDistanceMatrixProvider* const);
     Hamming();

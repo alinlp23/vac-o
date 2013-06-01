@@ -32,7 +32,7 @@
 class StructureCmpMock : public IStructureCmp
 {
 public:
-    MOCK_CONST_METHOD2(compare, Similitude(const biopp::SecStructure&, const biopp::SecStructure&));
+    MOCK_CONST_METHOD2(compare, fideo::Similitude(const biopp::SecStructure&, const biopp::SecStructure&));
 };
 
 #endif  /* _STRUCTURECMPMOCK_H */

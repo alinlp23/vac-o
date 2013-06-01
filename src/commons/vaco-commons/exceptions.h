@@ -36,8 +36,6 @@
 class VACOException {};
 
 DEFINE_SPECIFIC_EXCEPTION_TEXT(PluginException, VACOException, "Plugin");
-DEFINE_SPECIFIC_EXCEPTION_TEXT(CombinatorException, VACOException, "Combinator Exception");
-DEFINE_SPECIFIC_EXCEPTION_TEXT(RNABackendException, VACOException, "Combinator Exception");
 
 #endif  /* _EXCEPTIONS_H */
 

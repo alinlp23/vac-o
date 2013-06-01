@@ -38,11 +38,11 @@
 template<SimilitudePolicy policy>
 class SSValidator : public IQAValidator
 {
-    const fideo::IFold* const fold_backend;
+    fideo::IFold* const fold_backend;
     const IStructureCmp* const struct_cmp_backend;
 
     const biopp::SecStructure target_structure;
-    const Similitude similitude;
+    const fideo::Similitude similitude;
     const bool circ;
 
     /**
@@ -60,16 +60,19 @@ public:
      * @param structure Target secondary structure
      * @param simil Target similitude
      */
-    SSValidator(const fideo::IFold*, const IStructureCmp*, const biopp::SecStructure&, Similitude, bool);
+    SSValidator(fideo::IFold*, const IStructureCmp*, const biopp::SecStructure&, fideo::Similitude, bool);
 };
 
 //Implementation
 
 template<SimilitudePolicy policy>
-SSValidator<policy>::SSValidator(const fideo::IFold* fb, const IStructureCmp* strb,
-                                 const biopp::SecStructure& str, Similitude simil, bool circ) :
-    fold_backend(fb), struct_cmp_backend(strb), target_structure(str),
-    similitude(simil), circ(circ)
+SSValidator<policy>::SSValidator(fideo::IFold* fb, const IStructureCmp* strb,
+                                 const biopp::SecStructure& str, fideo::Similitude simil, bool circ) 
+  : fold_backend(fb),
+    struct_cmp_backend(strb),
+    target_structure(str),
+    similitude(simil), 
+    circ(circ)
 {}
 
 template<SimilitudePolicy policy>
@@ -81,7 +84,7 @@ bool SSValidator<policy>::validate(const biopp::NucSequence& seq) const
     bool pass(true);
     if (seq_struct.pair_count() > 0)
     {
-        const Similitude s = struct_cmp_backend->compare(target_structure, seq_struct);
+        const fideo::Similitude s = struct_cmp_backend->compare(target_structure, seq_struct);
         pass = SimilitudeCmp<policy>::cmp(similitude, s);
     }
     return pass;

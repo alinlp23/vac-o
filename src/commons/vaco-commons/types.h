@@ -101,27 +101,6 @@ typedef unsigned int Attempts;
 
 
 //TODO: move to fideo
-/**
- * Distance between sequences
- */
-typedef float Distance;
-
-/**
- * Similitude between sequences or structures
- */
-typedef float Similitude;
-
-typedef std::set<std::string> StringSequencesCt;
-
-/**
- * Container of raw (string) RNA sequences
- */
-typedef std::set<std::string> StringSequencesCt;
-
-/**
- * Number of combination attemps.
- */
-typedef unsigned int CombinationAttempts;
 
 /**
  * Filename path

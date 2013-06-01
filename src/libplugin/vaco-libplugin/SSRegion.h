@@ -28,7 +28,7 @@
 
 #include "fideo/RnaBackendsTypes.h"
 #include "fideo/IFold.h"
-#include "vaco-rna-backends/IStartProvider.h"
+#include "fideo/IStartProvider.h"
 #include "vaco-libplugin/CombinatoryRegion.h"
 
 using biopp::SecStructure;
@@ -37,19 +37,19 @@ class IFoldInverse;
 class IStructureCmp;
 class ISequenceCmp;
 
-class SSRegion : public CombinatoryRegion, public IStartProvider
+class SSRegion : public CombinatoryRegion, public fideo::IStartProvider
 {
     SecStructure wt_structure;
     SecStructure vaccine_structure;
     NMutations max_mutations;
-    Similitude max_similitude;
-    Distance min_distance;
+    fideo::Similitude max_similitude;
+    fideo::Distance min_distance;
     const NucSequencesCt wildtype_cache;
     const bool circ;
 
     /*libRNA backends*/
-    const fideo::IFold* const fold_backend;
-    IFoldInverse* const inverse_backend;
+    fideo::IFold* const fold_backend;
+    fideo::IFoldInverse* const inverse_backend;
     const IStructureCmp* const struct_cmp_backend;
     const ISequenceCmp* const seq_cmp_backend;
 
@@ -62,12 +62,12 @@ class SSRegion : public CombinatoryRegion, public IStartProvider
     bool structure_compare(const NucSequence&);
 
     // Implements IStartProvider
-    virtual void get_partial_start(IFoldInverse* const);
-    virtual void get_complete_start(IFoldInverse* const);
+    virtual void get_partial_start(fideo::IFoldInverse* const);
+    virtual void get_complete_start(fideo::IFoldInverse* const);
 public:
     SSRegion(SeqIndex, SeqIndex, const SecStructure&, const SecStructure&,
-             NMutations, Similitude, Distance, const NucSequencesCt&, bool,
-             const fideo::IFold* const, IFoldInverse* const, const IStructureCmp* const,
+             NMutations, fideo::Similitude, fideo::Distance, const NucSequencesCt&, bool,
+             fideo::IFold* const, fideo::IFoldInverse* const, const IStructureCmp* const,
              const ISequenceCmp* const);
 
 };

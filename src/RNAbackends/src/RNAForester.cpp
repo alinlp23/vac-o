@@ -24,41 +24,41 @@
  */
 
 #include <sstream>
-
+#include <etilico/etilico.h>
 #include "vaco-rna-backends/RNAForester.h"
 #include "fideo/FideoHelper.h"
+#include "fideo/FideoStructureParser.h"
 
-using std::stringstream;
 
 const FilePath RNAForester::IN = "forester.in";
 const FilePath RNAForester::OUT = "forester.out";
 const FileLineNo RNAForester::LINE_NO = 1;
-const std::string RNAForester::RNAforester_PROG = "";//TODO: ??
+const std::string RNAForester::RNAforester_PROG = "RNAforester";
 
-Similitude RNAForester::compare(const biopp::SecStructure& struct1, const biopp::SecStructure& struct2) const throw(RNABackendException)
+fideo::Similitude RNAForester::compare(const biopp::SecStructure& struct1, const biopp::SecStructure& struct2) const
 {
-    stringstream ss;
+    std::stringstream ss;
     ss << RNAforester_PROG << " -r --score -f "
        << IN << " > " << OUT;
 
-    const fideo::Command CMD = ss.str();
+    const etilico::Command CMD = ss.str();
 
     FileLinesCt lines;
-    string struct1_str;
-    string struct2_str;
-    struct1.to_str(struct1_str);
-    struct2.to_str(struct2_str);
+    std::string struct1_str;
+    std::string struct2_str;
+    fideo::ViennaParser::toString(struct1, struct1_str);
+    fideo::ViennaParser::toString(struct2, struct2_str);
 
     insert_into(lines, struct1_str);
     insert_into(lines, struct2_str);
 
     fideo::helper::write(IN, lines);
-    fideo::helper::runCommand(CMD);
+    etilico::runCommand(CMD);
 
     FileLine aux;
     fideo::helper::readLine(OUT, LINE_NO, aux);
 
-    Similitude s;
+    fideo::Similitude s;
     fideo::helper::readValue(aux, s);
     return s;
 }
