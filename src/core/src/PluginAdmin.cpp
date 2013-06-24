@@ -33,7 +33,7 @@ IPlugin* PluginAdmin::load(const Path& file) throw(PluginException)
 
     handle = dlopen(file.c_str(), RTLD_LAZY);
 
-    bool success(handle != NULL);
+    const bool success(handle != NULL);
     if (success)
     {
         typedef IPlugin*(*CreatePlugin)();
@@ -53,13 +53,13 @@ IPlugin* PluginAdmin::load(const Path& file) throw(PluginException)
         {
             const string err = dlerror();
             dlclose(handle);
-            throw  PluginException(err);
+            throw PluginException(err);
         }
         else
             plg = create_plugin();
     }
     else
-        throw  PluginException(dlerror());
+        throw PluginException(dlerror());
 
     return plg;
 }

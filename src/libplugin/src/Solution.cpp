@@ -42,7 +42,7 @@ Solution::Solution(const NucSequence& seq, const CombinatoryRegionsCt& regions):
             c += seq[idx].as_char();
         }
         //default local score = 1
-        LocalOptimization op(NucSequence(c), 1);
+        const LocalOptimization op(NucSequence(c), 1);
         insert_into(components, op);
         ++it;
     }

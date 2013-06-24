@@ -23,7 +23,7 @@ protected:
         initial = new SolutionMock;
     }
 public:
-    void fake_explore(const ISolution* const s)
+    void fake_explore(const ISolution* const /* s */)
     {
         bool done(false);
         size_t i = 0;

@@ -45,7 +45,7 @@ void Strategy::run(const ISolution* init, ISolutionObserver* obs)
         ++current_iteration;
         neighborhood->explore(current_solution);
 
-        bool someone_selected = select_neighbor();
+        const bool someone_selected = select_neighbor();
         if (someone_selected)
         {
             if (selected_neighbor_score >= current_score)

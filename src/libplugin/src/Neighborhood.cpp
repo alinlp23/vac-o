@@ -41,7 +41,7 @@ void Neighborhood::explore(const ISolution* current) const
         //sets the current solution's sequence as the base sequence
         regions[r]->set_base_sequence(cseq);
         //Compute local score without the region r
-        Score cscore = current->compute_local_score(r);
+        const Score cscore = current->compute_local_score(r);
 
         Attempts i = 0;
         while (i < attempts && !done)
@@ -50,9 +50,9 @@ void Neighborhood::explore(const ISolution* current) const
             NucSequence ndelta;
             Score nscore = regions[r]->generate(nseq, ndelta);
 
-            if (cscore * nscore >= cutoff)
+            if (cscore* nscore >= cutoff)
             {
-                ISolution* neighbor = current->clone();
+                ISolution* const neighbor = current->clone();
                 LocalOptimization op(ndelta, nscore);
                 neighbor->update_solution(r, nseq, op);
                 done = notify(neighbor);

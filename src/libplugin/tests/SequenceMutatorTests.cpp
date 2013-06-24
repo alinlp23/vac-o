@@ -76,7 +76,7 @@ TEST_F(SequenceMutatorTest, FromSize)
 TEST_F(SequenceMutatorTest, FromWrongSize)
 {
     SequenceMutator mutator(5, 2);
-    EXPECT_THROW(mutator.begin(seq), PluginException);
+    EXPECTst_THROW(mutator.begin(seq), PluginException);
 }
 
 TEST_F(SequenceMutatorTest, TooMuchMutations)

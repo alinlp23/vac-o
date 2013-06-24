@@ -39,7 +39,7 @@ bool FirstImprovement::select_neighbor()
 bool FirstImprovement::update(const ISolution* neighbor)
 {
     bool done(false);
-    Score ns = scorer->evaluate(neighbor);
+    const Score ns = scorer->evaluate(neighbor);
     if (ns >= current_score)
     {
         selected_neighbor = neighbor;

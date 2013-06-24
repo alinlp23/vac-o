@@ -91,7 +91,7 @@ void SSRegion::get_partial_start(fideo::IFoldInverse* const backend)
     for (size_t idx = start; idx < end; ++idx)
         tmp += base_sequence[idx].as_char();
 
-    NucSequence partial(tmp);
+    const NucSequence partial(tmp);
     backend->set_start(partial);
 }
 

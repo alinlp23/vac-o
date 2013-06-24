@@ -80,7 +80,7 @@ bool SimulatedAnnealing::select_neighbor()
 
 bool SimulatedAnnealing::update(const ISolution* neighbor)
 {
-    Score ns = scorer->evaluate(neighbor);
+    const Score ns = scorer->evaluate(neighbor);
     ScoredSolution ss(neighbor, ns);
     insert_into(neighbors, ss);
 

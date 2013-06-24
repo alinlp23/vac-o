@@ -66,13 +66,12 @@ public:
 //Implementation
 
 template<SimilitudePolicy policy>
-SSValidator<policy>::SSValidator(fideo::IFold* fb, const IStructureCmp* strb,
-                                 const biopp::SecStructure& str, fideo::Similitude simil, bool circ) 
-  : fold_backend(fb),
-    struct_cmp_backend(strb),
-    target_structure(str),
-    similitude(simil), 
-    circ(circ)
+SSValidator<policy>::SSValidator(fideo::IFold* fb, const IStructureCmp* strb, const biopp::SecStructure& str, fideo::Similitude simil, bool circ)
+    : fold_backend(fb),
+      struct_cmp_backend(strb),
+      target_structure(str),
+      similitude(simil),
+      circ(circ)
 {}
 
 template<SimilitudePolicy policy>

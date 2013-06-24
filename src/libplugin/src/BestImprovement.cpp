@@ -36,7 +36,7 @@ bool BestImprovement::select_neighbor()
 
 bool BestImprovement::update(const ISolution* neighbor)
 {
-    Score ns = scorer->evaluate(neighbor);
+    const Score ns = scorer->evaluate(neighbor);
     if (ns >= current_score && ns > selected)
     {
         if (selected != 0)

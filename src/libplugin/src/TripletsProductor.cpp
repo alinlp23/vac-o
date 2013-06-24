@@ -41,7 +41,7 @@ TripletsProductor::TripletsProductor(const AminoSequence& aminoacids) :
 }
 bool TripletsProductor::next(TripletsProduct& p)
 {
-    bool cont(more);
+    const bool cont(more);
     p = product;
     if (more)
         move(last);

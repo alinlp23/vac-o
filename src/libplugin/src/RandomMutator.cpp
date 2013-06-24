@@ -54,7 +54,7 @@ RandomMutator::RandomMutator(NMutations mutations, NMutations mutants, const IMu
 bool RandomMutator::next(NucSequence& seq)
 {
     ++counter;
-    bool more(counter <= mutants);
+    const bool more(counter <= mutants);
 
     if (more)
     {
@@ -80,12 +80,13 @@ bool RandomMutator::next(NucSequence& seq)
             }
             while (prob == 0.f);
 
-            Nucleotide b = Nucleotide(0);
+            Nucleotide b;//TODO: MethodNotImplemented = Nucleotide(0)
+            b.reset();//TODO: check this solution.
             Nucleotide a = seq[pos];
             float acc = matrix[a.value][b.value];
             while (acc < prob)
             {
-                b = Nucleotide((b.value + 1) % 4);
+                ++b;
                 acc += matrix[a.value][b.value];
             }
             seq[pos] = b;
