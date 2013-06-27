@@ -64,7 +64,7 @@ TEST(RandomMutatorTest, AllMutationsWithCustomMatrix)
     {
         for (size_t idx = 0; idx < mutated.length(); ++idx)
         {
-            //EXPECT_TRUE(mutated[idx] == 0 || mutated[idx] == 3);//TODO: what is 0 y 3?, throws "biopp::MethodNotImplemented"
+            EXPECT_TRUE(mutated[idx] == static_cast<biopp::Nucleotide::Alpha>(0) || mutated[idx] == static_cast<biopp::Nucleotide::Alpha>(3));
         }
         ++i;
     }

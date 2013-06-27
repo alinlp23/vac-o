@@ -80,8 +80,8 @@ bool RandomMutator::next(NucSequence& seq)
             }
             while (prob == 0.f);
 
-            Nucleotide b;//TODO: MethodNotImplemented = Nucleotide(0)
-            b.reset();//TODO: check this solution.
+            Nucleotide b = Nucleotide(static_cast<Nucleotide::Alpha>(0) );
+
             Nucleotide a = seq[pos];
             float acc = matrix[a.value][b.value];
             while (acc < prob)

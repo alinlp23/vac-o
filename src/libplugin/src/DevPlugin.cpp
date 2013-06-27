@@ -111,7 +111,7 @@ DevPlugin::DevPlugin() :
     wt_cache(), ssregion(), gcregion(), regions(), rnd_ss(), neighborhood(), strategy()
 {
 
-    fideo::IFold* p = mili::FactoryRegistry<fideo::IFold, std::string>::new_class("UNAFold");
+    fideo::IFold* const p = mili::FactoryRegistry<fideo::IFold, std::string>::new_class("UNAFold");
     assert(p != NULL);
     p->fold(NucSequence("....((((((.......((.....))....))).))).."), false, wt_struct);
     p->fold(NucSequence(".((.(((((.....)).))).))................"), false, vacc_struct);
@@ -158,10 +158,9 @@ void DevPlugin::get_qa_regions(QARegionsCt& qaregions) const
 
 Score DevPlugin::evaluate_solution(const ISolution* solution)
 {
-    Score s;
     NucSequence seq;
     solution->get_sequence(seq);
-    s = Score(seq_cmp_backend->compare(seq, wt_sequence));
+    const Score s = Score(seq_cmp_backend->compare(seq, wt_sequence));
 
     return s;
 }
