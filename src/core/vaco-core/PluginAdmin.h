@@ -34,7 +34,7 @@ class PluginAdmin
 {
     void* handle;
 public:
-    IPlugin* load(const Path& file) throw(PluginException);
+    IPlugin* load(const Path& file);
     void unload(IPlugin*);
 };
 

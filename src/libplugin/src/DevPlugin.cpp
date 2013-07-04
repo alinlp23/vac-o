@@ -30,6 +30,7 @@ using std::cout;
 using std::cin;
 using std::endl;
 #include "fideo/IFoldInverse.h"
+#include "fideo/FideoStructureParser.h"
 #include "vaco-libplugin/libplugin.h"
 #include "vaco-libplugin/SSValidator.h"
 #include "vaco-commons/types.h"
@@ -67,7 +68,7 @@ class DevPlugin : public IPlugin
     void init_backends();
     fideo::IFold* fold_backend;
     fideo::IFoldInverse* inverse_backend;
-    IStructureCmp* struct_cmp_backend;
+    fideo::IStructureCmp* struct_cmp_backend;
     ISequenceCmp* seq_cmp_backend;
 
     void init_comb_regions();
@@ -111,13 +112,10 @@ DevPlugin::DevPlugin() :
     wt_cache(), ssregion(), gcregion(), regions(), rnd_ss(), neighborhood(), strategy()
 {
 
-    fideo::IFold* const p = mili::FactoryRegistry<fideo::IFold, std::string>::new_class("UNAFold");
-    assert(p != NULL);
-    p->fold(NucSequence("....((((((.......((.....))....))).))).."), false, wt_struct);
-    p->fold(NucSequence(".((.(((((.....)).))).))................"), false, vacc_struct);
-    p->fold(NucSequence(".((.(((((.....)).))).))."), false, ires);
-    //TODO: delete en main?
-    delete p;
+    fideo::ViennaParser::parseStructure(std::string("....((((((.......((.....))....))).))).."), wt_struct);
+    fideo::ViennaParser::parseStructure(std::string(".((.(((((.....)).))).))................"), vacc_struct);
+    fideo::ViennaParser::parseStructure(std::string(".((.(((((.....)).))).))."), ires);
+
     init_params();
 }
 
@@ -201,7 +199,7 @@ void DevPlugin::init_backends()
 {
     fold_backend = mili::FactoryRegistry<fideo::IFold, std::string>::new_class("RNAFold");
     inverse_backend = fideo::IFoldInverse::Factory::new_class("INFORNA", fideo::InverseFoldParams(ires, 2, 20, 100));
-    struct_cmp_backend = new RNAForester;
+    struct_cmp_backend = fideo::IStructureCmp::Factory::new_class("RNAForester");
     seq_cmp_backend = new Hamming;
 }
 

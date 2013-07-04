@@ -24,7 +24,7 @@
  */
 
 #include "fideo/IFoldInverse.h"
-#include "vaco-rna-backends/IStructureCmp.h"
+#include "fideo/IStructureCmp.h"
 #include "vaco-rna-backends/ISequenceCmp.h"
 #include "vaco-libplugin/SSRegion.h"
 #include "vaco-libplugin/SequenceMutator.h"
@@ -32,7 +32,7 @@
 SSRegion::SSRegion(SeqIndex s, SeqIndex e, const SecStructure& wt,
                    const SecStructure& vaccine, NMutations nm, fideo::Similitude simi,
                    fideo::Distance dis, const NucSequencesCt& wt_cache, bool circ, fideo::IFold* const fb,
-                   fideo::IFoldInverse* const fib, const IStructureCmp* const str_cmp,
+                   fideo::IFoldInverse* const fib, const fideo::IStructureCmp* const str_cmp,
                    const ISequenceCmp* const seq_cmp) :
     CombinatoryRegion(s, e),
     wt_structure(wt), vaccine_structure(vaccine), max_mutations(nm),

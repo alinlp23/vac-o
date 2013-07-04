@@ -27,9 +27,9 @@
 #define _STRUCTURECMPMOCK_H
 
 #include <gmock/gmock.h>
-#include "vaco-rna-backends/IStructureCmp.h"
+#include "fideo/IStructureCmp.h"
 
-class StructureCmpMock : public IStructureCmp
+class StructureCmpMock : public fideo::IStructureCmp
 {
 public:
     MOCK_CONST_METHOD2(compare, fideo::Similitude(const biopp::SecStructure&, const biopp::SecStructure&));

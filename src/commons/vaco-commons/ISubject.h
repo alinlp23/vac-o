@@ -42,7 +42,7 @@ class ISubject
     ObserversCt observers;
 public:
     ISubject()
-      : observers(NULL)
+      : observers()
     {}
     virtual ~ISubject() {}
 
@@ -60,7 +60,7 @@ class ISingleSubject
     typedef ISingleObserver<Subject> Observer;
     Observer* observer;
 public:
-    ISingleSubject(): observer(NULL)
+    ISingleSubject(): observer()
     {}
 
     virtual ~ISingleSubject() {}

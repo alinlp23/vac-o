@@ -29,6 +29,7 @@
 #include "fideo/RnaBackendsTypes.h"
 #include "fideo/IFold.h"
 #include "fideo/IStartProvider.h"
+#include "fideo/IStructureCmp.h"
 #include "vaco-libplugin/CombinatoryRegion.h"
 
 using biopp::SecStructure;
@@ -50,7 +51,7 @@ class SSRegion : public CombinatoryRegion, public fideo::IStartProvider
     /*libRNA backends*/
     fideo::IFold* const fold_backend;
     fideo::IFoldInverse* const inverse_backend;
-    const IStructureCmp* const struct_cmp_backend;
+    const fideo::IStructureCmp* const struct_cmp_backend;
     const ISequenceCmp* const seq_cmp_backend;
 
     virtual Score evaluate(const NucSequence&) const;
@@ -67,7 +68,7 @@ class SSRegion : public CombinatoryRegion, public fideo::IStartProvider
 public:
     SSRegion(SeqIndex, SeqIndex, const SecStructure&, const SecStructure&,
              NMutations, fideo::Similitude, fideo::Distance, const NucSequencesCt&, bool,
-             fideo::IFold* const, fideo::IFoldInverse* const, const IStructureCmp* const,
+             fideo::IFold* const, fideo::IFoldInverse* const, const fideo::IStructureCmp* const,
              const ISequenceCmp* const);
 
 };

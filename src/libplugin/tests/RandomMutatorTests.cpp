@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
+#include <string>
+#include <biopp/biopp.h>
 #include "vaco-libplugin/testing/MutationMatrixProviderMock.h"
 #include "vaco-libplugin/RandomMutator.h"
 
@@ -32,12 +34,12 @@ inline void fake_provider(MutationMatrix& matrix)
 TEST(RandomMutatorTest, AllMutationsWithDefaultMatrix)
 {
     IQAMutator* mutator = new RandomMutator(4, 10);
-    string str = "AAAAAA";
-    NucSequence s(str);
+    const std::string str = "AAAAAA";
+    biopp::NucSequence s(str);
 
     mutator->set_base_sequence(s);
     size_t i = 0;
-    NucSequence mutated;
+    biopp::NucSequence mutated;
     while (mutator->next(mutated))
         ++i;
 
@@ -54,12 +56,12 @@ TEST(RandomMutatorTest, AllMutationsWithCustomMatrix)
 
     IQAMutator* mutator = new RandomMutator(4, 10, &matrix_provider);
 
-    string str = "AAAAAA";
-    NucSequence s(str);
+    const std::string str = "AAAAAA";
+    biopp::NucSequence s(str);
 
     mutator->set_base_sequence(s);
     size_t i = 0;
-    NucSequence mutated;
+    biopp::NucSequence mutated;
     while (mutator->next(mutated))
     {
         for (size_t idx = 0; idx < mutated.length(); ++idx)

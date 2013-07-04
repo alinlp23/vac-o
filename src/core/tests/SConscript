@@ -4,7 +4,7 @@ name = 'vaco-core'
 inc = env.Dir('..')
 src = env.Glob('*.cpp')
 
-deps = ['vaco-core', 'vaco-core-objects', 'gmock','gtest_main', 'gtest']
+deps = ['vaco-core-objects', 'gmock','gtest_main', 'gtest']
 
 test_plugins = [
         ('vaco-test-wrong-plugin', env.File('WrongPlugin.cpp')),

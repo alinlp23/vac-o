@@ -24,7 +24,7 @@
  */
 
 #include <iostream>
-
+#include <etilico/etilico.h>
 #include "vaco-commons/IPlugin.h"
 #include "vaco-commons/Parameter.h"
 #include "vaco-commons/IQARegion.h"
@@ -84,8 +84,10 @@ void print_ranking(SequenceRanker& ranking)
 int main(int /*argc*/, char** /*argv*/)
 {
     PluginAdmin plg_admin;
-    //TODO: cambiar path por default
-    IPlugin* plg = plg_admin.load("libplugin/libplugin.so");
+    std::string pluginPath;
+    etilico::Config::getInstance()->getPath("libplugin.so", pluginPath);
+
+    IPlugin* const plg = plg_admin.load(pluginPath);
 
     ParamsCt params;
     plg->get_parameters(params);

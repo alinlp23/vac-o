@@ -28,9 +28,8 @@
 
 #include "fideo/RnaBackendsTypes.h"
 #include "fideo/IFold.h"
+#include "fideo/IStructureCmp.h"
 #include "biopp/biopp.h"
-
-#include "vaco-rna-backends/IStructureCmp.h"
 
 #include "vaco-libplugin/SimilitudeCmp.h"
 #include "vaco-libplugin/IQAValidator.h"
@@ -39,7 +38,7 @@ template<SimilitudePolicy policy>
 class SSValidator : public IQAValidator
 {
     fideo::IFold* const fold_backend;
-    const IStructureCmp* const struct_cmp_backend;
+    const fideo::IStructureCmp* const struct_cmp_backend;
 
     const biopp::SecStructure target_structure;
     const fideo::Similitude similitude;
@@ -60,13 +59,13 @@ public:
      * @param structure Target secondary structure
      * @param simil Target similitude
      */
-    SSValidator(fideo::IFold*, const IStructureCmp*, const biopp::SecStructure&, fideo::Similitude, bool);
+    SSValidator(fideo::IFold*, const fideo::IStructureCmp*, const biopp::SecStructure&, fideo::Similitude, bool);
 };
 
 //Implementation
 
 template<SimilitudePolicy policy>
-SSValidator<policy>::SSValidator(fideo::IFold* fb, const IStructureCmp* strb, const biopp::SecStructure& str, fideo::Similitude simil, bool circ)
+SSValidator<policy>::SSValidator(fideo::IFold* fb, const fideo::IStructureCmp* strb, const biopp::SecStructure& str, fideo::Similitude simil, bool circ)
     : fold_backend(fb),
       struct_cmp_backend(strb),
       target_structure(str),

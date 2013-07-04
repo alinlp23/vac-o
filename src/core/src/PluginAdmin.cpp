@@ -27,7 +27,7 @@
 #include "vaco-commons/exceptions.h"
 #include "vaco-core/PluginAdmin.h"
 
-IPlugin* PluginAdmin::load(const Path& file) throw(PluginException)
+IPlugin* PluginAdmin::load(const Path& file)
 {
     IPlugin* plg;
 
