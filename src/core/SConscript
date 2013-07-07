@@ -6,6 +6,7 @@ deps = ['mili', 'biopp', 'vaco-commons', 'dl', 'fideo']
 
 src = env.Glob('src/*.cpp')
 src.remove(env.File('src/main.cpp'))
+
 env.CreateObject('vaco-core-objects', inc, src, deps)
 
 env.CreateProgram(name, inc, [env.File('src/main.cpp')], ['vaco-core-objects'])
