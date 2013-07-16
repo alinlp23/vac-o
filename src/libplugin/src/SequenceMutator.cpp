@@ -76,8 +76,8 @@ void SequenceMutator::reset()
     {
         const SeqIndex pos = positions[i];
         AlphabetIterator<Nucleotide> it(mutated[pos]);
-        it.next();
-        it.get(mutated[pos]);
+        ++it;
+        mutated[pos] = *it;
     }
 }
 
@@ -112,8 +112,8 @@ bool SequenceMutator::next_mutation(NucSequence& seq)
     const SeqIndex pos = positions[positions.size() - 1];
 
     AlphabetIterator<Nucleotide> it(mutated[pos]);
-    it.next();
-    it.get(mutated[pos]);
+    ++it;
+    mutated[pos] = *it; 
 
     if (mutated[pos] == sequence[pos] && mutations > 1)
         reset();

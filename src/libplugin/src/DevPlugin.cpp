@@ -197,7 +197,7 @@ void DevPlugin::init_params()
 
 void DevPlugin::init_backends()
 {
-    fold_backend = mili::FactoryRegistry<fideo::IFold, std::string>::new_class("RNAFold");
+    fold_backend = fideo::Folder::new_class("RNAFold");
     inverse_backend = fideo::IFoldInverse::Factory::new_class("INFORNA", fideo::InverseFoldParams(ires, 2, 20, 100));
     struct_cmp_backend = fideo::IStructureCmp::Factory::new_class("RNAForester");
     seq_cmp_backend = new Hamming;
@@ -209,7 +209,7 @@ void DevPlugin::init_comb_regions()
      * Fill wt_cache with sequences that fold to wt_struct
      */
     fideo::IStartProvider* const devprovider = new DevStartProvider(wt_sequence);
-    fideo::IFoldInverse* const wt_inverse = fideo::IFoldInverse::Factory::new_class("RNAinverse", fideo::InverseFoldParams(wt_struct, 0, 25, 10));
+    fideo::IFoldInverse* const wt_inverse = fideo::IFoldInverse::Factory::new_class("INFORNA"/*"RNAinverse"*/, fideo::InverseFoldParams(wt_struct, 0, 25, 10));
 
     wt_inverse->query_start(devprovider);
     NucSequence tmp;

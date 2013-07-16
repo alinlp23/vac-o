@@ -55,7 +55,6 @@ bool RandomMutator::next(NucSequence& seq)
 {
     ++counter;
     const bool more(counter <= mutants);
-    AlphabetIterator<Nucleotide> it;
 
     if (more)
     {
@@ -80,19 +79,15 @@ bool RandomMutator::next(NucSequence& seq)
                 prob = rnd.get();
             }
             while (prob == 0.f);
-            
-            it.reset(); 
 
-            Nucleotide b;
+            AlphabetIterator<Nucleotide> b;
             Nucleotide a = seq[pos];
 
-            it.get(b);
-            float acc = matrix[a.value][b.value];
+            float acc = matrix[a.value][*b];
             while (acc < prob)
             {
-                it.next();
-                it.get(b);
-                acc += matrix[a.value][b.value];
+                ++b;
+                acc += matrix[a.value][*b];
             }
             seq[pos] = b;
 
