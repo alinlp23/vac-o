@@ -81,15 +81,16 @@ bool RandomMutator::next(NucSequence& seq)
             while (prob == 0.f);
 
             AlphabetIterator<Nucleotide> b;
+            b.restart();
             Nucleotide a = seq[pos];
 
-            float acc = matrix[a.value][*b];
+            float acc = matrix[a.value][(*b).value];
             while (acc < prob)
             {
                 ++b;
-                acc += matrix[a.value][*b];
+                acc += matrix[a.value][(*b).value];
             }
-            seq[pos] = b;
+            seq[pos] = *b;
 
             ++i;
         }

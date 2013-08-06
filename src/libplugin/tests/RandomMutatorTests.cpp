@@ -33,7 +33,7 @@ inline void fake_provider(MutationMatrix& matrix)
 
 TEST(RandomMutatorTest, AllMutationsWithDefaultMatrix)
 {
-    IQAMutator* mutator = new RandomMutator(4, 10);
+    IQAMutator* const mutator = new RandomMutator(4, 10);
     const std::string str = "AAAAAA";
     biopp::NucSequence s(str);
 
