@@ -33,6 +33,7 @@
 #include "vaco-commons/RecombinantInfo.h"
 #include "vaco-libplugin/SimilitudeCmp.h"
 #include "vaco-libplugin/IQAValidator.h"
+#include "vaco-libplugin/RecombAlgorithm.h"
 
 template<SimilitudePolicy policy>
 class RecombValidator : public IQAValidator
@@ -73,10 +74,20 @@ RecombValidator<policy>::RecombValidator(const RecombinantInfo& recombInfo, cons
 {}
 
 template<SimilitudePolicy policy>
-bool RecombValidator<policy>::validate(const biopp::NucSequence& /*seq*/) const
+bool RecombValidator<policy>::validate(const biopp::NucSequence& seq) const
 {
-    //TODO: here call to Recomb algorithm
-    std::cout << "RecombValidator<policy>::validate" << std::endl;
+    RecombinantInfo::RecombinantSequenceInfo sequenceInfo;
+    sequenceInfo.sequence = seq;
+    sequenceInfo.regions.push_back(RecombinantInfo::PositionsRange(2,5));
+    sequenceInfo.regions.push_back(RecombinantInfo::PositionsRange(7,8));
+
+    RecombAlgorithm algorithm(recombInfo, sequenceInfo);
+
+    std::list<biopp::NucSequence> results;
+    //call to Recomb algorithm
+    algorithm.run(results);
+    //TODO: use result to fold and compare. 
+
     //biopp::SecStructure seq_struct;
     //const bool circ = false;
     //fold_backend.fold(seq, circ, seq_struct);
@@ -89,6 +100,7 @@ bool RecombValidator<policy>::validate(const biopp::NucSequence& /*seq*/) const
     }*/
     return pass;
 }
+
 
 #endif  /* _RecombValidator_H */
 

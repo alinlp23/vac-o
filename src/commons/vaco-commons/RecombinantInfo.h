@@ -13,6 +13,11 @@ struct RecombinantInfo
             end(end) 
         {}
 
+        PositionsRange(const PositionsRange& other) 
+          : start(other.start),
+            end(other.end)
+        {}
+
         const unsigned int start;
         const unsigned int end;
     };
