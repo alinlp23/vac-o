@@ -33,7 +33,10 @@ using std::endl;
 #include "fideo/FideoStructureParser.h"
 #include "vaco-libplugin/libplugin.h"
 #include "vaco-libplugin/SSValidator.h"
+#include "vaco-libplugin/QAWholeRegion.h"
+#include "vaco-libplugin/RecombValidator.h"
 #include "vaco-commons/types.h"
+#include "vaco-commons/RecombinantInfo.h"
 
 class DevStartProvider : public fideo::IStartProvider
 {
@@ -60,6 +63,12 @@ class DevPlugin : public IPlugin
     fideo::Distance min_distance;
     CutOff cutoff;
     Attempts attempts;
+
+    //Gets sequences and regions to recombine with solutions
+    void getRecombinantInfo(RecombinantInfo& recomb);
+
+    void initQaRecombinant();
+    IQARegion* iQARecomb;
 
     void init_params();
     Parameter<fideo::Distance>* min_distance_param;
@@ -123,6 +132,7 @@ void DevPlugin::configure()
 {
     init_backends();
     init_comb_regions();
+    initQaRecombinant();
     init_qa_regions();
     init_local_search();
 }
@@ -152,6 +162,7 @@ IStrategy* DevPlugin::get_strategy() const
 void DevPlugin::get_qa_regions(QARegionsCt& qaregions) const
 {
     insert_into(qaregions, rnd_ss);
+    insert_into(qaregions, iQARecomb);
 }
 
 Score DevPlugin::evaluate_solution(const ISolution* solution)
@@ -183,6 +194,7 @@ void DevPlugin::unload()
     delete mutator;
     delete validator;
     delete rnd_ss;
+    delete iQARecomb;
     delete this;
 }
 
@@ -209,7 +221,7 @@ void DevPlugin::init_comb_regions()
      * Fill wt_cache with sequences that fold to wt_struct
      */
     fideo::IStartProvider* const devprovider = new DevStartProvider(wt_sequence);
-    fideo::IFoldInverse* const wt_inverse = fideo::IFoldInverse::Factory::new_class("INFORNA"/*"RNAinverse"*/, fideo::InverseFoldParams(wt_struct, 0, 25, 10));
+    fideo::IFoldInverse* const wt_inverse = fideo::IFoldInverse::factory("INFORNA"/*"RNAinverse"*/, fideo::InverseFoldParams(wt_struct, 0, 25, 10));
 
     wt_inverse->query_start(devprovider);
     NucSequence tmp;
@@ -249,11 +261,30 @@ void DevPlugin::init_qa_regions()
     rnd_ss = new QARegion(0, 24, 3, mutator, validator);
 }
 
+void DevPlugin::initQaRecombinant()
+{
+    const fideo::Similitude similitude = .5f;
+    RecombinantInfo recombinantInfo;
+    getRecombinantInfo(recombinantInfo);
+    IQAValidator* validator = new RecombValidator<MaxSimilitude>(recombinantInfo, *fold_backend, *struct_cmp_backend, similitude);
+    iQARecomb = new QAWholeRegion(validator);
+}
+
 void DevPlugin::init_local_search()
 {
     neighborhood = new Neighborhood(regions, cutoff, attempts);
     strategy = new SimulatedAnnealing(neighborhood, 10, 5, 2, .8f, 3.f, .05f);
     neighborhood->set(strategy);
+}
+
+void DevPlugin::getRecombinantInfo(RecombinantInfo& recomb)
+{
+    RecombinantInfo::RecombinantSequenceInfo recombinantSequenceInfo;
+    recomb.recombinantSequences.push_back(recombinantSequenceInfo);
+    recombinantSequenceInfo.sequence = NucSequence("ACATTTACT");
+
+    recombinantSequenceInfo.regions.push_back(RecombinantInfo::PositionsRange(1,3));
+    recombinantSequenceInfo.regions.push_back(RecombinantInfo::PositionsRange(5,7));
 }
 
 extern "C" IPlugin* create_plugin()
