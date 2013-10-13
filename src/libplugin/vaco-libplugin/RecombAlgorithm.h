@@ -79,13 +79,13 @@ RecombAlgorithm::RecombAlgorithm(const RecombinantInfo& recomb, const biopp::Nuc
 
 void RecombAlgorithm::run(std::list<biopp::NucSequence>& results) 
 {
-    Positions positionsrRecomb;
     Positions positions;
     flat(recombinantSequenceInfo.candidateRegions, positions);
     for(RecombinantInfo::RecombinantSequences::const_iterator it = recombinantSequenceInfo.recombinantSequences.begin();
         it != recombinantSequenceInfo.recombinantSequences.end();
         ++it)
     {
+        Positions positionsrRecomb;
         flat(it->regions, positionsrRecomb);
         combination(positions, positionsrRecomb, sequence, it->sequence, results);
     }

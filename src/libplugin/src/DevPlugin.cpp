@@ -282,11 +282,11 @@ void DevPlugin::init_local_search()
 void DevPlugin::getRecombinantInfo(RecombinantInfo& recomb)
 {
     RecombinantInfo::RecombinantSequenceInfo recombinantSequenceInfo;
-    recomb.recombinantSequences.push_back(recombinantSequenceInfo);
-    recombinantSequenceInfo.sequence = NucSequence("ACATTTACT");
-
+    recombinantSequenceInfo.sequence = NucSequence("CGCAGCCACGUUAGGUGGGCCGCAGGCGCAGAUAGAGAC");
     recombinantSequenceInfo.regions.push_back(RecombinantInfo::PositionsRange(1,3));
     recombinantSequenceInfo.regions.push_back(RecombinantInfo::PositionsRange(5,7));
+
+    recomb.recombinantSequences.push_back(recombinantSequenceInfo);
 
     recomb.candidateRegions.push_back(RecombinantInfo::PositionsRange(2,5));
     recomb.candidateRegions.push_back(RecombinantInfo::PositionsRange(7,8));
