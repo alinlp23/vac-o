@@ -39,8 +39,9 @@ template<SimilitudePolicy policy>
 class RecombValidator : public IQAValidator
 {
     const RecombinantInfo& recombInfo;
-    const fideo::IFold& fold_backend;
+    fideo::IFold& fold_backend;
     const fideo::IStructureCmp& struct_cmp_backend;
+    const SecStructure& wt_struct;
     const fideo::Similitude similitude;
 
     /**
@@ -57,7 +58,7 @@ public:
      * @param strb Structure compare backend
      * @param simil Target similitude
      */
-    RecombValidator(const RecombinantInfo& recombInfo, const fideo::IFold& fb, const fideo::IStructureCmp& strb, fideo::Similitude simil);
+    RecombValidator(const RecombinantInfo& recombInfo, fideo::IFold& fb, const fideo::IStructureCmp& strb, const SecStructure& wt_struct, fideo::Similitude simil);
 
     virtual ~RecombValidator()
     {}
@@ -66,10 +67,11 @@ public:
 //Implementation
 
 template<SimilitudePolicy policy>
-RecombValidator<policy>::RecombValidator(const RecombinantInfo& recombInfo, const fideo::IFold& fb, const fideo::IStructureCmp& strb, fideo::Similitude simil)
+RecombValidator<policy>::RecombValidator(const RecombinantInfo& recombInfo, fideo::IFold& fb, const fideo::IStructureCmp& strb, const SecStructure& wt_struct, fideo::Similitude simil)
     : recombInfo(recombInfo),
       fold_backend(fb),
       struct_cmp_backend(strb),
+      wt_struct(wt_struct),
       similitude(simil)
 {}
 
@@ -81,18 +83,23 @@ bool RecombValidator<policy>::validate(const biopp::NucSequence& seq) const
     std::list<biopp::NucSequence> results;
     //call to Recomb algorithm
     algorithm.run(results);
-    //TODO: use result to fold and compare. 
-
-    //biopp::SecStructure seq_struct;
-    //const bool circ = false;
-    //fold_backend.fold(seq, circ, seq_struct);
 
     bool pass(true);
-    /*if (seq_struct.pair_count() > 0)
+    std::list<biopp::NucSequence>::const_iterator it = results.begin();
+    while(it != results.end() && pass)
     {
-        const fideo::Similitude s = struct_cmp_backend.compare(target_structure, seq_struct);
-        pass = SimilitudeCmp<policy>::cmp(similitude, s);
-    }*/
+        biopp::SecStructure seq_struct;
+        const bool circ = false;
+        fold_backend.fold(*it, circ, seq_struct);
+
+        if (seq_struct.pair_count() > 0)
+        {
+            const fideo::Similitude s = struct_cmp_backend.compare(wt_struct, seq_struct);
+            pass = SimilitudeCmp<policy>::cmp(similitude, s);
+        }
+        ++it;
+    }
+
     return pass;
 }
 

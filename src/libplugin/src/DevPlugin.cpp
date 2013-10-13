@@ -69,6 +69,7 @@ class DevPlugin : public IPlugin
 
     void initQaRecombinant();
     RecombinantInfo* recombinantInfo;
+    IQAValidator* recombValidator;
     IQARegion* iQARecomb;
 
     void init_params();
@@ -268,8 +269,8 @@ void DevPlugin::initQaRecombinant()
     const fideo::Similitude similitude = .5f;
     recombinantInfo = new RecombinantInfo();
     getRecombinantInfo(*recombinantInfo);
-    IQAValidator* validator = new RecombValidator<MaxSimilitude>(*recombinantInfo, *fold_backend, *struct_cmp_backend, similitude);
-    iQARecomb = new QAWholeRegion(validator);
+    recombValidator = new RecombValidator<MaxSimilitude>(*recombinantInfo, *fold_backend, *struct_cmp_backend, wt_struct, similitude);
+    iQARecomb = new QAWholeRegion(recombValidator);
 }
 
 void DevPlugin::init_local_search()
