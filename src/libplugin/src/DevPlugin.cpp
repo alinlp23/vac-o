@@ -287,6 +287,10 @@ void DevPlugin::getRecombinantInfo(RecombinantInfo& recomb)
 
     recombinantSequenceInfo.regions.push_back(RecombinantInfo::PositionsRange(1,3));
     recombinantSequenceInfo.regions.push_back(RecombinantInfo::PositionsRange(5,7));
+
+    recomb.candidateRegions.push_back(RecombinantInfo::PositionsRange(2,5));
+    recomb.candidateRegions.push_back(RecombinantInfo::PositionsRange(7,8));
+
 }
 
 extern "C" IPlugin* create_plugin()

@@ -15,9 +15,9 @@ class RecombAlgorithm
     static inline void combination(const Positions& positionsS1, const Positions& positionsS2, const biopp::NucSequence& s1, const biopp::NucSequence& s2, std::list<biopp::NucSequence>& results);
 
     const RecombinantInfo& recombinantSequenceInfo;
-    const RecombinantInfo::RecombinantSequenceInfo& sequenceInfo;
+    const biopp::NucSequence& sequence;
 public:
-    RecombAlgorithm(const RecombinantInfo& recomb, const RecombinantInfo::RecombinantSequenceInfo& sequenceInfo);
+    RecombAlgorithm(const RecombinantInfo& recomb, const biopp::NucSequence& seq);
     void run(std::list<biopp::NucSequence>& results);//TODO: getNext with mili::Coroutine
 };
 
@@ -58,9 +58,9 @@ inline void RecombAlgorithm::oneCombination(const Positions& despegues, const Po
         {
             if(*despegue < *aterrizaje) 
             {                
-                /*biopp::NucSequence seq;
+                biopp::NucSequence seq;
                 partition(s1, s2, start, *despegue, *aterrizaje, end, seq);
-                results.push_back(seq);*/
+                results.push_back(seq);
             }
         }
     }
@@ -72,22 +72,22 @@ inline void RecombAlgorithm::combination(const Positions& positionsS1, const Pos
     oneCombination(positionsS2, positionsS1, s2, s1, results);
 }
 
-RecombAlgorithm::RecombAlgorithm(const RecombinantInfo& recomb, const RecombinantInfo::RecombinantSequenceInfo& sequenceInfo)
+RecombAlgorithm::RecombAlgorithm(const RecombinantInfo& recomb, const biopp::NucSequence& seq)
   : recombinantSequenceInfo(recomb),
-    sequenceInfo(sequenceInfo)
+    sequence(seq)
 {}
 
 void RecombAlgorithm::run(std::list<biopp::NucSequence>& results) 
 {
     Positions positionsrRecomb;
     Positions positions;
-    flat(sequenceInfo.regions, positions);
+    flat(recombinantSequenceInfo.candidateRegions, positions);
     for(RecombinantInfo::RecombinantSequences::const_iterator it = recombinantSequenceInfo.recombinantSequences.begin();
         it != recombinantSequenceInfo.recombinantSequences.end();
         ++it)
     {
         flat(it->regions, positionsrRecomb);
-        combination(positions, positionsrRecomb, sequenceInfo.sequence, it->sequence, results);
+        combination(positions, positionsrRecomb, sequence, it->sequence, results);
     }
 }
 

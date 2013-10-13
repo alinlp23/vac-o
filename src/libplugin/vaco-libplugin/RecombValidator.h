@@ -76,12 +76,7 @@ RecombValidator<policy>::RecombValidator(const RecombinantInfo& recombInfo, cons
 template<SimilitudePolicy policy>
 bool RecombValidator<policy>::validate(const biopp::NucSequence& seq) const
 {
-    RecombinantInfo::RecombinantSequenceInfo sequenceInfo;
-    sequenceInfo.sequence = seq;
-    sequenceInfo.regions.push_back(RecombinantInfo::PositionsRange(2,5));
-    sequenceInfo.regions.push_back(RecombinantInfo::PositionsRange(7,8));
-
-    RecombAlgorithm algorithm(recombInfo, sequenceInfo);
+    RecombAlgorithm algorithm(recombInfo, seq);
 
     std::list<biopp::NucSequence> results;
     //call to Recomb algorithm
