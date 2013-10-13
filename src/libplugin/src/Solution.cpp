@@ -60,7 +60,7 @@ void Solution::update_solution(RegionIdx r, const NucSequence& seq, const LocalO
         sequence = seq;
     }
     else
-        throw(PluginException(" Out of range while updating solution component"));
+        throw (PluginException(" Out of range while updating solution component"));
 }
 
 void Solution::get_sequence(NucSequence& seq) const

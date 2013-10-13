@@ -8,14 +8,14 @@ struct RecombinantInfo
 {
     struct PositionsRange
     {
-        PositionsRange(unsigned start, unsigned end) 
-          : start(start), 
-            end(end) 
+        PositionsRange(unsigned start, unsigned end)
+            : start(start),
+              end(end)
         {}
 
-        PositionsRange(const PositionsRange& other) 
-          : start(other.start),
-            end(other.end)
+        PositionsRange(const PositionsRange& other)
+            : start(other.start),
+              end(other.end)
         {}
 
         const unsigned int start;

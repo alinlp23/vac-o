@@ -113,7 +113,7 @@ bool SequenceMutator::next_mutation(NucSequence& seq)
 
     AlphabetIterator<Nucleotide> it(mutated[pos]);
     ++it;
-    mutated[pos] = *it; 
+    mutated[pos] = *it;
 
     if (mutated[pos] == sequence[pos] && mutations > 1)
         reset();

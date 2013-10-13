@@ -42,7 +42,7 @@ class ISubject
     ObserversCt observers;
 public:
     ISubject()
-      : observers()
+        : observers()
     {}
     virtual ~ISubject() {}
 
