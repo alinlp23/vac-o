@@ -43,6 +43,9 @@ public:
     QAWholeRegion(const IQAValidator* validator)
       : validator(validator)
     {};
+
+    virtual ~QAWholeRegion()
+    {};
 };
 
 #endif

@@ -41,7 +41,7 @@ class RecombValidator : public IQAValidator
     const RecombinantInfo& recombInfo;
     fideo::IFold& fold_backend;
     const fideo::IStructureCmp& struct_cmp_backend;
-    const SecStructure& wt_struct;
+    const biopp::SecStructure& wt_struct;
     const fideo::Similitude similitude;
 
     /**
@@ -58,7 +58,7 @@ public:
      * @param strb Structure compare backend
      * @param simil Target similitude
      */
-    RecombValidator(const RecombinantInfo& recombInfo, fideo::IFold& fb, const fideo::IStructureCmp& strb, const SecStructure& wt_struct, fideo::Similitude simil);
+    RecombValidator(const RecombinantInfo& recombInfo, fideo::IFold& fb, const fideo::IStructureCmp& strb, const biopp::SecStructure& wt_struct, fideo::Similitude simil);
 
     virtual ~RecombValidator()
     {}
@@ -67,7 +67,7 @@ public:
 //Implementation
 
 template<SimilitudePolicy policy>
-RecombValidator<policy>::RecombValidator(const RecombinantInfo& recombInfo, fideo::IFold& fb, const fideo::IStructureCmp& strb, const SecStructure& wt_struct, fideo::Similitude simil)
+RecombValidator<policy>::RecombValidator(const RecombinantInfo& recombInfo, fideo::IFold& fb, const fideo::IStructureCmp& strb, const biopp::SecStructure& wt_struct, fideo::Similitude simil)
     : recombInfo(recombInfo),
       fold_backend(fb),
       struct_cmp_backend(strb),

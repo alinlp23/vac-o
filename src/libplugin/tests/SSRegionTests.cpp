@@ -1,8 +1,11 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
+#include "fideo/fideo.h"
+#include "fideo/FideoStructureParser.h"
+
 #include "vaco-rna-backends/testing/FoldMock.h"
-//#include "vaco-rna-backends/testing/FoldInverseMock.h"
+#include "vaco-rna-backends/testing/FoldInverseMock.h"
 #include "vaco-rna-backends/testing/SequenceCmpMock.h"
 #include "vaco-rna-backends/testing/StructureCmpMock.h"
 
@@ -13,7 +16,8 @@ using ::testing::_;
 using ::testing::InSequence;
 using ::testing::Test;
 using namespace biopp;
-/*
+using namespace fideo;
+
 class SSRegionTest : public Test
 {
 protected:
@@ -35,13 +39,13 @@ protected:
     {
         string wt_str("((...))");
         string va_str("(.....)");
-        wt = SecStructure(wt_str);//TODO: implement SecStructure(std::string)
-        va = SecStructure(va_str);
+        ViennaParser::parseStructure(wt_str, wt);
+        ViennaParser::parseStructure(va_str, va);
         string b = "AAAAAAA";
         base = NucSequence(b);
         start = 1;
         end = 5;
-        partial = b.substr(start, end - start);
+        partial = NucSequence(b.substr(start, end - start));
 
         string str = "CTAC";
         inverse = NucSequence(str);
@@ -65,15 +69,15 @@ public:
     void fill_cache()
     {
         string str = "GGGGGGG";
-        NucSequence s1 = str;
+        NucSequence s1(str);
         insert_into(wt_cache, s1);
 
         str = "CGGGGCC";
-        NucSequence s2 = str;
+        NucSequence s2(str);
         insert_into(wt_cache, s2);
 
         str = "AAAAGGG";
-        NucSequence s3 = str;
+        NucSequence s3(str);
         insert_into(wt_cache, s3);
     }
 
@@ -93,9 +97,9 @@ public:
         }
     }
 
-    fideo::Fe fake_fold(const NucSequence& seq, SecStructure& str, bool circ)
+    fideo::Fe fake_fold(const NucSequence& /*seq*/, bool /*circ*/, SecStructure& str)
     {
-        str = "((...))";
+        ViennaParser::parseStructure("((...))", str);
         return -3.f;
     }
 };
@@ -190,7 +194,7 @@ TEST_F(SSRegionTest, CheckMutations)
     .Times(times)
     .WillRepeatedly(Return(.5f));
 
-    EXPECT_CALL(fold_backend, fold(_, _, false))
+    EXPECT_CALL(fold_backend, fold(_, false, _))
     .Times(times)
     .WillRepeatedly(Invoke(this, &SSRegionTest::fake_fold));
 
@@ -224,7 +228,7 @@ TEST_F(SSRegionTest, CheckMutationsStopAsSoonAsFail)
     .WillOnce(Return(.9f)) // stop
     .WillRepeatedly(Return(.5f)); //210 times
 
-    EXPECT_CALL(fold_backend, fold(_, _, true))
+    EXPECT_CALL(fold_backend, fold(_, true, _))
     .Times(times)
     .WillRepeatedly(Invoke(this, &SSRegionTest::fake_fold));
 
@@ -304,4 +308,3 @@ TEST_F(SSRegionTest, CheckCacheStopAsSoonAsFail)
     Score score = issregion->generate(seq, delta);
     EXPECT_EQ(score, 3. / 4.);
 }
-*/
