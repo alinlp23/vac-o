@@ -51,6 +51,10 @@ protected:
     SeqIndex end;
     ConstraintsCt constraints;
     NucSequence base_sequence;
+public:
+    virtual ~CombinatoryRegion()
+    {}
+
 };
 
 

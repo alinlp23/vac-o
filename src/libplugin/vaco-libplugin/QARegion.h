@@ -51,6 +51,7 @@ class QARegion : public IQARegion
     bool validate_mutants(const NucSequence&, const NucSequence&, queue<NucSequence>&) const;
 public:
     QARegion(SeqIndex, SeqIndex, Depth, IQAMutator*, const IQAValidator*);
+    virtual ~QARegion() {}
 };
 
 #endif  /* _QAREGION_H */

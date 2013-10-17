@@ -93,10 +93,8 @@ TEST_F(RecombValidatorTest, QAWholeRegionNonEmpty)
 TEST_F(RecombValidatorTest, WithRecombinantInfo)
 {
     EXPECT_CALL(fold_backend, fold(_, false, _))
-    //.Times(28)
     .WillRepeatedly(Invoke(this, &RecombValidatorTest::fake_fold));
     EXPECT_CALL(str_cmp_backend, compare(_, _))
-    //.Times(28)
     .WillRepeatedly(Return(.3f));
 
     const fideo::Similitude similitude = .5f;
@@ -107,6 +105,62 @@ TEST_F(RecombValidatorTest, WithRecombinantInfo)
     recombinantSequenceInfo.sequence = NucSequence("CGCGCAG");
     recombinantSequenceInfo.regions.push_back(RecombinantInfo::PositionsRange(1, 2));
     recombinantSequenceInfo.regions.push_back(RecombinantInfo::PositionsRange(4, 7));
+
+    recomb.recombinantSequences.push_back(recombinantSequenceInfo);
+
+    recomb.candidateRegions.push_back(RecombinantInfo::PositionsRange(1, 2));
+    recomb.candidateRegions.push_back(RecombinantInfo::PositionsRange(4, 7));
+
+    IQAValidator* validator = new RecombValidator<MaxSimilitude>(recomb, fold_backend, str_cmp_backend, wt_struct, similitude);
+
+    NucSequence s("CGCGCAG");
+    EXPECT_TRUE(validator->validate(s));
+
+    delete validator;
+}
+
+TEST_F(RecombValidatorTest, WithRecombinantInfoButWithoutCandidateRegions)
+{
+    EXPECT_CALL(fold_backend, fold(_, false, _))
+    .WillRepeatedly(Invoke(this, &RecombValidatorTest::fake_fold));
+    EXPECT_CALL(str_cmp_backend, compare(_, _))
+    .WillRepeatedly(Return(.3f));
+
+    const fideo::Similitude similitude = .5f;
+    SecStructure wt_struct;
+    fideo::ViennaParser::parseStructure(std::string("((...))"), wt_struct);
+    RecombinantInfo recomb;
+    RecombinantInfo::RecombinantSequenceInfo recombinantSequenceInfo;
+    recombinantSequenceInfo.sequence = NucSequence("CGCGCAG");
+    recombinantSequenceInfo.regions.push_back(RecombinantInfo::PositionsRange(1, 2));
+    recombinantSequenceInfo.regions.push_back(RecombinantInfo::PositionsRange(4, 7));
+
+    recomb.recombinantSequences.push_back(recombinantSequenceInfo);
+
+    //recomb.candidateRegions.push_back(RecombinantInfo::PositionsRange(1, 2));
+    //recomb.candidateRegions.push_back(RecombinantInfo::PositionsRange(4, 7));
+
+    IQAValidator* validator = new RecombValidator<MaxSimilitude>(recomb, fold_backend, str_cmp_backend, wt_struct, similitude);
+
+    NucSequence s("CGCGCAG");
+    EXPECT_TRUE(validator->validate(s));
+
+    delete validator;
+}
+
+TEST_F(RecombValidatorTest, WithRecombinantInfoButWithoutRegions)
+{
+    EXPECT_CALL(fold_backend, fold(_, false, _))
+    .WillRepeatedly(Invoke(this, &RecombValidatorTest::fake_fold));
+    EXPECT_CALL(str_cmp_backend, compare(_, _))
+    .WillRepeatedly(Return(.3f));
+
+    const fideo::Similitude similitude = .5f;
+    SecStructure wt_struct;
+    fideo::ViennaParser::parseStructure(std::string("((...))"), wt_struct);
+    RecombinantInfo recomb;
+    RecombinantInfo::RecombinantSequenceInfo recombinantSequenceInfo;
+    recombinantSequenceInfo.sequence = NucSequence("CGCGCAG");
 
     recomb.recombinantSequences.push_back(recombinantSequenceInfo);
 
@@ -124,10 +178,8 @@ TEST_F(RecombValidatorTest, WithRecombinantInfo)
 TEST_F(RecombValidatorTest, WithRecombinantInfoBadFold)
 {
     EXPECT_CALL(fold_backend, fold(_, false, _))
-    //.Times(28)
     .WillRepeatedly(Invoke(this, &RecombValidatorTest::fake_bad_fold));
     EXPECT_CALL(str_cmp_backend, compare(_, _))
-    //.Times(28)
     .WillRepeatedly(Return(.3f));
 
     const fideo::Similitude similitude = .5f;
@@ -151,49 +203,3 @@ TEST_F(RecombValidatorTest, WithRecombinantInfoBadFold)
 
     delete validator;
 }
-
-/*
-TEST_F(RecombValidatorTest, MaxSimilitude)
-{
-    EXPECT_CALL(fold_backend, fold(_, false, _))
-    .Times(2)
-    .WillRepeatedly(Invoke(this, &RecombValidatorTest::fake_fold));
-    EXPECT_CALL(str_cmp_backend, compare(_, _))
-    .Times(2)
-    .WillOnce(Return(.5f))
-    .WillOnce(Return(.3f));
-
-    SecStructure str;
-    fideo::ViennaParser::parseStructure(".(...).", str);
-
-    IQAValidator* validator = new SSValidator<MaxSimilitude>(&fold_backend, &str_cmp_backend, str, .4f, false);
-    NucSequence s;
-
-    EXPECT_FALSE(validator->validate(s));
-    EXPECT_TRUE(validator->validate(s));
-
-    delete validator;
-}
-
-TEST_F(RecombValidatorTest, BadFold)
-{
-    EXPECT_CALL(fold_backend, fold(_, true, _))
-    .Times(2)
-    .WillOnce(Invoke(this, &RecombValidatorTest::fake_fold))
-    .WillOnce(Invoke(this, &RecombValidatorTest::fake_bad_fold));
-    EXPECT_CALL(str_cmp_backend, compare(_, _))
-    .Times(1)
-    .WillOnce(Return(.3f));
-
-    SecStructure str;
-    fideo::ViennaParser::parseStructure(".(...).", str);
-
-    IQAValidator* validator = new SSValidator<MaxSimilitude>(&fold_backend, &str_cmp_backend, str, .4f, true);
-    NucSequence s;
-
-    EXPECT_TRUE(validator->validate(s));
-    EXPECT_TRUE(validator->validate(s));
-
-    delete validator;
-}
-*/

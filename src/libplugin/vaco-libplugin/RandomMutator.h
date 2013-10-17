@@ -36,6 +36,7 @@ class IMutationMatrixProvider
 public:
     virtual void get_mutation_matrix(MutationMatrix& m) const = 0;
     virtual ~IMutationMatrixProvider() {}
+
 };
 
 /**
@@ -70,6 +71,9 @@ public:
      * @param provider the mutation matrix provider
      */
     RandomMutator(NMutations, NMutations, const IMutationMatrixProvider* const);
+
+    virtual ~RandomMutator()
+    {}
 };
 
 #endif  /* _RANDOMMUTATOR_H */

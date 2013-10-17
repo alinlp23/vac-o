@@ -40,6 +40,7 @@ using biopp::SeqIndex;
  */
 class ICombinatoryRegion
 {
+protected:
     virtual Score evaluate(const NucSequence&) const = 0;
 public:
     /**
