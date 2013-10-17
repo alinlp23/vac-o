@@ -1,3 +1,5 @@
+#include <memory>
+
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
@@ -48,12 +50,10 @@ TEST_F(RecombValidatorTest, WithoutRecombinantInfo)
     SecStructure wt_struct;
     fideo::ViennaParser::parseStructure(std::string("....((((((.......((.....))....))).))).."), wt_struct);
     RecombinantInfo recombinantInfo;
-    IQAValidator* validator = new RecombValidator<MaxSimilitude>(recombinantInfo, fold_backend, str_cmp_backend, wt_struct, similitude);
+    const std::auto_ptr<IQAValidator> validator(new RecombValidator<MaxSimilitude>(recombinantInfo, fold_backend, str_cmp_backend, wt_struct, similitude));
 
-    NucSequence s;
+    const NucSequence s;
     EXPECT_TRUE(validator->validate(s));
-
-    delete validator;
 };
 
 
@@ -62,10 +62,9 @@ TEST_F(RecombValidatorTest, QAWholeRegion)
 
     EXPECT_CALL(validatorMock, validate(_))
     .WillOnce(Invoke(this, &RecombValidatorTest::okValidate));
-    IQARegion* qARegion = new QAWholeRegion(&validatorMock);
-    NucSequence s;
+    const std::auto_ptr<IQARegion> qARegion(new QAWholeRegion(&validatorMock));
+    const NucSequence s;
     EXPECT_TRUE(qARegion->validate(s));
-    delete qARegion;
 };
 
 TEST_F(RecombValidatorTest, QAWholeRegionEmpty)
@@ -73,10 +72,9 @@ TEST_F(RecombValidatorTest, QAWholeRegionEmpty)
 
     EXPECT_CALL(validatorMock, validate(NucSequence()))
     .WillOnce(Invoke(this, &RecombValidatorTest::okValidate));
-    IQARegion* qARegion = new QAWholeRegion(&validatorMock);
-    NucSequence s;
+    const std::auto_ptr<IQARegion> qARegion(new QAWholeRegion(&validatorMock));
+    const NucSequence s;
     EXPECT_TRUE(qARegion->validate(s));
-    delete qARegion;
 };
 
 TEST_F(RecombValidatorTest, QAWholeRegionNonEmpty)
@@ -84,10 +82,9 @@ TEST_F(RecombValidatorTest, QAWholeRegionNonEmpty)
 
     EXPECT_CALL(validatorMock, validate(NucSequence("CGCGCAG")))
     .WillOnce(Invoke(this, &RecombValidatorTest::okValidate));
-    IQARegion* qARegion = new QAWholeRegion(&validatorMock);
-    NucSequence s("CGCGCAG");
+    const std::auto_ptr<IQARegion> qARegion(new QAWholeRegion(&validatorMock));
+    const NucSequence s("CGCGCAG");
     EXPECT_TRUE(qARegion->validate(s));
-    delete qARegion;
 };
 
 TEST_F(RecombValidatorTest, WithRecombinantInfo)
@@ -111,12 +108,10 @@ TEST_F(RecombValidatorTest, WithRecombinantInfo)
     recomb.candidateRegions.push_back(RecombinantInfo::PositionsRange(1, 2));
     recomb.candidateRegions.push_back(RecombinantInfo::PositionsRange(4, 7));
 
-    IQAValidator* validator = new RecombValidator<MaxSimilitude>(recomb, fold_backend, str_cmp_backend, wt_struct, similitude);
+    const std::auto_ptr<IQAValidator> validator(new RecombValidator<MaxSimilitude>(recomb, fold_backend, str_cmp_backend, wt_struct, similitude));
 
-    NucSequence s("CGCGCAG");
+    const NucSequence s("CGCGCAG");
     EXPECT_TRUE(validator->validate(s));
-
-    delete validator;
 }
 
 TEST_F(RecombValidatorTest, WithRecombinantInfoButWithoutCandidateRegions)
@@ -137,15 +132,9 @@ TEST_F(RecombValidatorTest, WithRecombinantInfoButWithoutCandidateRegions)
 
     recomb.recombinantSequences.push_back(recombinantSequenceInfo);
 
-    //recomb.candidateRegions.push_back(RecombinantInfo::PositionsRange(1, 2));
-    //recomb.candidateRegions.push_back(RecombinantInfo::PositionsRange(4, 7));
-
-    IQAValidator* validator = new RecombValidator<MaxSimilitude>(recomb, fold_backend, str_cmp_backend, wt_struct, similitude);
-
-    NucSequence s("CGCGCAG");
+    const std::auto_ptr<IQAValidator> validator(new RecombValidator<MaxSimilitude>(recomb, fold_backend, str_cmp_backend, wt_struct, similitude));
+    const NucSequence s("CGCGCAG");
     EXPECT_TRUE(validator->validate(s));
-
-    delete validator;
 }
 
 TEST_F(RecombValidatorTest, WithRecombinantInfoButWithoutRegions)
@@ -167,12 +156,11 @@ TEST_F(RecombValidatorTest, WithRecombinantInfoButWithoutRegions)
     recomb.candidateRegions.push_back(RecombinantInfo::PositionsRange(1, 2));
     recomb.candidateRegions.push_back(RecombinantInfo::PositionsRange(4, 7));
 
-    IQAValidator* validator = new RecombValidator<MaxSimilitude>(recomb, fold_backend, str_cmp_backend, wt_struct, similitude);
+    const std::auto_ptr<IQAValidator> validator(new RecombValidator<MaxSimilitude>(recomb, fold_backend, str_cmp_backend, wt_struct, similitude));
 
-    NucSequence s("CGCGCAG");
+    const NucSequence s("CGCGCAG");
     EXPECT_TRUE(validator->validate(s));
 
-    delete validator;
 }
 
 TEST_F(RecombValidatorTest, WithRecombinantInfoBadFold)
@@ -196,10 +184,8 @@ TEST_F(RecombValidatorTest, WithRecombinantInfoBadFold)
     recomb.candidateRegions.push_back(RecombinantInfo::PositionsRange(1, 2));
     recomb.candidateRegions.push_back(RecombinantInfo::PositionsRange(4, 7));
 
-    IQAValidator* validator = new RecombValidator<MaxSimilitude>(recomb, fold_backend, str_cmp_backend, wt_struct, similitude);
+    const std::auto_ptr<IQAValidator> validator(new RecombValidator<MaxSimilitude>(recomb, fold_backend, str_cmp_backend, wt_struct, similitude));
 
-    NucSequence s("CGCGCAG");
+    const NucSequence s("CGCGCAG");
     EXPECT_TRUE(validator->validate(s));
-
-    delete validator;
 }
