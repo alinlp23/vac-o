@@ -118,9 +118,24 @@ public:
 DevPlugin::DevPlugin() :
     vacc_sequence("CGCAGGGACTGCAGGTACCCCGCAGGCGCAGATAGAGAC"),
     wt_sequence("CCGCCGCACUUAUCCCUGACGAAUUCUACCAGUCGCGAU"),
-    min_distance(0), cutoff(1), attempts(2), min_distance_param(), cutoff_param(),
-    fold_backend(), inverse_backend(), struct_cmp_backend(), seq_cmp_backend(),
-    wt_cache(), ssregion(), gcregion(), regions(), rnd_ss(), neighborhood(), strategy()
+    min_distance(0), cutoff(1), 
+    attempts(2), 
+    recombinantInfo(NULL),
+    recombValidator(NULL),
+    iQARecomb(NULL),
+    min_distance_param(), 
+    cutoff_param(),
+    fold_backend(), 
+    inverse_backend(), 
+    struct_cmp_backend(), 
+    seq_cmp_backend(),
+    wt_cache(), 
+    ssregion(), gcregion(), regions(), 
+    mutator(NULL),
+    validator(NULL),    
+    rnd_ss(), 
+    neighborhood(), 
+    strategy()
 {
 
     fideo::ViennaParser::parseStructure(std::string("....((((((.......((.....))....))).))).."), wt_struct);
