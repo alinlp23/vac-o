@@ -189,3 +189,69 @@ TEST_F(RecombValidatorTest, WithRecombinantInfoBadFold)
     const NucSequence s("CGCGCAG");
     EXPECT_TRUE(validator->validate(s));
 }
+
+TEST_F(RecombValidatorTest, SequencesGenerated)
+{
+    RecombinantInfo recomb;
+    RecombinantInfo::RecombinantSequenceInfo recombinantSequenceInfo;
+    recombinantSequenceInfo.sequence = NucSequence("ATCCCAG");
+    recombinantSequenceInfo.regions.push_back(RecombinantInfo::PositionsRange(1, 2));
+    recombinantSequenceInfo.regions.push_back(RecombinantInfo::PositionsRange(4, 7));
+
+    recomb.recombinantSequences.push_back(recombinantSequenceInfo);
+
+    recomb.candidateRegions.push_back(RecombinantInfo::PositionsRange(1, 2));
+    recomb.candidateRegions.push_back(RecombinantInfo::PositionsRange(4, 7));
+
+    const NucSequence s("CGCGCAA");
+    RecombAlgorithm algorithm(recomb, s);
+
+    std::list<biopp::NucSequence> results;
+    //call to Recomb algorithm
+    algorithm.run(results);
+
+    std::list<biopp::NucSequence> expectedResults;//recombinants generated
+    expectedResults.push_back(NucSequence("CUCGCAA"));
+    expectedResults.push_back(NucSequence("CUCCCAA"));
+    expectedResults.push_back(NucSequence("CUCCCAA"));
+    expectedResults.push_back(NucSequence("CUCCCAA"));
+    expectedResults.push_back(NucSequence("CUCCCAG"));
+    expectedResults.push_back(NucSequence("CGCCCAA"));
+    expectedResults.push_back(NucSequence("CGCCCAA"));
+    expectedResults.push_back(NucSequence("CGCCCAA"));
+    expectedResults.push_back(NucSequence("CGCCCAG"));
+    expectedResults.push_back(NucSequence("CGCGCAA"));
+    expectedResults.push_back(NucSequence("CGCGCAA"));
+    expectedResults.push_back(NucSequence("CGCGCAG"));
+    expectedResults.push_back(NucSequence("CGCGCAA"));
+    expectedResults.push_back(NucSequence("CGCGCAG"));
+    expectedResults.push_back(NucSequence("CGCGCAG"));
+    expectedResults.push_back(NucSequence("AGCCCAG"));
+    expectedResults.push_back(NucSequence("AGCGCAG"));
+    expectedResults.push_back(NucSequence("AGCGCAG"));
+    expectedResults.push_back(NucSequence("AGCGCAG"));
+    expectedResults.push_back(NucSequence("AGCGCAA"));
+    expectedResults.push_back(NucSequence("AUCGCAG"));
+    expectedResults.push_back(NucSequence("AUCGCAG"));
+    expectedResults.push_back(NucSequence("AUCGCAG"));
+    expectedResults.push_back(NucSequence("AUCGCAA"));
+    expectedResults.push_back(NucSequence("AUCCCAG"));
+    expectedResults.push_back(NucSequence("AUCCCAG"));
+    expectedResults.push_back(NucSequence("AUCCCAA"));
+    expectedResults.push_back(NucSequence("AUCCCAG"));
+    expectedResults.push_back(NucSequence("AUCCCAA"));
+    expectedResults.push_back(NucSequence("AUCCCAA"));
+
+    EXPECT_EQ(results.size(), expectedResults.size());
+
+    std::list<biopp::NucSequence>::const_iterator itExpected = expectedResults.begin();
+    std::list<biopp::NucSequence>::const_iterator it = results.begin();
+    while(it != results.end() && itExpected != expectedResults.end())
+    {
+        const size_t expecedLength = 7;
+        EXPECT_EQ(it->length(), itExpected->length());
+        EXPECT_EQ(*it, *itExpected);
+        ++it;
+        ++itExpected;
+    }
+}
