@@ -23,11 +23,13 @@
  *
  */
 
-#include "SequenceMutator.h"
+#include "vaco-libplugin/SequenceMutator.h"
+
+using namespace biopp;
 
 SequenceMutator::SequenceMutator(const NucSequence& seq, NMutations max) :
     sequence(seq), mutated(seq), seq_length(seq.length()), mutations(max),
-    rmutations(max), combinator(new SeqIndexesCombinator(seq.length(), max)),
+    rmutations(max), combinator(new fideo::SeqIndexesCombinator(seq.length(), max)),
     positions()
 {
     begin();
@@ -35,7 +37,7 @@ SequenceMutator::SequenceMutator(const NucSequence& seq, NMutations max) :
 
 SequenceMutator::SequenceMutator(size_t length, NMutations max) :
     sequence(), mutated(), seq_length(length), mutations(max), rmutations(max),
-    combinator(new SeqIndexesCombinator(length, max)), positions()
+    combinator(new fideo::SeqIndexesCombinator(length, max)), positions()
 {}
 
 SequenceMutator::~SequenceMutator()
@@ -50,7 +52,7 @@ void SequenceMutator::begin()
     reset();
 }
 
-void SequenceMutator::begin(const NucSequence& seq) throw(PluginException)
+void SequenceMutator::begin(const NucSequence& seq)
 {
     if (seq.length() != seq_length)
         throw PluginException(" SequenceMutator: sequence length must be equal to the length given at initialization");
@@ -72,8 +74,10 @@ void SequenceMutator::reset()
 {
     for (size_t i = 0; i < positions.size(); ++i)
     {
-        SeqIndex pos = positions[i];
-        mutated[pos] = Nucleotide((mutated[pos] + 1) % 4);
+        const SeqIndex pos = positions[i];
+        AlphabetIterator<Nucleotide> it(mutated[pos]);
+        ++it;
+        mutated[pos] = *it;
     }
 }
 
@@ -105,8 +109,12 @@ bool SequenceMutator::next_mutation(NucSequence& seq)
 {
     seq = mutated;
 
-    SeqIndex pos = positions[positions.size() - 1];
-    mutated[pos] = Nucleotide((mutated[pos] + 1) % 4);
+    const SeqIndex pos = positions[positions.size() - 1];
+
+    AlphabetIterator<Nucleotide> it(mutated[pos]);
+    ++it;
+    mutated[pos] = *it;
+
     if (mutated[pos] == sequence[pos] && mutations > 1)
         reset();
 

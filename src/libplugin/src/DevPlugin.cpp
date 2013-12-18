@@ -23,19 +23,26 @@
  *
  */
 
-#include "libplugin.h"
+
+#include <cassert>
 #include <iostream>
 using std::cout;
 using std::cin;
 using std::endl;
-#include "IStartProvider.h"
-#include "SSValidator.h"
+#include "fideo/IFoldInverse.h"
+#include "fideo/FideoStructureParser.h"
+#include "vaco-libplugin/libplugin.h"
+#include "vaco-libplugin/SSValidator.h"
+#include "vaco-libplugin/QAWholeRegion.h"
+#include "vaco-libplugin/RecombValidator.h"
+#include "vaco-commons/types.h"
+#include "vaco-commons/RecombinantInfo.h"
 
-class DevStartProvider : public IStartProvider
+class DevStartProvider : public fideo::IStartProvider
 {
     NucSequence base;
-    virtual void get_complete_start(IFoldInverse* const) {}
-    virtual void get_partial_start(IFoldInverse* const backend)
+    virtual void get_complete_start(fideo::IFoldInverse* const) {}
+    virtual void get_partial_start(fideo::IFoldInverse* const backend)
     {
         backend->set_start(base);
     }
@@ -53,18 +60,26 @@ class DevPlugin : public IPlugin
     SecStructure vacc_struct;
     SecStructure ires;
 
-    Distance min_distance;
+    fideo::Distance min_distance;
     CutOff cutoff;
     Attempts attempts;
 
+    //Gets sequences and regions to recombine with solutions
+    void getRecombinantInfo(RecombinantInfo& recomb);
+
+    void initQaRecombinant();
+    RecombinantInfo* recombinantInfo;
+    IQAValidator* recombValidator;
+    IQARegion* iQARecomb;
+
     void init_params();
-    Parameter<Distance>* min_distance_param;
+    Parameter<fideo::Distance>* min_distance_param;
     Parameter<CutOff>* cutoff_param;
 
     void init_backends();
-    IFold* fold_backend;
-    IFoldInverse* inverse_backend;
-    IStructureCmp* struct_cmp_backend;
+    fideo::IFold* fold_backend;
+    fideo::IFoldInverse* inverse_backend;
+    fideo::IStructureCmp* struct_cmp_backend;
     ISequenceCmp* seq_cmp_backend;
 
     void init_comb_regions();
@@ -103,21 +118,38 @@ public:
 DevPlugin::DevPlugin() :
     vacc_sequence("CGCAGGGACTGCAGGTACCCCGCAGGCGCAGATAGAGAC"),
     wt_sequence("CCGCCGCACUUAUCCCUGACGAAUUCUACCAGUCGCGAU"),
-    wt_struct("....((((((.......((.....))....))).))).."),
-    vacc_struct(".((.(((((.....)).))).))................"),
-    ires(".((.(((((.....)).))).))."),
-    min_distance(0), cutoff(1), attempts(2), min_distance_param(), cutoff_param(),
-    fold_backend(), inverse_backend(), struct_cmp_backend(), seq_cmp_backend(),
-    wt_cache(), ssregion(), gcregion(), regions(), rnd_ss(), neighborhood(), strategy()
+    min_distance(0), cutoff(1),
+    attempts(2),
+    recombinantInfo(NULL),
+    recombValidator(NULL),
+    iQARecomb(NULL),
+    min_distance_param(),
+    cutoff_param(),
+    fold_backend(),
+    inverse_backend(),
+    struct_cmp_backend(),
+    seq_cmp_backend(),
+    wt_cache(),
+    ssregion(), gcregion(), regions(),
+    mutator(NULL),
+    validator(NULL),
+    rnd_ss(),
+    neighborhood(),
+    strategy()
 {
-    init_params();
 
+    fideo::ViennaParser::parseStructure(std::string("....((((((.......((.....))....))).))).."), wt_struct);
+    fideo::ViennaParser::parseStructure(std::string(".((.(((((.....)).))).))................"), vacc_struct);
+    fideo::ViennaParser::parseStructure(std::string(".((.(((((.....)).))).))."), ires);
+
+    init_params();
 }
 
 void DevPlugin::configure()
 {
     init_backends();
     init_comb_regions();
+    initQaRecombinant();
     init_qa_regions();
     init_local_search();
 }
@@ -147,14 +179,14 @@ IStrategy* DevPlugin::get_strategy() const
 void DevPlugin::get_qa_regions(QARegionsCt& qaregions) const
 {
     insert_into(qaregions, rnd_ss);
+    insert_into(qaregions, iQARecomb);
 }
 
 Score DevPlugin::evaluate_solution(const ISolution* solution)
 {
-    Score s;
     NucSequence seq;
     solution->get_sequence(seq);
-    s = Score(seq_cmp_backend->compare(seq, wt_sequence));
+    const Score s = Score(seq_cmp_backend->compare(seq, wt_sequence));
 
     return s;
 }
@@ -179,6 +211,8 @@ void DevPlugin::unload()
     delete mutator;
     delete validator;
     delete rnd_ss;
+    delete iQARecomb;
+    delete recombinantInfo;
     delete this;
 }
 
@@ -187,15 +221,15 @@ void DevPlugin::unload()
  */
 void DevPlugin::init_params()
 {
-    min_distance_param = new Parameter<Distance>("Min distance", min_distance);
+    min_distance_param = new Parameter<fideo::Distance>("Min distance", min_distance);
     cutoff_param = new Parameter<CutOff>("Threshold cutoff", cutoff);
 }
 
 void DevPlugin::init_backends()
 {
-    fold_backend = new RNAFold;
-    inverse_backend = new INFORNA(ires, 2, 20, 100);
-    struct_cmp_backend = new RNAForester;
+    fold_backend = fideo::Fold::new_class("RNAFold");
+    inverse_backend = fideo::IFoldInverse::factory("INFORNA", fideo::InverseFoldParams(ires, 2, 20, 100));
+    struct_cmp_backend = fideo::IStructureCmp::Factory::new_class("RNAForester");
     seq_cmp_backend = new Hamming;
 }
 
@@ -204,8 +238,9 @@ void DevPlugin::init_comb_regions()
     /**
      * Fill wt_cache with sequences that fold to wt_struct
      */
-    IStartProvider* devprovider = new DevStartProvider(wt_sequence);
-    IFoldInverse* wt_inverse = new RNAinverse(wt_struct, 0, 25, 10);
+    fideo::IStartProvider* const devprovider = new DevStartProvider(wt_sequence);
+    fideo::IFoldInverse* const wt_inverse = fideo::IFoldInverse::factory("INFORNA"/*"RNAinverse"*/, fideo::InverseFoldParams(wt_struct, 0, 25, 10));
+
     wt_inverse->query_start(devprovider);
     NucSequence tmp;
     for (size_t i = 0; i < 5; ++i)
@@ -226,10 +261,10 @@ void DevPlugin::init_comb_regions()
     string s;
     for (size_t i = 33; i < 39; ++i)
     {
-        s += to_str(wt_sequence[i]);
+        s += wt_sequence[i].as_char();
     }
 
-    NucSequence seq = s;
+    NucSequence seq(s);
     seq.translate(aminoacids);
     gcregion = new GCRegion(33, 39, aminoacids);
 
@@ -244,11 +279,34 @@ void DevPlugin::init_qa_regions()
     rnd_ss = new QARegion(0, 24, 3, mutator, validator);
 }
 
+void DevPlugin::initQaRecombinant()
+{
+    const fideo::Similitude similitude = .5f;
+    recombinantInfo = new RecombinantInfo();
+    getRecombinantInfo(*recombinantInfo);
+    recombValidator = new RecombValidator<MaxSimilitude>(*recombinantInfo, *fold_backend, *struct_cmp_backend, wt_struct, similitude);
+    iQARecomb = new QAWholeRegion(recombValidator);
+}
+
 void DevPlugin::init_local_search()
 {
     neighborhood = new Neighborhood(regions, cutoff, attempts);
     strategy = new SimulatedAnnealing(neighborhood, 10, 5, 2, .8f, 3.f, .05f);
     neighborhood->set(strategy);
+}
+
+void DevPlugin::getRecombinantInfo(RecombinantInfo& recomb)
+{
+    RecombinantInfo::RecombinantSequenceInfo recombinantSequenceInfo;
+    recombinantSequenceInfo.sequence = NucSequence("CGCAGCCACGUUAGGUGGGCCGCAGGCGCAGAUAGAGAC");
+    recombinantSequenceInfo.regions.push_back(RecombinantInfo::PositionsRange(1, 3));
+    recombinantSequenceInfo.regions.push_back(RecombinantInfo::PositionsRange(5, 7));
+
+    recomb.recombinantSequences.push_back(recombinantSequenceInfo);
+
+    recomb.candidateRegions.push_back(RecombinantInfo::PositionsRange(2, 5));
+    recomb.candidateRegions.push_back(RecombinantInfo::PositionsRange(7, 8));
+
 }
 
 extern "C" IPlugin* create_plugin()

@@ -23,7 +23,7 @@
  *
  */
 
-#include "Strategy.h"
+#include "vaco-libplugin/Strategy.h"
 
 Strategy::Strategy(const INeighborhood* ne, Iteration max, Iteration max_idle):
     neighborhood(ne), scorer(), max_iterations(max), max_idle_iterations(max_idle),
@@ -45,7 +45,7 @@ void Strategy::run(const ISolution* init, ISolutionObserver* obs)
         ++current_iteration;
         neighborhood->explore(current_solution);
 
-        bool someone_selected = select_neighbor();
+        const bool someone_selected = select_neighbor();
         if (someone_selected)
         {
             if (selected_neighbor_score >= current_score)

@@ -23,7 +23,9 @@
  *
  */
 
-#include "TripletsProductor.h"
+#include "vaco-libplugin/TripletsProductor.h"
+
+using namespace biopp;
 
 TripletsProductor::TripletsProductor(const AminoSequence& aminoacids) :
     last(aminoacids.size() - 1), more(aminoacids.size() > 0),
@@ -39,7 +41,7 @@ TripletsProductor::TripletsProductor(const AminoSequence& aminoacids) :
 }
 bool TripletsProductor::next(TripletsProduct& p)
 {
-    bool cont(more);
+    const bool cont(more);
     p = product;
     if (more)
         move(last);

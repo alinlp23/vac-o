@@ -23,8 +23,9 @@
  *
  */
 
-#include "FirstImprovement.h"
 #include <iostream>
+#include "vaco-libplugin/FirstImprovement.h"
+
 FirstImprovement::FirstImprovement(const INeighborhood* ne, Iteration max, Iteration max_idle):
     Strategy(ne, max, max_idle) {}
 
@@ -38,7 +39,7 @@ bool FirstImprovement::select_neighbor()
 bool FirstImprovement::update(const ISolution* neighbor)
 {
     bool done(false);
-    Score ns = scorer->evaluate(neighbor);
+    const Score ns = scorer->evaluate(neighbor);
     if (ns >= current_score)
     {
         selected_neighbor = neighbor;

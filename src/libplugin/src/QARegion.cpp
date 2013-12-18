@@ -23,11 +23,11 @@
  *
  */
 
-#include "QARegion.h"
-#include "IQAMutator.h"
-#include "IQAValidator.h"
-
 #include <iostream>
+#include "vaco-libplugin/QARegion.h"
+#include "vaco-libplugin/IQAMutator.h"
+#include "vaco-libplugin/IQAValidator.h"
+
 using std::cout;
 using std::endl;
 
@@ -41,11 +41,10 @@ bool QARegion::validate(const NucSequence& seq) const
     queue<NucSequence> mutants;
 
     //Extract the region from the complete sequence
-    NucSequence region;
     string str_r;
     for (SeqIndex i = start; i < end; ++i)
-        str_r += to_str(seq[i]);
-    region = str_r;
+        str_r += seq[i].as_char();
+    NucSequence region(str_r);
 
     insert_into(mutants, region);
     bool pass = validator->validate(seq);

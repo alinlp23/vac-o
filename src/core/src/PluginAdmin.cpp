@@ -24,16 +24,16 @@
  */
 
 #include <dlfcn.h>
-#include "exceptions.h"
-#include "PluginAdmin.h"
+#include "vaco-commons/exceptions.h"
+#include "vaco-core/PluginAdmin.h"
 
-IPlugin* PluginAdmin::load(const Path& file) throw(PluginException)
+IPlugin* PluginAdmin::load(const Path& file)
 {
     IPlugin* plg;
 
     handle = dlopen(file.c_str(), RTLD_LAZY);
 
-    bool success(handle != NULL);
+    const bool success(handle != NULL);
     if (success)
     {
         typedef IPlugin*(*CreatePlugin)();
@@ -53,13 +53,13 @@ IPlugin* PluginAdmin::load(const Path& file) throw(PluginException)
         {
             const string err = dlerror();
             dlclose(handle);
-            throw  PluginException(err);
+            throw PluginException(err);
         }
         else
             plg = create_plugin();
     }
     else
-        throw  PluginException(dlerror());
+        throw PluginException(dlerror());
 
     return plg;
 }

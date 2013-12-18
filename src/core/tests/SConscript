@@ -1,0 +1,18 @@
+Import ('env')
+
+name = 'vaco-core-objects'
+inc = env.Dir('..')
+src = env.Glob('*.cpp')
+
+deps = ['gmock','gtest_main', 'gtest', 'vaco-commons']
+
+test_plugins = [
+        ('vaco-test-wrong-plugin', env.File('WrongPlugin.cpp')),
+        ('vaco-test-right-plugin', env.File('RightPlugin.cpp'))
+        ]
+
+for plugin_name, plugin_src in test_plugins:
+    src.remove(plugin_src)
+    env.CreateSharedLibrary(plugin_name, inc, [], plugin_src, deps)
+
+env.CreateTest(name, inc, src, deps + [p[0] for p in test_plugins])

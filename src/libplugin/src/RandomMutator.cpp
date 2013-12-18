@@ -24,8 +24,10 @@
  */
 
 #include <mili/mili.h>
-#include "rna_backends_types.h"
-#include "RandomMutator.h"
+#include "fideo/RnaBackendsTypes.h"
+#include "vaco-libplugin/RandomMutator.h"
+
+using namespace biopp;
 
 inline void initialize_mutation_matrix(MutationMatrix& matrix)
 {
@@ -52,7 +54,7 @@ RandomMutator::RandomMutator(NMutations mutations, NMutations mutants, const IMu
 bool RandomMutator::next(NucSequence& seq)
 {
     ++counter;
-    bool more(counter <= mutants);
+    const bool more(counter <= mutants);
 
     if (more)
     {
@@ -78,14 +80,17 @@ bool RandomMutator::next(NucSequence& seq)
             }
             while (prob == 0.f);
 
-            Nucleotide b = Nucleotide(0);
-            float acc = matrix[seq[pos]][b];
+            AlphabetIterator<Nucleotide> b;
+            b.restart();
+            Nucleotide a = seq[pos];
+
+            float acc = matrix[a.value][(*b).value];
             while (acc < prob)
             {
-                b = Nucleotide((b + 1) % 4);
-                acc += matrix[seq[pos]][b];
+                ++b;
+                acc += matrix[a.value][(*b).value];
             }
-            seq[pos] = b;
+            seq[pos] = *b;
 
             ++i;
         }

@@ -23,7 +23,7 @@
  *
  */
 
-#include "SequenceOptimization.h"
+#include "vaco-core/SequenceOptimization.h"
 
 bool SequenceOptimizationCmp::operator()(const SequenceOptimization* opt1,
         const SequenceOptimization* opt2) const

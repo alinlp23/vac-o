@@ -24,7 +24,7 @@
  */
 
 #include <mili/mili.h>
-#include "CombinatoryRegion.h"
+#include "vaco-libplugin/CombinatoryRegion.h"
 
 CombinatoryRegion::CombinatoryRegion(SeqIndex start, SeqIndex end) :
     start(start), end(end), constraints(), base_sequence()
@@ -37,7 +37,7 @@ void CombinatoryRegion::set_base_sequence(const NucSequence& sequence)
 
 void CombinatoryRegion::add_constraint(SeqIndex start, SeqIndex end)
 {
-    Constraint* c = new Constraint;
+    Constraint* const c = new Constraint;
     c->start = start;
     c->end = end;
     insert_into(constraints, c);

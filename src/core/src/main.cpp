@@ -23,24 +23,18 @@
  *
  */
 
-/*combinatory*/
-#include "CombinatoryEngine.h"
-
-/*validator*/
-#include "QAEngine.h"
-#include "IQARegion.h"
-
-/*ranker*/
-#include "SequenceRanker.h"
-
-/*pluginadmin*/
-#include "PluginAdmin.h"
-
-/*plugin*/
-#include "IPlugin.h"
-#include "Parameter.h"
-
 #include <iostream>
+#include <etilico/etilico.h>
+#include "vaco-commons/IPlugin.h"
+#include "vaco-commons/Parameter.h"
+#include "vaco-commons/IQARegion.h"
+
+#include "vaco-core/CombinatoryEngine.h"
+#include "vaco-core/QAEngine.h"
+#include "vaco-core/SequenceRanker.h"
+#include "vaco-core/PluginAdmin.h"
+
+
 using std::cout;
 using std::cin;
 using std::endl;
@@ -49,7 +43,7 @@ void ask_for_parameters(ParamsCt& params)
 {
     if (!params.empty())
     {
-        CAutonomousIterator<ParamsCt> it(params);
+        mili::CAutonomousIterator<ParamsCt> it(params);
 
         string aux;
         string param_name;
@@ -70,7 +64,7 @@ void ask_for_parameters(ParamsCt& params)
 
 void print_ranking(SequenceRanker& ranking)
 {
-    CAutonomousIterator<SequenceRanker> it(ranking);
+    mili::CAutonomousIterator<SequenceRanker> it(ranking);
 
     NucSequence seq;
     Score score;
@@ -80,17 +74,20 @@ void print_ranking(SequenceRanker& ranking)
         score = (*it)->second;
         for (size_t i = 0; i < seq.length(); ++i)
         {
-            cout << to_str(seq[i]);
+            cout << seq[i].as_char();
         }
         cout << " Score: " << score << endl;
         ++it;
     }
 }
 
-int main(int argc, char** argv)
+int main(int /*argc*/, char** /*argv*/)
 {
     PluginAdmin plg_admin;
-    IPlugin* plg = plg_admin.load("libplugin/libplugin.so");
+    std::string pluginPath;
+    etilico::Config::getInstance()->getPath("libplugin.so", pluginPath);
+
+    IPlugin* const plg = plg_admin.load(pluginPath);
 
     ParamsCt params;
     plg->get_parameters(params);

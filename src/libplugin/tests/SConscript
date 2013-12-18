@@ -1,0 +1,9 @@
+Import ('env')
+
+name = 'vaco-libplugin'
+inc = env.Dir('.')
+src = env.Glob('*.cpp')
+
+deps = ['fideo', 'vaco-rna-backends', 'gmock','gtest_main', 'gtest']
+
+env.CreateTest(name, inc, src, deps)

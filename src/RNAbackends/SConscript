@@ -1,0 +1,9 @@
+Import ('env')
+
+name = 'vaco-rna-backends'
+inc = env.Dir('.')
+ext_inc = []
+src = env.Glob('src/*.cpp')
+deps = ['vaco-commons', 'fideo', 'gmock','gtest_main', 'gtest']
+
+env.CreateSharedLibrary(name, inc, ext_inc, src, deps)

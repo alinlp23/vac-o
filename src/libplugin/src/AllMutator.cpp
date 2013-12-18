@@ -23,7 +23,7 @@
  *
  */
 
-#include "AllMutator.h"
+#include "vaco-libplugin/AllMutator.h"
 
 AllMutator::AllMutator(size_t l, NMutations m) : mutator(l, m), mutations(m)
 {}

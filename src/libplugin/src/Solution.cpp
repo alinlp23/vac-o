@@ -23,11 +23,14 @@
  *
  */
 
-#include "Solution.h"
+#include "vaco-libplugin/Solution.h"
+
+using biopp::NucSequence;
+using biopp::SeqIndex;
 
 Solution::Solution(const NucSequence& seq, const CombinatoryRegionsCt& regions): sequence(seq), components()
 {
-    CAutonomousIterator<CombinatoryRegionsCt> it(regions);
+    mili::CAutonomousIterator<CombinatoryRegionsCt> it(regions);
     SeqIndex start;
     SeqIndex end;
     while (!it.end())
@@ -36,10 +39,10 @@ Solution::Solution(const NucSequence& seq, const CombinatoryRegionsCt& regions):
         string c;
         for (size_t idx = start; idx < end; ++idx)
         {
-            c.append(to_str(seq[idx]));
+            c += seq[idx].as_char();
         }
         //default local score = 1
-        LocalOptimization op(c, 1);
+        const LocalOptimization op(NucSequence(c), 1);
         insert_into(components, op);
         ++it;
     }
@@ -49,7 +52,7 @@ Solution::Solution(const NucSequence& seq, const LocalOptimizationCt& comp) :
     sequence(seq), components(comp)
 {}
 
-void Solution::update_solution(RegionIdx r, const NucSequence& seq, const LocalOptimization& op) throw(PluginException)
+void Solution::update_solution(RegionIdx r, const NucSequence& seq, const LocalOptimization& op)
 {
     if (r < components.size() && seq.length() == sequence.length())
     {
@@ -57,7 +60,7 @@ void Solution::update_solution(RegionIdx r, const NucSequence& seq, const LocalO
         sequence = seq;
     }
     else
-        throw(PluginException(" Out of range while updating solution component"));
+        throw (PluginException(" Out of range while updating solution component"));
 }
 
 void Solution::get_sequence(NucSequence& seq) const

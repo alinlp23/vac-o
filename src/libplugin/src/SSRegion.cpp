@@ -23,17 +23,16 @@
  *
  */
 
-#include "SSRegion.h"
-#include "IFoldInverse.h"
-#include "IStructureCmp.h"
-#include "ISequenceCmp.h"
-#include "SequenceMutator.h"
-#include "IFold.h"
+#include "fideo/IFoldInverse.h"
+#include "fideo/IStructureCmp.h"
+#include "vaco-rna-backends/ISequenceCmp.h"
+#include "vaco-libplugin/SSRegion.h"
+#include "vaco-libplugin/SequenceMutator.h"
 
 SSRegion::SSRegion(SeqIndex s, SeqIndex e, const SecStructure& wt,
-                   const SecStructure& vaccine, NMutations nm, Similitude simi,
-                   Distance dis, const NucSequencesCt& wt_cache, bool circ, const IFold* const fb,
-                   IFoldInverse* const fib, const IStructureCmp* const str_cmp,
+                   const SecStructure& vaccine, NMutations nm, fideo::Similitude simi,
+                   fideo::Distance dis, const NucSequencesCt& wt_cache, bool circ, fideo::IFold* const fb,
+                   fideo::IFoldInverse* const fib, const fideo::IStructureCmp* const str_cmp,
                    const ISequenceCmp* const seq_cmp) :
     CombinatoryRegion(s, e),
     wt_structure(wt), vaccine_structure(vaccine), max_mutations(nm),
@@ -46,17 +45,17 @@ Score SSRegion::evaluate(const NucSequence& delta) const
 {
     Score s;
 
-    CAutonomousIterator<NucSequencesCt> it(wildtype_cache);
-    Distance min_hd = end - start;
+    mili::CAutonomousIterator<NucSequencesCt> it(wildtype_cache);
+    fideo::Distance min_hd = end - start;
     while (!it.end())
     {
         string tmp;
         for (size_t idx = start; idx < end; ++idx)
-            tmp += to_str((*it)[idx]);
+            tmp += (*it)[idx].as_char();
 
-        NucSequence partial = tmp;
+        NucSequence partial(tmp);
 
-        minimize(min_hd, seq_cmp_backend->compare(delta, partial));
+        mili::minimize(min_hd, seq_cmp_backend->compare(delta, partial));
         ++it;
     }
     s = min_hd / Score(end - start);
@@ -86,24 +85,24 @@ void SSRegion::set_base_sequence(const NucSequence& sequence)
     inverse_backend->query_start(this);
 }
 
-void SSRegion::get_partial_start(IFoldInverse* const backend)
+void SSRegion::get_partial_start(fideo::IFoldInverse* const backend)
 {
     string tmp;
     for (size_t idx = start; idx < end; ++idx)
-        tmp += to_str(base_sequence[idx]);
+        tmp += base_sequence[idx].as_char();
 
-    NucSequence partial = tmp;
+    const NucSequence partial(tmp);
     backend->set_start(partial);
 }
 
-void SSRegion::get_complete_start(IFoldInverse* const backend)
+void SSRegion::get_complete_start(fideo::IFoldInverse* const backend)
 {
     backend->set_start(base_sequence);
 }
 
 bool SSRegion::cache_compare(const NucSequence& seq)
 {
-    CAutonomousIterator<NucSequencesCt> it(wildtype_cache);
+    mili::CAutonomousIterator<NucSequencesCt> it(wildtype_cache);
     bool pass(true);
     while (!it.end() && pass)
     {
@@ -122,9 +121,9 @@ bool SSRegion::structure_compare(const NucSequence& seq)
 
     while (mutator.next(mutated) && pass)
     {
-        fold_backend->fold(mutated, mutated_struct, circ);
+        fold_backend->fold(mutated, circ, mutated_struct);
 
-        if (mutated_struct.pair_length() > 0)
+        if (mutated_struct.pair_count() > 0)
             pass = max_similitude > struct_cmp_backend->compare(wt_structure, mutated_struct);
     }
     return pass;
