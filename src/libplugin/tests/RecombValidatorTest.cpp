@@ -248,7 +248,6 @@ TEST_F(RecombValidatorTest, SequencesGenerated)
     std::list<biopp::NucSequence>::const_iterator it = results.begin();
     while(it != results.end() && itExpected != expectedResults.end())
     {
-        const size_t expecedLength = 7;
         EXPECT_EQ(it->length(), itExpected->length());
         EXPECT_EQ(*it, *itExpected);
         ++it;

@@ -227,7 +227,7 @@ void DevPlugin::init_params()
 
 void DevPlugin::init_backends()
 {
-    fold_backend = fideo::Folder::new_class("RNAFold");
+    fold_backend = fideo::Fold::new_class("RNAFold");
     inverse_backend = fideo::IFoldInverse::factory("INFORNA", fideo::InverseFoldParams(ires, 2, 20, 100));
     struct_cmp_backend = fideo::IStructureCmp::Factory::new_class("RNAForester");
     seq_cmp_backend = new Hamming;
